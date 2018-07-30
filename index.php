@@ -1,4 +1,4 @@
 <?php
 
-echo "init";
+echo "init proyect";
 
