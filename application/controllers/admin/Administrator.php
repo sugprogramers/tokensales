@@ -21,13 +21,23 @@ class Administrator extends CI_Controller {
      */
     public function __construct() {
         parent::__construct();
-       $this->load->model("admin/administrator_model");
+        $this->load->helper('url');
+        $this->load->model("admin/administrator_model");
     }
 
     public function index() {
-        $this->load->view('admin/list_administrador');
+        //$this->load->view('admin/list_administrador');
         //$this->load->view('welcome_message');
         //echo "index default";
+        $this->load->view('header/header_admin');
+        $this->load->view('admin/dashboard_administrador');
+        $this->load->view('footer/footer_admin');
+    }
+    
+    public function dashboard() {
+        
+        
+       
     }
 
     public function noparametro() {

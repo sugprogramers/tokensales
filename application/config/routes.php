@@ -57,3 +57,7 @@ $route['translate_uri_dashes'] = FALSE;
 $route['default'] = "admin/Administrator";
 $route['noparametro'] = "admin/Administrator/noparametro";
 $route['parametro/(:num)'] = "admin/Administrator/parametro/$1";
+
+
+$route['login'] = "login";
+
