@@ -23,7 +23,7 @@
   <script src="<?php echo base_url()."themes/default/remark"; ?>/global/js/Component.min599c.js?v4.0.2"></script>
   <script src="<?php echo base_url()."themes/default/remark"; ?>/global/js/Plugin.min599c.js?v4.0.2"></script>
   <script src="<?php echo base_url()."themes/default/remark"; ?>/global/js/Base.min599c.js?v4.0.2"></script>
-  <script src="<?php echo base_url()."themes/default/remark"; ?>/global/js/Config.min599c.js?v4.0.2"></script>
+  <script src="<?php echo base_url()."themes/default/remark"; ?>/global/js/Config.min599c.js?v4.0.2"></script> 
 
   <script src="<?php echo base_url()."themes/default/remark/topbar"; ?>/assets/js/Section/Menubar.min599c.js?v4.0.2"></script>
   <script src="<?php echo base_url()."themes/default/remark/topbar"; ?>/assets/js/Section/Sidebar.min599c.js?v4.0.2"></script>
@@ -33,10 +33,9 @@
   <!-- Config -->
   <script src="<?php echo base_url()."themes/default/remark"; ?>/global/js/config/colors.min599c.js?v4.0.2"></script>
   <script src="<?php echo base_url()."themes/default/remark/topbar"; ?>/assets/js/config/tour.min599c.js?v4.0.2"></script>
-  
-  <!-- <script>
-    Config.set('assets', '<?php //echo base_url()."/themes/default/remark/topbar"; ?>/assets');
-  </script> -->
+  <script>
+    Config.set('assets', '<?php echo base_url()."themes/default/remark/topbar"; ?>/assets');
+  </script>
 
   <!-- Page -->
   <script src="<?php echo base_url()."themes/default/remark/topbar"; ?>/assets/js/Site.min599c.js?v4.0.2"></script>
@@ -44,7 +43,6 @@
   <script src="<?php echo base_url()."themes/default/remark"; ?>/global/js/Plugin/slidepanel.min599c.js?v4.0.2"></script>
   <script src="<?php echo base_url()."themes/default/remark"; ?>/global/js/Plugin/switchery.min599c.js?v4.0.2"></script>
   <script src="<?php echo base_url()."themes/default/remark"; ?>/global/js/Plugin/jquery-placeholder.min599c.js?v4.0.2"></script>
-  <script src="<?php echo base_url()."themes/default/remark"; ?>/global/js/Plugin/material.min599c.js?v4.0.2"></script>
 
 
   <script>
@@ -62,17 +60,5 @@
 </body>
 
 
+<!-- Mirrored from getbootstrapadmin.com/remark/topbar/pages/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 31 Jul 2018 16:06:42 GMT -->
 </html>
-
-
-
-
-
-
-<!-- 
-replace
-../
-<?php echo base_url()."themes/default/remark/topbar"; ?>/
-../../
-<?php echo base_url()."themes/default/remark"; ?>/
--->

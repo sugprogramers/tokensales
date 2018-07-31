@@ -1,9 +1,7 @@
-<?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-?><!DOCTYPE html>
+<!DOCTYPE html>
 <html class="no-js css-menubar" lang="en">
 
-<!-- Mirrored from getbootstrapadmin.com/remark/topbar/pages/login-v3.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 31 Jul 2018 16:06:43 GMT -->
+<!-- Mirrored from getbootstrapadmin.com/remark/topbar/pages/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 31 Jul 2018 16:06:42 GMT -->
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -22,8 +20,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   <link rel="stylesheet" href="<?php echo base_url()."themes/default/remark/topbar"; ?>/assets/css/site.min599c.css?v4.0.2">
 
   <!-- Skin tools (demo site only) -->
-  <link rel="stylesheet" href="<?php echo base_url()."themes/default/remark"; ?>/global/css/skintools.min599c.css?v4.0.2">
-  <script src="<?php echo base_url()."themes/default/remark/topbar"; ?>/assets/js/Plugin/skintools.min599c.js?v4.0.2"></script>
+  <!--<link rel="stylesheet" href="<?php echo base_url()."themes/default/remark"; ?>/global/css/skintools.min599c.css?v4.0.2">
+  <script src="<?php echo base_url()."themes/default/remark/topbar"; ?>/assets/js/Plugin/skintools.min599c.js?v4.0.2"></script> -->
 
   <!-- Plugins -->
   <link rel="stylesheet" href="<?php echo base_url()."themes/default/remark"; ?>/global/vendor/animsition/animsition.min599c.css?v4.0.2">
@@ -34,7 +32,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   <link rel="stylesheet" href="<?php echo base_url()."themes/default/remark"; ?>/global/vendor/flag-icon-css/flag-icon.min599c.css?v4.0.2">
 
   <!-- Page -->
-  <link rel="stylesheet" href="<?php echo base_url()."themes/default/remark/topbar"; ?>/assets/examples/css/pages/login-v3.min599c.css?v4.0.2">
+  <link rel="stylesheet" href="<?php echo base_url()."themes/default/remark/topbar"; ?>/assets/examples/css/pages/login.min599c.css?v4.0.2">
 
   <!-- Fonts -->
   <link rel="stylesheet" href="<?php echo base_url()."themes/default/remark"; ?>/global/fonts/web-icons/web-icons.min599c.css?v4.0.2">
@@ -57,10 +55,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     Breakpoints();
   </script>
 </head>
-<body class="animsition site-navbar-small page-login-v3 layout-full">
+ <!--
+    azul :  rgba(26, 46, 73, 1) o 
+    celeste : #6cd9d0
+    -->
+<style>   
+.page-login:before {    
+    background:rgba(26, 46, 73, 1);
+    background-color:rgba(26, 46, 73, 1);  
+}
+</style>
+<body class="animsition site-navbar-small page-login  layout-full" style="background:rgba(26, 46, 73, 1);color:#ffffff"> 
   <!--[if lt IE 8]>
         <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
-
-
 
