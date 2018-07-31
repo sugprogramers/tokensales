@@ -5,6 +5,7 @@
         <img class="brand-img" src="<?php echo base_url()."themes/default/remark/topbar"; ?>/assets/images/smart2.png" alt="...">
          <!-- <h2 class="brand-text">Remark</h2> -->
       </div>
+        
       <!-- <p>Sign into your pages account</p> -->
        
       <form method="post" action="#">
