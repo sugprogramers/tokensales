@@ -27,16 +27,16 @@ class Administrator extends CI_Controller {
 
     public function index() {
         //$this->load->view('admin/list_administrador');
-        //$this->load->view('welcome_message');
+        $this->load->view('welcome_message');
         //echo "index default";
-        $this->load->view('header/header_admin');
-        $this->load->view('admin/dashboard_administrador');
-        $this->load->view('footer/footer_admin');
+       
     }
     
     public function dashboard() {
         
-        
+        $this->load->view('header/header_admin');
+        $this->load->view('admin/dashboard_administrator');
+        $this->load->view('footer/footer_admin');
        
     }
 

@@ -1,4 +1,4 @@
-  <!-- Page -->
+
   
   <div class="page">
     <div class="page-content">
@@ -11,4 +11,3 @@
       
     </div>
   </div>
-  <!-- End Page -->

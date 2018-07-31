@@ -60,4 +60,5 @@ $route['parametro/(:num)'] = "admin/Administrator/parametro/$1";
 
 
 $route['login'] = "login";
+$route['dashboard'] = "admin/Administrator/dashboard";
 
