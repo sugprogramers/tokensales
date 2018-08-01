@@ -10,7 +10,7 @@ class Administrator_Model extends CI_Model
 
      public function get_administrator()
      {
-          return $this->db->get("administrator");
+          return $this->db->get("c_user");
      }
 
 }
