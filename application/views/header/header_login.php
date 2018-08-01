@@ -22,6 +22,9 @@
   <!-- Skin tools (demo site only) -->
   <!--<link rel="stylesheet" href="<?php echo base_url()."themes/default/remark"; ?>/global/css/skintools.min599c.css?v4.0.2">
   <script src="<?php echo base_url()."themes/default/remark/topbar"; ?>/assets/js/Plugin/skintools.min599c.js?v4.0.2"></script> -->
+  
+   <link rel="stylesheet" href="<?php echo base_url()."themes/default/remark"; ?>/global/vendor/toastr/toastr.min599c.css?v4.0.2">
+   <link rel="stylesheet" href="<?php echo base_url()."themes/default/remark/topbar"; ?>/assets/examples/css/advanced/toastr.min599c.css?v4.0.2">
 
   <!-- Plugins -->
   <link rel="stylesheet" href="<?php echo base_url()."themes/default/remark"; ?>/global/vendor/animsition/animsition.min599c.css?v4.0.2">

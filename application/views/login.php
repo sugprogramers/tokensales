@@ -72,12 +72,13 @@
         $("#login_form").submit(function (event) {
             event.preventDefault();
             $.ajax({
-                url: 'Login_Controller/login_user',
+                url: "<?php echo site_url('Login_Controller/login_user')?>",
                 type: "POST",
                 data: $(this).serialize(),
                 success: function (resp) {
                     if (resp === "error") {
-                        alert("Los datos no existen");
+                       
+                         showError('los datos no existe');
                     } else {
                         alert("correcto");
                     }
@@ -85,4 +86,7 @@
             });
         });
     };
+    
+    
+    
 </script>
