@@ -13,7 +13,7 @@ class Login extends CI_Controller {
         $this->load->view('header/header_login');
         $this->load->view('login');        
         $this->load->view('footer/footer_login');
-		
+	
         /*$this->load->database();
         $query = $this->db->get("c_country");
         
