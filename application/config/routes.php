@@ -54,14 +54,12 @@ $route['default_controller'] = 'login';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
-
-
-//Ejemplo Route llamar solo a controller
+//Ejemplo Route Administrador
 $route['default'] = "admin/Administrator";
 $route['noparametro'] = "admin/Administrator/noparametro";
 $route['parametro/(:num)'] = "admin/Administrator/parametro/$1";
 
-$route['login'] = "login";
 
+$route['login'] = "login";
 $route['dashboard'] = "admin/Administrator/dashboard";
 
