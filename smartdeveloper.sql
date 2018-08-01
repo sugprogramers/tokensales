@@ -1,5 +1,3 @@
-
-
 CREATE TABLE c_currency
 (
   c_currency_id character varying(32) NOT NULL,
