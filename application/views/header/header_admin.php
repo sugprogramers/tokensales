@@ -20,9 +20,9 @@
   <link rel="stylesheet" href="<?php echo base_url()."themes/default/remark/topbar"; ?>/assets/css/site.min599c.css?v4.0.2">
 
   <!-- Skin tools (demo site only) -->
-  <link rel="stylesheet" href="<?php echo base_url()."themes/default/remark"; ?>/global/css/skintools.min599c.css?v4.0.2">
+<!-- <link rel="stylesheet" href="<?php echo base_url()."themes/default/remark"; ?>/global/css/skintools.min599c.css?v4.0.2">
   <script src="<?php echo base_url()."themes/default/remark/topbar"; ?>/assets/js/Plugin/skintools.min599c.js?v4.0.2"></script>
-
+-->
   <!-- Plugins -->
   <link rel="stylesheet" href="<?php echo base_url()."themes/default/remark"; ?>/global/vendor/animsition/animsition.min599c.css?v4.0.2">
   <link rel="stylesheet" href="<?php echo base_url()."themes/default/remark"; ?>/global/vendor/asscrollable/asScrollable.min599c.css?v4.0.2">
@@ -102,12 +102,13 @@
               <span class="sr-only">Toggle fullscreen</span>
             </a>
           </li>
-          <li class="nav-item hidden-float">
+          <!--<li class="nav-item hidden-float">
             <a class="nav-link icon wb-search" data-toggle="collapse" href="#" data-target="#site-navbar-search"
               role="button">
               <span class="sr-only">Toggle Search</span>
             </a>
           </li>
+          
           <li class="nav-item dropdown dropdown-fw dropdown-mega">
             <a class="nav-link" data-toggle="dropdown" href="#" aria-expanded="false" data-animation="fade"
               role="button">Mega <i class="icon wb-chevron-down-mini" aria-hidden="true"></i></a>
@@ -214,7 +215,7 @@
                   </div>
                   <div class="col-md-4">
                     <h5 class="mb-0">Accordion</h5>
-                    <!-- Accordion -->
+                    
                     <div class="panel-group panel-group-simple" id="siteMegaAccordion" aria-multiselectable="true"
                       role="tablist">
                       <div class="panel">
@@ -269,18 +270,18 @@
                         </div>
                       </div>
                     </div>
-                    <!-- End Accordion -->
+                   
                   </div>
                 </div>
               </div>
             </div>
-          </li>
+          </li> -->
         </ul>
         <!-- End Navbar Toolbar -->
 
         <!-- Navbar Toolbar Right -->
         <ul class="nav navbar-toolbar navbar-right navbar-toolbar-right">
-          <li class="nav-item dropdown">
+         <!-- <li class="nav-item dropdown">
             <a class="nav-link" data-toggle="dropdown" href="javascript:void(0)" data-animation="scale-up"
               aria-expanded="false" role="button">
               <span class="flag-icon flag-icon-us"></span>
@@ -297,7 +298,7 @@
               <a class="dropdown-item" href="javascript:void(0)" role="menuitem">
                 <span class="flag-icon flag-icon-nl"></span> Dutch</a>
             </div>
-          </li>
+          </li> -->
           <li class="nav-item dropdown">
             <a class="nav-link navbar-avatar" data-toggle="dropdown" href="#" aria-expanded="false"
               data-animation="scale-up" role="button">
@@ -314,6 +315,7 @@
               <a class="dropdown-item" href="javascript:void(0)" role="menuitem"><i class="icon wb-power" aria-hidden="true"></i> Logout</a>
             </div>
           </li>
+          <!--
           <li class="nav-item dropdown">
             <a class="nav-link" data-toggle="dropdown" href="javascript:void(0)" title="Notifications"
               aria-expanded="false" data-animation="scale-up" role="button">
@@ -498,7 +500,7 @@
               data-url="<?php echo base_url()."themes/default/remark/topbar"; ?>/site-sidebar.tpl">
                 <i class="icon wb-chat" aria-hidden="true"></i>
               </a>
-          </li>
+          </li> -->
         </ul>
         <!-- End Navbar Toolbar Right -->
       </div>
