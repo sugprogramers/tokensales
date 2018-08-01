@@ -1,7 +1,7 @@
 
   <!-- Footer -->
   <footer class="site-footer">
-    <span class="site-footer-legal">© <?php  echo date("Y"); ?> <a href="#">DEGREE</a></span>
+    <span class="site-footer-legal">© <?php  echo date("Y"); ?> <a href="#">SMART DEVELOPER</a></span>
     <div class="site-footer-right">
         Developed by <a href="#">SUG</a>
     </div>
