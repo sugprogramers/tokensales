@@ -70,12 +70,18 @@
         data-toggle="collapse">
         <i class="icon wb-more-horizontal" aria-hidden="true"></i>
       </button>
-      <a class="navbar-brand navbar-brand-center" href="<?php echo base_url()."themes/default/remark/topbar"; ?>/index-2.html">
-        <img class="navbar-brand-logo navbar-brand-logo-normal" src="<?php echo base_url()."themes/default/remark/topbar"; ?>/assets/images/logo.png"
+      <a class="navbar-brand navbar-brand-center" href="#">
+        <img class="navbar-brand-logo navbar-brand-logo-normal" style="height: 32px;" src="<?php echo base_url()."themes/default/remark/topbar"; ?>/assets/images/logo2.png"
           title="Remark">
-        <img class="navbar-brand-logo navbar-brand-logo-special" src="<?php echo base_url()."themes/default/remark/topbar"; ?>/assets/images/logo-colored.png"
+        <img class="navbar-brand-logo navbar-brand-logo-special" style="height: 32px;"  src="<?php echo base_url()."themes/default/remark/topbar"; ?>/assets/images/logo2.png"
           title="Remark">
-        <span class="navbar-brand-text hidden-xs-down"> Remark</span>
+        
+        <span class="navbar-brand-text hidden-xs-down" style="color:#6cd9d0"> 
+         SMART 
+        </span> 
+        <span class="navbar-brand-text hidden-xs-down" style="color:#fff;font-size: 10px;"> 
+            DEVELOPER </span>
+        
       </a>
      <!-- <button type="button" class="navbar-toggler collapsed" data-target="#site-navbar-search"
         data-toggle="collapse">
