@@ -8,7 +8,7 @@
         
       <!-- <p>Sign into your pages account</p> -->
        
-      <form method="post" action="#">
+      <form method="post" action="dashboard">
         
           <div class="form-group" style="margin-top: 20px;">
           <label class="sr-only" for="inputEmail">Email</label>
