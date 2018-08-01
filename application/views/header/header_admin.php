@@ -51,6 +51,8 @@
   <script>
     Breakpoints();
   </script>
+  
+  <link id="skinStyle" href="<?php echo base_url()."themes/default/remark/topbar"; ?>/assets/skins/cyan.css" rel="stylesheet" type="text/css">
 </head>
 <body class="animsition site-navbar-small ">
   <!--[if lt IE 8]>
