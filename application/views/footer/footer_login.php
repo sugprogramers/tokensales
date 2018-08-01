@@ -45,10 +45,9 @@
   <script src="<?php echo base_url()."themes/default/remark"; ?>/global/js/Plugin/jquery-placeholder.min599c.js?v4.0.2"></script>
 
 
-  <script>
+    <script>
     (function(document, window, $) {
       'use strict';
-
       var Site = window.Site;
       $(document).ready(function() {
         Site.run();
