@@ -3,3 +3,7 @@
 
 ../
 <?php echo base_url()."themes/default/remark/topbar"; ?>/
+
+
+azul :  rgba(26, 46, 73, 1) o 
+celeste : #6cd9d0

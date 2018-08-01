@@ -55,10 +55,7 @@
     Breakpoints();
   </script>
 </head>
- <!--
-    azul :  rgba(26, 46, 73, 1) o 
-    celeste : #6cd9d0
-    -->
+
 <style>   
 .page-login:before {    
     background:rgba(26, 46, 73, 1);
