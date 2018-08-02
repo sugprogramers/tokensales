@@ -33,11 +33,8 @@
         <!-- <p>Still no account? Please go to <a href="register.html">Register</a></p> -->
 
         <p>Forgot your password?</p> 
-
-
         <p>Don't have an account yet?</p>
-
-        <p>Sign up to Start Investing or Get Financing now</p>
+        <p> Register to <a href="register_investor">Start Investing now</a> or to <a href="register_company">Get Financing</a> now.</p>
 
 
         <!--

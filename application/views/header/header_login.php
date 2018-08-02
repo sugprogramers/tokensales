@@ -57,6 +57,8 @@
   <script>
     Breakpoints();
   </script>
+  
+  <link id="skinStyle" href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/assets/skins/cyan.css" rel="stylesheet" type="text/css">
 </head>
 
 <style>   
