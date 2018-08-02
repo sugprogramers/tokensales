@@ -325,13 +325,17 @@
                                     <!-- <i class="icon wb-user" aria-hidden="true"></i> -->
                                     <?php if ($this->session->userdata("login_admin")) {
                                         echo $this->session->userdata("email");
-                                    } ?>
+                                    } else{
+                                       
+                                    }
+                                    ?>
 
                                 </a>
                                 <!--<a class="dropdown-item" href="javascript:void(0)" role="menuitem"><i class="icon wb-payment" aria-hidden="true"></i> Billing</a>
                                 <a class="dropdown-item" href="javascript:void(0)" role="menuitem"><i class="icon wb-settings" aria-hidden="true"></i> Settings</a>-->
                                 <div class="dropdown-divider" role="presentation"></div>
                                 <a  data-target="#logOutModal" data-toggle="modal"    class="dropdown-item" href="#" role="menuitem"><i class="icon wb-power" aria-hidden="true"></i> Logout</a>
+                            
                             </div>
                         </li>
                         <!--
@@ -546,11 +550,30 @@
                 <div>
                     <div>
                         <ul class="site-menu" data-plugin="menu">
+   
+ <?php if ($this->session->userdata("login_admin")) { ?>                            
                             <li class="site-menu-category">General</li>
+                            
+                             <li class="dropdown site-menu-item has-sub" id="idDashboardAdmin">
+                                <a data-toggle="dropdown" href="#" data-dropdown-toggle="false">
+                                    <i class="site-menu-icon wb-dashboard" aria-hidden="true"></i>
+                                    <span class="site-menu-title">Dashboard</span>                                   
+                                </a>
+                               
+                            </li>
+                            
+                             <li class="dropdown site-menu-item has-sub">
+                                <a data-toggle="dropdown" href="#" data-dropdown-toggle="false">
+                                    <i class="site-menu-icon wb-user" aria-hidden="true"></i>
+                                    <span class="site-menu-title">Profile</span>                                   
+                                </a>
+                               
+                            </li>
+                            
                             <li class="dropdown site-menu-item has-sub">
                                 <a data-toggle="dropdown" href="javascript:void(0)" data-dropdown-toggle="false">
-                                    <i class="site-menu-icon wb-layout" aria-hidden="true"></i>
-                                    <span class="site-menu-title">Layouts</span>
+                                    <i class="site-menu-icon wb-folder" aria-hidden="true"></i>
+                                    <span class="site-menu-title">Projects</span>
                                     <span class="site-menu-arrow"></span>
                                 </a>
                                 <div class="dropdown-menu">
@@ -559,962 +582,56 @@
                                             <div>
                                                 <ul class="site-menu-sub site-menu-normal-list">
                                                     <li class="site-menu-item">
-                                                        <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/layouts/grids.html">
-                                                            <span class="site-menu-title">Grid Scaffolding</span>
+                                                        <a href="#">
+                                                            <span class="site-menu-title">Config Project Type</span>
                                                         </a>
                                                     </li>
+                                                    
                                                     <li class="site-menu-item">
-                                                        <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/layouts/layout-grid.html">
-                                                            <span class="site-menu-title">Layout Grid</span>
+                                                        <a href="#">
+                                                            <span class="site-menu-title">Validate Projects</span>
                                                         </a>
                                                     </li>
-                                                    <li class="site-menu-item">
-                                                        <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/layouts/headers.html">
-                                                            <span class="site-menu-title">Different Headers</span>
-                                                        </a>
-                                                    </li>
-                                                    <li class="site-menu-item">
-                                                        <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/layouts/panel-transition.html">
-                                                            <span class="site-menu-title">Panel Transition</span>
-                                                        </a>
-                                                    </li>
-                                                    <li class="site-menu-item">
-                                                        <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/layouts/boxed.html">
-                                                            <span class="site-menu-title">Boxed Layout</span>
-                                                        </a>
-                                                    </li>
-                                                    <li class="site-menu-item">
-                                                        <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/layouts/two-columns.html">
-                                                            <span class="site-menu-title">Two Columns</span>
-                                                        </a>
-                                                    </li>
-                                                    <li class="site-menu-item">
-                                                        <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/layouts/bordered-header.html">
-                                                            <span class="site-menu-title">Bordered Header</span>
-                                                        </a>
-                                                    </li>
-                                                    <li class="site-menu-item has-sub">
-                                                        <a href="javascript:void(0)">
-                                                            <span class="site-menu-title">Page Aside</span>
-                                                            <span class="site-menu-arrow"></span>
-                                                        </a>
-                                                        <ul class="site-menu-sub">
-                                                            <li class="site-menu-item">
-                                                                <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/layouts/aside-left-static.html">
-                                                                    <span class="site-menu-title">Left Static</span>
-                                                                </a>
-                                                            </li>
-                                                            <li class="site-menu-item">
-                                                                <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/layouts/aside-right-static.html">
-                                                                    <span class="site-menu-title">Right Static</span>
-                                                                </a>
-                                                            </li>
-                                                            <li class="site-menu-item">
-                                                                <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/layouts/aside-left-fixed.html">
-                                                                    <span class="site-menu-title">Left Fixed</span>
-                                                                </a>
-                                                            </li>
-                                                            <li class="site-menu-item">
-                                                                <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/layouts/aside-right-fixed.html">
-                                                                    <span class="site-menu-title">Right Fixed</span>
-                                                                </a>
-                                                            </li>
-                                                        </ul>
-                                                    </li>
+                                                    
                                                 </ul>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </li>
-                            <li class="dropdown site-menu-item has-sub active">
-                                <a data-toggle="dropdown" href="javascript:void(0)" data-dropdown-toggle="false">
-                                    <i class="site-menu-icon wb-file" aria-hidden="true"></i>
-                                    <span class="site-menu-title">Pages</span>
-                                    <span class="site-menu-arrow"></span>
-                                </a>
-                                <div class="dropdown-menu">
-                                    <div class="site-menu-scroll-wrap is-list">
-                                        <div>
-                                            <div>
-                                                <ul class="site-menu-sub site-menu-normal-list">
-                                                    <li class="site-menu-item has-sub">
-                                                        <a href="javascript:void(0)">
-                                                            <span class="site-menu-title">Errors</span>
-                                                            <span class="site-menu-arrow"></span>
-                                                        </a>
-                                                        <ul class="site-menu-sub">
-                                                            <li class="site-menu-item">
-                                                                <a href="error-400.html">
-                                                                    <span class="site-menu-title">400 Bad Request</span>
-                                                                </a>
-                                                            </li>
-                                                            <li class="site-menu-item">
-                                                                <a href="error-403.html">
-                                                                    <span class="site-menu-title">403 Forbidden</span>
-                                                                </a>
-                                                            </li>
-                                                            <li class="site-menu-item">
-                                                                <a href="error-404.html">
-                                                                    <span class="site-menu-title">404 Not Found</span>
-                                                                </a>
-                                                            </li>
-                                                            <li class="site-menu-item">
-                                                                <a href="error-500.html">
-                                                                    <span class="site-menu-title">500 Internal Server Error</span>
-                                                                </a>
-                                                            </li>
-                                                            <li class="site-menu-item">
-                                                                <a href="error-503.html">
-                                                                    <span class="site-menu-title">503 Service Unavailable</span>
-                                                                </a>
-                                                            </li>
-                                                        </ul>
-                                                    </li>
-                                                    <li class="site-menu-item">
-                                                        <a href="faq.html">
-                                                            <span class="site-menu-title">FAQ</span>
-                                                        </a>
-                                                    </li>
-                                                    <li class="site-menu-item">
-                                                        <a href="gallery.html">
-                                                            <span class="site-menu-title">Gallery</span>
-                                                        </a>
-                                                    </li>
-                                                    <li class="site-menu-item">
-                                                        <a href="gallery-grid.html">
-                                                            <span class="site-menu-title">Gallery Grid</span>
-                                                        </a>
-                                                    </li>
-                                                    <li class="site-menu-item">
-                                                        <a href="search-result.html">
-                                                            <span class="site-menu-title">Search Result</span>
-                                                        </a>
-                                                    </li>
-                                                    <li class="site-menu-item has-sub">
-                                                        <a href="javascript:void(0)">
-                                                            <span class="site-menu-title">Maps</span>
-                                                            <span class="site-menu-arrow"></span>
-                                                        </a>
-                                                        <ul class="site-menu-sub">
-                                                            <li class="site-menu-item">
-                                                                <a href="map-google.html">
-                                                                    <span class="site-menu-title">Google Maps</span>
-                                                                </a>
-                                                            </li>
-                                                            <li class="site-menu-item">
-                                                                <a href="map-vector.html">
-                                                                    <span class="site-menu-title">Vector Maps</span>
-                                                                </a>
-                                                            </li>
-                                                        </ul>
-                                                    </li>
-                                                    <li class="site-menu-item">
-                                                        <a href="maintenance.html">
-                                                            <span class="site-menu-title">Maintenance</span>
-                                                        </a>
-                                                    </li>
-                                                    <li class="site-menu-item">
-                                                        <a href="forgot-password.html">
-                                                            <span class="site-menu-title">Forgot Password</span>
-                                                        </a>
-                                                    </li>
-                                                    <li class="site-menu-item">
-                                                        <a href="lockscreen.html">
-                                                            <span class="site-menu-title">Lockscreen</span>
-                                                        </a>
-                                                    </li>
-                                                    <li class="site-menu-item">
-                                                        <a href="login.html">
-                                                            <span class="site-menu-title">Login</span>
-                                                        </a>
-                                                    </li>
-                                                    <li class="site-menu-item">
-                                                        <a href="register.html">
-                                                            <span class="site-menu-title">Register</span>
-                                                        </a>
-                                                    </li>
-                                                    <li class="site-menu-item">
-                                                        <a href="login-v2.html">
-                                                            <span class="site-menu-title">Login V2</span>
-                                                        </a>
-                                                    </li>
-                                                    <li class="site-menu-item">
-                                                        <a href="register-v2.html">
-                                                            <span class="site-menu-title">Register V2</span>
-                                                        </a>
-                                                    </li>
-                                                    <li class="site-menu-item">
-                                                        <a href="login-v3.html">
-                                                            <span class="site-menu-title">Login V3</span>
-                                                        </a>
-                                                    </li>
-                                                    <li class="site-menu-item">
-                                                        <a href="register-v3.html">
-                                                            <span class="site-menu-title">Register V3</span>
-                                                        </a>
-                                                    </li>
-                                                    <li class="site-menu-item">
-                                                        <a href="user.html">
-                                                            <span class="site-menu-title">User List</span>
-                                                        </a>
-                                                    </li>
-                                                    <li class="site-menu-item">
-                                                        <a href="invoice.html">
-                                                            <span class="site-menu-title">Invoice</span>
-                                                        </a>
-                                                    </li>
-                                                    <li class="site-menu-item active">
-                                                        <a href="blank.html">
-                                                            <span class="site-menu-title">Blank Page</span>
-                                                        </a>
-                                                    </li>
-                                                    <li class="site-menu-item has-sub">
-                                                        <a href="javascript:void(0)">
-                                                            <span class="site-menu-title">Email</span>
-                                                            <span class="site-menu-arrow"></span>
-                                                        </a>
-                                                        <ul class="site-menu-sub">
-                                                            <li class="site-menu-item">
-                                                                <a href="email-articles.html">
-                                                                    <span class="site-menu-title">Articles</span>
-                                                                </a>
-                                                            </li>
-                                                            <li class="site-menu-item">
-                                                                <a href="email-welcome.html">
-                                                                    <span class="site-menu-title">Welcome</span>
-                                                                </a>
-                                                            </li>
-                                                            <li class="site-menu-item">
-                                                                <a href="email-post.html">
-                                                                    <span class="site-menu-title">Post</span>
-                                                                </a>
-                                                            </li>
-                                                            <li class="site-menu-item">
-                                                                <a href="email-thumbnail.html">
-                                                                    <span class="site-menu-title">Thumbnail</span>
-                                                                </a>
-                                                            </li>
-                                                            <li class="site-menu-item">
-                                                                <a href="email-news.html">
-                                                                    <span class="site-menu-title">News</span>
-                                                                </a>
-                                                            </li>
-                                                        </ul>
-                                                    </li>
-                                                    <li class="site-menu-item">
-                                                        <a href="code-editor.html">
-                                                            <span class="site-menu-title">Code Editor</span>
-                                                        </a>
-                                                    </li>
-                                                    <li class="site-menu-item">
-                                                        <a href="profile.html">
-                                                            <span class="site-menu-title">Profile</span>
-                                                        </a>
-                                                    </li>
-                                                    <li class="site-menu-item">
-                                                        <a href="profile-v2.html">
-                                                            <span class="site-menu-title">Profile V2</span>
-                                                        </a>
-                                                    </li>
-                                                    <li class="site-menu-item">
-                                                        <a href="profile-v3.html">
-                                                            <span class="site-menu-title">Profile V3</span>
-                                                        </a>
-                                                    </li>
-                                                    <li class="site-menu-item">
-                                                        <a href="site-map.html">
-                                                            <span class="site-menu-title">Sitemap</span>
-                                                        </a>
-                                                    </li>
-                                                    <li class="site-menu-item">
-                                                        <a href="project.html">
-                                                            <span class="site-menu-title">Project</span>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="site-menu-category">Elements</li>
-                            <li class="dropdown site-menu-item has-section has-sub">
-                                <a data-toggle="dropdown" href="javascript:void(0)" data-dropdown-toggle="false">
-                                    <i class="site-menu-icon wb-bookmark" aria-hidden="true"></i>
-                                    <span class="site-menu-title">UI</span>
-                                    <span class="site-menu-arrow"></span>
-                                </a>
-                                <ul class="dropdown-menu site-menu-sub site-menu-section-wrap blocks-md-3">
-                                    <li class="site-menu-section site-menu-item has-sub">
-                                        <header>
-                                            <span class="site-menu-title">Basic UI</span>
-                                            <span class="site-menu-arrow"></span>
-                                        </header>
-                                        <div class="site-menu-scroll-wrap is-section">
-                                            <div>
-                                                <div>
-                                                    <ul class="site-menu-sub site-menu-section-list">
-                                                        <li class="site-menu-item has-sub">
-                                                            <a href="javascript:void(0)">
-                                                                <span class="site-menu-title">Panel</span>
-                                                                <span class="site-menu-arrow"></span>
-                                                            </a>
-                                                            <ul class="site-menu-sub">
-                                                                <li class="site-menu-item">
-                                                                    <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/uikit/panel-structure.html">
-                                                                        <span class="site-menu-title">Panel Structure</span>
-                                                                    </a>
-                                                                </li>
-                                                                <li class="site-menu-item">
-                                                                    <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/uikit/panel-actions.html">
-                                                                        <span class="site-menu-title">Panel Actions</span>
-                                                                    </a>
-                                                                </li>
-                                                                <li class="site-menu-item">
-                                                                    <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/uikit/panel-portlets.html">
-                                                                        <span class="site-menu-title">Panel Portlets</span>
-                                                                    </a>
-                                                                </li>
-                                                            </ul>
-                                                        </li>
-                                                        <li class="site-menu-item">
-                                                            <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/uikit/buttons.html">
-                                                                <span class="site-menu-title">Buttons</span>
-                                                            </a>
-                                                        </li>
-                                                        <li class="site-menu-item">
-                                                            <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/uikit/cards.html">
-                                                                <span class="site-menu-title">Cards</span>
-                                                            </a>
-                                                        </li>
-                                                        <li class="site-menu-item">
-                                                            <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/uikit/dropdowns.html">
-                                                                <span class="site-menu-title">Dropdowns</span>
-                                                            </a>
-                                                        </li>
-                                                        <li class="site-menu-item">
-                                                            <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/uikit/icons.html">
-                                                                <span class="site-menu-title">Icons</span>
-                                                            </a>
-                                                        </li>
-                                                        <li class="site-menu-item">
-                                                            <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/uikit/list.html">
-                                                                <span class="site-menu-title">List</span>
-                                                            </a>
-                                                        </li>
-                                                        <li class="site-menu-item">
-                                                            <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/uikit/tooltip-popover.html">
-                                                                <span class="site-menu-title">Tooltip &amp; Popover</span>
-                                                            </a>
-                                                        </li>
-                                                        <li class="site-menu-item">
-                                                            <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/uikit/modals.html">
-                                                                <span class="site-menu-title">Modals</span>
-                                                            </a>
-                                                        </li>
-                                                        <li class="site-menu-item">
-                                                            <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/uikit/tabs-accordions.html">
-                                                                <span class="site-menu-title">Tabs &amp; Accordions</span>
-                                                            </a>
-                                                        </li>
-                                                        <li class="site-menu-item">
-                                                            <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/uikit/images.html">
-                                                                <span class="site-menu-title">Images</span>
-                                                            </a>
-                                                        </li>
-                                                        <li class="site-menu-item">
-                                                            <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/uikit/badges.html">
-                                                                <span class="site-menu-title">Badges</span>
-                                                            </a>
-                                                        </li>
-                                                        <li class="site-menu-item">
-                                                            <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/uikit/progress-bars.html">
-                                                                <span class="site-menu-title">Progress Bars</span>
-                                                            </a>
-                                                        </li>
-                                                        <li class="site-menu-item">
-                                                            <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/uikit/carousel.html">
-                                                                <span class="site-menu-title">Carousel</span>
-                                                            </a>
-                                                        </li>
-                                                        <li class="site-menu-item">
-                                                            <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/uikit/typography.html">
-                                                                <span class="site-menu-title">Typography</span>
-                                                            </a>
-                                                        </li>
-                                                        <li class="site-menu-item">
-                                                            <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/uikit/colors.html">
-                                                                <span class="site-menu-title">Colors</span>
-                                                            </a>
-                                                        </li>
-                                                        <li class="site-menu-item">
-                                                            <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/uikit/utilities.html">
-                                                                <span class="site-menu-title">Utilties</span>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="site-menu-section site-menu-item has-sub">
-                                        <header>
-                                            <span class="site-menu-title">Advanced UI</span>
-                                            <span class="site-menu-arrow"></span>
-                                        </header>
-                                        <div class="site-menu-scroll-wrap is-section">
-                                            <div>
-                                                <div>
-                                                    <ul class="site-menu-sub site-menu-section-list">
-                                                        <li class="site-menu-item hidden-sm-down site-tour-trigger">
-                                                            <a href="javascript:void(0)">
-                                                                <span class="site-menu-title">Tour</span>
-                                                            </a>
-                                                        </li>
-                                                        <li class="site-menu-item">
-                                                            <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/advanced/animation.html">
-                                                                <span class="site-menu-title">Animation</span>
-                                                            </a>
-                                                        </li>
-                                                        <li class="site-menu-item">
-                                                            <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/advanced/highlight.html">
-                                                                <span class="site-menu-title">Highlight</span>
-                                                            </a>
-                                                        </li>
-                                                        <li class="site-menu-item">
-                                                            <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/advanced/lightbox.html">
-                                                                <span class="site-menu-title">Lightbox</span>
-                                                            </a>
-                                                        </li>
-                                                        <li class="site-menu-item">
-                                                            <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/advanced/scrollable.html">
-                                                                <span class="site-menu-title">Scrollable</span>
-                                                            </a>
-                                                        </li>
-                                                        <li class="site-menu-item">
-                                                            <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/advanced/rating.html">
-                                                                <span class="site-menu-title">Rating</span>
-                                                            </a>
-                                                        </li>
-                                                        <li class="site-menu-item">
-                                                            <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/advanced/context-menu.html">
-                                                                <span class="site-menu-title">Context Menu</span>
-                                                            </a>
-                                                        </li>
-                                                        <li class="site-menu-item">
-                                                            <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/advanced/alertify.html">
-                                                                <span class="site-menu-title">Alertify</span>
-                                                            </a>
-                                                        </li>
-                                                        <li class="site-menu-item">
-                                                            <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/advanced/masonry.html">
-                                                                <span class="site-menu-title">Masonry</span>
-                                                            </a>
-                                                        </li>
-                                                        <li class="site-menu-item">
-                                                            <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/advanced/treeview.html">
-                                                                <span class="site-menu-title">Treeview</span>
-                                                            </a>
-                                                        </li>
-                                                        <li class="site-menu-item">
-                                                            <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/advanced/toastr.html">
-                                                                <span class="site-menu-title">Toastr</span>
-                                                            </a>
-                                                        </li>
-                                                        <li class="site-menu-item">
-                                                            <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/advanced/maps-vector.html">
-                                                                <span class="site-menu-title">Vector Maps</span>
-                                                            </a>
-                                                        </li>
-                                                        <li class="site-menu-item">
-                                                            <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/advanced/maps-google.html">
-                                                                <span class="site-menu-title">Google Maps</span>
-                                                            </a>
-                                                        </li>
-                                                        <li class="site-menu-item">
-                                                            <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/advanced/sortable-nestable.html">
-                                                                <span class="site-menu-title">Sortable &amp; Nestable</span>
-                                                            </a>
-                                                        </li>
-                                                        <li class="site-menu-item">
-                                                            <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/advanced/bootbox-sweetalert.html">
-                                                                <span class="site-menu-title">Bootbox &amp; Sweetalert</span>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="site-menu-section site-menu-item has-sub">
-                                        <header>
-                                            <span class="site-menu-title">Structure</span>
-                                            <span class="site-menu-arrow"></span>
-                                        </header>
-                                        <div class="site-menu-scroll-wrap is-section">
-                                            <div>
-                                                <div>
-                                                    <ul class="site-menu-sub site-menu-section-list">
-                                                        <li class="site-menu-item">
-                                                            <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/structure/alerts.html">
-                                                                <span class="site-menu-title">Alerts</span>
-                                                            </a>
-                                                        </li>
-                                                        <li class="site-menu-item">
-                                                            <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/structure/ribbon.html">
-                                                                <span class="site-menu-title">Ribbon</span>
-                                                            </a>
-                                                        </li>
-                                                        <li class="site-menu-item">
-                                                            <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/structure/pricing-tables.html">
-                                                                <span class="site-menu-title">Pricing Tables</span>
-                                                            </a>
-                                                        </li>
-                                                        <li class="site-menu-item">
-                                                            <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/structure/overlay.html">
-                                                                <span class="site-menu-title">Overlay</span>
-                                                            </a>
-                                                        </li>
-                                                        <li class="site-menu-item">
-                                                            <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/structure/cover.html">
-                                                                <span class="site-menu-title">Cover</span>
-                                                            </a>
-                                                        </li>
-                                                        <li class="site-menu-item">
-                                                            <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/structure/timeline-simple.html">
-                                                                <span class="site-menu-title">Simple Timeline</span>
-                                                            </a>
-                                                        </li>
-                                                        <li class="site-menu-item">
-                                                            <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/structure/timeline.html">
-                                                                <span class="site-menu-title">Timeline</span>
-                                                            </a>
-                                                        </li>
-                                                        <li class="site-menu-item">
-                                                            <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/structure/step.html">
-                                                                <span class="site-menu-title">Step</span>
-                                                            </a>
-                                                        </li>
-                                                        <li class="site-menu-item">
-                                                            <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/structure/comments.html">
-                                                                <span class="site-menu-title">Comments</span>
-                                                            </a>
-                                                        </li>
-                                                        <li class="site-menu-item">
-                                                            <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/structure/media.html">
-                                                                <span class="site-menu-title">Media</span>
-                                                            </a>
-                                                        </li>
-                                                        <li class="site-menu-item">
-                                                            <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/structure/chat.html">
-                                                                <span class="site-menu-title">Chat</span>
-                                                            </a>
-                                                        </li>
-                                                        <li class="site-menu-item">
-                                                            <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/structure/testimonials.html">
-                                                                <span class="site-menu-title">Testimonials</span>
-                                                            </a>
-                                                        </li>
-                                                        <li class="site-menu-item">
-                                                            <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/structure/nav.html">
-                                                                <span class="site-menu-title">Nav</span>
-                                                            </a>
-                                                        </li>
-                                                        <li class="site-menu-item">
-                                                            <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/structure/navbars.html">
-                                                                <span class="site-menu-title">Navbars</span>
-                                                            </a>
-                                                        </li>
-                                                        <li class="site-menu-item">
-                                                            <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/structure/blockquotes.html">
-                                                                <span class="site-menu-title">Blockquotes</span>
-                                                            </a>
-                                                        </li>
-                                                        <li class="site-menu-item">
-                                                            <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/structure/pagination.html">
-                                                                <span class="site-menu-title">Pagination</span>
-                                                            </a>
-                                                        </li>
-                                                        <li class="site-menu-item">
-                                                            <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/structure/breadcrumbs.html">
-                                                                <span class="site-menu-title">Breadcrumbs</span>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="dropdown site-menu-item has-section has-sub">
-                                <a data-toggle="dropdown" href="javascript:void(0)" data-dropdown-toggle="false">
-                                    <i class="site-menu-icon wb-plugin" aria-hidden="true"></i>
-                                    <span class="site-menu-title">Compents</span>
-                                    <span class="site-menu-arrow"></span>
-                                </a>
-                                <ul class="dropdown-menu site-menu-sub site-menu-section-wrap blocks-md-3">
-                                    <li class="site-menu-section site-menu-item has-sub">
-                                        <header>
-                                            <span class="site-menu-title">Forms</span>
-                                            <span class="site-menu-arrow"></span>
-                                        </header>
-                                        <div class="site-menu-scroll-wrap is-section">
-                                            <div>
-                                                <div>
-                                                    <ul class="site-menu-sub site-menu-section-list">
-                                                        <li class="site-menu-item">
-                                                            <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/forms/general.html">
-                                                                <span class="site-menu-title">General Elements</span>
-                                                            </a>
-                                                        </li>
-                                                        <li class="site-menu-item">
-                                                            <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/forms/material.html">
-                                                                <span class="site-menu-title">Material Elements</span>
-                                                            </a>
-                                                        </li>
-                                                        <li class="site-menu-item">
-                                                            <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/forms/advanced.html">
-                                                                <span class="site-menu-title">Advanced Elements</span>
-                                                            </a>
-                                                        </li>
-                                                        <li class="site-menu-item">
-                                                            <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/forms/layouts.html">
-                                                                <span class="site-menu-title">Form Layouts</span>
-                                                            </a>
-                                                        </li>
-                                                        <li class="site-menu-item">
-                                                            <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/forms/wizard.html">
-                                                                <span class="site-menu-title">Form Wizard</span>
-                                                            </a>
-                                                        </li>
-                                                        <li class="site-menu-item">
-                                                            <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/forms/validation.html">
-                                                                <span class="site-menu-title">Form Validation</span>
-                                                            </a>
-                                                        </li>
-                                                        <li class="site-menu-item">
-                                                            <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/forms/masks.html">
-                                                                <span class="site-menu-title">Form Masks</span>
-                                                            </a>
-                                                        </li>
-                                                        <li class="site-menu-item has-sub">
-                                                            <a href="javascript:void(0)">
-                                                                <span class="site-menu-title">Editors</span>
-                                                                <span class="site-menu-arrow"></span>
-                                                            </a>
-                                                            <ul class="site-menu-sub">
-                                                                <li class="site-menu-item">
-                                                                    <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/forms/editor-summernote.html">
-                                                                        <span class="site-menu-title">Summernote</span>
-                                                                    </a>
-                                                                </li>
-                                                                <li class="site-menu-item">
-                                                                    <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/forms/editor-markdown.html">
-                                                                        <span class="site-menu-title">Markdown</span>
-                                                                    </a>
-                                                                </li>
-                                                                <li class="site-menu-item">
-                                                                    <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/forms/editor-ace.html">
-                                                                        <span class="site-menu-title">Ace Editor</span>
-                                                                    </a>
-                                                                </li>
-                                                            </ul>
-                                                        </li>
-                                                        <li class="site-menu-item">
-                                                            <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/forms/image-cropping.html">
-                                                                <span class="site-menu-title">Image Cropping</span>
-                                                            </a>
-                                                        </li>
-                                                        <li class="site-menu-item">
-                                                            <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/forms/file-uploads.html">
-                                                                <span class="site-menu-title">File Uploads</span>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="site-menu-section site-menu-item has-sub">
-                                        <header>
-                                            <span class="site-menu-title">Tables</span>
-                                            <span class="site-menu-arrow"></span>
-                                        </header>
-                                        <div class="site-menu-scroll-wrap is-section">
-                                            <div>
-                                                <div>
-                                                    <ul class="site-menu-sub site-menu-section-list">
-                                                        <li class="site-menu-item">
-                                                            <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/tables/basic.html">
-                                                                <span class="site-menu-title">Basic Tables</span>
-                                                            </a>
-                                                        </li>
-                                                        <li class="site-menu-item">
-                                                            <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/tables/bootstrap.html">
-                                                                <span class="site-menu-title">Bootstrap Tables</span>
-                                                            </a>
-                                                        </li>
-                                                        <li class="site-menu-item">
-                                                            <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/tables/floatthead.html">
-                                                                <span class="site-menu-title">floatThead</span>
-                                                            </a>
-                                                        </li>
-                                                        <li class="site-menu-item">
-                                                            <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/tables/responsive.html">
-                                                                <span class="site-menu-title">Responsive Tables</span>
-                                                            </a>
-                                                        </li>
-                                                        <li class="site-menu-item">
-                                                            <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/tables/editable.html">
-                                                                <span class="site-menu-title">Editable Tables</span>
-                                                            </a>
-                                                        </li>
-                                                        <li class="site-menu-item">
-                                                            <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/tables/jsgrid.html">
-                                                                <span class="site-menu-title">jsGrid</span>
-                                                            </a>
-                                                        </li>
-                                                        <li class="site-menu-item">
-                                                            <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/tables/footable.html">
-                                                                <span class="site-menu-title">FooTable</span>
-                                                            </a>
-                                                        </li>
-                                                        <li class="site-menu-item">
-                                                            <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/tables/datatable.html">
-                                                                <span class="site-menu-title">DataTables</span>
-                                                            </a>
-                                                        </li>
-                                                        <li class="site-menu-item">
-                                                            <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/tables/jqtabledit.html">
-                                                                <span class="site-menu-title">Jquery Tabledit</span>
-                                                            </a>
-                                                        </li>
-                                                        <li class="site-menu-item">
-                                                            <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/tables/table-dragger.html">
-                                                                <span class="site-menu-title">Table Dragger</span>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="site-menu-section site-menu-item has-sub">
-                                        <header>
-                                            <span class="site-menu-title">Chart</span>
-                                            <span class="site-menu-arrow"></span>
-                                        </header>
-                                        <div class="site-menu-scroll-wrap is-section">
-                                            <div>
-                                                <div>
-                                                    <ul class="site-menu-sub site-menu-section-list">
-                                                        <li class="site-menu-item">
-                                                            <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/charts/chartjs.html">
-                                                                <span class="site-menu-title">Chart.js</span>
-                                                            </a>
-                                                        </li>
-                                                        <li class="site-menu-item">
-                                                            <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/charts/gauges.html">
-                                                                <span class="site-menu-title">Gauges</span>
-                                                            </a>
-                                                        </li>
-                                                        <li class="site-menu-item">
-                                                            <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/charts/flot.html">
-                                                                <span class="site-menu-title">Flot</span>
-                                                            </a>
-                                                        </li>
-                                                        <li class="site-menu-item">
-                                                            <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/charts/peity.html">
-                                                                <span class="site-menu-title">Peity</span>
-                                                            </a>
-                                                        </li>
-                                                        <li class="site-menu-item">
-                                                            <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/charts/sparkline.html">
-                                                                <span class="site-menu-title">Sparkline</span>
-                                                            </a>
-                                                        </li>
-                                                        <li class="site-menu-item">
-                                                            <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/charts/morris.html">
-                                                                <span class="site-menu-title">Morris</span>
-                                                            </a>
-                                                        </li>
-                                                        <li class="site-menu-item">
-                                                            <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/charts/chartist.html">
-                                                                <span class="site-menu-title">Chartist.js</span>
-                                                            </a>
-                                                        </li>
-                                                        <li class="site-menu-item">
-                                                            <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/charts/rickshaw.html">
-                                                                <span class="site-menu-title">Rickshaw</span>
-                                                            </a>
-                                                        </li>
-                                                        <li class="site-menu-item">
-                                                            <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/charts/pie-progress.html">
-                                                                <span class="site-menu-title">Pie Progress</span>
-                                                            </a>
-                                                        </li>
-                                                        <li class="site-menu-item">
-                                                            <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/charts/c3.html">
-                                                                <span class="site-menu-title">C3</span>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
                             </li>
                             <li class="dropdown site-menu-item has-sub">
-                                <a data-toggle="dropdown" href="javascript:void(0)" data-dropdown-toggle="false">
-                                    <i class="site-menu-icon wb-extension" aria-hidden="true"></i>
-                                    <span class="site-menu-title">Widgets</span>
-                                    <span class="site-menu-arrow"></span>
+                                <a data-toggle="dropdown" href="#" data-dropdown-toggle="false">
+                                    <i class="site-menu-icon wb-users" aria-hidden="true"></i>
+                                    <span class="site-menu-title">Investors</span>                                   
                                 </a>
-                                <div class="dropdown-menu">
-                                    <div class="site-menu-scroll-wrap is-list">
-                                        <div>
-                                            <div>
-                                                <ul class="site-menu-sub site-menu-normal-list">
-                                                    <li class="site-menu-item">
-                                                        <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/widgets/statistics.html">
-                                                            <span class="site-menu-title">Statistics Widgets</span>
-                                                        </a>
-                                                    </li>
-                                                    <li class="site-menu-item">
-                                                        <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/widgets/data.html">
-                                                            <span class="site-menu-title">Data Widgets</span>
-                                                        </a>
-                                                    </li>
-                                                    <li class="site-menu-item">
-                                                        <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/widgets/blog.html">
-                                                            <span class="site-menu-title">Blog Widgets</span>
-                                                        </a>
-                                                    </li>
-                                                    <li class="site-menu-item">
-                                                        <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/widgets/chart.html">
-                                                            <span class="site-menu-title">Chart Widgets</span>
-                                                        </a>
-                                                    </li>
-                                                    <li class="site-menu-item">
-                                                        <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/widgets/social.html">
-                                                            <span class="site-menu-title">Social Widgets</span>
-                                                        </a>
-                                                    </li>
-                                                    <li class="site-menu-item">
-                                                        <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/widgets/weather.html">
-                                                            <span class="site-menu-title">Weather Widgets</span>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                               
                             </li>
-                            <li class="site-menu-category">Apps</li>
+                            
+                             <li class="dropdown site-menu-item has-sub">
+                                <a data-toggle="dropdown" href="#" data-dropdown-toggle="false">
+                                    <i class="site-menu-icon fa-users" aria-hidden="true"></i>
+                                    <span class="site-menu-title">Companys</span>                                   
+                                </a>
+                               
+                            </li>
+                            
+                             <li class="dropdown site-menu-item has-sub">
+                                <a data-toggle="dropdown" href="#" data-dropdown-toggle="false">
+                                    <i class="site-menu-icon fa-paypal" aria-hidden="true"></i>
+                                    <span class="site-menu-title">Payments</span>                                   
+                                </a>
+                               
+                            </li>
+                            
                             <li class="dropdown site-menu-item has-sub">
-                                <a data-toggle="dropdown" href="javascript:void(0)" data-dropdown-toggle="false">
-                                    <i class="site-menu-icon wb-grid-4" aria-hidden="true"></i>
-                                    <span class="site-menu-title">Apps</span>
-                                    <span class="site-menu-arrow"></span>
-                                </a>
-                                <div class="dropdown-menu">
-                                    <div class="site-menu-scroll-wrap is-list">
-                                        <div>
-                                            <div>
-                                                <ul class="site-menu-sub site-menu-normal-list">
-                                                    <li class="site-menu-item">
-                                                        <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/apps/contacts/contacts.html">
-                                                            <span class="site-menu-title">Contacts</span>
-                                                        </a>
-                                                    </li>
-                                                    <li class="site-menu-item">
-                                                        <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/apps/calendar/calendar.html">
-                                                            <span class="site-menu-title">Calendar</span>
-                                                        </a>
-                                                    </li>
-                                                    <li class="site-menu-item">
-                                                        <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/apps/notebook/notebook.html">
-                                                            <span class="site-menu-title">Notebook</span>
-                                                        </a>
-                                                    </li>
-                                                    <li class="site-menu-item">
-                                                        <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/apps/taskboard/taskboard.html">
-                                                            <span class="site-menu-title">Taskboard</span>
-                                                        </a>
-                                                    </li>
-                                                    <li class="site-menu-item has-sub">
-                                                        <a href="javascript:void(0)">
-                                                            <span class="site-menu-title">Documents</span>
-                                                            <span class="site-menu-arrow"></span>
-                                                        </a>
-                                                        <ul class="site-menu-sub">
-                                                            <li class="site-menu-item">
-                                                                <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/apps/documents/articles.html">
-                                                                    <span class="site-menu-title">Articles</span>
-                                                                </a>
-                                                            </li>
-                                                            <li class="site-menu-item">
-                                                                <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/apps/documents/categories.html">
-                                                                    <span class="site-menu-title">Categories</span>
-                                                                </a>
-                                                            </li>
-                                                            <li class="site-menu-item">
-                                                                <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/apps/documents/article.html">
-                                                                    <span class="site-menu-title">Article</span>
-                                                                </a>
-                                                            </li>
-                                                        </ul>
-                                                    </li>
-                                                    <li class="site-menu-item">
-                                                        <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/apps/forum/forum.html">
-                                                            <span class="site-menu-title">Forum</span>
-                                                        </a>
-                                                    </li>
-                                                    <li class="site-menu-item">
-                                                        <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/apps/message/message.html">
-                                                            <span class="site-menu-title">Message</span>
-                                                        </a>
-                                                    </li>
-                                                    <li class="site-menu-item">
-                                                        <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/apps/projects/projects.html">
-                                                            <span class="site-menu-title">Projects</span>
-                                                        </a>
-                                                    </li>
-                                                    <li class="site-menu-item">
-                                                        <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/apps/mailbox/mailbox.html">
-                                                            <span class="site-menu-title">Mailbox</span>
-                                                        </a>
-                                                    </li>
-                                                    <li class="site-menu-item">
-                                                        <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/apps/media/overview.html">
-                                                            <span class="site-menu-title">Media</span>
-                                                        </a>
-                                                    </li>
-                                                    <li class="site-menu-item">
-                                                        <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/apps/work/work.html">
-                                                            <span class="site-menu-title">Work</span>
-                                                        </a>
-                                                    </li>
-                                                    <li class="site-menu-item">
-                                                        <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/apps/location/location.html">
-                                                            <span class="site-menu-title">Location</span>
-                                                        </a>
-                                                    </li>
-                                                    <li class="site-menu-item">
-                                                        <a href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/apps/travel/travel.html">
-                                                            <span class="site-menu-title">Travel</span>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                <a data-toggle="dropdown" href="#" data-dropdown-toggle="false" onclick="$('#logOutModal').modal('show');">
+                                    <i class="site-menu-icon wb-power" aria-hidden="true"></i>
+                                    <span class="site-menu-title">Logout</span>                                   
+                                </a>                               
                             </li>
+                            
+ <?php } ?>                              
+                            
                         </ul>
                     </div>
                 </div>

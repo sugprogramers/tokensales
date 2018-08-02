@@ -33,7 +33,9 @@ class Administrator extends CI_Controller {
     }
     
     public function dashboard() {
-        
+        if (!$this->session->userdata("login_admin")) {
+            redirect(base_url() . 'login');
+        }
         $this->load->view('header/header_admin');
         $this->load->view('admin/dashboard_administrator');
         $this->load->view('footer/footer_admin');
