@@ -11,6 +11,9 @@ class Login_Controller extends CI_Controller {
     }
 
     public function index() {
+        if ($this->session->userdata("login_admin")) {
+            redirect(base_url() . 'dashboard');
+        }
         $this->load->view('header/header_login');
         $this->load->view('login');
         $this->load->view('footer/footer_login');
@@ -24,17 +27,21 @@ class Login_Controller extends CI_Controller {
             $data = [
                 "id" => $resp->c_user_id,
                 "name" => $resp->username,
-                "login" => TRUE
+                "login_admin" => TRUE
             ];
 
             $this->session->set_userdata($data);
+            $response = array('redirect' => base_url() . 'dashboard', 'status' => 'success');
+            echo json_encode($response);
         } else {
-            echo "error";
+            $response = array('redirect' => '', 'status' => 'error');
+            echo json_encode($response);
         }
     }
 
     public function logout_user() {
-        
+        $this->session->sess_destroy();
+        redirect(base_url() . 'login');
     }
 
 }

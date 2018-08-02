@@ -12,13 +12,13 @@
 
             <div class="form-group" style="margin-top: 20px;">
                 <label class="sr-only" for="inputEmail">Email</label>
-                <input type="email" class="form-control form-control-lg" id="inputEmail" name="email" placeholder="Email Address" style="font-size: 14px; border-radius:0;">
+                <input type="email" required class="form-control form-control-lg" id="inputEmail" name="email" placeholder="Email Address" style="font-size: 14px; border-radius:0;">
             </div>
 
 
             <div class="form-group" style="margin-top: 30px;">
                 <label class="sr-only" for="inputPassword">Password</label>
-                <input type="password" class="form-control form-control-lg" id="inputPassword" name="password" placeholder="Password" style="font-size: 14px ; border-radius:0;">
+                <input type="password" required  class="form-control form-control-lg" id="inputPassword" name="password" placeholder="Password" style="font-size: 14px ; border-radius:0;">
             </div>
 
             <!-- <div class="form-group clearfix">
@@ -72,16 +72,18 @@
         $("#login_form").submit(function (event) {
             event.preventDefault();
             $.ajax({
-                url: "<?php echo site_url('Login_Controller/login_user')?>",
+                url: "<?php echo base_url('Login_Controller/login_user')?>",
                 type: "POST",
                 data: $(this).serialize(),
-                success: function (resp) {
-                    if (resp === "error") {
-                       
-                         showError('los datos no existe');
-                    } else {
-                        alert("correcto");
-                    }
+                success: function (data) {
+                    var resp = $.parseJSON(data);//convertir data de json
+                    if (resp.status === "error") {                       
+                         showError('Error user or password invalid');
+                    } 
+                    if (resp.status === "success") {                       
+                        window.location.href = resp.redirect;
+                    }                     
+                    
                 }
             });
         });
