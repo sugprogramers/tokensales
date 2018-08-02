@@ -59,7 +59,8 @@ $route['login'] = "Login_Controller";
 $route['logout'] = "Login_Controller/logout_user";
 $route['dashboard'] = "admin/Administrator/dashboard";
 
-
+//ProjectDocumentType
+$route['listalldocument'] = "AdminProjectDocumentTypeController/listDataGrid";
 
 
 //Ejemplo Route Administrador
