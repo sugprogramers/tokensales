@@ -51,6 +51,21 @@
   <script src="<?php echo base_url()."themes/default/remark"; ?>/global/js/Plugin/slidepanel.min599c.js?v4.0.2"></script>
   <script src="<?php echo base_url()."themes/default/remark"; ?>/global/js/Plugin/switchery.min599c.js?v4.0.2"></script>
 
+  
+  <!-- DataGrid -->
+  <script src="<?php echo base_url()."themes/default/remark"; ?>/global/vendor/datatables.net/jquery.dataTables599c.js?v4.0.2"></script>
+  <script src="<?php echo base_url()."themes/default/remark"; ?>/global/vendor/datatables.net-bs4/dataTables.bootstrap4599c.js?v4.0.2"></script>
+  <script src="<?php echo base_url()."themes/default/remark"; ?>/global/vendor/datatables.net-fixedheader/dataTables.fixedHeader.min599c.js?v4.0.2"></script>
+  <script src="<?php echo base_url()."themes/default/remark"; ?>/global/vendor/datatables.net-fixedcolumns/dataTables.fixedColumns.min599c.js?v4.0.2"></script>
+  <script src="<?php echo base_url()."themes/default/remark"; ?>/global/vendor/datatables.net-rowgroup/dataTables.rowGroup.min599c.js?v4.0.2"></script>
+  <script src="<?php echo base_url()."themes/default/remark"; ?>/global/vendor/datatables.net-scroller/dataTables.scroller.min599c.js?v4.0.2"></script>
+  <script src="<?php echo base_url()."themes/default/remark"; ?>/global/vendor/datatables.net-responsive/dataTables.responsive.min599c.js?v4.0.2"></script>
+  <script src="<?php echo base_url()."themes/default/remark"; ?>/global/vendor/bootbox/bootbox.min599c.js?v4.0.2"></script>
+  
+  
+  
+  
+  
 
   <script>
     (function(document, window, $) {

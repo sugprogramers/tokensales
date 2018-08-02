@@ -45,11 +45,16 @@ class CProjectdocumenttypeModel extends CI_Model
        return $data;
     }
     
+    
+    public function getTest(){
+       return $this->db->get("c_projectdocumenttype");
+    }
+    
     function getId() {
         return $this->c_projectdocumenttype_id;
     }
     
-    function getIsactive() {
+    function isActive() {
         return $this->isactive;
     }
 
@@ -61,7 +66,7 @@ class CProjectdocumenttypeModel extends CI_Model
         return $this->description;
     }
 
-    function getIsmandatory() {
+    function isMandatory() {
         return $this->ismandatory;
     }
 

@@ -41,6 +41,18 @@
         <link rel='stylesheet' href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,300italic">
         <link rel="stylesheet" href="<?php echo base_url() . "themes/default/remark"; ?>/global/fonts/font-awesome/font-awesome.min599c.css?v4.0.2">
 
+        
+        <!-- DataTable Css For This Page -->
+        <link rel="stylesheet" href="<?php echo base_url() . "themes/default/remark"; ?>/global/vendor/datatables.net-bs4/dataTables.bootstrap4.min599c.css?v4.0.2">
+        <link rel="stylesheet" href="<?php echo base_url() . "themes/default/remark"; ?>/global/vendor/datatables.net-fixedheader-bs4/dataTables.fixedheader.bootstrap4.min599c.css?v4.0.2">
+        <link rel="stylesheet" href="<?php echo base_url() . "themes/default/remark"; ?>/global/vendor/datatables.net-fixedcolumns-bs4/dataTables.fixedcolumns.bootstrap4.min599c.css?v4.0.2">
+        <link rel="stylesheet" href="<?php echo base_url() . "themes/default/remark"; ?>/global/vendor/datatables.net-rowgroup-bs4/dataTables.rowgroup.bootstrap4.min599c.css?v4.0.2">
+        <link rel="stylesheet" href="<?php echo base_url() . "themes/default/remark"; ?>/global/vendor/datatables.net-scroller-bs4/dataTables.scroller.bootstrap4.min599c.css?v4.0.2">
+        <link rel="stylesheet" href="<?php echo base_url() . "themes/default/remark"; ?>/global/vendor/datatables.net-select-bs4/dataTables.select.bootstrap4.min599c.css?v4.0.2">
+        <link rel="stylesheet" href="<?php echo base_url() . "themes/default/remark"; ?>/global/vendor/datatables.net-responsive-bs4/dataTables.responsive.bootstrap4.min599c.css?v4.0.2">
+        <link rel="stylesheet" href="<?php echo base_url() . "themes/default/remark"; ?>/global/vendor/datatables.net-buttons-bs4/dataTables.buttons.bootstrap4.min599c.css?v4.0.2">
+        
+        
         <!--[if lt IE 9]>
           <script src="<?php echo base_url() . "themes/default/remark"; ?>/global/vendor/html5shiv/html5shiv.min.js?v4.0.2"></script>
           <![endif]-->
@@ -582,8 +594,8 @@
                                             <div>
                                                 <ul class="site-menu-sub site-menu-normal-list">
                                                     <li class="site-menu-item">
-                                                        <a href="#">
-                                                            <span class="site-menu-title">Config Project Type</span>
+                                                        <a href="listalldocument">
+                                                            <span class="site-menu-title">Project Documents Type</span>
                                                         </a>
                                                     </li>
                                                     
