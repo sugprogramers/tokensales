@@ -2,18 +2,17 @@
 /**
  * Entity class for entity CCurrency (stored in table C_Currency).
  */
-class CCurrencyModel extends CI_Model {
+class CFileModel extends CI_Model {
     
-    private $c_currency_id;
+    private $c_file_id;
     private $isactive;
     private $created;
     private $createdby;
     private $updated;
     private $updatedby;
-    private $iso_code;
-    private $cursymbol;
-    private $description;
-    private $stdprecision;    
+    private $name;
+    private $datatype;
+    private $path;    
     
     public function __construct() {
         parent::__construct();
@@ -21,25 +20,24 @@ class CCurrencyModel extends CI_Model {
     }    
     
     public function get($id) {
-        $query = $this->db->get_where("c_currency", array('c_currency_id' => $id));
+        $query = $this->db->get_where("c_file", array('c_file_id' => $id));
         $result = $query->result()[0];
-        
-        $this->c_currency_id = $result->c_currency_id;
+
+        $this->c_file_id = $result->c_file_id;
         $this->isactive = $result->isactive;
         $this->created = $result->created;
         $this->createdby = $result->createdby;
         $this->updated = $result->updated;
         $this->updatedby = $result->updatedby;
-        $this->iso_code = $result->iso_code;
-        $this->cursymbol = $result->cursymbol;
-        $this->description = $result->description;
-        $this->stdprecision = $result->stdprecision; 
+        $this->name = $result->name;
+        $this->datatype = $result->datatype;
+        $this->path = $result->path; 
         
         return $this;
     }
 
     function getId() {
-        return $this->c_currency_id;
+        return $this->c_file_id;
     }
 
     function getIsactive() {
@@ -62,24 +60,20 @@ class CCurrencyModel extends CI_Model {
         return $this->updatedby;
     }
 
-    function getIso_code() {
-        return $this->iso_code;
+    function getName() {
+        return $this->name;
     }
 
-    function getCursymbol() {
-        return $this->cursymbol;
+    function getDatatype() {
+        return $this->datatype;
     }
 
-    function getDescription() {
-        return $this->description;
+    function getPath() {
+        return $this->path;
     }
 
-    function getStdprecision() {
-        return $this->stdprecision;
-    }
-
-    function setId($c_currency_id) {
-        $this->c_currency_id = $c_currency_id;
+    function setId($c_file_id) {
+        $this->c_file_id = $c_file_id;
     }
 
     function setIsactive($isactive) {
@@ -102,38 +96,34 @@ class CCurrencyModel extends CI_Model {
         $this->updatedby = $updatedby;
     }
 
-    function setIso_code($iso_code) {
-        $this->iso_code = $iso_code;
+    function setName($name) {
+        $this->name = $name;
     }
 
-    function setCursymbol($cursymbol) {
-        $this->cursymbol = $cursymbol;
+    function setDatatype($datatype) {
+        $this->datatype = $datatype;
     }
 
-    function setDescription($description) {
-        $this->description = $description;
+    function setPath($path) {
+        $this->path = $path;
     }
 
-    function setStdprecision($stdprecision) {
-        $this->stdprecision = $stdprecision;
-    }    
-    
-    function save() {
+        
+    function save() {      
         $data = array(
-            'c_currency_id' => $this->c_currency_id,
+            'c_file_id' => $this->c_file_id,
             'isactive' => $this->isactive,
             'created' => $this->created,
             'createdby' => $this->createdby,
             'updated' => $this->updated,
             'updatedby' => $this->updatedby,
-            'iso_code' => $this->iso_code,
-            'cursymbol' => $this->cursymbol,
-            'description' => $this->description,
-            'stdprecision' => $this->stdprecision
+            'name' => $this->name,
+            'datatype' => $this->datatype,
+            'path' => $this->path
         );
         
-        $this->db->where('c_currency_id', $this->c_currency_id);
-        return $this->db->update('c_currency', $data);
+        $this->db->where('c_file_id', $this->c_file_id);
+        return $this->db->update('c_file', $data);
     }    
     
 }

@@ -2,18 +2,17 @@
 /**
  * Entity class for entity CCurrency (stored in table C_Currency).
  */
-class CCurrencyModel extends CI_Model {
+class CCountryModel extends CI_Model {
     
-    private $c_currency_id;
+    private $c_country_id;
     private $isactive;
     private $created;
     private $createdby;
     private $updated;
     private $updatedby;
-    private $iso_code;
-    private $cursymbol;
+    private $name;
     private $description;
-    private $stdprecision;    
+    private $countrycode;    
     
     public function __construct() {
         parent::__construct();
@@ -21,25 +20,24 @@ class CCurrencyModel extends CI_Model {
     }    
     
     public function get($id) {
-        $query = $this->db->get_where("c_currency", array('c_currency_id' => $id));
+        $query = $this->db->get_where("c_country", array('c_country_id' => $id));
         $result = $query->result()[0];
         
-        $this->c_currency_id = $result->c_currency_id;
+        $this->c_country_id = $result->c_country_id;
         $this->isactive = $result->isactive;
         $this->created = $result->created;
         $this->createdby = $result->createdby;
         $this->updated = $result->updated;
         $this->updatedby = $result->updatedby;
-        $this->iso_code = $result->iso_code;
-        $this->cursymbol = $result->cursymbol;
+        $this->name = $result->name;
         $this->description = $result->description;
-        $this->stdprecision = $result->stdprecision; 
+        $this->countrycode = $result->countrycode; 
         
         return $this;
     }
 
     function getId() {
-        return $this->c_currency_id;
+        return $this->c_country_id;
     }
 
     function getIsactive() {
@@ -62,24 +60,20 @@ class CCurrencyModel extends CI_Model {
         return $this->updatedby;
     }
 
-    function getIso_code() {
-        return $this->iso_code;
-    }
-
-    function getCursymbol() {
-        return $this->cursymbol;
+    function getName() {
+        return $this->name;
     }
 
     function getDescription() {
         return $this->description;
     }
 
-    function getStdprecision() {
-        return $this->stdprecision;
+    function getCountrycode() {
+        return $this->countrycode;
     }
 
-    function setId($c_currency_id) {
-        $this->c_currency_id = $c_currency_id;
+    function setId($c_country_id) {
+        $this->c_country_id = $c_country_id;
     }
 
     function setIsactive($isactive) {
@@ -102,38 +96,33 @@ class CCurrencyModel extends CI_Model {
         $this->updatedby = $updatedby;
     }
 
-    function setIso_code($iso_code) {
-        $this->iso_code = $iso_code;
-    }
-
-    function setCursymbol($cursymbol) {
-        $this->cursymbol = $cursymbol;
+    function setName($name) {
+        $this->name = $name;
     }
 
     function setDescription($description) {
         $this->description = $description;
     }
 
-    function setStdprecision($stdprecision) {
-        $this->stdprecision = $stdprecision;
+    function setCountrycode($countrycode) {
+        $this->countrycode = $countrycode;
     }    
     
     function save() {
         $data = array(
-            'c_currency_id' => $this->c_currency_id,
+            'c_country_id' => $this->c_country_id,
             'isactive' => $this->isactive,
             'created' => $this->created,
             'createdby' => $this->createdby,
             'updated' => $this->updated,
             'updatedby' => $this->updatedby,
-            'iso_code' => $this->iso_code,
-            'cursymbol' => $this->cursymbol,
+            'name' => $this->name,
             'description' => $this->description,
-            'stdprecision' => $this->stdprecision
+            'countrycode' => $this->countrycode
         );
         
-        $this->db->where('c_currency_id', $this->c_currency_id);
-        return $this->db->update('c_currency', $data);
+        $this->db->where('c_country_id', $this->c_country_id);
+        return $this->db->update('c_country', $data);
     }    
     
 }
