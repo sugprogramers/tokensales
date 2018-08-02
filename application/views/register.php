@@ -109,14 +109,12 @@
         //var product_code = $('#product_code').val();
         //data : {product_code:product_code , product_name:product_name, price:price},
         $("#register_form").submit(function (event) {
-            console.log("acaaaa1");
             event.preventDefault();
             $.ajax({
                 url: "<?php echo base_url('Register_Controller/register_user')?>",
                 type: "POST",
                 data: $(this).serialize(),
                 success: function (data) {
-                    console.log("acaaaa2");
                     console.log("data:");
                     console.log(data);
                     var resp = $.parseJSON(data);//convertir data de json
