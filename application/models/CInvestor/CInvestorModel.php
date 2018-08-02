@@ -70,7 +70,7 @@ class CInvestorModel extends CI_Model {
     }
 
     public function getAll() {               
-        $query = $this->db->get("c_investor");
+        $query = $this->db->get_where("c_investor", array('isactive' => 'Y'));
         $result = $query->result();
         
         $list = array();

@@ -39,7 +39,7 @@ class CCurrencyModel extends CI_Model {
     }
 
     public function getAll() {               
-        $query = $this->db->get("c_currency");
+        $query = $this->db->get_where("c_currency", array('isactive' => 'Y'));
         $result = $query->result();
         
         $list = array();

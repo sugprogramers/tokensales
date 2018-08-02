@@ -37,7 +37,7 @@ class CFileModel extends CI_Model {
     }
     
     public function getAll() {               
-        $query = $this->db->get("c_file");
+        $query = $this->db->get_where("c_file", array('isactive' => 'Y'));
         $result = $query->result();
         
         $list = array();

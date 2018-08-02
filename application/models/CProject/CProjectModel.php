@@ -79,7 +79,7 @@ class CProjectModel extends CI_Model {
     }
 
     public function getAll() {               
-        $query = $this->db->get("c_project");
+        $query = $this->db->get_where("c_project", array('isactive' => 'Y'));
         $result = $query->result();
         
         $list = array();

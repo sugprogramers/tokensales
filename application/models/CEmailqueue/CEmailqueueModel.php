@@ -43,7 +43,7 @@ class CEmailqueueModel extends CI_Model {
     }
     
     public function getAll() {               
-        $query = $this->db->get("c_emailqueue");
+        $query = $this->db->get_where("c_emailqueue", array('isactive' => 'Y'));
         $result = $query->result();
         
         $list = array();

@@ -39,7 +39,7 @@ class CProjectdocumentModel extends CI_Model {
     }
     
     public function getAll() {               
-        $query = $this->db->get("c_projectdocument");
+        $query = $this->db->get_where("c_projectdocument", array('isactive' => 'Y'));
         $result = $query->result();
         
         $list = array();
