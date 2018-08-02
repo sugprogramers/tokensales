@@ -1,5 +1,7 @@
 <?php
 
+include "application/libraries/UUID.php";
+
 class CUserModel extends CI_Model
 {
   private $c_User_Id;
@@ -214,34 +216,67 @@ class CUserModel extends CI_Model
 
      
    
-    function save(){
-        $data = array(
-            'c_User_Id' => $this->c_User_Id,
-            'isactive' => $this->isactive,
-            'created' => $this->created,
-            'createdby' => $this->createdby,
-            'updated' => $this->updated,
-            'updatedby' => $this->updatedby,
-            'username' => $this->username,
-            'password' => $this->password,
-            'phone' => $this->phone,
-            'firstname' => $this->firstname,
-            'lastname' => $this->lastnam,
-            'birthday' => $this->birthday,
-            'address1' => $this->address1,
-            'address2' => $this->address2,
-            'c_country_id' => $this->c_country_id,
-            'c_region_id' => $this->c_region_id,
-            'city' => $this->city,
-            'postal' => $this->postal,
-            'usertype' => $this->usertype,
-            'email' => $this->email,
-            'registertoken' => $this->registertoken,
-            'tokenexpirationdate' => $this->tokenexpirationdate,
-            'status' => $this->status
-        );
-        $this->db->where('c_User_Id', $this->c_User_Id);
-        return $this->db->update('c_User', $data);
+    function save(){    
+        $now = (new DateTime())->format('Y-m-d H:i:s');
+        
+        if (!$this->c_User_Id) {     
+            // NEW
+            $data = array(
+                'c_user_id' => UUID::getRawUUID(),
+                'isactive' => 'Y',
+                'created' => $now,
+                'createdby' => '100',
+                'updated' => $now,
+                'updatedby' => '100',
+                'username' => $this->email,
+                'password' => $this->password,
+                'phone' => $this->phone,
+                'firstname' => $this->firstname,
+                'lastname' => $this->lastname,
+                'birthday' => $this->birthday,
+                'address1' => $this->address1,
+                'address2' => $this->address2,
+                'c_country_id' => $this->c_country_id,
+                'c_region_id' => $this->c_region_id,
+                'city' => $this->city,
+                'postal' => $this->postal,
+                'usertype' => $this->usertype,
+                'email' => $this->email,
+                'status' => 'PEND'
+            );
+            
+            return $this->db->insert('c_user', $data);                    
+            
+        } else {
+        
+            // UPDATE
+            $data = array(
+                'isactive' => $this->isactive,
+                'updated' => $now,
+                'updatedby' => $this->updatedby,
+                'username' => $this->username,
+                'password' => $this->password,
+                'phone' => $this->phone,
+                'firstname' => $this->firstname,
+                'lastname' => $this->lastnam,
+                'birthday' => $this->birthday,
+                'address1' => $this->address1,
+                'address2' => $this->address2,
+                'c_country_id' => $this->c_country_id,
+                'c_region_id' => $this->c_region_id,
+                'city' => $this->city,
+                'postal' => $this->postal,
+                'usertype' => $this->usertype,
+                'email' => $this->email,
+                'registertoken' => $this->registertoken,
+                'tokenexpirationdate' => $this->tokenexpirationdate,
+                'status' => $this->status
+            );
+
+            $this->db->where('c_user_id', $this->c_User_Id);
+            return $this->db->update('c_user', $data);  
+        }
+
     }  
 
 }
