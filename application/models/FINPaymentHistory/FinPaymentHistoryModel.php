@@ -27,7 +27,7 @@ class FinPaymentHistoryModel extends CI_Model
     }
     
     public function get($id) {
-       $query = $this->db->get_where("fin_payment_history", array('fin_payment_history_id' => 'Y'));
+       $query = $this->db->get_where("fin_payment_history", array('fin_payment_history_id' => $id));
        $result = $query->result()[0];
        
        $this->fin_payment_history_id = $result->$fin_payment_history_id;

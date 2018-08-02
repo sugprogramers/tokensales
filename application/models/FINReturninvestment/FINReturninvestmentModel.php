@@ -23,7 +23,7 @@ class FINReturninvestmentModel extends CI_Model
 	}
 
      public function get($id) {
-       $query = $this->db->get_where("fin_returninvestment", array('fin_returninvestment_id' => 'Y'));
+       $query = $this->db->get_where("fin_returninvestment", array('fin_returninvestment_id' => $id));
        $result = $query->result()[0];
        
        $this->fin_returninvestment_id = $result->fin_returninvestment_id;
