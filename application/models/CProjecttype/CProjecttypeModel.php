@@ -15,10 +15,6 @@ class CProjecttypeModel extends CI_Model
 		parent::__construct();
 		$this->load->database();
     }
-
-    public function getAll(){
-          return $this->db->get("c_projecttype_id");
-    }
      
     public function get($id) {
        $query = $this->db->get_where("c_projecttype", array('c_projecttype_id' => $id));
@@ -34,7 +30,18 @@ class CProjecttypeModel extends CI_Model
        return $this;
     }
     
-    function getC_projecttype_id() {
+    public function getAll(){
+       $query = $this->db->get_where("c_projecttype", array('isactive' => 'Y'));
+       $result = $query->result();
+       $data = array();
+       foreach($result as $value) {
+           $obj = new CProjecttypeModel;
+           $data[] = $obj->get($value->c_projecttype_id);
+       }
+       return $data;
+    }
+    
+    function getId() {
         return $this->c_projecttype_id;
     }
     

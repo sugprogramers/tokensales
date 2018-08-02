@@ -26,12 +26,8 @@ class FinPaymentHistoryModel extends CI_Model
 		$this->load->database();
     }
     
-       public function getAll(){
-          return $this->db->get("fin_payment_history");
-    }
-     
     public function get($id) {
-       $query = $this->db->get_where("fin_payment_history", array('fin_payment_history_id' => $id));
+       $query = $this->db->get_where("fin_payment_history", array('fin_payment_history_id' => 'Y'));
        $result = $query->result()[0];
        
        $this->fin_payment_history_id = $result->$fin_payment_history_id;
@@ -54,7 +50,18 @@ class FinPaymentHistoryModel extends CI_Model
        return $this;
     }
     
-    function getFin_payment_history_id() {
+    public function getAll(){
+       $query = $this->db->get_where("fin_payment_history", array('isactive' => "Y"));
+       $result = $query->result();
+       $data = array();
+       foreach ($result as $value) {
+          $obj = new FinPaymentHistoryModel();
+          $data[] = $obj->get($value->fin_payment_history_id);
+       }
+       return $data;
+    }
+    
+    function getId() {
         return $this->fin_payment_history_id;
     }
 
@@ -90,8 +97,9 @@ class FinPaymentHistoryModel extends CI_Model
         return $this->type;
     }
 
-    function getC_currency_id() {
-        return $this->c_currency_id;
+    function getCCurrency() {
+        $obj = new CCurrencyModel();
+        return $obj->get($this->c_currency_id);
     }
 
     function getAmount() {
@@ -110,19 +118,17 @@ class FinPaymentHistoryModel extends CI_Model
         return $this->description;
     }
 
-    function getFin_investment_id() {
-        return $this->fin_investment_id;
+    function getFinInvestment() {
+        $obj = new FINInvestmentModel();
+        return $obj->get($this->fin_investment_id);
     }
 
-    function getFin_returninvestment_id() {
-        return $this->fin_returninvestment_id;
+    function getFinReturninvestment() {
+        $obj = new FINReturninvestmentModel();
+        return $obj->get($this->fin_returninvestment_id);
     }
 
-    function setFin_payment_history_id($fin_payment_history_id) {
-        $this->fin_payment_history_id = $fin_payment_history_id;
-    }
-
-    function setIsactive($isactive) {
+     function setIsactive($isactive) {
         $this->isactive = $isactive;
     }
 
@@ -138,7 +144,7 @@ class FinPaymentHistoryModel extends CI_Model
         $this->type = $type;
     }
 
-    function setC_currency_id($c_currency_id) {
+    function setCCurrencyId($c_currency_id) {
         $this->c_currency_id = $c_currency_id;
     }
 
@@ -158,11 +164,11 @@ class FinPaymentHistoryModel extends CI_Model
         $this->description = $description;
     }
 
-    function setFin_investment_id($fin_investment_id) {
+    function setFinInvestmentId($fin_investment_id) {
         $this->fin_investment_id = $fin_investment_id;
     }
 
-    function setFin_returninvestment_id($fin_returninvestment_id) {
+    function setFinReturninvestmentId($fin_returninvestment_id) {
         $this->fin_returninvestment_id = $fin_returninvestment_id;
     }
             

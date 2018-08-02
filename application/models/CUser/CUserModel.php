@@ -33,11 +33,6 @@ class CUserModel extends CI_Model
     }
     
 
-     public function getAll(){
-          return $this->db->get("c_user");
-     }
-     
-     
     public function get($id) {
        $query = $this->db->get_where("c_user", array('c_user_id' => $id));
        $result = $query->result()[0];
@@ -51,6 +46,173 @@ class CUserModel extends CI_Model
        $this->username = $result->username; 
        return $this;
    }
+   
+    public function getAll(){
+       $query = $this->db->get_where("c_user", array('isactive' => 'Y'));
+       $result = $query->result();
+       $data = array();
+       foreach($result as $value) {
+           $obj = new CUserModel();
+           $data[] = $obj->get($value->c_user_id);
+       }
+       return $data;
+     }
+     
+     function getId() {
+         return $this->c_User_Id;
+     }
+
+     function getIsactive() {
+         return $this->isactive;
+     }
+
+     function getUsername() {
+         return $this->username;
+     }
+
+     function getPassword() {
+         return $this->password;
+     }
+
+     function getPhone() {
+         return $this->phone;
+     }
+
+     function getFirstname() {
+         return $this->firstname;
+     }
+
+     function getLastname() {
+         return $this->lastname;
+     }
+
+     function getBirthday() {
+         return $this->birthday;
+     }
+
+     function getAddress1() {
+         return $this->address1;
+     }
+
+     function getAddress2() {
+         return $this->address2;
+     }
+
+     function getCCountry() {
+         $obj = new CCountryModel();
+         return $obj->get($this->c_country_id);
+     }
+
+     function getCRegion() {
+         $obj = new CRegionModel();
+         return $obj->get($this->c_region_id);
+     }
+
+     function getCity() {
+         return $this->city;
+     }
+
+     function getPostal() {
+         return $this->postal;
+     }
+
+     function getUsertype() {
+         return $this->usertype;
+     }
+
+     function getEmail() {
+         return $this->email;
+     }
+
+     function getRegistertoken() {
+         return $this->registertoken;
+     }
+
+     function getTokenexpirationdate() {
+         return $this->tokenexpirationdate;
+     }
+
+     function getStatus() {
+         return $this->status;
+     }
+
+     function setCUserId($c_User_Id) {
+         $this->c_User_Id = $c_User_Id;
+     }
+
+     function setIsactive($isactive) {
+         $this->isactive = $isactive;
+     }
+
+     function setUsername($username) {
+         $this->username = $username;
+     }
+
+     function setPassword($password) {
+         $this->password = $password;
+     }
+
+     function setPhone($phone) {
+         $this->phone = $phone;
+     }
+
+     function setFirstname($firstname) {
+         $this->firstname = $firstname;
+     }
+
+     function setLastname($lastname) {
+         $this->lastname = $lastname;
+     }
+
+     function setBirthday($birthday) {
+         $this->birthday = $birthday;
+     }
+
+     function setAddress1($address1) {
+         $this->address1 = $address1;
+     }
+
+     function setAddress2($address2) {
+         $this->address2 = $address2;
+     }
+
+     function setCCountryId($c_country_id) {
+         $this->c_country_id = $c_country_id;
+     }
+
+     function setCRegionId($c_region_id) {
+         $this->c_region_id = $c_region_id;
+     }
+
+     function setCity($city) {
+         $this->city = $city;
+     }
+
+     function setPostal($postal) {
+         $this->postal = $postal;
+     }
+
+     function setUsertype($usertype) {
+         $this->usertype = $usertype;
+     }
+
+     function setEmail($email) {
+         $this->email = $email;
+     }
+
+     function setRegistertoken($registertoken) {
+         $this->registertoken = $registertoken;
+     }
+
+     function setTokenexpirationdate($tokenexpirationdate) {
+         $this->tokenexpirationdate = $tokenexpirationdate;
+     }
+
+     function setStatus($status) {
+         $this->status = $status;
+     }
+
+     
    
     function save(){
         $data = array(

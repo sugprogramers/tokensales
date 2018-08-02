@@ -17,9 +17,7 @@ class CProjectdocumenttypeModel extends CI_Model
 		$this->load->database();
     }
 
-    public function getAll(){
-          return $this->db->get("c_projectdocumenttype_id");
-    }
+    
      
     public function get($id) {
        $query = $this->db->get_where("c_projectdocumenttype", array('c_projectdocumenttype_id' => $id));
@@ -36,7 +34,18 @@ class CProjectdocumenttypeModel extends CI_Model
        return $this;
     }
     
-    function getC_projectdocumenttype_id() {
+    public function getAll(){
+       $query = $this->db->get_where("c_projectdocumenttype", array('isactive' => 'Y'));
+       $result = $query->result();
+       $data = array();
+       foreach($result as $value) {
+           $obj = new CProjectdocumenttypeModel();
+           $data[] = $obj->get($value->c_projectdocumenttype_id);
+       }
+       return $data;
+    }
+    
+    function getId() {
         return $this->c_projectdocumenttype_id;
     }
     

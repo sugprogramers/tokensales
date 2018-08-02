@@ -17,11 +17,6 @@ class CRegionModel extends CI_Model
 		$this->load->database();
     }
 
-    public function getAll(){
-          return $this->db->get("c_region");
-    }
-     
-     
     public function get($id) {
        $query = $this->db->get_where("c_region", array('c_region_id' => $id));
        $result = $query->result()[0];
@@ -37,7 +32,18 @@ class CRegionModel extends CI_Model
        return $this;
     }
     
-    function getC_region_id() {
+    public function getAll(){
+       $query = $this->db->get_where("c_region", array('isactive' => 'Y'));
+       $result = $query->result();
+       $data = array();
+       foreach($result as $value) {
+           $obj = new CRegionModel();
+           $data[] = $obj->get($value->c_region_id);
+       }
+       return $data;
+    }
+    
+    function getId() {
         return $this->c_region_id;
     }
     
@@ -53,8 +59,9 @@ class CRegionModel extends CI_Model
         return $this->description;
     }
 
-    function getC_country_id() {
-        return $this->c_country_id;
+    function getCCountry() {
+        $obj = new CCountryModel();
+        return $obj->get($this->c_country_id);
     }
 
     function setIsactive($isactive) {

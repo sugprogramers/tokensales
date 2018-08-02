@@ -22,13 +22,8 @@ class FINReturninvestmentModel extends CI_Model
 		$this->load->database();
 	}
 
-     public function getAll()
-     {
-          return $this->db->get("fin_returninvestment");
-     }
-     
      public function get($id) {
-       $query = $this->db->get_where("fin_payment_history", array('fin_payment_history_id' => $id));
+       $query = $this->db->get_where("fin_returninvestment", array('fin_returninvestment_id' => 'Y'));
        $result = $query->result()[0];
        
        $this->fin_returninvestment_id = $result->fin_returninvestment_id;
@@ -46,10 +41,21 @@ class FINReturninvestmentModel extends CI_Model
        $this->paymentdate = $result->paymentdate; 
        return $this;
     }
+    
+    public function getAll(){
+       $query = $this->db->get_where("fin_returninvestment", array('isactive' => "Y"));
+       $result = $query->result();
+       $data = array();
+       foreach ($result as $value) {
+          $obj = new FINReturninvestmentModel();
+          $data[] = $obj->get($value->fin_returninvestment_id);
+       }
+       return $data;
+    }
      
-     function getFin_returninvestment_id() {
+    function getId() {
          return $this->fin_returninvestment_id;
-     }
+    }
 
      function getIsactive() {
          return $this->isactive;
@@ -79,12 +85,15 @@ class FINReturninvestmentModel extends CI_Model
          return $this->scheduleddate;
      }
 
-     function getC_investor_id() {
-         return $this->c_investor_id;
+     function getCInvestor() {
+         $obj = new CInvestorModel();
+         return $obj->get($this->c_investor_id);
      }
 
-     function getC_project_id() {
-         return $this->c_project_id;
+     function getCProject() {
+         $obj =  new CProjectModel();
+         return $obj->get($this->c_project_id);
+         
      }
 
      function getAmount() {

@@ -22,11 +22,6 @@ class FINInvestmentModel extends CI_Model
 		$this->load->database();
     }
 
-     public function get_administrator(){
-          return $this->db->get("fin_investment");
-    }
-    
-    
     public function get($id) {
        $query = $this->db->get_where("fin_investment", array('fin_investment_id' => $id));
        $result = $query->result()[0];
@@ -46,7 +41,18 @@ class FINInvestmentModel extends CI_Model
        return $this;
     }
     
-    function getFin_investment_id() {
+    public function getAll(){
+       $query = $this->db->get_where("fin_investment", array('isactive' => 'Y'));
+       $result = $query->result();
+       $data = array();
+       foreach($result as $value) {
+           $obj = new FINInvestmentModel();
+           $data[] = $obj->get($value->fin_investment_id);
+       }
+       return $data;
+    }
+    
+    function getId() {
         return $this->fin_investment_id;
     }
 
@@ -74,12 +80,14 @@ class FINInvestmentModel extends CI_Model
         return $this->status;
     }
 
-    function getC_project_id() {
-        return $this->c_project_id;
+    function getCProject() {
+        $obj =  new CProjectModel();
+        return $obj->get($this->c_project_id);
     }
 
-    function getC_investor_id() {
-        return $this->c_investor_id;
+    function getCInvestor() {
+        $obj = new CInvestorModel();
+        return $obj->get($this->c_investor_id);
     }
 
     function getStartdate() {
@@ -88,10 +96,6 @@ class FINInvestmentModel extends CI_Model
 
     function getAmount() {
         return $this->amount;
-    }
-
-    function setFin_investment_id($fin_investment_id) {
-        $this->fin_investment_id = $fin_investment_id;
     }
 
     function setIsactive($isactive) {
@@ -118,11 +122,11 @@ class FINInvestmentModel extends CI_Model
         $this->status = $status;
     }
 
-    function setC_project_id($c_project_id) {
+    function setCProjectId($c_project_id) {
         $this->c_project_id = $c_project_id;
     }
 
-    function setC_investor_id($c_investor_id) {
+    function setCInvestorId($c_investor_id) {
         $this->c_investor_id = $c_investor_id;
     }
 
