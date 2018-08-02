@@ -12,7 +12,7 @@ class Login_Controller extends CI_Controller {
 
     public function index() {
         if ($this->session->userdata("login_admin")) {
-            redirect(base_url() . 'dashboard');
+            redirect(base_url() . 'admin_dashboard');
         }
         $this->load->view('header/header_login');
         $this->load->view('login');
@@ -32,7 +32,7 @@ class Login_Controller extends CI_Controller {
             ];
 
             $this->session->set_userdata($data);
-            $response = array('redirect' => base_url() . 'dashboard', 'status' => 'success');
+            $response = array('redirect' => base_url() . 'admin_dashboard', 'status' => 'success');
             echo json_encode($response);
         } else {
             $response = array('redirect' => '', 'status' => 'error');

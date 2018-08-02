@@ -54,16 +54,17 @@ $route['default_controller'] = 'Login_Controller';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
-//routes de paginas VALIDO
+//routes de paginas 
 $route['login'] = "Login_Controller";
 $route['logout'] = "Login_Controller/logout_user";
-$route['dashboard'] = "admin/Administrator/dashboard";
+$route['admin_dashboard'] = "Admin_Dashboard_Controller";
+$route['admin_profile'] = "Admin_Profile_Controller";
 
 //ProjectDocumentType
 $route['listalldocument'] = "AdminProjectDocumentTypeController/listDataGrid";
 
 
-//Ejemplo Route Administrador
+//Ejemplo Route Administrador a sub funciones
 /*$route['default'] = "admin/Administrator";
 $route['noparametro'] = "admin/Administrator/noparametro";
 $route['parametro/(:num)'] = "admin/Administrator/parametro/$1";
