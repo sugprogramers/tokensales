@@ -38,6 +38,18 @@ class CCurrencyModel extends CI_Model {
         return $this;
     }
 
+    public function getAll() {               
+        $query = $this->db->get("c_currency");
+        $result = $query->result();
+        
+        $list = array();
+        foreach($result as $currency) {
+            $obj = new CCurrencyModel();
+            $list[] = $obj->get($currency->c_currency_id);
+        }
+        return $list;
+    }
+    
     function getId() {
         return $this->c_currency_id;
     }

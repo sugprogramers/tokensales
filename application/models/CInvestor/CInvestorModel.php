@@ -69,6 +69,18 @@ class CInvestorModel extends CI_Model {
         return $this;
     }
 
+    public function getAll() {               
+        $query = $this->db->get("c_investor");
+        $result = $query->result();
+        
+        $list = array();
+        foreach($result as $investor) {
+            $obj = new CInvestorModel();
+            $list[] = $obj->get($investor->c_investor_id);
+        }
+        return $list;
+    }
+    
     function getId() {
         return $this->c_investor_id;
     }

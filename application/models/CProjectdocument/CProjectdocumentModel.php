@@ -37,6 +37,18 @@ class CProjectdocumentModel extends CI_Model {
         
         return $this;
     }
+    
+    public function getAll() {               
+        $query = $this->db->get("c_projectdocument");
+        $result = $query->result();
+        
+        $list = array();
+        foreach($result as $projectdocument) {
+            $obj = new CProjectdocumentModel();
+            $list[] = $obj->get($projectdocument->c_projectdocument_id);
+        }
+        return $list;
+    }    
 
     function getId() {
         return $this->c_projectdocument_id;

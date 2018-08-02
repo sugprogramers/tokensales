@@ -35,6 +35,18 @@ class CCountryModel extends CI_Model {
         
         return $this;
     }
+    
+    public function getAll() {               
+        $query = $this->db->get("c_country");
+        $result = $query->result();
+        
+        $list = array();
+        foreach($result as $country) {
+            $obj = new CCountryModel();
+            $list[] = $obj->get($country->c_country_id);
+        }
+        return $list;
+    }    
 
     function getId() {
         return $this->c_country_id;

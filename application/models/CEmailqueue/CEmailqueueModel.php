@@ -41,6 +41,18 @@ class CEmailqueueModel extends CI_Model {
         
         return $this;
     }
+    
+    public function getAll() {               
+        $query = $this->db->get("c_emailqueue");
+        $result = $query->result();
+        
+        $list = array();
+        foreach($result as $emailqueue) {
+            $obj = new CEmailqueueModel();
+            $list[] = $obj->get($emailqueue->c_emailqueue_id);
+        }
+        return $list;
+    }    
 
     function getId() {
         return $this->c_emailqueue_id;

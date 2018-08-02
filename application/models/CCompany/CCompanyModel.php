@@ -51,6 +51,18 @@ class CCompanyModel extends CI_Model {
         
         return $this;
     }
+    
+    public function getAll() {               
+        $query = $this->db->get("c_company");
+        $result = $query->result();
+        
+        $list = array();
+        foreach($result as $company) {
+            $obj = new CCurrencyModel();
+            $list[] = $obj->get($company->c_company_id);
+        }
+        return $list;
+    }
 
     function getId() {
         return $this->c_company_id;
