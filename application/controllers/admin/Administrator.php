@@ -22,12 +22,12 @@ class Administrator extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->helper('url');
-        //$this->load->model("admin/administrator_model");
+        $this->load->model("admin/administrator_model");
     }
 
     public function index() {
-        //$this->load->view('admin/list_administrador');
-        $this->load->view('welcome_message');
+        $this->load->view('admin/list_administrador');
+        //$this->load->view('welcome_message');
         //echo "index default";
        
     }
@@ -62,10 +62,10 @@ class Administrator extends CI_Controller {
       $data = [];
       foreach($query->result() as $r) {
            $data[] = array(
-                $r->IdAdministrator,
-                $r->Email,
-               '<a class="btn btn-sm btn-primary" href="javascript:void(0)" title="Edit" onclick="edit_person('."'".$r->IdAdministrator."'".')"><i class="glyphicon glyphicon-pencil"></i> Edit</a>
-				  <a class="btn btn-sm btn-danger" href="javascript:void(0)" title="Hapus" onclick="delete_person('."'".$r->IdAdministrator."'".')"><i class="glyphicon glyphicon-trash"></i> Delete</a>'
+                $r->c_user_id,
+                $r->email,
+               '<a class="btn btn-sm btn-primary" href="javascript:void(0)" title="Edit" onclick="edit_person('."'".$r->c_user_id."'".')"><i class="glyphicon glyphicon-pencil"></i> Edit</a>
+				  <a class="btn btn-sm btn-danger" href="javascript:void(0)" title="Hapus" onclick="delete_person('."'".$r->c_user_id."'".')"><i class="glyphicon glyphicon-trash"></i> Delete</a>'
 		
            );
       }

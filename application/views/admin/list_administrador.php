@@ -17,7 +17,7 @@
 	<h2>nuevoo</h2>
 
 
-	<table id="item-list" class="table table-bordered table-striped table-hover">
+	<table id="item-list1" class="table table-bordered table-striped table-hover">
 		<thead>
 			<tr>
 				<th>ID</th>
@@ -38,11 +38,11 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
-    $('#item-list').DataTable({
+    $('#item-list1').DataTable({
         "processing": true,  //mostrar waiting
         "serverSide": false, //consultar servidor ordenar , filtrar
         "ajax": {
-            url : "admin/Administrator/get_items",
+            url : "<?php echo base_url('admin/Administrator/get_items')?>",
             type : 'GET'
         },
     });

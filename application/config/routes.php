@@ -63,6 +63,7 @@ $route['dashboard'] = "admin/Administrator/dashboard";
 
 
 //Ejemplo Route Administrador
-$route['default'] = "admin/Administrator";
+/*$route['default'] = "admin/Administrator";
 $route['noparametro'] = "admin/Administrator/noparametro";
 $route['parametro/(:num)'] = "admin/Administrator/parametro/$1";
+*/
