@@ -126,22 +126,6 @@ class FinPaymentHistoryModel extends CI_Model
         $this->isactive = $isactive;
     }
 
-    function setCreated($created) {
-        $this->created = $created;
-    }
-
-    function setCreatedby($createdby) {
-        $this->createdby = $createdby;
-    }
-
-    function setUpdated($updated) {
-        $this->updated = $updated;
-    }
-
-    function setUpdatedby($updatedby) {
-        $this->updatedby = $updatedby;
-    }
-
     function setPaymentdate($paymentdate) {
         $this->paymentdate = $paymentdate;
     }

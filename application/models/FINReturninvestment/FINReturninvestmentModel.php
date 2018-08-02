@@ -95,28 +95,8 @@ class FINReturninvestmentModel extends CI_Model
          return $this->paymentdate;
      }
 
-     function setFin_returninvestment_id($fin_returninvestment_id) {
-         $this->fin_returninvestment_id = $fin_returninvestment_id;
-     }
-
      function setIsactive($isactive) {
          $this->isactive = $isactive;
-     }
-
-     function setCreated($created) {
-         $this->created = $created;
-     }
-
-     function setCreatedby($createdby) {
-         $this->createdby = $createdby;
-     }
-
-     function setUpdated($updated) {
-         $this->updated = $updated;
-     }
-
-     function setUpdatedby($updatedby) {
-         $this->updatedby = $updatedby;
      }
 
      function setStatus($status) {
