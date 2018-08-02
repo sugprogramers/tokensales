@@ -34,7 +34,7 @@
 
         <p>Forgot your password?</p> 
         <p>Don't have an account yet?</p>
-        <p> Register to <a href="register_investor">Start Investing now</a> or to <a href="register_company">Get Financing</a> now.</p>
+        <p> Register to <a href="register_investor">Start Investing or to Get Financing</a>  now.</p>
 
 
         <!--
