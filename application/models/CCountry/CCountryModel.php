@@ -42,7 +42,7 @@ class CCountryModel extends CI_Model {
         
         $list = array();
         foreach($result as $country) {
-            $obj = new CCurrencyModel();
+            $obj = new CCountryModel();
             $list[] = $obj->get($country->c_country_id);
         }
         return $list;
