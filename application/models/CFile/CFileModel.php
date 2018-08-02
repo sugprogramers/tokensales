@@ -35,6 +35,18 @@ class CFileModel extends CI_Model {
         
         return $this;
     }
+    
+    public function getAll() {               
+        $query = $this->db->get("c_file");
+        $result = $query->result();
+        
+        $list = array();
+        foreach($result as $file) {
+            $obj = new CFileModel();
+            $list[] = $obj->get($file->c_file_id);
+        }
+        return $list;
+    }    
 
     function getId() {
         return $this->c_file_id;

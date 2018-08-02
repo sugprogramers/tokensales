@@ -12,7 +12,7 @@ class CProjectModel extends CI_Model {
     private $updatedby;
     private $name;    
     private $c_user_id;
-    private $c_company_id;    
+    private $c_project_id;    
     private $c_currency_id;    
     private $datecontract;
     private $startdate;
@@ -55,7 +55,7 @@ class CProjectModel extends CI_Model {
         $this->updatedby = $result->updatedby;
         $this->name = $result->name;
         $this->c_user_id = $result->c_user_id;
-        $this->c_company_id = $result->c_company_id; 
+        $this->c_project_id = $result->c_project_id; 
         $this->c_currency_id = $result->c_currency_id; 
         $this->datecontract = $result->datecontract; 
         $this->startdate = $result->startdate; 
@@ -78,6 +78,18 @@ class CProjectModel extends CI_Model {
         return $this;
     }
 
+    public function getAll() {               
+        $query = $this->db->get("c_project");
+        $result = $query->result();
+        
+        $list = array();
+        foreach($result as $project) {
+            $obj = new CProjectModel();
+            $list[] = $obj->get($project->c_project_id);
+        }
+        return $list;
+    }
+    
     function getId() {
         return $this->c_project_id;
     }
@@ -110,8 +122,8 @@ class CProjectModel extends CI_Model {
         return $this->c_user_id;
     }
 
-    function getC_company_id() {
-        return $this->c_company_id;
+    function getC_project_id() {
+        return $this->c_project_id;
     }
 
     function getC_currency_id() {
@@ -218,8 +230,8 @@ class CProjectModel extends CI_Model {
         $this->c_user_id = $c_user_id;
     }
 
-    function setC_company_id($c_company_id) {
-        $this->c_company_id = $c_company_id;
+    function setC_project_id($c_project_id) {
+        $this->c_project_id = $c_project_id;
     }
 
     function setC_currency_id($c_currency_id) {
@@ -304,7 +316,7 @@ class CProjectModel extends CI_Model {
             'updatedby' => $this->updatedby,
             'name' => $this->name,
             'c_user_id' => $this->c_user_id,
-            'c_company_id' => $this->c_company_id,
+            'c_project_id' => $this->c_project_id,
             'c_currency_id' => $this->c_currency_id,
             'datecontract' => $this->datecontract,
             'startdate' => $this->startdate,
