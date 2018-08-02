@@ -27,6 +27,7 @@ class Login_Controller extends CI_Controller {
             $data = [
                 "id" => $resp->c_user_id,
                 "name" => $resp->username,
+                "email" => $resp->email,
                 "login_admin" => TRUE
             ];
 

@@ -22,6 +22,10 @@
   <script src="<?php echo base_url()."themes/default/remark"; ?>/global/vendor/intro-js/intro.min599c.js?v4.0.2"></script>
   <script src="<?php echo base_url()."themes/default/remark"; ?>/global/vendor/screenfull/screenfull599c.js?v4.0.2"></script>
   <script src="<?php echo base_url()."themes/default/remark"; ?>/global/vendor/slidepanel/jquery-slidePanel.min599c.js?v4.0.2"></script>
+  
+  
+<script src="<?php echo base_url() . "themes/default/remark"; ?>/global/vendor/toastr/toastr.min599c.js?v4.0.2"></script>
+
 
   <!-- Scripts -->
   <script src="<?php echo base_url()."themes/default/remark"; ?>/global/js/Component.min599c.js?v4.0.2"></script>
@@ -59,7 +63,110 @@
     })(document, window, jQuery);
   </script>
 
+  <script>
+    function showWarning(val) {
+        toastr.options = {
+            "closeButton": true,
+            "debug": false,
+            "newestOnTop": false,
+            "progressBar": false,
+            "positionClass": "toast-bottom-left",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "3000",
+            "hideDuration": "1000",
+            "timeOut": "2000",
+            "extendedTimeOut": "3000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        };
+        toastr["warning"](val, "Alert");
 
+    }
+
+    function showSuccess(val) {
+
+
+        toastr.options = {
+            "closeButton": true,
+            "debug": false,
+            "newestOnTop": false,
+            "progressBar": false,
+            "positionClass": "toast-bottom-left",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "2000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        };
+        toastr["success"](val, "Success");
+    }
+
+    function showError(val) {
+
+
+        toastr.options = {
+            "closeButton": true,
+            "debug": false,
+            "newestOnTop": false,
+            "progressBar": false,
+            "positionClass": "toast-bottom-left",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "2000",
+            "hideDuration": "1000",
+            "timeOut": "2000",
+            "extendedTimeOut": "2000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        };
+        toastr["error"](val, "Error");
+    }
+
+     function logOut() {
+               window.location.replace("<?php echo base_url(); ?>Login_Controller/logout_user");
+         }
+</script>
+
+  <!-- Modal -->
+<!--<div class="modal fade" id="logOutModal" aria-hidden="true" aria-labelledby="examplePositionCenter"
+     role="dialog" tabindex="-1"> -->
+<div class="modal fade" id="logOutModal" aria-hidden="true" aria-labelledby="examplePositionSidebar"
+                          role="dialog" tabindex="-1">    
+    <!--<div class="modal-dialog modal-center">-->
+         <div class="modal-dialog modal-simple modal-sidebar modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title">Close session</h4>
+            </div>
+            <div class="modal-body">
+                <h4>Do you want to close the session?</h4>
+            </div>
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-raised btn-primary btn-block" onclick="logOut();"><i class="icon fa-check" aria-hidden="true"></i> YES</button>
+                <button type="button" class="btn btn-raised btn-danger btn-block" data-dismiss="modal"><i class="icon fa-close" aria-hidden="true"></i> No</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Modal -->
+  
+  
+  
+  
 </body>
 
 
