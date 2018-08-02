@@ -14,9 +14,9 @@ class Admin_Profile_Controller extends CI_Controller {
         if (!$this->session->userdata("login_admin")) {
             redirect(base_url() . 'login');
         }
-        $this->load->view('header/header_login');
+        $this->load->view('header/header_admin');
         $this->load->view('admin_profile');
-        $this->load->view('footer/footer_login');
+        $this->load->view('footer/footer_admin');
     }
 
 }

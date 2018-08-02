@@ -3,7 +3,7 @@
   <div class="page">
     <div class="page-content">
         
-      <h2>Blank</h2>
+      <h2>Dashboard admin</h2>
       
       
       

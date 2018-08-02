@@ -567,15 +567,15 @@
                             <li class="site-menu-category">General</li>
                             
                              <li class="dropdown site-menu-item has-sub" id="idDashboardAdmin">
-                                <a data-toggle="dropdown" href="#" data-dropdown-toggle="false">
+                                <a data-toggle="dropdown" href="<?php echo base_url(); ?>admin_dashboard" data-dropdown-toggle="false">
                                     <i class="site-menu-icon wb-dashboard" aria-hidden="true"></i>
                                     <span class="site-menu-title">Dashboard</span>                                   
                                 </a>
                                
                             </li>
                             
-                             <li class="dropdown site-menu-item has-sub">
-                                <a data-toggle="dropdown" href="#" data-dropdown-toggle="false">
+                             <li class="dropdown site-menu-item has-sub" id="idProfileAdmin">
+                                <a data-toggle="dropdown" href="<?php echo base_url(); ?>admin_profile" data-dropdown-toggle="false">
                                     <i class="site-menu-icon wb-user" aria-hidden="true"></i>
                                     <span class="site-menu-title">Profile</span>                                   
                                 </a>
@@ -594,7 +594,7 @@
                                             <div>
                                                 <ul class="site-menu-sub site-menu-normal-list">
                                                     <li class="site-menu-item">
-                                                        <a href="listalldocument">
+                                                        <a href="<?php echo base_url(); ?>listalldocument">
                                                             <span class="site-menu-title">Project Documents Type</span>
                                                         </a>
                                                     </li>
