@@ -611,16 +611,16 @@
                                     </div>
                                 </div>
                             </li>
-                            <li class="dropdown site-menu-item has-sub">
-                                <a data-toggle="dropdown" href="#" data-dropdown-toggle="false">
+                            <li class="dropdown site-menu-item has-sub" id="idListInvestorAdmin">
+                                <a data-toggle="dropdown" href="<?php echo base_url(); ?>admin_list_investor" data-dropdown-toggle="false">
                                     <i class="site-menu-icon wb-users" aria-hidden="true"></i>
                                     <span class="site-menu-title">Investors</span>                                   
                                 </a>
                                
                             </li>
                             
-                             <li class="dropdown site-menu-item has-sub">
-                                <a data-toggle="dropdown" href="#" data-dropdown-toggle="false">
+                            <li class="dropdown site-menu-item has-sub" id="idListCompanyAdmin">
+                                <a data-toggle="dropdown" href="<?php echo base_url(); ?>admin_list_company" data-dropdown-toggle="false">
                                     <i class="site-menu-icon fa-users" aria-hidden="true"></i>
                                     <span class="site-menu-title">Companys</span>                                   
                                 </a>

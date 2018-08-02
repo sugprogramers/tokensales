@@ -59,6 +59,8 @@ $route['login'] = "Login_Controller";
 $route['logout'] = "Login_Controller/logout_user";
 $route['admin_dashboard'] = "Admin_Dashboard_Controller";
 $route['admin_profile'] = "Admin_Profile_Controller";
+$route['admin_list_investor'] = "Admin_List_Investor_Controller";
+$route['admin_list_company'] = "Admin_List_Company_Controller";
 
 //ProjectDocumentType
 $route['listalldocument'] = "AdminProjectDocumentTypeController/listDataGrid";
