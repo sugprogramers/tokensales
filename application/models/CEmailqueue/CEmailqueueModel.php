@@ -101,6 +101,12 @@ class CEmailqueueModel extends CI_Model {
     function getC_user_id() {
         return $this->c_user_id;
     }
+    
+    function getUser() {
+        $obj = new CUserModel();
+        $obj->get($this->c_user_id);
+        return $obj;
+    }    
 
     function setId($c_emailqueue_id) {
         $this->c_emailqueue_id = $c_emailqueue_id;

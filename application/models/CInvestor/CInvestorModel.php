@@ -168,7 +168,31 @@ class CInvestorModel extends CI_Model {
     function getPayin_paypalusername() {
         return $this->payin_paypalusername;
     }
-
+    
+    function getUser() {
+        $obj = new CUserModel();
+        $obj->get($this->c_user_id);
+        return $obj;
+    }  
+    
+    function getTaxCountry() {
+        $obj = new CCountryModel();
+        $obj->get($this->c_tax_country_id);
+        return $obj;
+    }      
+    
+    function getDocImgFront() {
+        $obj = new CFileModel();
+        $obj->get($this->c_docimgfront_id);
+        return $obj;
+    } 
+    
+    function getDocImgBack() {
+        $obj = new CFileModel();
+        $obj->get($this->c_docimgback_id);
+        return $obj;
+    }     
+    
     function setId($c_investor_id) {
         $this->c_investor_id = $c_investor_id;
     }

@@ -89,6 +89,24 @@ class CProjectdocumentModel extends CI_Model {
     function getStatus() {
         return $this->status;
     }
+    
+    function getProject() {
+        $obj = new CProjectModel();
+        $obj->get($this->c_project_id);
+        return $obj;
+    } 
+    
+    function getProjectDocumentType() {
+        $obj = new CProjectdocumenttypeModel();
+        $obj->get($this->c_projectdocumenttype_id);
+        return $obj;
+    }     
+    
+    function getFile() {
+        $obj = new CFileModel();
+        $obj->get($this->c_file_id);
+        return $obj;
+    }       
 
     function setId($c_projectdocument_id) {
         $this->c_projectdocument_id = $c_projectdocument_id;

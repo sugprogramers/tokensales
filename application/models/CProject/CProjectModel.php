@@ -12,7 +12,7 @@ class CProjectModel extends CI_Model {
     private $updatedby;
     private $name;    
     private $c_user_id;
-    private $c_project_id;    
+    private $c_company_id;    
     private $c_currency_id;    
     private $datecontract;
     private $startdate;
@@ -36,7 +36,7 @@ class CProjectModel extends CI_Model {
 
     // PROJECT PRESENTATION
     private $homeimage_id;
-    private $description;
+    private $description;   
     
     public function __construct() {
         parent::__construct();
@@ -55,7 +55,7 @@ class CProjectModel extends CI_Model {
         $this->updatedby = $result->updatedby;
         $this->name = $result->name;
         $this->c_user_id = $result->c_user_id;
-        $this->c_project_id = $result->c_project_id; 
+        $this->c_company_id = $result->c_company_id; 
         $this->c_currency_id = $result->c_currency_id; 
         $this->datecontract = $result->datecontract; 
         $this->startdate = $result->startdate; 
@@ -122,8 +122,8 @@ class CProjectModel extends CI_Model {
         return $this->c_user_id;
     }
 
-    function getC_project_id() {
-        return $this->c_project_id;
+    function getC_company_id() {
+        return $this->c_company_id;
     }
 
     function getC_currency_id() {
@@ -198,6 +198,42 @@ class CProjectModel extends CI_Model {
         return $this->description;
     }
 
+    function getCUser() {
+        $obj = new CUserModel();
+        $obj->get($this->c_user_id);
+        return $obj;
+    }  
+    
+    function getCompany() {
+        $obj = new CCompanyModel();
+        $obj->get($this->c_company_id);
+        return $obj;
+    }      
+    
+    function getCurrency() {
+        $obj = new CCurrencyModel();
+        $obj->get($this->c_currency_id);
+        return $obj;
+    }          
+    
+    function getCountry() {
+        $obj = new CCountryModel();
+        $obj->get($this->c_country_id);
+        return $obj;
+    }  
+    
+    function getRegion() {
+        $obj = new CRegionModel();
+        $obj->get($this->c_region_id);
+        return $obj;
+    }      
+    
+    function getHomeImage() {
+        $obj = new CFileModel();
+        $obj->get($this->homeimage_id);
+        return $obj;
+    }    
+    
     function setId($c_project_id) {
         $this->c_project_id = $c_project_id;
     }
@@ -230,8 +266,8 @@ class CProjectModel extends CI_Model {
         $this->c_user_id = $c_user_id;
     }
 
-    function setC_project_id($c_project_id) {
-        $this->c_project_id = $c_project_id;
+    function setC_company_id($c_company_id) {
+        $this->c_company_id = $c_company_id;
     }
 
     function setC_currency_id($c_currency_id) {
@@ -316,7 +352,7 @@ class CProjectModel extends CI_Model {
             'updatedby' => $this->updatedby,
             'name' => $this->name,
             'c_user_id' => $this->c_user_id,
-            'c_project_id' => $this->c_project_id,
+            'c_company_id' => $this->c_company_id,
             'c_currency_id' => $this->c_currency_id,
             'datecontract' => $this->datecontract,
             'startdate' => $this->startdate,

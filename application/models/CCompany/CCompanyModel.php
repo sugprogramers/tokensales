@@ -131,6 +131,24 @@ class CCompanyModel extends CI_Model {
     function getPostal() {
         return $this->postal;
     }
+    
+    function getUser() {
+        $obj = new CUserModel();
+        $obj->get($this->c_user_id);
+        return $obj;
+    }
+    
+    function getCountry() {
+        $obj = new CCountryModel();
+        $obj->get($this->c_country_id);
+        return $obj;
+    }
+    
+    function getRegion() {
+        $obj = new CRegionModel();
+        $obj->get($this->c_region_id);
+        return $obj;
+    }  
 
     function setId($c_company_id) {
         $this->c_company_id = $c_company_id;
