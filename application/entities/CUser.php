@@ -2,7 +2,7 @@
 
 class CUser {
 
-    public $c_user_Id;
+    public $c_user_id;
     public $isactive;
     public $created;
     public $createdby;

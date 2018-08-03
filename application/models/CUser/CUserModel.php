@@ -12,39 +12,76 @@ class CUserModel extends CI_Model
     
 
     public function get($id) {
-       $query = $this->db->get_where("c_user", array('c_user_id' => $id));
-       $result = $query->result()[0];
-       $cUser = new CUser();
-       
-       $cUser->c_user_Id = $result->c_user_id;
-       $cUser->isactive = $result->isactive;
-       $cUser->created = $result->created;
-       $cUser->createdby = $result->createdby;
-       $cUser->updated = $result->updated;
-       $cUser->updatedby = $result->updatedby;
-       $cUser->password = $result->password;
-       $cUser->phone = $result->phone;
-       $cUser->firstname = $result->firstname;
-       $cUser->lastname = $result->lastname;
-       $cUser->birthday = $result->birthday;
-       $cUser->address1 = $result->address1;
-       $cUser->address2 = $result->address2;
-       $cUser->c_country_id = $result->c_country_id;
-       $cUser->c_region_id = $result->c_region_id;
-       $cUser->city = $result->city;
-       $cUser->postal = $result->postal;
-       $cUser->usertype = $result->usertype;
-       $cUser->email = $result->email;
-       $cUser->registertoken = $result->registertoken;
-       $cUser->tokenexpirationdate = $result->tokenexpirationdate;
-       $cUser->status = $result->status;
-       
-       return $cUser;
+        $query = $this->db->get_where("c_user", array('c_user_id' => $id));
+        $result = $query->result();
+        if (!$result) {
+            return false;            
+        }
+        
+        $cUser = new CUser();       
+        $cUser->c_user_id = $result[0]->c_user_id;
+        $cUser->isactive = $result[0]->isactive;
+        $cUser->created = $result[0]->created;
+        $cUser->createdby = $result[0]->createdby;
+        $cUser->updated = $result[0]->updated;
+        $cUser->updatedby = $result[0]->updatedby;
+        $cUser->password = $result[0]->password;
+        $cUser->phone = $result[0]->phone;
+        $cUser->firstname = $result[0]->firstname;
+        $cUser->lastname = $result[0]->lastname;
+        $cUser->birthday = $result[0]->birthday;
+        $cUser->address1 = $result[0]->address1;
+        $cUser->address2 = $result[0]->address2;
+        $cUser->c_country_id = $result[0]->c_country_id;
+        $cUser->c_region_id = $result[0]->c_region_id;
+        $cUser->city = $result[0]->city;
+        $cUser->postal = $result[0]->postal;
+        $cUser->usertype = $result[0]->usertype;
+        $cUser->email = $result[0]->email;
+        $cUser->registertoken = $result[0]->registertoken;
+        $cUser->tokenexpirationdate = $result[0]->tokenexpirationdate;
+        $cUser->status = $result[0]->status;
+
+        return $cUser;
    }
+   
+    public function loadByEmail($email) {
+        $query = $this->db->get_where("c_user", array('email' => $email));
+        $result = $query->result();
+        if (!$result) {
+            return false;            
+        }
+        
+        $cUser = new CUser();       
+        $cUser->c_user_id = $result[0]->c_user_id;
+        $cUser->isactive = $result[0]->isactive;
+        $cUser->created = $result[0]->created;
+        $cUser->createdby = $result[0]->createdby;
+        $cUser->updated = $result[0]->updated;
+        $cUser->updatedby = $result[0]->updatedby;
+        $cUser->password = $result[0]->password;
+        $cUser->phone = $result[0]->phone;
+        $cUser->firstname = $result[0]->firstname;
+        $cUser->lastname = $result[0]->lastname;
+        $cUser->birthday = $result[0]->birthday;
+        $cUser->address1 = $result[0]->address1;
+        $cUser->address2 = $result[0]->address2;
+        $cUser->c_country_id = $result[0]->c_country_id;
+        $cUser->c_region_id = $result[0]->c_region_id;
+        $cUser->city = $result[0]->city;
+        $cUser->postal = $result[0]->postal;
+        $cUser->usertype = $result[0]->usertype;
+        $cUser->email = $result[0]->email;
+        $cUser->registertoken = $result[0]->registertoken;
+        $cUser->tokenexpirationdate = $result[0]->tokenexpirationdate;
+        $cUser->status = $result[0]->status;
+
+        return $cUser;
+   }   
      
     public function save($cUser){    
         $now = (new DateTime())->format('Y-m-d H:i:s');
-        if (!$cUser->c_user_Id) {     
+        if (!$cUser->c_user_id) {     
             // NEW
             $data = array(
                 'c_user_id' => UUID::getRawUUID(),
@@ -93,7 +130,7 @@ class CUserModel extends CI_Model
                 'status' => $cUser->status
             );
 
-            $this->db->where('c_user_id', $cUser->c_User_Id);
+            $this->db->where('c_user_id', $cUser->c_user_id);
             return $this->db->update('c_user', $data);  
         }
 
