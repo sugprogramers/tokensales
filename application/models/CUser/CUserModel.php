@@ -10,7 +10,6 @@ class CUserModel extends CI_Model
   private $createdby ;
   private $updated ;
   private $updatedby ;
-  private $username ;
   private $password ;
   private $phone ;
   private $firstname;
@@ -38,14 +37,29 @@ class CUserModel extends CI_Model
     public function get($id) {
        $query = $this->db->get_where("c_user", array('c_user_id' => $id));
        $result = $query->result()[0];
-       
        $this->c_User_Id = $result->c_user_id;
        $this->isactive = $result->isactive;
        $this->created = $result->created;
        $this->createdby = $result->createdby;
        $this->updated = $result->updated;
        $this->updatedby = $result->updatedby;
-       $this->username = $result->username; 
+       $this->password = $result->password;
+       $this->phone = $result->phone;
+       $this->firstname = $result->firstname;
+       $this->lastname = $result->lastname;
+       $this->birthday = $result->birthday;
+       $this->address1 = $result->address1;
+       $this->address2 = $result->address2;
+       $this->c_country_id = $result->c_country_id;
+       $this->c_region_id = $result->c_region_id;
+       $this->city = $result->city;
+       $this->postal = $result->postal;
+       $this->usertype = $result->usertype;
+       $this->email = $result->email;
+       $this->registertoken = $result->registertoken;
+       $this->tokenexpirationdate = $result->tokenexpirationdate;
+       $this->status = $result->status;
+       
        return $this;
    }
    
@@ -66,10 +80,6 @@ class CUserModel extends CI_Model
 
      function getIsactive() {
          return $this->isactive;
-     }
-
-     function getUsername() {
-         return $this->username;
      }
 
      function getPassword() {
@@ -146,10 +156,6 @@ class CUserModel extends CI_Model
          $this->isactive = $isactive;
      }
 
-     function setUsername($username) {
-         $this->username = $username;
-     }
-
      function setPassword($password) {
          $this->password = $password;
      }
@@ -218,7 +224,6 @@ class CUserModel extends CI_Model
    
     function save(){    
         $now = (new DateTime())->format('Y-m-d H:i:s');
-        
         if (!$this->c_User_Id) {     
             // NEW
             $data = array(
@@ -228,7 +233,6 @@ class CUserModel extends CI_Model
                 'createdby' => '100',
                 'updated' => $now,
                 'updatedby' => '100',
-                'username' => $this->email,
                 'password' => $this->password,
                 'phone' => $this->phone,
                 'firstname' => $this->firstname,
@@ -244,17 +248,13 @@ class CUserModel extends CI_Model
                 'email' => $this->email,
                 'status' => 'PEND'
             );
-            
             return $this->db->insert('c_user', $data);                    
-            
         } else {
-        
             // UPDATE
             $data = array(
                 'isactive' => $this->isactive,
                 'updated' => $now,
                 'updatedby' => $this->updatedby,
-                'username' => $this->username,
                 'password' => $this->password,
                 'phone' => $this->phone,
                 'firstname' => $this->firstname,
