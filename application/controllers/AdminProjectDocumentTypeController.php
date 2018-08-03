@@ -56,7 +56,10 @@ class AdminProjectDocumentTypeController extends CI_Controller {
            $data[] = array(
                 $obj->getName(),
                 $obj->getDescription(),               
-                $obj->isMandatory(),"HOla"
+                $obj->isMandatory(),
+          
+                '<a class="btn btn-sm btn-icon btn-pure btn-default on-default edit-row" href="javascript:void(0)" title="Edit" onclick="edit_document('."'".$obj->getId()."'".')"><i class="icon wb-edit"></i></a>
+		 <a class="btn btn-sm btn-icon btn-pure btn-default on-default edit-row" href="javascript:void(0)" title="Remove" onclick="delete_document('."'".$obj->getId()."'".')"><i class="icon wb-trash"></i></a>'
            );
       }
       
@@ -72,5 +75,80 @@ class AdminProjectDocumentTypeController extends CI_Controller {
       
       exit();
    }
+   
+   
+   public function get_itemById() {
+ 
+       $cProjectDocId = $this->input->post("id");
+       try{ 
+       $obj = $this->CProjectdocumenttypeModel->get($cProjectDocId);  
+       
+       $data = [];
+       if($obj)
+         $data[] = array("name" => $obj->getName(),
+                         "description" => $obj->getDescription(), 
+                         "isMandatory" => $obj->isMandatory(),
+                         "cprojectdocumenttypeid" => $obj->getId());
+         
+              
+         $response = array('redirect' => '', 'status' => 'success', 'data' => $data);
+         echo json_encode($response);
+            
+       } catch (Exception $e) {
+            $response = array('redirect' => '', 'status' => 'error', 'msg' => $e->getMessage());
+            echo json_encode($response);
+       }
+             
+    }
+   
+   
+   
+   
+   public function register_document() {
+ 
+       $cProjectDocId = $this->input->post("objid");
+       $name = $this->input->post("name");
+       $description = $this->input->post("description");
+       $isMandatory = $this->input->post("isMandatory");
+       
+       try {
+            if(strcmp($cProjectDocId,"")==0)
+               $objDoc = new CProjectdocumenttypeModel();
+            else
+               $objDoc =  $this->CProjectdocumenttypeModel->get($cProjectDocId);  
+               
+            if(!$objDoc)
+                throw new Exception ("Document not Found");
+
+            $objDoc->setName($name);
+            $objDoc->setDescription($description);
+            $objDoc->setIsmandatory("Y");
+            $objDoc->save();
+            $response = array('redirect' => '', 'status' => 'success');
+            echo json_encode($response);
+            
+       } catch (Exception $e) {
+            $response = array('redirect' => '', 'status' => 'error', 'msg' => $e->getMessage());
+            echo json_encode($response);
+       }
+             
+    }
+    
+    
+    public function delete_document() {
+       $cProjectDocId = $this->input->post("id");
+       try {
+            $this->CProjectdocumenttypeModel->delete($cProjectDocId);  
+            $response = array('redirect' => '', 'status' => 'success');
+            echo json_encode($response);
+       } catch (Exception $e) {
+            $response = array('redirect' => '', 'status' => 'error', 'msg' => $e->getMessage());
+            echo json_encode($response);
+       }
+    }
+   
+   
+   
+   
 
 }

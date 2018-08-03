@@ -1,5 +1,7 @@
 <?php
 
+include "application/libraries/UUID.php";
+
 class CProjectdocumenttypeModel extends CI_Model
 {
     private $c_projectdocumenttype_id;
@@ -21,6 +23,7 @@ class CProjectdocumenttypeModel extends CI_Model
      
     public function get($id) {
        $query = $this->db->get_where("c_projectdocumenttype", array('c_projectdocumenttype_id' => $id));
+       if(!$query->result()) return null;
        $result = $query->result()[0];
        $this->c_projectdocumenttype_id = $result->c_projectdocumenttype_id;
        $this->isactive = $result->isactive;
@@ -88,19 +91,40 @@ class CProjectdocumenttypeModel extends CI_Model
     
 
     function save(){
-        $data = array(
-            'c_projectdocumenttype_id' => $this->c_projectdocumenttype_id,
-            'isactive' => $this->isactive,
-            'created' => $this->created,
-            'createdby' => $this->createdby,
-            'updated' => $this->updated,
-            'updatedby' => $this->updatedby,
-            'name' => $this->name,
-            'description' => $this->description,
-            'ismandatory' => $this->ismandatory
-        );
-        $this->db->where('c_projectdocumenttype_id', $this->c_projectdocumenttype_id);
-        return $this->db->update('c_projectdocumenttype', $data);
+        $now = (new DateTime())->format('Y-m-d H:i:s');
+        if(!$this->c_projectdocumenttype_id){
+            //NOW
+            $data = array(
+                'c_projectdocumenttype_id' => UUID::getRawUUID(),
+                'isactive' => 'Y',
+                'created' => $now,
+                'createdby' => '100',
+                'updated' => $now,
+                'updatedby' => '100',
+                'name' => $this->name,
+                'description' => $this->description,
+                'ismandatory' => $this->ismandatory
+              );
+            return $this->db->insert('c_projectdocumenttype', $data);
+        }else{ //Update
+            $data = array(
+                'isactive' => $this->isactive,
+                'updated' => $now,
+                'updatedby' => $this->updatedby,
+                'name' => $this->name,
+                'description' => $this->description,
+                'ismandatory' => $this->ismandatory
+              );
+            $this->db->where('c_projectdocumenttype_id', $this->c_projectdocumenttype_id);
+            return $this->db->update('c_projectdocumenttype', $data);
+        }
     }  
-
+    
+    function delete($id){
+        $this->db->where('c_projectdocumenttype_id', $id);
+        return $this->db->delete('c_projectdocumenttype');
+    }
+    
+    
+    
 }
