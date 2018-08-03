@@ -60,7 +60,7 @@ class Register_Controller extends CI_Controller {
             }
             
             /* @var $user CUser */
-            $user = $this->CUserModel->loadByEmail($email);
+            $user = $this->CUserModel->loadByEmail($email); 
             if($user != null) {
                 throw new Exception("Email already used");
             }
@@ -69,22 +69,22 @@ class Register_Controller extends CI_Controller {
             
             $type = (strcmp($usertype,"investor") == 0 ? "INV" : "COMPMAN");
            
-            $newuser = new CUserModel();
-            $newuser->setFirstname($firstname);
-            $newuser->setLastname($lastname);
-            $newuser->setEmail($email);
-            $newuser->setPassword($password);
-            $newuser->setBirthday($birthday_date);
-            $newuser->setPhone($phone);
-            $newuser->setCCountryId($countryId);
-            $newuser->setCRegionId($regionId);
-            $newuser->setCity($city);
-            $newuser->setPostal($postal);
-            $newuser->setAddress1($address1);
-            $newuser->setAddress2($address2);
-            $newuser->setUsertype($type);
+            $newuser = new CUser();
+            $newuser->firstname = $firstname;
+            $newuser->lastname = $lastname;
+            $newuser->email = $email;
+            $newuser->password = $password;
+            $newuser->birthday = $birthday_date;
+            $newuser->phone = $phone;
+            $newuser->c_country_id = $countryId;
+            $newuser->c_region_id = $regionId;
+            $newuser->city = $city;
+            $newuser->postal = $postal;
+            $newuser->address1 = $address1;
+            $newuser->address2 = $address2;
+            $newuser->usertype = $type;
             
-            $newuser->save();
+            $this->CUserModel->save($newuser);
  
             $response = array('redirect' => '', 'status' => 'success'); //'redirect' => base_url() . 'login'
             echo json_encode($response);
