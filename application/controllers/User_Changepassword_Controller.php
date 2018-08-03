@@ -18,5 +18,12 @@ class User_Changepassword_Controller extends CI_Controller {
         $this->load->view('user_changepassword');
         $this->load->view('footer/footer_admin');
     }
+    
+    public function changePassword(){
+        log_message('error', 'Enter changePassword with POST' . implode($this->input->post(NULL, TRUE)));
+
+        $response = array('status' => 'success', 'msg' => 'Success');
+        echo json_encode($response);
+    }
 
 }
