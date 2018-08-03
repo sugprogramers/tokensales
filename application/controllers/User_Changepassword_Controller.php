@@ -41,9 +41,15 @@ class User_Changepassword_Controller extends CI_Controller {
             }
             
             $c_user_id = $this->session->userdata("id");
-            CUser $user = $this->CUserModel->get($c_user_id);
-            log_message('error', $user->password);
- 
+            
+            /* @var $user CUser */
+            $user = $this->CUserModel->get($c_user_id);
+            if(!$user){
+                throw new SDException('User does not exists');
+            }
+            
+            $user->password = $password;
+            $this->CUserModel->save($user);
            
 
 
