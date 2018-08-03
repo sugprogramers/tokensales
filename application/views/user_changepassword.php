@@ -113,6 +113,9 @@
                         else if(resp.msg === "passwordMismatch"){
                             showError('Repeat Password does not match new password');
                         }
+                        else if(resp.msg === "malformedPassword"){
+                            showError('Password does not follow the required restrictions');
+                        }
                         else{
                             showError(resp.msg);
                         }
