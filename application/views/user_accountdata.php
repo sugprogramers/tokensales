@@ -2,7 +2,7 @@
   <div class="page">
     <div class="page-content">
         
-      <h2>Profile admin</h2>
+      <h2>General Account Data</h2>
       
       
       
@@ -16,6 +16,6 @@
 
 <script type="text/javascript">
     window.onload = function () {
-       $('#idProfileAdmin').addClass('active');       
+       
     };
 </script>

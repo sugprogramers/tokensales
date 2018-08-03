@@ -79,7 +79,7 @@ CREATE TABLE c_user
   createdby character varying(32) NOT NULL,
   updated timestamp without time zone NOT NULL DEFAULT now(),
   updatedby character varying(32) NOT NULL,
-  username character varying(60) NOT NULL,
+  email character varying(255) NOT NULL,
   password character varying(40) NOT NULL,
  
   phone character varying(40) NOT NULL,
@@ -98,7 +98,6 @@ CREATE TABLE c_user
 
   usertype character varying(60) NOT NULL DEFAULT 'INV'::character varying, --ADM:admin INV:investor COMPMAN:company manager
 
-  email character varying(255) NOT NULL,
   registertoken character varying(60),
   tokenexpirationdate timestamp without time zone,
   status character varying(60) NOT NULL DEFAULT 'PEND'::character varying, --PEND:pending validation VAL:validated SUS:suspended
@@ -110,6 +109,7 @@ CREATE TABLE c_user
   CONSTRAINT c_user_c_region_fk FOREIGN KEY (c_region_id)
       REFERENCES c_region (c_region_id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT c_user_email_uniq UNIQUE(email),
   CONSTRAINT c_user_isactive_check CHECK (isactive = ANY (ARRAY['Y'::bpchar, 'N'::bpchar]))
 )
 WITH (

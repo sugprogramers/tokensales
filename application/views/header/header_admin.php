@@ -574,12 +574,34 @@
                                
                             </li>
                             
-                             <li class="dropdown site-menu-item has-sub" id="idProfileAdmin">
-                                <a data-toggle="dropdown" href="<?php echo base_url(); ?>admin_profile" data-dropdown-toggle="false">
-                                    <i class="site-menu-icon wb-user" aria-hidden="true"></i>
-                                    <span class="site-menu-title">Profile</span>                                   
+                             <li class="dropdown site-menu-item has-sub">
+                                <a data-toggle="dropdown" href="javascript:void(0)" data-dropdown-toggle="false">
+                                    <i class="site-menu-icon wb-folder" aria-hidden="true"></i>
+                                    <span class="site-menu-title">My Data</span>
+                                    <span class="site-menu-arrow"></span>
                                 </a>
-                               
+                                <div class="dropdown-menu">
+                                    <div class="site-menu-scroll-wrap is-list">
+                                        <div>
+                                            <div>
+                                                <ul class="site-menu-sub site-menu-normal-list">
+                                                    <li class="site-menu-item">
+                                                        <a href="<?php echo base_url(); ?>user_accountdata">
+                                                            <span class="site-menu-title">Account Data</span>
+                                                        </a>
+                                                    </li>
+                                                    
+                                                    <li class="site-menu-item">
+                                                        <a href="<?php echo base_url(); ?>user_changepassword">
+                                                            <span class="site-menu-title">Change Password</span>
+                                                        </a>
+                                                    </li>
+                                                    
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </li>
                             
                             <li class="dropdown site-menu-item has-sub">

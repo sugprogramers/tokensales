@@ -2,12 +2,12 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Admin_Profile_Controller extends CI_Controller {
+class User_Accountdata_Controller extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
         $this->load->helper('url');
-       //$this->load->model("Login_Model");
+        $this->load->model("CUser/CUserModel");
     }
 
     public function index() {
@@ -15,7 +15,7 @@ class Admin_Profile_Controller extends CI_Controller {
             redirect(base_url() . 'login');
         }
         $this->load->view('header/header_admin');
-        $this->load->view('admin_profile');
+        $this->load->view('user_accountdata');
         $this->load->view('footer/footer_admin');
     }
 
