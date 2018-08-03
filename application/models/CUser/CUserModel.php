@@ -278,6 +278,16 @@ class CUserModel extends CI_Model
         }
 
     }  
+    
+    
+    function get_all_investor(){
+         $this->db->where("usertype", "INV");
+        return $this->db->get("c_user");
+    } 
+     function get_all_company(){
+         $this->db->where("usertype", "COMPMAN");
+        return $this->db->get("c_user");
+    } 
 
 }
 

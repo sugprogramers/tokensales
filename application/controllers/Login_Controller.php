@@ -26,7 +26,8 @@ class Login_Controller extends CI_Controller {
         if ($resp) {
             $data = [
                 "id" => $resp->c_user_id,
-                "name" => $resp->username,
+                "firstname" => $resp->firstname,
+                "lastname" => $resp->lastname,
                 "email" => $resp->email,
                 "login_admin" => TRUE
             ];
