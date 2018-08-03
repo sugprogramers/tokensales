@@ -29,8 +29,11 @@ class CCompanyModel extends CI_Model {
     
     public function get($id) {
         $query = $this->db->get_where("c_company", array('c_company_id' => $id));
-        $result = $query->result()[0];
-
+        $queryresult = $query->result();
+        if (!$queryresult) {
+            return null;
+        }        
+        $result = $queryresult[0];
         $this->c_company_id = $result->c_company_id;
         $this->isactive = $result->isactive;
         $this->created = $result->created;
@@ -134,20 +137,17 @@ class CCompanyModel extends CI_Model {
     
     function getUser() {
         $obj = new CUserModel();
-        $obj->get($this->c_user_id);
-        return $obj;
+        return $obj->get($this->c_user_id);
     }
     
     function getCountry() {
         $obj = new CCountryModel();
-        $obj->get($this->c_country_id);
-        return $obj;
+        return $obj->get($this->c_country_id);        
     }
     
     function getRegion() {
         $obj = new CRegionModel();
-        $obj->get($this->c_region_id);
-        return $obj;
+        return $obj->get($this->c_region_id);        
     }  
 
     function setId($c_company_id) {

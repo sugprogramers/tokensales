@@ -33,10 +33,11 @@
   <link rel="stylesheet" href="<?php echo base_url()."themes/default/remark"; ?>/global/vendor/intro-js/introjs.min599c.css?v4.0.2">
   <link rel="stylesheet" href="<?php echo base_url()."themes/default/remark"; ?>/global/vendor/slidepanel/slidePanel.min599c.css?v4.0.2">
   <link rel="stylesheet" href="<?php echo base_url()."themes/default/remark"; ?>/global/vendor/flag-icon-css/flag-icon.min599c.css?v4.0.2">
-
+  
   <!-- Page -->
   <link rel="stylesheet" href="<?php echo base_url()."themes/default/remark/topbar"; ?>/assets/examples/css/pages/login.min599c.css?v4.0.2">
   <link rel="stylesheet" href="<?php echo base_url()."themes/default/remark/topbar"; ?>/assets/examples/css/forms/layouts.min599c.css?v4.0.2">
+  <link rel="stylesheet" href="<?php echo base_url()."themes/default/remark/topbar"; ?>/assets/examples/css/forms/masks.min599c.css?v4.0.2">
 
   <!-- Fonts -->
   <link rel="stylesheet" href="<?php echo base_url()."themes/default/remark"; ?>/global/fonts/web-icons/web-icons.min599c.css?v4.0.2">
@@ -65,11 +66,11 @@
 <!--rgba(26, 46, 73, 1); -->
 <style>     
 .page-login:before {    
-    background:rgba(26, 46, 73, 1); 
-    background-color:rgba(26, 46, 73, 1); 
+    background:rgba(26, 46, 73, 1);
+    background-color:rgba(26, 46, 73, 1);  
 }
 </style>
-<body class="animsition site-navbar-small page-register  layout-full" style="background:rgba(26, 46, 73, 1); color:#76838f"> <!--background:rgba(255, 255, 255, 0.1); color:#76838f" -->
+<body class="animsition site-navbar-small page-register  layout-full" style="background:rgba(26, 46, 73, 1);color:#ffffff">  <!--background:rgba(255, 255, 255, 0.1); color:#76838f" -->
 <!--<body class="animsition site-navbar-small page-register layout-full page-dark">--> 
   <!--[if lt IE 8]>
         <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>

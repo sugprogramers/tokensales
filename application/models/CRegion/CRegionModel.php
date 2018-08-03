@@ -13,23 +13,27 @@ class CRegionModel extends CI_Model
     private $c_country_id;
     
     public function __construct(){
-		parent::__construct();
-		$this->load->database();
+        parent::__construct();
+        $this->load->database();
     }
 
     public function get($id) {
-       $query = $this->db->get_where("c_region", array('c_region_id' => $id));
-       $result = $query->result()[0];
-       $this->c_region_id = $result->c_region_id;
-       $this->isactive = $result->isactive;
-       $this->created = $result->created;
-       $this->createdby = $result->createdby;
-       $this->updated = $result->updated;
-       $this->updatedby = $result->updatedby;
-       $this->name = $result->name; 
-       $this->description = $result->description; 
-       $this->c_country_id = $result->c_country_id; 
-       return $this;
+        $query = $this->db->get_where("c_region", array('c_region_id' => $id));
+        $queryresult = $query->result();
+        if (!$queryresult) {
+            return null;
+        }        
+        $result = $queryresult[0];
+        $this->c_region_id = $result->c_region_id;
+        $this->isactive = $result->isactive;
+        $this->created = $result->created;
+        $this->createdby = $result->createdby;
+        $this->updated = $result->updated;
+        $this->updatedby = $result->updatedby;
+        $this->name = $result->name; 
+        $this->description = $result->description; 
+        $this->c_country_id = $result->c_country_id; 
+        return $this;
     }
     
     public function getAll(){
@@ -42,6 +46,17 @@ class CRegionModel extends CI_Model
        }
        return $data;
     }
+    
+    public function getRegionsByCountry($countryId){
+       $query = $this->db->get_where("c_region", array('isactive' => 'Y', 'c_country_id' => $countryId));
+       $result = $query->result();
+       $data = array();
+       foreach($result as $value) {
+           $obj = new CRegionModel();
+           $data[] = $obj->get($value->c_region_id);
+       }
+       return $data;
+    }    
     
     function getId() {
         return $this->c_region_id;

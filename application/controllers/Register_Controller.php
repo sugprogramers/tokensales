@@ -8,6 +8,8 @@ class Register_Controller extends CI_Controller {
         parent::__construct();
         $this->load->helper('url');
         $this->load->model("CUser/CUserModel");
+        $this->load->model("CCountry/CCountryModel");
+        $this->load->model("CRegion/CRegionModel");
     }
 
     public function index() {
@@ -32,22 +34,23 @@ class Register_Controller extends CI_Controller {
        $usertype = $this->input->post("usertype");      
       
        try {
-            $now = (new DateTime())->format('Y-m-d H:i:s');
+            $birthday_date = (new DateTime($birthday))->format('Y-m-d H:i:s');
+            $type = (strcmp($usertype,"investor") == 0 ? "INV" : "COMPMAN");
            
             $newuser = new CUserModel();
             $newuser->setFirstname($firstname);
             $newuser->setLastname($lastname);
             $newuser->setEmail($email);
             $newuser->setPassword($password);
-            $newuser->setBirthday($now); //($birthday);
+            $newuser->setBirthday($birthday_date);
             $newuser->setPhone($phone);
-            $newuser->setCCountryId("100"); //($countryId);
-            $newuser->setCRegionId("103"); //($regionId);
+            $newuser->setCCountryId($countryId);
+            $newuser->setCRegionId($regionId);
             $newuser->setCity($city);
             $newuser->setPostal($postal);
             $newuser->setAddress1($address1);
             $newuser->setAddress2($address2);
-            $newuser->setUsertype("INV"); //($usertype);
+            $newuser->setUsertype($type);
             
             $newuser->save();
  
@@ -59,6 +62,33 @@ class Register_Controller extends CI_Controller {
             echo json_encode($response);
        }
              
+    }
+    
+    public function get_country_list() {
+        $country_list = $this->CCountryModel->getAll();
+        
+        $html = '<option value="">Choose a Country</option>';        
+        foreach ($country_list as $country) {     
+            if ($country->getId() == "100") { // ee.uu.
+                $html .= '<option value="'.$country->getId().'" selected>'.$country->getName().'</option>';            
+            } else {
+                $html .= '<option value="'.$country->getId().'">'.$country->getName().'</option>';            
+            }
+        }
+        $response = array('html' => $html); 
+        echo json_encode($response);
+    }
+    
+    public function get_region_list() {
+        $countryId = $this->input->post("countryId");
+        $region_list = $this->CRegionModel->getRegionsByCountry($countryId);
+        
+        $html = '<option value="">Choose a Region</option>';
+        foreach ($region_list as $region) {     
+            $html .= '<option value="'.$region->getId().'">'.$region->getDescription().'</option>';            
+        }
+        $response = array('html' => $html); 
+        echo json_encode($response);
     }
 
 }

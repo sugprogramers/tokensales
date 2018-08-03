@@ -21,8 +21,11 @@ class CCountryModel extends CI_Model {
     
     public function get($id) {
         $query = $this->db->get_where("c_country", array('c_country_id' => $id));
-        $result = $query->result()[0];
-        
+        $queryresult = $query->result();
+        if (!$queryresult) {
+            return null;
+        }        
+        $result = $queryresult[0];
         $this->c_country_id = $result->c_country_id;
         $this->isactive = $result->isactive;
         $this->created = $result->created;

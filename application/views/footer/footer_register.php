@@ -15,12 +15,11 @@
 <script src="<?php echo base_url() . "themes/default/remark"; ?>/global/vendor/intro-js/intro.min599c.js?v4.0.2"></script>
 <script src="<?php echo base_url() . "themes/default/remark"; ?>/global/vendor/screenfull/screenfull599c.js?v4.0.2"></script>
 <script src="<?php echo base_url() . "themes/default/remark"; ?>/global/vendor/slidepanel/jquery-slidePanel.min599c.js?v4.0.2"></script>
-
-
 <script src="<?php echo base_url() . "themes/default/remark"; ?>/global/vendor/toastr/toastr.min599c.js?v4.0.2"></script>
 
 <!-- Plugins For This Page -->
 <script src="<?php echo base_url() . "themes/default/remark"; ?>/global/vendor/jquery-placeholder/jquery.placeholder599c.js?v4.0.2"></script>
+<script src="<?php echo base_url() . "themes/default/remark"; ?>/global/vendor/bootstrap-datepicker/bootstrap-datepicker.min599c.js?v4.0.2"></script>
 
 <!-- Scripts -->
 <script src="<?php echo base_url() . "themes/default/remark"; ?>/global/js/Component.min599c.js?v4.0.2"></script>
@@ -46,7 +45,7 @@
 <script src="<?php echo base_url() . "themes/default/remark"; ?>/global/js/Plugin/slidepanel.min599c.js?v4.0.2"></script>
 <script src="<?php echo base_url() . "themes/default/remark"; ?>/global/js/Plugin/switchery.min599c.js?v4.0.2"></script>
 <script src="<?php echo base_url() . "themes/default/remark"; ?>/global/js/Plugin/jquery-placeholder.min599c.js?v4.0.2"></script>
-
+<script src="<?php echo base_url() . "themes/default/remark"; ?>/global/js/Plugin/bootstrap-datepicker.min599c.js?v4.0.2"></script>
 
 <script>
     (function (document, window, $) {
