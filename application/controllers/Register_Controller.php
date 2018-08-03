@@ -58,7 +58,12 @@ class Register_Controller extends CI_Controller {
             if(!isset($address1) || trim($address1) == '' ) {
                 throw new Exception("Address1 is not set");
             }
-
+            
+            /* @var $user CUser */
+            $user = $this->CUserModel->loadByEmail($email);
+            if($user != null) {
+                throw new Exception("Email already used");
+            }
         
             $birthday_date = (new DateTime($birthday))->format('Y-m-d H:i:s');
             

@@ -15,7 +15,7 @@ class CUserModel extends CI_Model
         $query = $this->db->get_where("c_user", array('c_user_id' => $id));
         $result = $query->result();
         if (!$result) {
-            return false;            
+            return null;            
         }
         
         $cUser = new CUser();       
@@ -49,7 +49,7 @@ class CUserModel extends CI_Model
         $query = $this->db->get_where("c_user", array('email' => $email));
         $result = $query->result();
         if (!$result) {
-            return false;            
+            return null;            
         }
         
         $cUser = new CUser();       
