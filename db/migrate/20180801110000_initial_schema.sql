@@ -144,7 +144,7 @@ CREATE TABLE c_emailqueue
 WITH (
   OIDS=FALSE
 );
-ALTER TABLE c_user
+ALTER TABLE c_emailqueue
   OWNER TO smart;
 
 
@@ -326,7 +326,7 @@ CREATE TABLE c_projectdocumenttype
 WITH (
   OIDS=FALSE
 );
-ALTER TABLE c_file
+ALTER TABLE c_projectdocumenttype
   OWNER TO smart;
 
 
