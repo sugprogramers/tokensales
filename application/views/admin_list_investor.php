@@ -14,7 +14,7 @@
         <div class="panel">
             <div class="panel-body">
 
-                <table id="idTableListInvestor" class="table table-hover dataTable table-striped w-full dtr-inline" data-paging="true" data-sorting="true" data-filtering="true">
+                <table id="idTableListInvestor" class="table table-hover dataTable table-striped w-full dtr-inline" role="grid" >
                     <thead>
                         <tr>
                             <th>ID</th>
@@ -22,7 +22,7 @@
                             <th>Password</th>
                             <th>FirstName</th>
                             <th>LastName</th>
-                            <th></th>
+                            <th ></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -39,6 +39,11 @@
     window.onload = function () {
         $('#idListInvestorAdmin').addClass('active');
         $('#idTableListInvestor').DataTable({
+            "order": [[ 0, "desc" ]],
+            "columnDefs": [{
+                    "targets": [5],
+                    "orderable": false
+                }],
             "processing": false, //mostrar waiting
             "serverSide": false, //consultar servidor ordenar , filtrar
             "ajax": {
