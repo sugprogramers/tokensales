@@ -115,7 +115,7 @@ class CUserModel extends CI_Model
                 'password' => $cUser->password,
                 'phone' => $cUser->phone,
                 'firstname' => $cUser->firstname,
-                'lastname' => $cUser->lastnam,
+                'lastname' => $cUser->lastname,
                 'birthday' => $cUser->birthday,
                 'address1' => $cUser->address1,
                 'address2' => $cUser->address2,
