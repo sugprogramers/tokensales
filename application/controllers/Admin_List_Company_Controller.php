@@ -35,8 +35,8 @@ class Admin_List_Company_Controller extends CI_Controller {
                 $r->password,
                 $r->firstname,
                 $r->lastname,
-                '<a class="btn btn-sm btn-primary" href="javascript:void(0)" title="Edit" onclick="edit_person(' . "'" . $r->c_user_id . "'" . ')"><i class="glyphicon glyphicon-pencil"></i> Edit</a>
-				  <a class="btn btn-sm btn-danger" href="javascript:void(0)" title="Hapus" onclick="delete_person(' . "'" . $r->c_user_id . "'" . ')"><i class="glyphicon glyphicon-trash"></i> Delete</a>'
+                '<a class="btn btn-sm btn-primary" href="javascript:void(0)" title="Edit" onclick="edit_person(' . "'" . $r->c_user_id . "'" . ')"><i class="icon fa-edit"></i> Edit</a>
+				  <a class="btn btn-sm btn-danger" href="javascript:void(0)" title="Hapus" onclick="delete_person(' . "'" . $r->c_user_id . "'" . ')"><i class="icon fa-trash"></i> Delete</a>'
             );
         }
 

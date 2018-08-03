@@ -14,7 +14,7 @@
         <div class="panel">
             <div class="panel-body">
 
-                <table id="idTableListInvestor" class="table table-hover dataTable table-striped w-full dtr-inline" role="grid" >
+                <table id="idTableListInvestor" class="table table-hover dataTable table-striped" role="grid" style="width:100%" >
                     <thead>
                         <tr>
                             <th>ID</th>
@@ -22,7 +22,7 @@
                             <th>Password</th>
                             <th>FirstName</th>
                             <th>LastName</th>
-                            <th ></th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -38,7 +38,9 @@
 <script type="text/javascript">
     window.onload = function () {
         $('#idListCompanyAdmin').addClass('active');
-        $('#idTableListInvestor').DataTable({
+        var table = $('#idTableListInvestor').DataTable({
+            responsive: true,
+            fixedHeader:{header:!0},
             "order": [[ 0, "desc" ]],
             "columnDefs": [{
                     "targets": [5],
@@ -51,6 +53,7 @@
                 type: 'GET'
             },
         });
+      new $.fn.dataTable.FixedHeader( table );
 
     };
 </script>

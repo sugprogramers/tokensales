@@ -43,7 +43,7 @@
 
         
         <!-- DataTable Css For This Page -->
-        <link rel="stylesheet" href="<?php echo base_url() . "themes/default/remark"; ?>/global/vendor/datatables.net-bs4/dataTables.bootstrap4.min599c.css?v4.0.2">
+       <link rel="stylesheet" href="<?php echo base_url() . "themes/default/remark"; ?>/global/vendor/datatables.net-bs4/dataTables.bootstrap4.min599c.css?v4.0.2">
         <link rel="stylesheet" href="<?php echo base_url() . "themes/default/remark"; ?>/global/vendor/datatables.net-fixedheader-bs4/dataTables.fixedheader.bootstrap4.min599c.css?v4.0.2">
         <link rel="stylesheet" href="<?php echo base_url() . "themes/default/remark"; ?>/global/vendor/datatables.net-fixedcolumns-bs4/dataTables.fixedcolumns.bootstrap4.min599c.css?v4.0.2">
         <link rel="stylesheet" href="<?php echo base_url() . "themes/default/remark"; ?>/global/vendor/datatables.net-rowgroup-bs4/dataTables.rowgroup.bootstrap4.min599c.css?v4.0.2">
@@ -51,7 +51,7 @@
         <link rel="stylesheet" href="<?php echo base_url() . "themes/default/remark"; ?>/global/vendor/datatables.net-select-bs4/dataTables.select.bootstrap4.min599c.css?v4.0.2">
         <link rel="stylesheet" href="<?php echo base_url() . "themes/default/remark"; ?>/global/vendor/datatables.net-responsive-bs4/dataTables.responsive.bootstrap4.min599c.css?v4.0.2">
         <link rel="stylesheet" href="<?php echo base_url() . "themes/default/remark"; ?>/global/vendor/datatables.net-buttons-bs4/dataTables.buttons.bootstrap4.min599c.css?v4.0.2">
-        
+    
         
         <!--[if lt IE 9]>
           <script src="<?php echo base_url() . "themes/default/remark"; ?>/global/vendor/html5shiv/html5shiv.min.js?v4.0.2"></script>
