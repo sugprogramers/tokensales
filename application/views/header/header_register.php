@@ -19,6 +19,7 @@
   <link rel="stylesheet" href="<?php echo base_url()."themes/default/remark"; ?>/global/css/bootstrap-extend.min599c.css?v4.0.2">
   <link rel="stylesheet" href="<?php echo base_url()."themes/default/remark/topbar"; ?>/assets/css/site.min599c.css?v4.0.2">
 
+  
   <!-- Skin tools (demo site only) -->
   <!--<link rel="stylesheet" href="<?php echo base_url()."themes/default/remark"; ?>/global/css/skintools.min599c.css?v4.0.2">
   <script src="<?php echo base_url()."themes/default/remark/topbar"; ?>/assets/js/Plugin/skintools.min599c.js?v4.0.2"></script> -->
@@ -33,11 +34,14 @@
   <link rel="stylesheet" href="<?php echo base_url()."themes/default/remark"; ?>/global/vendor/intro-js/introjs.min599c.css?v4.0.2">
   <link rel="stylesheet" href="<?php echo base_url()."themes/default/remark"; ?>/global/vendor/slidepanel/slidePanel.min599c.css?v4.0.2">
   <link rel="stylesheet" href="<?php echo base_url()."themes/default/remark"; ?>/global/vendor/flag-icon-css/flag-icon.min599c.css?v4.0.2">
+  <link rel="stylesheet" href="<?php echo base_url()."themes/default/remark"; ?>/global/vendor/bootstrap-datepicker/bootstrap-datepicker.min599c.css?v4.0.2">
+  
   
   <!-- Page -->
   <link rel="stylesheet" href="<?php echo base_url()."themes/default/remark/topbar"; ?>/assets/examples/css/pages/login.min599c.css?v4.0.2">
   <link rel="stylesheet" href="<?php echo base_url()."themes/default/remark/topbar"; ?>/assets/examples/css/forms/layouts.min599c.css?v4.0.2">
   <link rel="stylesheet" href="<?php echo base_url()."themes/default/remark/topbar"; ?>/assets/examples/css/forms/masks.min599c.css?v4.0.2">
+  <link rel="stylesheet" href="<?php echo base_url()."themes/default/remark/topbar"; ?>/assets/examples/css/uikit/modals.min599c.css?v4.0.2">
 
   <!-- Fonts -->
   <link rel="stylesheet" href="<?php echo base_url()."themes/default/remark"; ?>/global/fonts/web-icons/web-icons.min599c.css?v4.0.2">
@@ -63,7 +67,6 @@
   <link id="skinStyle" href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/assets/skins/cyan.css" rel="stylesheet" type="text/css">
 </head>
 
-<!--rgba(26, 46, 73, 1); -->
 <style>     
 .page-login:before {    
     background:rgba(26, 46, 73, 1);

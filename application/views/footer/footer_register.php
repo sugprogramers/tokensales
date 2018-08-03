@@ -10,12 +10,14 @@
 <script src="<?php echo base_url() . "themes/default/remark"; ?>/global/vendor/asscrollable/jquery-asScrollable.min599c.js?v4.0.2"></script>
 <script src="<?php echo base_url() . "themes/default/remark"; ?>/global/vendor/ashoverscroll/jquery-asHoverScroll.min599c.js?v4.0.2"></script>
 
+
 <!-- Plugins -->
 <script src="<?php echo base_url() . "themes/default/remark"; ?>/global/vendor/switchery/switchery.min599c.js?v4.0.2"></script>
 <script src="<?php echo base_url() . "themes/default/remark"; ?>/global/vendor/intro-js/intro.min599c.js?v4.0.2"></script>
 <script src="<?php echo base_url() . "themes/default/remark"; ?>/global/vendor/screenfull/screenfull599c.js?v4.0.2"></script>
 <script src="<?php echo base_url() . "themes/default/remark"; ?>/global/vendor/slidepanel/jquery-slidePanel.min599c.js?v4.0.2"></script>
 <script src="<?php echo base_url() . "themes/default/remark"; ?>/global/vendor/toastr/toastr.min599c.js?v4.0.2"></script>
+  
 
 <!-- Plugins For This Page -->
 <script src="<?php echo base_url() . "themes/default/remark"; ?>/global/vendor/jquery-placeholder/jquery.placeholder599c.js?v4.0.2"></script>

@@ -2,8 +2,8 @@
 <div class="page vertical-align text-center" data-animsition-in="fade-in" data-animsition-out="fade-out">
     <div class="page-content container-fluid vertical-align-middle animation-slide-top animation-duration-1">
         <div class="brand">
-            <img class="brand-img" src="<?php echo base_url() . "themes/default/remark/topbar"; ?>/assets/images/smart3.png" alt="...">
-            <!-- <h2 class="brand-text">Remark</h2> -->
+            <img class="brand-img" src="<?php echo base_url() . "themes/default/remark/topbar"; ?>/assets/images/smart4.png" alt="...">
+            <!-- <h2 class="brand-text">Remark</h2> style="background:rgba(0, 0, 0, 0.12)"-->
         </div>
 
         <div class="row align-center">
@@ -73,9 +73,11 @@
                 </div>                  
               </form>
             </div>
-            <div class="col-sm-3  align-center"></div>
+            <div class="col-sm-3  align-center"></div>        
         </div>    
         <p>Have account already? Please go to <a href="login">Sign In</a></p>
+
+                        
         <!--
         <footer class="page-copyright page-copyright-inverse">
           <p>WEBSITE BY SUG</p>
@@ -133,7 +135,7 @@
             });
         });
 
-        $("#register_form").submit(function (event) {
+        $("#register_form").submit(function (event) {        
             event.preventDefault();
             $.ajax({
                 url: "<?php echo base_url('Register_Controller/register_user')?>",
@@ -142,11 +144,11 @@
                 success: function (data) {
                     var resp = $.parseJSON(data);//convertir data de json
                     if (resp.status === "error") {                       
-                         showError('Error user or password invalid');
+                         showError(resp.msg);
                     } 
                     if (resp.status === "success") {
                         showSuccess("SUCCESS");
-                        console.log("ACA SUCESS**");
+                        $('#modal_register').modal('show');                        
                        // window.location.href = resp.redirect;
                     }                     
                     
@@ -154,10 +156,36 @@
             });
         });
 
-            
+        $("#modal_finalize").click(function (event) {        
+            window.location.href = "<?php echo base_url('Login_Controller')?>";
+        });            
        
-    };
-    
+    };    
 
     
 </script>
+
+            
+                   
+<!-- Modal -->
+<div class="modal fade modal-3d-slit in" id="modal_register" aria-hidden="true" aria-labelledby="examplePositionCenter"
+  role="dialog" tabindex="-1" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog modal-simple modal-center">
+    <div class="modal-content">
+      <div class="modal-header">
+        <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button> -->
+        <h4 class="modal-title">Register Success</h4>
+      </div>
+      <div class="modal-body">
+        <h5><p>You have registered correctly. Then you can log in.</p></h5>
+      </div>
+      <div class="modal-footer">
+        <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
+        <button id="modal_finalize" type="button" class="btn btn-primary">Finalize</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Modal -->    
