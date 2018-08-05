@@ -3,27 +3,19 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class AdminProjectDocumentTypeController extends CI_Controller {
-
-    /**
-     * Index Page for this controller.
-     *
-     * Maps to the following URL
-     * 		http://example.com/index.php/welcome
-     * 	- or -
-     * 		http://example.com/index.php/welcome/index
-     * 	- or -
-     * Since this controller is set as the default controller in
-     * config/routes.php, it's displayed at http://example.com/
-     *
-     * So any other public methods not prefixed with an underscore will
-     * map to /index.php/welcome/<method_name>
-     * @see https://codeigniter.com/user_guide/general/urls.html
-     */
-    
+        
     public function __construct() {
         parent::__construct();
         $this->load->helper('url');
-        $this->load->model("CProjectdocumenttype/CProjectdocumenttypeModel");
+        $this->load->model("CProjectdocumenttypeModel");
+        
+        if (!isset($this->session->id)){
+            redirect(base_url() . 'login');
+        }
+        
+        if($this->session->usertype !== "ADM"){
+            redirect(base_url() . 'login');
+        }
     }
 
     public function index() {
@@ -34,9 +26,7 @@ class AdminProjectDocumentTypeController extends CI_Controller {
     }
     
     public function listDataGrid(){
-       if (!$this->session->userdata("login_admin")){
-         redirect(base_url() . 'login');
-       }
+
        
        $this->load->view('header/header_admin');
        $this->load->view('projectdocumenttype/list_projectdocumenttype');
@@ -54,12 +44,12 @@ class AdminProjectDocumentTypeController extends CI_Controller {
       
       foreach ($query as $obj) {
            $data[] = array(
-                $obj->getName(),
-                $obj->getDescription(),               
-                $obj->isMandatory(),
+                $obj->name,
+                $obj->description,               
+                $obj->ismandatory,
           
-                '<a class="btn btn-sm btn-icon btn-pure btn-default on-default edit-row" href="javascript:void(0)" title="Edit" onclick="edit_document('."'".$obj->getId()."'".')"><i class="icon wb-edit"></i></a>
-		 <a class="btn btn-sm btn-icon btn-pure btn-default on-default edit-row" href="javascript:void(0)" title="Remove" onclick="delete_document('."'".$obj->getId()."'".')"><i class="icon wb-trash"></i></a>'
+                '<a class="btn btn-sm btn-icon btn-pure btn-default on-default edit-row" href="javascript:void(0)" title="Edit" onclick="edit_document('."'".$obj->c_projectdocumenttype_id."'".')"><i class="icon wb-edit"></i></a>
+		 <a class="btn btn-sm btn-icon btn-pure btn-default on-default edit-row" href="javascript:void(0)" title="Remove" onclick="delete_document('."'".$obj->c_projectdocumenttype_id."'".')"><i class="icon wb-trash"></i></a>'
            );
       }
       
@@ -78,21 +68,22 @@ class AdminProjectDocumentTypeController extends CI_Controller {
    
    
    public function get_itemById() {
- 
+       
        $cProjectDocId = $this->input->post("id");
        try{ 
-       $obj = $this->CProjectdocumenttypeModel->get($cProjectDocId);  
+       $cProjectDoc = $this->CProjectdocumenttypeModel->get($cProjectDocId);  
        
        $data = [];
-       if($obj)
-         $data[] = array("name" => $obj->getName(),
-                         "description" => $obj->getDescription(), 
-                         "isMandatory" => $obj->isMandatory(),
-                         "cprojectdocumenttypeid" => $obj->getId());
+       if($cProjectDoc){
+         $data[] = array("name" => $cProjectDoc->name,
+                         "description" => $cProjectDoc->description, 
+                         "isMandatory" => $cProjectDoc->ismandatory,
+                         "cprojectdocumenttypeid" => $cProjectDoc->c_projectdocumenttype_id);
          
               
          $response = array('redirect' => '', 'status' => 'success', 'data' => $data);
          echo json_encode($response);
+       }
             
        } catch (Exception $e) {
             $response = array('redirect' => '', 'status' => 'error', 'msg' => $e->getMessage());
@@ -113,17 +104,18 @@ class AdminProjectDocumentTypeController extends CI_Controller {
        
        try {
             if(strcmp($cProjectDocId,"")==0)
-               $objDoc = new CProjectdocumenttypeModel();
+               $objDoc = new CProjectdocumenttype();
             else
                $objDoc =  $this->CProjectdocumenttypeModel->get($cProjectDocId);  
                
             if(!$objDoc)
                 throw new Exception ("Document not Found");
 
-            $objDoc->setName($name);
-            $objDoc->setDescription($description);
-            $objDoc->setIsmandatory("Y");
-            $objDoc->save();
+            $objDoc->name = $name;
+            $objDoc->description = $description;
+            $objDoc->ismandatory = "Y";
+            $objDoc->isactive = "Y";
+            $this->CProjectdocumenttypeModel->save($objDoc, $this->session->id);
             $response = array('redirect' => '', 'status' => 'success');
             echo json_encode($response);
             

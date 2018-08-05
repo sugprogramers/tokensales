@@ -3,17 +3,19 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Login_Controller extends CI_Controller {
-
+    
     public function __construct() {
         parent::__construct();
         $this->load->helper('url');
         $this->load->model("Login_Model");
+        
+        
+        if(isset($this->session->id) && $this->session->usertype === "ADM"){
+            redirect(base_url() . 'admin_dashboard');
+        }
     }
 
     public function index() {
-        if ($this->session->userdata("login_admin")) {
-            redirect(base_url() . 'admin_dashboard');
-        }
         $this->load->view('header/header_login');
         $this->load->view('login');
         $this->load->view('footer/footer_login');
@@ -29,7 +31,7 @@ class Login_Controller extends CI_Controller {
                 "firstname" => $resp->firstname,
                 "lastname" => $resp->lastname,
                 "email" => $resp->email,
-                "login_admin" => TRUE
+                "usertype" => $resp->usertype
             ];
 
             $this->session->set_userdata($data);

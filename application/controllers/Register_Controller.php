@@ -7,9 +7,13 @@ class Register_Controller extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->helper('url');
-        $this->load->model("CUser/CUserModel");
-        $this->load->model("CCountry/CCountryModel");
-        $this->load->model("CRegion/CRegionModel");
+        $this->load->model("CUserModel");
+        $this->load->model("CCountryModel");
+        $this->load->model("CRegionModel");
+        
+        if(isset($this->session->id) && $this->session->usertype === "ADM"){
+            redirect(base_url() . 'admin_dashboard');
+        }
     }
 
     public function index() {
@@ -70,6 +74,7 @@ class Register_Controller extends CI_Controller {
             $type = (strcmp($usertype,"investor") == 0 ? "INV" : "COMPMAN");
            
             $newuser = new CUser();
+            $newuser->isactive = "Y";
             $newuser->firstname = $firstname;
             $newuser->lastname = $lastname;
             $newuser->email = $email;
@@ -84,7 +89,7 @@ class Register_Controller extends CI_Controller {
             $newuser->address2 = $address2;
             $newuser->usertype = $type;
             
-            $this->CUserModel->save($newuser);
+            $this->CUserModel->save($newuser, $this->session->id);
  
             $response = array('redirect' => '', 'status' => 'success'); //'redirect' => base_url() . 'login'
             echo json_encode($response);
@@ -101,10 +106,10 @@ class Register_Controller extends CI_Controller {
         
         $html = '<option value="">Choose a Country</option>';        
         foreach ($country_list as $country) {     
-            if ($country->getId() == "100") { // ee.uu.
-                $html .= '<option value="'.$country->getId().'" selected>'.$country->getName().'</option>';            
+            if ($country->c_country_id == "100") { // ee.uu.
+                $html .= '<option value="'.$country->c_country_id.'" selected>'.$country->name.'</option>';            
             } else {
-                $html .= '<option value="'.$country->getId().'">'.$country->getName().'</option>';            
+                $html .= '<option value="'.$country->c_country_id.'">'.$country->name.'</option>';            
             }
         }
         $response = array('html' => $html); 
@@ -118,7 +123,7 @@ class Register_Controller extends CI_Controller {
         
         $html = '<option value="">Choose a Region</option>';
         foreach ($region_list as $region) {     
-            $html .= '<option value="'.$region->getId().'">'.$region->getDescription().'</option>';            
+            $html .= '<option value="'.$region->c_region_id.'">'.$region->description.'</option>';            
         }
         $response = array('html' => $html); 
         echo json_encode($response);

@@ -9,22 +9,24 @@ class User_Changepassword_Controller extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->helper('url');
-        $this->load->model("CUser/CUserModel");
+        $this->load->model("CUserModel");
+        
+        if (!isset($this->session->id)){
+            redirect(base_url() . 'login');
+        }
+        
+        if($this->session->usertype !== "ADM"){
+            redirect(base_url() . 'login');
+        }
     }
 
     public function index() {
-        if (!$this->session->userdata("login_admin")) {
-            redirect(base_url() . 'login');
-        }
         $this->load->view('header/header_admin');
         $this->load->view('user_changepassword');
         $this->load->view('footer/footer_admin');
     }
     
     public function changePassword(){
-        if (!$this->session->userdata("login_admin") || !$this->session->userdata("id")) {
-            redirect(base_url() . 'login');
-        }
         
         try{
             $password = $this->input->post('password');
@@ -39,17 +41,15 @@ class User_Changepassword_Controller extends CI_Controller {
             else if(preg_match_all('/^\S*(?=\S{8,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])(?=\S*[\@\#\$\!\¡\¿\?\*\(\)\%\^\&\+\=])\S*$/', $password) != 1){
                 throw new SDException('malformedPassword');
             }
-            
-            $c_user_id = $this->session->userdata("id");
-            
+                        
             /* @var $user CUser */
-            $user = $this->CUserModel->get($c_user_id);
+            $user = $this->CUserModel->get($this->session->id);
             if(!$user){
                 throw new SDException('User does not exists');
             }
             
             $user->password = $password;
-            $this->CUserModel->save($user);
+            $this->CUserModel->save($user, $this->session->id);
            
 
 
