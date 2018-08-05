@@ -1,6 +1,6 @@
 <?php
-include "application/libraries/UUID.php";
-include "application/entities/CCompany.php";
+include_once "application/libraries/UUID.php";
+include_once "application/entities/CCompany.php";
 class CCurrencyModel extends CI_Model {
         
     public function __construct() {

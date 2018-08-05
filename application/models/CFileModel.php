@@ -1,6 +1,6 @@
 <?php
-include "application/libraries/UUID.php";
-include "application/entities/CFile.php";
+include_once "application/libraries/UUID.php";
+include_once "application/entities/CFile.php";
 
 class CFileModel extends CI_Model {  
     

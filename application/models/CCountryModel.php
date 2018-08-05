@@ -1,6 +1,6 @@
 <?php
-include "application/libraries/UUID.php";
-include "application/entities/CCountry.php";
+include_once "application/libraries/UUID.php";
+include_once "application/entities/CCountry.php";
 
 class CCountryModel extends CI_Model {
     

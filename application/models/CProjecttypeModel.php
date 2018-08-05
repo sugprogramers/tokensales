@@ -1,6 +1,6 @@
 <?php
-include "application/libraries/UUID.php";
-include "application/entities/CProjecttype.php";
+include_once "application/libraries/UUID.php";
+include_once "application/entities/CProjecttype.php";
 
 class CProjecttypeModel extends CI_Model
 {

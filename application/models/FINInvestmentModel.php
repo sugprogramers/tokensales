@@ -1,6 +1,6 @@
 <?php
-include "application/libraries/UUID.php";
-include "application/entities/FINInvestment.php";
+include_once "application/libraries/UUID.php";
+include_once "application/entities/FINInvestment.php";
 
 class FINInvestmentModel extends CI_Model
 {

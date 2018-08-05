@@ -1,6 +1,6 @@
 <?php
-include "application/libraries/UUID.php";
-include "application/entities/CRegion.php";
+include_once "application/libraries/UUID.php";
+include_once "application/entities/CRegion.php";
 
 class CRegionModel extends CI_Model
 {

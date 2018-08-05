@@ -33,6 +33,7 @@
         <link rel="stylesheet" href="<?php echo base_url() . "themes/default/remark"; ?>/global/vendor/intro-js/introjs.min599c.css?v4.0.2">
         <link rel="stylesheet" href="<?php echo base_url() . "themes/default/remark"; ?>/global/vendor/slidepanel/slidePanel.min599c.css?v4.0.2">
         <link rel="stylesheet" href="<?php echo base_url() . "themes/default/remark"; ?>/global/vendor/flag-icon-css/flag-icon.min599c.css?v4.0.2">
+        <link rel="stylesheet" href="<?php echo base_url() . "themes/default/remark"; ?>/global/vendor/bootstrap-datepicker/bootstrap-datepicker.min599c.css?v4.0.2">
 
         <!-- Fonts -->
         <link rel="stylesheet" href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/assets/examples/css/uikit/icon.min599c.css?v4.0.2">

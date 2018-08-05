@@ -1,6 +1,6 @@
 <?php
-include "application/libraries/UUID.php";
-include "application/entities/CEmailqueue.php";
+include_once "application/libraries/UUID.php";
+include_once "application/entities/CEmailqueue.php";
 class CEmailqueueModel extends CI_Model {   
     
     public function __construct() {

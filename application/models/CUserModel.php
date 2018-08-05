@@ -1,7 +1,7 @@
 <?php
 
-include "application/libraries/UUID.php";
-include "application/entities/CUser.php";
+include_once "application/libraries/UUID.php";
+include_once "application/entities/CUser.php";
 
 class CUserModel extends CI_Model
 {

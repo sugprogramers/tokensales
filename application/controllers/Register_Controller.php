@@ -11,9 +11,6 @@ class Register_Controller extends CI_Controller {
         $this->load->model("CCountryModel");
         $this->load->model("CRegionModel");
         
-        if(isset($this->session->id) && $this->session->usertype === "ADM"){
-            redirect(base_url() . 'admin_dashboard');
-        }
     }
 
     public function index() {
@@ -102,11 +99,17 @@ class Register_Controller extends CI_Controller {
     }    
     
     public function get_country_list() {
+        $countryId = "100";// ee.uu.
+        if($this->input->post("countryId") !== NULL){
+            $countryId = $this->input->post("countryId");
+        }
+        
+
         $country_list = $this->CCountryModel->getAll();
         
         $html = '<option value="">Choose a Country</option>';        
         foreach ($country_list as $country) {     
-            if ($country->c_country_id == "100") { // ee.uu.
+            if ($country->c_country_id == $countryId) {
                 $html .= '<option value="'.$country->c_country_id.'" selected>'.$country->name.'</option>';            
             } else {
                 $html .= '<option value="'.$country->c_country_id.'">'.$country->name.'</option>';            
@@ -117,13 +120,20 @@ class Register_Controller extends CI_Controller {
     }
     
     public function get_region_list() {
-        log_message('error', 'mi primer log');
         $countryId = $this->input->post("countryId");
+        $regionId = "";
+        if($this->input->post("regionId") !== NULL){
+            $regionId = $this->input->post("regionId");
+        }
         $region_list = $this->CRegionModel->getRegionsByCountry($countryId);
         
         $html = '<option value="">Choose a Region</option>';
-        foreach ($region_list as $region) {     
-            $html .= '<option value="'.$region->c_region_id.'">'.$region->description.'</option>';            
+        foreach ($region_list as $region) { 
+            if ($region->c_region_id == $regionId) {
+                $html .= '<option value="'.$region->c_region_id.'" selected>'.$region->description.'</option>';            
+            } else {
+                $html .= '<option value="'.$region->c_region_id.'">'.$region->description.'</option>';            
+            }
         }
         $response = array('html' => $html); 
         echo json_encode($response);

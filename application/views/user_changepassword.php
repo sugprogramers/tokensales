@@ -1,6 +1,6 @@
 <style>
     #passwordChangeForm{
-        background-color:#f0f0f0;
+        background-color:#ffffff;
         border:1px solid #ccc;
         padding:20px 25px 5px 25px;
         margin:0 auto
@@ -67,9 +67,10 @@
                         </div>
 
                         <div id="wrongPass" class="password-wrong">The password must contain at least 8 characters and consist of at least one uppercase letter, one lowercase letter, one number and one symbol.<br><br> <strong>Symbols allowed: @ , # , $ , ! , ¡ , ¿ , ? , * , ( , ) , % , ^ , &amp; , + , = </strong></div>
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-block btn-primary">Save changes</button>
+                        <div class="form-group text-right">
+                            <button type="submit" class="btn btn-primary">Save changes</button>
                         </div>
+                                 
                     </div>
 
                 </form>
@@ -123,6 +124,8 @@
                     } 
                     else if (resp.status === "success") {                       
                         showSuccess('Your information has been updated.');
+                        $('#password').val("");
+                        $('#passwordRepeat').val("");
                     }                     
                     
                 }

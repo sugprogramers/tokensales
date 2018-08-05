@@ -1,6 +1,6 @@
 <?php
-include "application/libraries/UUID.php";
-include "application/entities/FINPaymentHistory.php";
+include_once "application/libraries/UUID.php";
+include_once "application/entities/FINPaymentHistory.php";
 
 class FINPaymentHistoryModel extends CI_Model
 {  
