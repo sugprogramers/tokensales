@@ -335,7 +335,7 @@
                             <div class="dropdown-menu" role="menu">
                                 <a class="dropdown-item" href="javascript:void(0)" role="menuitem">
                                     <!-- <i class="icon wb-user" aria-hidden="true"></i> -->
-                                    <?php if ($this->session->userdata("login_admin")) {
+                                    <?php if ($this->session->userdata("usertype") === "ADM") {
                                         echo $this->session->userdata("email");
                                     } else{
                                        
@@ -563,7 +563,7 @@
                     <div>
                         <ul class="site-menu" data-plugin="menu">
    
- <?php if ($this->session->userdata("login_admin")) { ?>                            
+ <?php if ($this->session->userdata("usertype") === "ADM") { ?>                            
                             <li class="site-menu-category">General</li>
                             
                              <li class="dropdown site-menu-item has-sub" id="idDashboardAdmin">
