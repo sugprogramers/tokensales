@@ -13,83 +13,62 @@ class CUserModel extends CI_Model
 
     public function get($id) {
         $query = $this->db->get_where("c_user", array('c_user_id' => $id));
-        $result = $query->result();
-        if (!$result) {
-            return null;            
+        $queryresult = $query->result();
+        if (!$queryresult) {
+            return null;
         }
         
-        $cUser = new CUser();       
-        $cUser->c_user_id = $result[0]->c_user_id;
-        $cUser->isactive = $result[0]->isactive;
-        $cUser->created = $result[0]->created;
-        $cUser->createdby = $result[0]->createdby;
-        $cUser->updated = $result[0]->updated;
-        $cUser->updatedby = $result[0]->updatedby;
-        $cUser->password = $result[0]->password;
-        $cUser->phone = $result[0]->phone;
-        $cUser->firstname = $result[0]->firstname;
-        $cUser->lastname = $result[0]->lastname;
-        $cUser->birthday = $result[0]->birthday;
-        $cUser->address1 = $result[0]->address1;
-        $cUser->address2 = $result[0]->address2;
-        $cUser->c_country_id = $result[0]->c_country_id;
-        $cUser->c_region_id = $result[0]->c_region_id;
-        $cUser->city = $result[0]->city;
-        $cUser->postal = $result[0]->postal;
-        $cUser->usertype = $result[0]->usertype;
-        $cUser->email = $result[0]->email;
-        $cUser->registertoken = $result[0]->registertoken;
-        $cUser->tokenexpirationdate = $result[0]->tokenexpirationdate;
-        $cUser->status = $result[0]->status;
-
-        return $cUser;
+        $result = $queryresult[0];  
+        return CUser::build($result);
    }
    
     public function loadByEmail($email) {
         $query = $this->db->get_where("c_user", array('email' => $email));
-        $result = $query->result();
-        if (!$result) {
-            return null;            
+        $queryresult = $query->result();
+        if (!$queryresult) {
+            return null;
         }
         
-        $cUser = new CUser();       
-        $cUser->c_user_id = $result[0]->c_user_id;
-        $cUser->isactive = $result[0]->isactive;
-        $cUser->created = $result[0]->created;
-        $cUser->createdby = $result[0]->createdby;
-        $cUser->updated = $result[0]->updated;
-        $cUser->updatedby = $result[0]->updatedby;
-        $cUser->password = $result[0]->password;
-        $cUser->phone = $result[0]->phone;
-        $cUser->firstname = $result[0]->firstname;
-        $cUser->lastname = $result[0]->lastname;
-        $cUser->birthday = $result[0]->birthday;
-        $cUser->address1 = $result[0]->address1;
-        $cUser->address2 = $result[0]->address2;
-        $cUser->c_country_id = $result[0]->c_country_id;
-        $cUser->c_region_id = $result[0]->c_region_id;
-        $cUser->city = $result[0]->city;
-        $cUser->postal = $result[0]->postal;
-        $cUser->usertype = $result[0]->usertype;
-        $cUser->email = $result[0]->email;
-        $cUser->registertoken = $result[0]->registertoken;
-        $cUser->tokenexpirationdate = $result[0]->tokenexpirationdate;
-        $cUser->status = $result[0]->status;
+        $cUser = new CUser();
+        $result = $queryresult[0];
+        $cUser->c_user_id = $result->c_user_id;
+        $cUser->isactive = $result->isactive;
+        $cUser->created = $result->created;
+        $cUser->createdby = $result->createdby;
+        $cUser->updated = $result->updated;
+        $cUser->updatedby = $result->updatedby;
+        $cUser->password = $result->password;
+        $cUser->phone = $result->phone;
+        $cUser->firstname = $result->firstname;
+        $cUser->lastname = $result->lastname;
+        $cUser->birthday = $result->birthday;
+        $cUser->address1 = $result->address1;
+        $cUser->address2 = $result->address2;
+        $cUser->c_country_id = $result->c_country_id;
+        $cUser->c_region_id = $result->c_region_id;
+        $cUser->city = $result->city;
+        $cUser->postal = $result->postal;
+        $cUser->usertype = $result->usertype;
+        $cUser->email = $result->email;
+        $cUser->registertoken = $result->registertoken;
+        $cUser->tokenexpirationdate = $result->tokenexpirationdate;
+        $cUser->status = $result->status;
 
         return $cUser;
    }   
      
-    public function save($cUser){    
+    public function save($cUser, $updatedBy){    
         $now = (new DateTime())->format('Y-m-d H:i:s');
         if (!$cUser->c_user_id) {     
             // NEW
+            $cUser->c_user_id = UUID::getRawUUID();
             $data = array(
-                'c_user_id' => UUID::getRawUUID(),
-                'isactive' => 'Y',
+                'c_user_id' => $cUser->c_user_id,
+                'isactive' => $cUser->isactive,
                 'created' => $now,
-                'createdby' => '100',
+                'createdby' => $updatedBy,
                 'updated' => $now,
-                'updatedby' => '100',
+                'updatedby' => $updatedBy,
                 'password' => $cUser->password,
                 'phone' => $cUser->phone,
                 'firstname' => $cUser->firstname,
@@ -111,7 +90,7 @@ class CUserModel extends CI_Model
             $data = array(
                 'isactive' => $cUser->isactive,
                 'updated' => $now,
-                'updatedby' => $cUser->updatedby,
+                'updatedby' => $updatedBy,
                 'password' => $cUser->password,
                 'phone' => $cUser->phone,
                 'firstname' => $cUser->firstname,
@@ -142,8 +121,7 @@ class CUserModel extends CI_Model
        $result = $query->result();
        $data = array();
        foreach($result as $value) {
-           $obj = new CUserModel();
-           $data[] = $obj->get($value->c_user_id);
+           $data[] = CUser::build($value);
        }
        return $data;
     }
