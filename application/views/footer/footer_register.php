@@ -22,6 +22,8 @@
 <!-- Plugins For This Page -->
 <script src="<?php echo base_url() . "themes/default/remark"; ?>/global/vendor/jquery-placeholder/jquery.placeholder599c.js?v4.0.2"></script>
 <script src="<?php echo base_url() . "themes/default/remark"; ?>/global/vendor/bootstrap-datepicker/bootstrap-datepicker.min599c.js?v4.0.2"></script>
+<script src="<?php echo base_url() . "themes/default/remark"; ?>/global/vendor/formatter/jquery.formatter.min599c.js?v4.0.2"></script>
+
 
 <!-- Scripts -->
 <script src="<?php echo base_url() . "themes/default/remark"; ?>/global/js/Component.min599c.js?v4.0.2"></script>
@@ -48,6 +50,8 @@
 <script src="<?php echo base_url() . "themes/default/remark"; ?>/global/js/Plugin/switchery.min599c.js?v4.0.2"></script>
 <script src="<?php echo base_url() . "themes/default/remark"; ?>/global/js/Plugin/jquery-placeholder.min599c.js?v4.0.2"></script>
 <script src="<?php echo base_url() . "themes/default/remark"; ?>/global/js/Plugin/bootstrap-datepicker.min599c.js?v4.0.2"></script>
+<script src="<?php echo base_url() . "themes/default/remark"; ?>/global/js/Plugin/formatter.min599c.js?v4.0.2"></script>
+
 
 <script>
     (function (document, window, $) {
