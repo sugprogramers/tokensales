@@ -146,30 +146,48 @@ window.onload = function () {
                 }
             });
         });
-        
-    
 
 };
 
 
    
     function delete_document(id){
-        $.ajax({
-                url: "<?php echo base_url('Admin_List_DocumentType_Controller/delete_document')?>",
-                type: "POST",
-                data: {'id': id},
-                success: function (data) {
-                    
-                    var resp = $.parseJSON(data);//convertir data de json
-                    if (resp.status === "error") {                       
-                         showError('Error Get Data - Please Try Again');
-                    } 
-                    if (resp.status === "success") {  
-                         table.ajax.reload();
-                        $('#examplePositionCenter').modal('hide');
-                    }                     
-              }
-        });
+       
+    
+       bootbox.confirm({
+                title: "Confirm Delete", message: "Are you sure you want to delete this document?",
+                buttons: {
+                    cancel: {label: '<i class="fa fa-times"></i> Cancel', className: 'btn-danger'},
+                    confirm: {label: '<i class="fa fa-check"></i> Confirm', className: 'btn-primary'}
+                },
+                callback: function (result) {
+                    if (result) {
+                          
+                          $.ajax({
+                                url: "<?php echo base_url('Admin_List_DocumentType_Controller/delete_document')?>",
+                                type: "POST",
+                                data: {'id': id},
+                                success: function (data) {
+
+                                    var resp = $.parseJSON(data);//convertir data de json
+                                    if (resp.status === "error") {                       
+                                         showError('Error Get Data - Please Try Again');
+                                    } 
+                                    if (resp.status === "success") {  
+                                         table.ajax.reload();
+                                        $('#examplePositionCenter').modal('hide');
+                                    }                     
+                              }
+                        });
+                          
+                    }
+                }
+            });
+    
+    
+    
+    
+        
        
     }
     
