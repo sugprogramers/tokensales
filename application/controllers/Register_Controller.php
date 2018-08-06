@@ -89,12 +89,13 @@ class Register_Controller extends CI_Controller {
             $newuser->address2 = $address2;
             $newuser->usertype = $type;
             
-            $this->CUserModel->save($newuser, $this->session->id);
+            $this->CUserModel->save($newuser, "100");
  
             $response = array('redirect' => '', 'status' => 'success'); //'redirect' => base_url() . 'login'
             echo json_encode($response);
             
        } catch (Exception $e) {
+            //log_message('error', $e->getMessage());
             $response = array('redirect' => '', 'status' => 'error', 'msg' => $e->getMessage());
             echo json_encode($response);
        }

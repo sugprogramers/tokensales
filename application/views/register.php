@@ -11,7 +11,7 @@
             <div class="col-sm-6  align-center">
               <form id="register_form" class="form-horizontal">
                 <div class="row">
-                  <div class="form-group col-md-6" style="margin-top: 30px;">
+                  <div class="form-group col-md-6" style="margin-top: 30px;">                      
                     <input type="text" required class="form-control" id="inputFirstname" name="firstname" placeholder="First Name" style="font-size: 14px; border-radius:0;">
                   </div>
                   <div class="form-group col-md-6" style="margin-top: 30px;">
