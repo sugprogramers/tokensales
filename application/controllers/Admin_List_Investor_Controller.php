@@ -37,8 +37,8 @@ class Admin_List_Investor_Controller extends CI_Controller {
                 $r->password,
                 $r->firstname,
                 $r->lastname,
-                '<a class="btn btn-sm btn-primary" href="javascript:void(0)" title="Edit" onclick="edit_person(' . "'" . $r->c_user_id . "'" . ')"><i class="icon fa-edit"></i> Edit</a>
-				  <a class="btn btn-sm btn-danger" href="javascript:void(0)" title="Hapus" onclick="delete_person(' . "'" . $r->c_user_id . "'" . ')"><i class="icon fa-trash"></i> Delete</a>'
+                '<a class="btn btn-sm btn-icon btn-pure btn-default on-default edit-row" href="javascript:void(0)" title="Edit" onclick="edit_document('."'".$r->c_user_id."'".')"><i class="icon wb-edit"></i></a>
+		 <a class="btn btn-sm btn-icon btn-pure btn-default on-default edit-row" href="javascript:void(0)" title="Remove" onclick="delete_document('."'".$r->c_user_id."'".')"><i class="icon wb-trash"></i></a>'
             );
         }
 
