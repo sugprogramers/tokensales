@@ -41,7 +41,9 @@ class FINPaymentHistoryModel extends CI_Model
                 'toaccount' => $finPaymentHistory->toaccount,
                 'description' => $finPaymentHistory->description,
                 'fin_investment_id' => $finPaymentHistory->fin_investment_id,
-                'fin_returninvestment_id' => $finPaymentHistory->fin_returninvestment_id
+                'fin_returninvestment_id' => $finPaymentHistory->fin_returninvestment_id,
+                'from_user_id' => $finPaymentHistory->from_user_id,
+                'to_user_id' => $finPaymentHistory->to_user_id
             );
             return $this->db->insert('fin_payment_history', $data);
         }
@@ -59,7 +61,9 @@ class FINPaymentHistoryModel extends CI_Model
                 'toaccount' => $finPaymentHistory->toaccount,
                 'description' => $finPaymentHistory->description,
                 'fin_investment_id' => $finPaymentHistory->fin_investment_id,
-                'fin_returninvestment_id' => $finPaymentHistory->fin_returninvestment_id
+                'fin_returninvestment_id' => $finPaymentHistory->fin_returninvestment_id,
+                'from_user_id' => $finPaymentHistory->from_user_id,
+                'to_user_id' => $finPaymentHistory->to_user_id
             );
 
             $this->db->where('fin_payment_history_id', $finPaymentHistory->fin_payment_history_id);

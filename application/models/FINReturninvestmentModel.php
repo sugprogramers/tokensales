@@ -34,8 +34,7 @@ class FINReturninvestmentModel extends CI_Model
                 'updatedby' => $updatedBy,
                 'status' => $finReturninvestment->status,
                 'scheduleddate' => $finReturninvestment->scheduleddate,
-                'c_investor_id' => $finReturninvestment->c_investor_id,
-                'c_project_id' => $finReturninvestment->c_project_id,
+                'fin_investment_id' => $finReturninvestment->fin_investment_id,
                 'amount' => $finReturninvestment->amount,
                 'paymentdate' => $finReturninvestment->paymentdate
             );
@@ -48,8 +47,7 @@ class FINReturninvestmentModel extends CI_Model
                 'updatedby' => $updatedBy,
                 'status' => $finReturninvestment->status,
                 'scheduleddate' => $finReturninvestment->scheduleddate,
-                'c_investor_id' => $finReturninvestment->c_investor_id,
-                'c_project_id' => $finReturninvestment->c_project_id,
+                'fin_investment_id' => $finReturninvestment->fin_investment_id,
                 'amount' => $finReturninvestment->amount,
                 'paymentdate' => $finReturninvestment->paymentdate
             );

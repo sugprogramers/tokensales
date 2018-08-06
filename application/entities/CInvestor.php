@@ -30,7 +30,12 @@ class CInvestor{
     public $validationnotes;
     
     // PAYPAL PAYIN INFORMATION
-    public $payin_paypalusername;  
+    public $payin_paypalusername;
+    
+    //BALANCE
+    public $payinbalance;
+    public $payoutbalance;
+    public $pendingbalance;
     
     public static function build($result){
         $cInvestor = new CInvestor();   
@@ -57,6 +62,9 @@ class CInvestor{
         $cInvestor->validateddate = $result->validateddate;
         $cInvestor->validationnotes = $result->validationnotes;
         $cInvestor->payin_paypalusername = $result->payin_paypalusername;
+        $cInvestor->payinbalance = $result->payinbalance;
+        $cInvestor->payoutbalance = $result->payoutbalance;
+        $cInvestor->pendingbalance = $result->pendingbalance;
         
         return $cInvestor;
     } 

@@ -11,8 +11,7 @@ class FINReturninvestment
     public  $updatedby;
     public  $status;
     public  $scheduleddate;
-    public  $c_investor_id;
-    public  $c_project_id; 
+    public  $fin_investment_id;
     public  $amount;
     public  $paymentdate;
     
@@ -28,8 +27,7 @@ class FINReturninvestment
        
        $finReturninvestment->status = $result->status;
        $finReturninvestment->scheduleddate = $result->scheduleddate;
-       $finReturninvestment->c_investor_id = $result->c_investor_id; 
-       $finReturninvestment->c_project_id = $result->c_project_id; 
+       $finReturninvestment->fin_investment_id = $result->fin_investment_id; 
        $finReturninvestment->amount = $result->amount; 
        $finReturninvestment->paymentdate = $result->paymentdate; 
        return $finReturninvestment;

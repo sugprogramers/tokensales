@@ -9,12 +9,10 @@ class CProject{
     public $updated;
     public $updatedby;
     public $name;    
-    public $c_user_id;
+    public $c_projectmanager_id;
     public $c_company_id;    
     public $c_currency_id;    
-    public $datecontract;
-    public $startdate;
-    public $datefinish;
+  
     public $c_projecttype_id;
     public $projectstatus;
     public $propertytype;
@@ -27,11 +25,11 @@ class CProject{
     // DEVELOPMENT LOAN AMTS
     public $totalyieldperc;
     public $loanterm;
-    public $targetamt;
     
-    // PAYPAL PAYIN INFORMATION
-    public $payin_paypalusername;
+    public $datelimit;
+    public $targetamt;
 
+    public $startdate;
     // PROJECT PRESENTATION
     public $homeimage_id;
     public $description;  
@@ -46,12 +44,9 @@ class CProject{
         $cProject->updated = $result->updated;
         $cProject->updatedby = $result->updatedby;
         $cProject->name = $result->name;
-        $cProject->c_user_id = $result->c_user_id;
+        $cProject->c_projectmanager_id = $result->c_projectmanager_id;
         $cProject->c_company_id = $result->c_company_id; 
         $cProject->c_currency_id = $result->c_currency_id; 
-        $cProject->datecontract = $result->datecontract; 
-        $cProject->startdate = $result->startdate; 
-        $cProject->datefinish = $result->datefinish; 
         $cProject->c_projecttype_id = $result->c_projecttype_id; 
         $cProject->projectstatus = $result->projectstatus; 
         $cProject->propertytype = $result->propertytype; 
@@ -62,8 +57,9 @@ class CProject{
         $cProject->city = $result->city; 
         $cProject->totalyieldperc = $result->totalyieldperc; 
         $cProject->loanterm = $result->loanterm; 
+        $cProject->datelimit = $result->datelimit; 
         $cProject->targetamt = $result->targetamt; 
-        $cProject->payin_paypalusername = $result->payin_paypalusername; 
+        $cProject->startdate = $result->startdate; 
         $cProject->homeimage_id = $result->homeimage_id; 
         $cProject->description = $result->description; 
         

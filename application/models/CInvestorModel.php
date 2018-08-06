@@ -46,7 +46,10 @@ class CInvestorModel extends CI_Model {
                 'status' => $cInvestor->status,
                 'validateddate' => $cInvestor->validateddate,
                 'validationnotes' => $cInvestor->validationnotes,
-                'payin_paypalusername' => $cInvestor->payin_paypalusername            
+                'payin_paypalusername' => $cInvestor->payin_paypalusername,      
+                'payinbalance' => $cInvestor->payinbalance,      
+                'payoutbalance' => $cInvestor->payoutbalance,
+                'pendingbalance' => $cInvestor->pendingbalance      
             );
             return $this->db->insert('c_investor', $data);
         }
@@ -70,7 +73,10 @@ class CInvestorModel extends CI_Model {
                 'status' => $cInvestor->status,
                 'validateddate' => $cInvestor->validateddate,
                 'validationnotes' => $cInvestor->validationnotes,
-                'payin_paypalusername' => $cInvestor->payin_paypalusername            
+                'payin_paypalusername' => $cInvestor->payin_paypalusername,
+                'payinbalance' => $cInvestor->payinbalance,      
+                'payoutbalance' => $cInvestor->payoutbalance,
+                'pendingbalance' => $cInvestor->pendingbalance 
             );
 
             $this->db->where('c_investor_id', $cInvestor->c_investor_id);
