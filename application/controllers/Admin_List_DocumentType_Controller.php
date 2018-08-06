@@ -69,6 +69,9 @@ class Admin_List_DocumentType_Controller extends CI_Controller {
    public function get_itemById() {
        
        $cProjectDocId = $this->input->post("id");
+       
+       
+     
        try{ 
        $cProjectDoc = $this->CProjectdocumenttypeModel->get($cProjectDocId);  
        
@@ -79,6 +82,7 @@ class Admin_List_DocumentType_Controller extends CI_Controller {
                          "isMandatory" => $cProjectDoc->ismandatory,
                          "cprojectdocumenttypeid" => $cProjectDoc->c_projectdocumenttype_id);
          
+           log_message('error', $cProjectDocId . " -- "  . $cProjectDoc->name  . " -- ". $cProjectDoc->ismandatory);
               
          $response = array('redirect' => '', 'status' => 'success', 'data' => $data);
          echo json_encode($response);

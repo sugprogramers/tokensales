@@ -187,9 +187,9 @@ window.onload = function () {
                        $('#dlgDescription').val(resp.data[0]['description']);
                        $('#dlgId').val(resp.data[0]['cprojectdocumenttypeid']);
                        
-                       $('#dlgIsMandatory').attr('checked', false);
-                       if(resp.data[0]['isMandatory']==="Y")
-                         $('#dlgIsMandatory').attr('checked', true);
+                       $('#dlgIsMandatory')[0].checked = false;
+                       if(resp.data[0]['isMandatory']=="Y")
+                        $('#dlgIsMandatory')[0].checked = true;
                        
                        $('#examplePositionCenter').modal('show');
                     }                     
