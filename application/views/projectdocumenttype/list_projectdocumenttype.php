@@ -103,7 +103,7 @@ window.onload = function () {
             "processing": true,  //mostrar waiting
             "serverSide": false, //consultar servidor ordenar , filtrar
             "ajax": {
-                url : "<?php echo base_url('AdminProjectDocumentTypeController/get_items')?>",
+                url : "<?php echo base_url('Admin_List_DocumentType_Controller/get_items')?>",
                 type : 'GET'
             },
      });
@@ -118,7 +118,7 @@ window.onload = function () {
      $("#register_form").submit(function (event) {
             event.preventDefault();
             $.ajax({
-                url: "<?php echo base_url('AdminProjectDocumentTypeController/register_document')?>",
+                url: "<?php echo base_url('Admin_List_DocumentType_Controller/register_document')?>",
                 type: "POST",
                 data: $('#register_form').serialize(),
                 success: function (data) {
@@ -143,7 +143,7 @@ window.onload = function () {
    
     function delete_document(id){
        $.ajax({
-                url: "<?php echo base_url('AdminProjectDocumentTypeController/delete_document')?>",
+                url: "<?php echo base_url('Admin_List_DocumentType_Controller/delete_document')?>",
                 type: "POST",
                 data: {'id': id},
                 success: function (data) {
@@ -165,7 +165,7 @@ window.onload = function () {
     
       
        $.ajax({
-                url: "<?php echo base_url('AdminProjectDocumentTypeController/get_itemById')?>",
+                url: "<?php echo base_url('Admin_List_DocumentType_Controller/get_itemById')?>",
                 type: "POST",
                 data: {'id': id},
                                     

@@ -63,7 +63,7 @@ $route['admin_list_company'] = "Admin_List_Company_Controller";
 $route['register'] = "Register_Controller";
 
 //ProjectDocumentType
-$route['listalldocument'] = "AdminProjectDocumentTypeController/listDataGrid";
+$route['listalldocument'] = "Admin_List_DocumentType_Controller/listDataGrid";
 
 //General c_user management
 $route['user_accountdata'] = "User_Accountdata_Controller";
