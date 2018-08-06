@@ -135,7 +135,7 @@
                                 <div class="form-group ">
                                     <label class="control-label" for="userLastName">Phone *</label>
                                     <!--<input type="tel" required class="form-control" id="inputPhone" name="phone" placeholder="Phone" style="font-size: 14px; border-radius:0;">-->
-                                    <input type="tel" required class="form-control" id="inputPhone" data-plugin="formatter" data-pattern="+[[999]] [[999]]-[[999]]-[[9999]]">
+                                    <input type="tel" required class="form-control" id="inputPhone" name="phone" data-plugin="formatter" data-pattern="+[[999]] [[999]]-[[999]]-[[9999]]" style="font-size: 14px; border-radius:0;">
                                 </div>
 
                             </div>
