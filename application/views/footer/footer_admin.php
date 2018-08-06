@@ -63,7 +63,7 @@
   <script src="<?php echo base_url()."themes/default/remark"; ?>/global/vendor/datatables.net-responsive/dataTables.responsive.min599c.js?v4.0.2"></script>
   <script src="<?php echo base_url()."themes/default/remark"; ?>/global/vendor/bootbox/bootbox.min599c.js?v4.0.2"></script>
   
-  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
 
   <script>
     (function(document, window, $) {
@@ -148,6 +148,9 @@
      function logOut() {
                window.location.replace("<?php echo base_url(); ?>Login_Controller/logout_user");
          }
+         
+        
+         
 </script>
 
   <!-- Modal -->

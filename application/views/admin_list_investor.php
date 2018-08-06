@@ -13,7 +13,7 @@
     <div class="page-content container-fluid">
         <div class="panel">
             <div class="panel-body">
-                
+
                 <table id="idTableListInvestor" class="table table-hover dataTable table-striped" role="grid" style="width:100%" >
                     <thead>
                         <tr>
@@ -28,7 +28,7 @@
                     <tbody>
                     </tbody>
                 </table>
-               
+
             </div> 
         </div> 
     </div> 
@@ -39,7 +39,7 @@
         $('#idListInvestorAdmin').addClass('active');
         var table = $('#idTableListInvestor').DataTable({
             responsive: true,
-            "order": [[ 0, "desc" ]],
+            "order": [[0, "desc"]],
             "columnDefs": [{
                     "targets": [5],
                     "orderable": false
@@ -51,9 +51,27 @@
                 type: 'GET'
             },
         });
-         new $.fn.dataTable.FixedHeader( table );
+        new $.fn.dataTable.FixedHeader(table);
+
 
     };
+    
+    function delete_document(id) {
+            bootbox.confirm({
+                title: "Confirm Delete", message: "Delete Item "+id+"?",
+                buttons: {
+                    cancel: {label: '<i class="fa fa-times"></i> Cancel', className: 'btn-danger'},
+                    confirm: {label: '<i class="fa fa-check"></i> Confirm', className: 'btn-success'}
+                },
+                callback: function (result) {
+                    if (result) {
+                          showSuccess('fsffs');
+                    }
+                }
+            });
+        }
+
+
 </script>
 
 
