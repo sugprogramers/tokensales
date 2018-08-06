@@ -40,10 +40,12 @@ class Admin_List_DocumentType_Controller extends CI_Controller {
       $data = [];
       
       foreach ($query as $obj) {
+          
+         
            $data[] = array(
                 $obj->name,
                 $obj->description,               
-                $obj->ismandatory,
+                (strcmp($obj->ismandatory,"Y")==0)?"Yes":"No",
           
                 '<a class="btn btn-sm btn-icon btn-pure btn-default on-default edit-row" href="javascript:void(0)" title="Edit" onclick="edit_document('."'".$obj->c_projectdocumenttype_id."'".')"><i class="icon wb-edit"></i></a>
 		 <a class="btn btn-sm btn-icon btn-pure btn-default on-default edit-row" href="javascript:void(0)" title="Remove" onclick="delete_document('."'".$obj->c_projectdocumenttype_id."'".')"><i class="icon wb-trash"></i></a>'
@@ -86,18 +88,15 @@ class Admin_List_DocumentType_Controller extends CI_Controller {
             $response = array('redirect' => '', 'status' => 'error', 'msg' => $e->getMessage());
             echo json_encode($response);
        }
-             
     }
    
    
-   
-   
    public function register_document() {
- 
+       
        $cProjectDocId = $this->input->post("objid");
        $name = $this->input->post("name");
        $description = $this->input->post("description");
-       $isMandatory = $this->input->post("isMandatory");
+       $isMandatory = ($this->input->post("isMandatory"))?"Y":"N";
        
        try {
             if(strcmp($cProjectDocId,"")==0)
@@ -108,9 +107,10 @@ class Admin_List_DocumentType_Controller extends CI_Controller {
             if(!$objDoc)
                 throw new Exception ("Document not Found");
 
+            
             $objDoc->name = $name;
             $objDoc->description = $description;
-            $objDoc->ismandatory = "Y";
+            $objDoc->ismandatory = $isMandatory;
             $objDoc->isactive = "Y";
             $this->CProjectdocumenttypeModel->save($objDoc, $this->session->id);
             $response = array('redirect' => '', 'status' => 'success');
