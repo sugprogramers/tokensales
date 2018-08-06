@@ -9,9 +9,6 @@ class AdminProjectDocumentTypeController extends CI_Controller {
         $this->load->helper('url');
         $this->load->model("CProjectdocumenttypeModel");
         
-        if (!isset($this->session->id)){
-            redirect(base_url() . 'login');
-        }
         
         if($this->session->usertype !== "ADM"){
             redirect(base_url() . 'login');

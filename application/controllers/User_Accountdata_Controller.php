@@ -10,9 +10,6 @@ class User_Accountdata_Controller extends CI_Controller {
         $this->load->helper('url');
         $this->load->model("CUserModel");
         
-        if (!isset($this->session->id)){
-            redirect(base_url() . 'login');
-        }
         
         if($this->session->usertype !== "ADM"){
             redirect(base_url() . 'login');

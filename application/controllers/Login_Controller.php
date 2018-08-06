@@ -7,15 +7,13 @@ class Login_Controller extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->helper('url');
-        $this->load->model("Login_Model");
-        
-        
-        if(isset($this->session->id) && $this->session->usertype === "ADM"){
-            redirect(base_url() . 'admin_dashboard');
-        }
+        $this->load->model("Login_Model");   
     }
 
     public function index() {
+         if( $this->session->usertype === "ADM"){
+            redirect(base_url() . 'admin_dashboard');
+        }
         $this->load->view('header/header_login');
         $this->load->view('login');
         $this->load->view('footer/footer_login');

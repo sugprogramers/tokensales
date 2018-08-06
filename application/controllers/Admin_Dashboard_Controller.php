@@ -9,9 +9,6 @@ class Admin_Dashboard_Controller extends CI_Controller {
         $this->load->helper('url');
         //$this->load->model("admin/Administrator_Model");
         
-        if (!isset($this->session->id)){
-            redirect(base_url() . 'login');
-        }
         
         if($this->session->usertype !== "ADM"){
             redirect(base_url() . 'login');
