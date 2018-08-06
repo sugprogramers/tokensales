@@ -1,5 +1,4 @@
-    
-          <!-- Panel Custom filter UI -->
+      <!-- Panel Custom filter UI -->
    <div class="page">
         <div class="page-header">
           <h1 class="page-title">Project Document</h1>
@@ -62,7 +61,7 @@
                                     
                                     <input id="dlgId" type="hidden" name="objid">
                                     <div class="col-xl-8 form-group">
-                                       <input id="dlgName" type="text" class="form-control" name="name" placeholder="Document Name">
+                                       <input id="dlgName" required type="text" class="form-control" name="name" placeholder="Document Name">
                                     </div>
                                     <div class="checkbox-custom checkbox-default">
                                       <input type="checkbox" id="dlgIsMandatory" name="isMandatory"  checked autocomplete="on"/>
@@ -75,7 +74,7 @@
                                </div>
                                <div class="modal-footer">
                                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                 <button type="submit"  class="btn btn-primary">Save changes</button>
+                                 <button type="submit"  class="btn btn-primary">    Save changes</button>
                                </div>  
                            </form>
                       </div>
@@ -100,6 +99,8 @@ window.onload = function () {
     
     $("#addToTable").click(function() {
          $("#register_form")[0].reset();
+         $('#dlgId').val('');
+         console.log('value: '  + $('#dlgId').val());
     });
     
     $('#exampleAddRow').addClass('active');
@@ -131,6 +132,7 @@ window.onload = function () {
                 url: "<?php echo base_url('Admin_List_DocumentType_Controller/register_document')?>",
                 type: "POST",
                 data: $('#register_form').serialize(),
+                async: true, 
                 success: function (data) {
                     console.log(data);
                     var resp = $.parseJSON(data);//convertir data de json
@@ -144,13 +146,15 @@ window.onload = function () {
                 }
             });
         });
+        
+    
 
 };
 
 
    
     function delete_document(id){
-       $.ajax({
+        $.ajax({
                 url: "<?php echo base_url('Admin_List_DocumentType_Controller/delete_document')?>",
                 type: "POST",
                 data: {'id': id},
@@ -165,7 +169,8 @@ window.onload = function () {
                         $('#examplePositionCenter').modal('hide');
                     }                     
               }
-       });
+        });
+       
     }
     
     
@@ -196,9 +201,10 @@ window.onload = function () {
               }
        }); 
     }
+    
+    
+  
   
   
              
 </script>
-
-
