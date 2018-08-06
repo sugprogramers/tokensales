@@ -1,5 +1,5 @@
 <style>
-    
+
     .formregistro .registro-intro-ventajas {
         color:#91ccc9;
         font-size:32px;
@@ -61,28 +61,29 @@
         font-weight:500
     }    
 
-</style>
+</style> 
 <div class="page">
     <div class="page-content" style="background:rgba(255, 255, 255, 1); color:#463d3e; padding-top: 0px; margin-top: 0px"> 
 
         <h2>Register as a user</h2>
-
 
         <div class="modal-body">
             <form id="register_form" class="with-labels formregistro" action="/en/subscription" method="post" role="form">
                 <div class="row">
                     <div class="col-md-6">
 
-                        <div class="form-group form-inline radios user-type ">
-                            <label>Register as:</label>
-                            <input type="radio" id="inputInvestor" name="usertype" value="investor" checked="">
+                        <div class="form-group">
+                            <label>Register as: &nbsp</label>
+                            <div class="radio-custom radio-default radio-inline">
+                                <input type="radio" id="inputInvestor" name="usertype" value="investor" checked="">
+                                <label for="role0">Individual</label>
+                            </div>
+                            <div class="radio-custom radio-default radio-inline">
+                                <input type="radio" id="inputCompany" name="usertype" value="company">
+                                <label for="role1">Company</label>
+                            </div>
+                        </div>                        
 
-                            <label for="role0">Individual</label>
-                            <input type="radio" id="inputCompany" name="usertype" value="company">
-
-                            <label for="role1">Company</label>
-                        </div>
-                        
                         <div class="row">
                             <div class="col-sm-6">
 
@@ -127,14 +128,13 @@
 
                             </div>                          
                         </div>                          
-                                           
-                        
+
+
                         <div class="row">
                             <div class="col-sm-6">
 
                                 <div class="form-group ">
                                     <label class="control-label" for="userLastName">Phone *</label>
-                                    <!--<input type="tel" required class="form-control" id="inputPhone" name="phone" placeholder="Phone" style="font-size: 14px; border-radius:0;">-->
                                     <input type="tel" required class="form-control" id="inputPhone" name="phone" data-plugin="formatter" data-pattern="+[[999]] [[999]]-[[999]]-[[9999]]" style="font-size: 14px; border-radius:0;">
                                 </div>
 
@@ -195,13 +195,13 @@
 
                             </div>                          
                         </div> 
-                        
+
                         <div class="row">
                             <div class="col-sm-6">
 
                                 <div class="form-group ">
                                     <label class="control-label" for="country">Address Line 1</label>
-                                    <input type="text" required class="form-control" id="inputAddress1" name="address1" placeholder="Address 1" style="font-size: 14px; border-radius:0;">
+                                    <input type="text" required class="form-control" id="inputAddress1" name="address1" placeholder="Address Line 1" style="font-size: 14px; border-radius:0;">
 
                                 </div>
 
@@ -209,25 +209,25 @@
 
                             <div class="col-sm-6">
 
-                                <div class="form-group ">
+                                <div class="form-group">
                                     <label class="control-label" for="country">Address Line 2</label>
-                                    <input type="text" class="form-control" id="inputAddress2" name="address2" placeholder="Address 2" style="font-size: 14px; border-radius:0;">
+                                    <input type="text" class="form-control" id="inputAddress2" name="address2" placeholder="Address Line 2" style="font-size: 14px; border-radius:0;">
 
                                 </div>
 
                             </div>                          
                         </div>                         
 
-                        <div class="checkbox">
+                        <div class="form-group">
 
-                            <div class="form-group ">
-                                <label class="acceptsConditions">
-                                    <input type="hidden" name="_acceptsConditions" value="on">
-                                    <input type="checkbox" id="acceptsConditions" name="acceptsConditions" checked> I accept the <a href="#">terms and conditions</a> of Smart Developer 
+                            <div class="checkbox-custom checkbox-default">
+                                <input type="checkbox" id="acceptsConditions" name="acceptsConditions" checked="" autocomplete="off">
+                                <label for="inputBasicRemember"> I accept the <a href="#">terms and conditions</a> of Smart Developer</label>
 
-                                </label>
                             </div>
-                        </div>
+
+                        </div>       
+
 
                         <input type="hidden" name="step" value="one">
 
@@ -265,10 +265,10 @@
                             <div class="col-md-10" style="padding-left:0px">Earn from the moment you invest! Smart Developer enabled opportunities pay out the estimated rental yield every month from the moment you commit your investment (Conditions apply).</div>
                         </div>                                                
                     </div>
-                    
+
                 </div>
             </form>
-            
+
             <p>Have account already? Please go to <a href="login">Sign In</a></p>
 
         </div>
