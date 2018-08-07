@@ -117,7 +117,7 @@ CREATE TABLE c_user
   city character varying(60) NOT NULL,
   postal character varying(10) NOT NULL,
 
-  usertype character varying(60) NOT NULL DEFAULT 'INV'::character varying, --ADM:admin INV:investor COMPMAN:company manager
+  usertype character varying(60) NOT NULL DEFAULT 'INV'::character varying, --ADM:admin INV:investor COMPMAN:project manager
 
   registertoken character varying(60),
   tokenexpirationdate timestamp without time zone,
@@ -283,48 +283,6 @@ ALTER TABLE c_emailqueue
   OWNER TO smart;
 
 
-
-
-CREATE TABLE c_company
-(
-  c_company_id character varying(32) NOT NULL,
-  isactive character(1) NOT NULL DEFAULT 'Y'::bpchar,
-  created timestamp without time zone NOT NULL DEFAULT now(),
-  createdby character varying(32) NOT NULL,
-  updated timestamp without time zone NOT NULL DEFAULT now(),
-  updatedby character varying(32) NOT NULL,
-  c_user_id character varying(32) NOT NULL,
-
-  name character varying(100) NOT NULL,
-  description character varying(255),
-  url character varying(120),
-  taxid character varying(20),
-
-  address1 character varying(150) NOT NULL,
-  address2 character varying(150),
-
-  c_country_id character varying(32) NOT NULL,
-  c_region_id character varying(32) NOT NULL,
-
-  city character varying(60) NOT NULL,
-  postal character varying(10) NOT NULL,
- 
-  CONSTRAINT c_company_key PRIMARY KEY (c_company_id),
-  CONSTRAINT c_company_c_country_fk FOREIGN KEY (c_country_id)
-      REFERENCES c_country (c_country_id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION,
-  CONSTRAINT c_company_c_region_fk FOREIGN KEY (c_region_id)
-      REFERENCES c_region (c_region_id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION,
-  CONSTRAINT c_company_isactive_chk CHECK (isactive = ANY (ARRAY['Y'::bpchar, 'N'::bpchar]))
-)
-WITH (
-  OIDS=FALSE
-);
-ALTER TABLE c_company
-  OWNER TO smart;
-
-
 CREATE TABLE c_projecttype
 (
   c_projecttype_id character varying(32) NOT NULL,
@@ -356,7 +314,7 @@ CREATE TABLE c_project
   name character varying(60) NOT NULL, 
 
   c_projectmanager_id character varying(32) NOT NULL,
-  c_company_id character varying(32) NOT NULL,
+  companyName character varying(60) NOT NULL,
   c_currency_id character varying(32) NOT NULL,
 
   c_projecttype_id character varying(32), --Investment types Buytolet Buytosell DevelLoan
@@ -388,9 +346,6 @@ CREATE TABLE c_project
   CONSTRAINT c_project_c_proman FOREIGN KEY (c_projectmanager_id)
       REFERENCES c_projectmanager (c_projectmanager_id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE SET NULL,
-  CONSTRAINT c_project_company_fk FOREIGN KEY (c_company_id)
-      REFERENCES c_company (c_company_id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION,
   CONSTRAINT c_project_c_currency FOREIGN KEY (c_currency_id)
       REFERENCES c_currency (c_currency_id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION,
@@ -506,9 +461,9 @@ ALTER TABLE fin_investment
   OWNER TO smart;
 
 
-CREATE TABLE fin_returninvestment
+CREATE TABLE fin_payment_order
 (
-  fin_returninvestment_id character varying(32) NOT NULL,
+  fin_payment_order_id character varying(32) NOT NULL,
   isactive character(1) NOT NULL DEFAULT 'Y'::bpchar,
   created timestamp without time zone NOT NULL DEFAULT now(),
   createdby character varying(32) NOT NULL,
@@ -516,23 +471,32 @@ CREATE TABLE fin_returninvestment
   updatedby character varying(32) NOT NULL,
   status character varying(60) NOT NULL DEFAULT 'PEND'::character varying, --PEND:pending CONF:confirmed
   scheduleddate timestamp without time zone NOT NULL,
-  fin_investment_id character varying(32) NOT NULL,
   amount numeric NOT NULL,
 
+  ordertype character varying(60) NOT NULL DEFAULT 'RETI'::character varying, --RETI:return of investment INVPAYOUT: investor payout PROMPAYOUT: project manager payout
+  fin_investment_id character varying(32),
+  c_project_id character varying(32),
+  c_investor_id character varying(32),
 
   paymentdate timestamp without time zone,
 
-  CONSTRAINT fin_returninvestment_key PRIMARY KEY (fin_returninvestment_id),
-  CONSTRAINT fin_returninvestment_investment_fk FOREIGN KEY (fin_investment_id)
+  CONSTRAINT fin_payment_order_key PRIMARY KEY (fin_payment_order_id),
+  CONSTRAINT fin_payment_order_investment_fk FOREIGN KEY (fin_investment_id)
       REFERENCES fin_investment (fin_investment_id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION,
-  CONSTRAINT fin_returninvestment_isactive_check CHECK (isactive = ANY (ARRAY['Y'::bpchar, 'N'::bpchar]))
+  CONSTRAINT fin_payment_order_project_fk FOREIGN KEY (c_project_id)
+      REFERENCES c_project (c_project_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT fin_payment_order_investor_fk FOREIGN KEY (c_investor_id)
+      REFERENCES c_investor (c_investor_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT fin_payment_order_isactive_check CHECK (isactive = ANY (ARRAY['Y'::bpchar, 'N'::bpchar]))
  
 )
 WITH (
   OIDS=FALSE
 );
-ALTER TABLE fin_returninvestment
+ALTER TABLE fin_payment_order
   OWNER TO smart;
 
 CREATE TABLE fin_payment_history
@@ -553,8 +517,7 @@ CREATE TABLE fin_payment_history
   toaccount character varying(60) NOT NULL,
   description character varying(255) NOT NULL,
 
-  fin_investment_id character varying(32),
-  fin_returninvestment_id character varying(32),
+  fin_payment_order_id character varying(32),
 
   from_user_id character varying(32) NOT NULL,
   to_user_id character varying(32) NOT NULL,
@@ -563,11 +526,8 @@ CREATE TABLE fin_payment_history
   CONSTRAINT fin_payment_history_currency_fk FOREIGN KEY (c_currency_id)
       REFERENCES c_currency (c_currency_id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION,
-  CONSTRAINT fin_payment_history_investment_fk FOREIGN KEY (fin_investment_id)
-      REFERENCES fin_investment (fin_investment_id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION,
-  CONSTRAINT fin_payment_history_retinvestment_fk FOREIGN KEY (fin_returninvestment_id)
-      REFERENCES fin_returninvestment (fin_returninvestment_id) MATCH SIMPLE
+  CONSTRAINT fin_payment_history_payorder_fk FOREIGN KEY (fin_payment_order_id)
+      REFERENCES fin_payment_order (fin_payment_order_id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION,
   CONSTRAINT fin_payment_history_fromuser_fk FOREIGN KEY (from_user_id)
       REFERENCES c_user (c_user_id) MATCH SIMPLE

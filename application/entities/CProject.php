@@ -10,7 +10,7 @@ class CProject{
     public $updatedby;
     public $name;    
     public $c_projectmanager_id;
-    public $c_company_id;    
+    public $companyname;    
     public $c_currency_id;    
   
     public $c_projecttype_id;
@@ -45,7 +45,7 @@ class CProject{
         $cProject->updatedby = $result->updatedby;
         $cProject->name = $result->name;
         $cProject->c_projectmanager_id = $result->c_projectmanager_id;
-        $cProject->c_company_id = $result->c_company_id; 
+        $cProject->companyname = $result->companyname; 
         $cProject->c_currency_id = $result->c_currency_id; 
         $cProject->c_projecttype_id = $result->c_projecttype_id; 
         $cProject->projectstatus = $result->projectstatus; 
