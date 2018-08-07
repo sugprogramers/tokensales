@@ -1,8 +1,8 @@
 <div class="page">
     <div class="page-header">
-        <h1 class="page-title">Dashboard Admin</h1>
+        <h1 class="page-title">Dashboard Company</h1>
         <div class="page-header-actions">
-          <!-- <ol class="breadcrumb breadcrumb-arrow">
+           <!-- <ol class="breadcrumb breadcrumb-arrow">
                 <li class="breadcrumb-item"><a class="icon fa-clipboard" href="#">Home</a></li>
                 <li class="breadcrumb-item"><a href="#">Layouts</a></li>
                 <li class="breadcrumb-item active">Headers</li>
@@ -19,9 +19,8 @@
     </div> 
 </div> 
 
-
 <script type="text/javascript">
     window.onload = function () {
-       $('#idDashboardAdmin').addClass('active');       
+       $('#idDashboardCompany').addClass('active');       
     };
 </script>

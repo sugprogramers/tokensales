@@ -14,6 +14,15 @@ class Register_Controller extends CI_Controller {
     }
 
     public function index() {
+        if ($this->session->usertype === "ADM") {
+            redirect(base_url() . 'admin_dashboard');
+        }
+        if ($this->session->usertype === "INV") {
+            redirect(base_url() . 'investor_dashboard');
+        }
+        if ($this->session->usertype === "COMPMAN") {
+            redirect(base_url() . 'company_dashboard');
+        }
         $this->load->view('header/header_register');
         $this->load->view('register');
         $this->load->view('footer/footer_register');

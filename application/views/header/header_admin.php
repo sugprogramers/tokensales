@@ -42,9 +42,9 @@
         <link rel='stylesheet' href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,300italic">
         <link rel="stylesheet" href="<?php echo base_url() . "themes/default/remark"; ?>/global/fonts/font-awesome/font-awesome.min599c.css?v4.0.2">
 
-        
+
         <!-- DataTable Css For This Page -->
-       <link rel="stylesheet" href="<?php echo base_url() . "themes/default/remark"; ?>/global/vendor/datatables.net-bs4/dataTables.bootstrap4.min599c.css?v4.0.2">
+        <link rel="stylesheet" href="<?php echo base_url() . "themes/default/remark"; ?>/global/vendor/datatables.net-bs4/dataTables.bootstrap4.min599c.css?v4.0.2">
         <link rel="stylesheet" href="<?php echo base_url() . "themes/default/remark"; ?>/global/vendor/datatables.net-fixedheader-bs4/dataTables.fixedheader.bootstrap4.min599c.css?v4.0.2">
         <link rel="stylesheet" href="<?php echo base_url() . "themes/default/remark"; ?>/global/vendor/datatables.net-fixedcolumns-bs4/dataTables.fixedcolumns.bootstrap4.min599c.css?v4.0.2">
         <link rel="stylesheet" href="<?php echo base_url() . "themes/default/remark"; ?>/global/vendor/datatables.net-rowgroup-bs4/dataTables.rowgroup.bootstrap4.min599c.css?v4.0.2">
@@ -52,8 +52,8 @@
         <link rel="stylesheet" href="<?php echo base_url() . "themes/default/remark"; ?>/global/vendor/datatables.net-select-bs4/dataTables.select.bootstrap4.min599c.css?v4.0.2">
         <link rel="stylesheet" href="<?php echo base_url() . "themes/default/remark"; ?>/global/vendor/datatables.net-responsive-bs4/dataTables.responsive.bootstrap4.min599c.css?v4.0.2">
         <link rel="stylesheet" href="<?php echo base_url() . "themes/default/remark"; ?>/global/vendor/datatables.net-buttons-bs4/dataTables.buttons.bootstrap4.min599c.css?v4.0.2">
-    
-        
+
+
         <!--[if lt IE 9]>
           <script src="<?php echo base_url() . "themes/default/remark"; ?>/global/vendor/html5shiv/html5shiv.min.js?v4.0.2"></script>
           <![endif]-->
@@ -336,10 +336,13 @@
                             <div class="dropdown-menu" role="menu">
                                 <a class="dropdown-item" href="javascript:void(0)" role="menuitem">
                                     <!-- <i class="icon wb-user" aria-hidden="true"></i> -->
-                                    <?php if ($this->session->userdata("usertype") === "ADM") {
+                                    <?php
+                                    if ($this->session->userdata("usertype") === "ADM" ||
+                                            $this->session->userdata("usertype") === "INV" ||
+                                            $this->session->userdata("usertype") === "COMPMAN") {
                                         echo $this->session->userdata("email");
-                                    } else{
-                                       
+                                    } else {
+                                        
                                     }
                                     ?>
 
@@ -348,7 +351,7 @@
                                 <a class="dropdown-item" href="javascript:void(0)" role="menuitem"><i class="icon wb-settings" aria-hidden="true"></i> Settings</a>-->
                                 <div class="dropdown-divider" role="presentation"></div>
                                 <a  data-target="#logOutModal" data-toggle="modal"    class="dropdown-item" href="#" role="menuitem"><i class="icon wb-power" aria-hidden="true"></i> Logout</a>
-                            
+
                             </div>
                         </li>
                         <!--
@@ -563,110 +566,141 @@
                 <div>
                     <div>
                         <ul class="site-menu" data-plugin="menu">
-   
- <?php if ($this->session->userdata("usertype") === "ADM") { ?>                            
-                            <li class="site-menu-category">General</li>
-                            
-                             <li class="dropdown site-menu-item has-sub" id="idDashboardAdmin">
-                                <a data-toggle="dropdown" href="<?php echo base_url(); ?>admin_dashboard" data-dropdown-toggle="false">
-                                    <i class="site-menu-icon wb-dashboard" aria-hidden="true"></i>
-                                    <span class="site-menu-title">Dashboard</span>                                   
-                                </a>
-                               
-                            </li>
-                            
-                             <li class="dropdown site-menu-item has-sub">
-                                <a data-toggle="dropdown" href="javascript:void(0)" data-dropdown-toggle="false">
-                                    <i class="site-menu-icon wb-folder" aria-hidden="true"></i>
-                                    <span class="site-menu-title">My Data</span>
-                                    <span class="site-menu-arrow"></span>
-                                </a>
-                                <div class="dropdown-menu">
-                                    <div class="site-menu-scroll-wrap is-list">
-                                        <div>
+
+<?php if ($this->session->userdata("usertype") === "ADM") { ?>                            
+                                <li class="site-menu-category">Admin</li>
+
+                                <li class="dropdown site-menu-item has-sub" id="idDashboardAdmin">
+                                    <a data-toggle="dropdown" href="<?php echo base_url(); ?>admin_dashboard" data-dropdown-toggle="false">
+                                        <i class="site-menu-icon wb-dashboard" aria-hidden="true"></i>
+                                        <span class="site-menu-title">Dashboard</span>                                   
+                                    </a>
+
+                                </li>
+
+                                <li class="dropdown site-menu-item has-sub">
+                                    <a data-toggle="dropdown" href="javascript:void(0)" data-dropdown-toggle="false">
+                                        <i class="site-menu-icon wb-folder" aria-hidden="true"></i>
+                                        <span class="site-menu-title">My Data</span>
+                                        <span class="site-menu-arrow"></span>
+                                    </a>
+                                    <div class="dropdown-menu">
+                                        <div class="site-menu-scroll-wrap is-list">
                                             <div>
-                                                <ul class="site-menu-sub site-menu-normal-list">
-                                                    <li class="site-menu-item">
-                                                        <a href="<?php echo base_url(); ?>user_accountdata">
-                                                            <span class="site-menu-title">Account Data</span>
-                                                        </a>
-                                                    </li>
-                                                    
-                                                    <li class="site-menu-item">
-                                                        <a href="<?php echo base_url(); ?>user_changepassword">
-                                                            <span class="site-menu-title">Change Password</span>
-                                                        </a>
-                                                    </li>
-                                                    
-                                                </ul>
+                                                <div>
+                                                    <ul class="site-menu-sub site-menu-normal-list">
+                                                        <li class="site-menu-item">
+                                                            <a href="<?php echo base_url(); ?>user_accountdata">
+                                                                <span class="site-menu-title">Account Data</span>
+                                                            </a>
+                                                        </li>
+
+                                                        <li class="site-menu-item">
+                                                            <a href="<?php echo base_url(); ?>user_changepassword">
+                                                                <span class="site-menu-title">Change Password</span>
+                                                            </a>
+                                                        </li>
+
+                                                    </ul>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </li>
-                            
-                            <li class="dropdown site-menu-item has-sub">
-                                <a data-toggle="dropdown" href="javascript:void(0)" data-dropdown-toggle="false">
-                                    <i class="site-menu-icon wb-folder" aria-hidden="true"></i>
-                                    <span class="site-menu-title">Projects</span>
-                                    <span class="site-menu-arrow"></span>
-                                </a>
-                                <div class="dropdown-menu">
-                                    <div class="site-menu-scroll-wrap is-list">
-                                        <div>
+                                </li>
+
+                                <li class="dropdown site-menu-item has-sub">
+                                    <a data-toggle="dropdown" href="javascript:void(0)" data-dropdown-toggle="false">
+                                        <i class="site-menu-icon wb-folder" aria-hidden="true"></i>
+                                        <span class="site-menu-title">Projects</span>
+                                        <span class="site-menu-arrow"></span>
+                                    </a>
+                                    <div class="dropdown-menu">
+                                        <div class="site-menu-scroll-wrap is-list">
                                             <div>
-                                                <ul class="site-menu-sub site-menu-normal-list">
-                                                    <li class="site-menu-item">
-                                                        <a href="<?php echo base_url(); ?>listalldocument">
-                                                            <span class="site-menu-title">Project Documents Type</span>
-                                                        </a>
-                                                    </li>
-                                                    
-                                                    <li class="site-menu-item">
-                                                        <a href="#">
-                                                            <span class="site-menu-title">Validate Projects</span>
-                                                        </a>
-                                                    </li>
-                                                    
-                                                </ul>
+                                                <div>
+                                                    <ul class="site-menu-sub site-menu-normal-list">
+                                                        <li class="site-menu-item">
+                                                            <a href="<?php echo base_url(); ?>listalldocument">
+                                                                <span class="site-menu-title">Project Documents Type</span>
+                                                            </a>
+                                                        </li>
+
+                                                        <li class="site-menu-item">
+                                                            <a href="#">
+                                                                <span class="site-menu-title">Validate Projects</span>
+                                                            </a>
+                                                        </li>
+
+                                                    </ul>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </li>
-                            <li class="dropdown site-menu-item has-sub" id="idListInvestorAdmin">
-                                <a data-toggle="dropdown" href="<?php echo base_url(); ?>admin_list_investor" data-dropdown-toggle="false">
-                                    <i class="site-menu-icon wb-users" aria-hidden="true"></i>
-                                    <span class="site-menu-title">Investors</span>                                   
-                                </a>
-                               
-                            </li>
-                            
-                            <li class="dropdown site-menu-item has-sub" id="idListCompanyAdmin">
-                                <a data-toggle="dropdown" href="<?php echo base_url(); ?>admin_list_company" data-dropdown-toggle="false">
-                                    <i class="site-menu-icon fa-users" aria-hidden="true"></i>
-                                    <span class="site-menu-title">Companys</span>                                   
-                                </a>
-                               
-                            </li>
-                            
-                             <li class="dropdown site-menu-item has-sub">
-                                <a data-toggle="dropdown" href="#" data-dropdown-toggle="false">
-                                    <i class="site-menu-icon fa-paypal" aria-hidden="true"></i>
-                                    <span class="site-menu-title">Payments</span>                                   
-                                </a>
-                               
-                            </li>
-                            
-                            <li class="dropdown site-menu-item has-sub">
-                                <a data-toggle="dropdown" href="#" data-dropdown-toggle="false" onclick="$('#logOutModal').modal('show');">
-                                    <i class="site-menu-icon wb-power" aria-hidden="true"></i>
-                                    <span class="site-menu-title">Logout</span>                                   
-                                </a>                               
-                            </li>
-                            
- <?php } ?>                              
-                            
+                                </li>
+                                <li class="dropdown site-menu-item has-sub" id="idListInvestorAdmin">
+                                    <a data-toggle="dropdown" href="<?php echo base_url(); ?>admin_list_investor" data-dropdown-toggle="false">
+                                        <i class="site-menu-icon wb-users" aria-hidden="true"></i>
+                                        <span class="site-menu-title">Investors</span>                                   
+                                    </a>
+
+                                </li>
+
+                                <li class="dropdown site-menu-item has-sub" id="idListCompanyAdmin">
+                                    <a data-toggle="dropdown" href="<?php echo base_url(); ?>admin_list_company" data-dropdown-toggle="false">
+                                        <i class="site-menu-icon fa-users" aria-hidden="true"></i>
+                                        <span class="site-menu-title">Companys</span>                                   
+                                    </a>
+
+                                </li>
+
+                                <li class="dropdown site-menu-item has-sub">
+                                    <a data-toggle="dropdown" href="#" data-dropdown-toggle="false">
+                                        <i class="site-menu-icon fa-paypal" aria-hidden="true"></i>
+                                        <span class="site-menu-title">Payments</span>                                   
+                                    </a>
+
+                                </li>
+
+                                <li class="dropdown site-menu-item has-sub">
+                                    <a data-toggle="dropdown" href="#" data-dropdown-toggle="false" onclick="$('#logOutModal').modal('show');">
+                                        <i class="site-menu-icon wb-power" aria-hidden="true"></i>
+                                        <span class="site-menu-title">Logout</span>                                   
+                                    </a>                               
+                                </li>
+
+<?php } ?>                              
+
+<?php if ($this->session->userdata("usertype") === "INV") { ?>                            
+                                <li class="site-menu-category">Investor</li>
+
+                                <li class="dropdown site-menu-item has-sub" id="idDashboardInvestor">
+                                    <a data-toggle="dropdown" href="<?php echo base_url(); ?>investor_dashboard" data-dropdown-toggle="false">
+                                        <i class="site-menu-icon wb-dashboard" aria-hidden="true"></i>
+                                        <span class="site-menu-title">Dashboard</span>                                   
+                                    </a>
+
+                                </li>
+
+<?php } ?>                                 
+                                
+<?php if ($this->session->userdata("usertype") === "COMPMAN") { ?>                            
+                                <li class="site-menu-category">Company</li>
+
+                                <li class="dropdown site-menu-item has-sub" id="idDashboardCompany">
+                                    <a data-toggle="dropdown" href="<?php echo base_url(); ?>company_dashboard" data-dropdown-toggle="false">
+                                        <i class="site-menu-icon wb-dashboard" aria-hidden="true"></i>
+                                        <span class="site-menu-title">Dashboard</span>                                   
+                                    </a>
+
+                                </li>
+
+<?php } ?>                                  
+                                
+                                
+                                
+                                
+                                
+                                
                         </ul>
                     </div>
                 </div>

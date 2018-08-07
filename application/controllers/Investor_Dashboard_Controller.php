@@ -2,23 +2,22 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Admin_Dashboard_Controller extends CI_Controller {
+class Investor_Dashboard_Controller extends CI_Controller {
             
     public function __construct() {
         parent::__construct();
         $this->load->helper('url');
-        //$this->load->model("admin/Administrator_Model");
         
-        
-        if($this->session->usertype !== "ADM"){
+        if($this->session->usertype !== "INV"){
             redirect(base_url() . 'login');
         }
     }
 
     public function index() {       
         $this->load->view('header/header_admin');
-        $this->load->view('admin_dashboard');
+        $this->load->view('investor_dashboard');
         $this->load->view('footer/footer_admin');        
     }
+    
    
 }

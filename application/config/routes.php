@@ -54,23 +54,31 @@ $route['default_controller'] = 'Login_Controller';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
-//routes de paginas 
+//routes de paginas empieza en controller
+
+//routes externo
 $route['login'] = "Login_Controller";
 $route['logout'] = "Login_Controller/logout_user";
+$route['register'] = "Register_Controller";
+
+//routes admin
 $route['admin_dashboard'] = "Admin_Dashboard_Controller";
 $route['admin_list_investor'] = "Admin_List_Investor_Controller";
 $route['admin_list_company'] = "Admin_List_Company_Controller";
-$route['register'] = "Register_Controller";
-
-//ProjectDocumentType
 $route['listalldocument'] = "Admin_List_DocumentType_Controller/listDataGrid";
-
-//General c_user management
 $route['user_accountdata'] = "User_Accountdata_Controller";
 $route['user_changepassword'] = "User_Changepassword_Controller";
 
+//routes investor
+$route['investor_dashboard'] = "Investor_Dashboard_Controller";
 
-//Ejemplo Route Administrador a sub funciones
+//routes company
+$route['company_dashboard'] = "Company_Dashboard_Controller";
+
+
+
+
+//Ejemplo Route test a sub funciones
 /*$route['default'] = "admin/Administrator";
 $route['noparametro'] = "admin/Administrator/noparametro";
 $route['parametro/(:num)'] = "admin/Administrator/parametro/$1";
