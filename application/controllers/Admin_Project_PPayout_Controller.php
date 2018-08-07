@@ -108,10 +108,9 @@ class Admin_Project_PPayout_Controller extends CI_Controller {
     
     public function execute_paymentorder() {
        
-       $finPaymentOrderId = $this->input->post();
+       $finPaymentOrderId = $this->input->post("dlgFinPaymentOrderId");
       
        try {
-           log_message('error', '122:'.implode($finPaymentOrderId,' - '));
             $response = array('msg' => 'Payment executed successfully', 'status' => 'success');
             echo json_encode($response);
             

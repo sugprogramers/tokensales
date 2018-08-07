@@ -39,7 +39,7 @@
     <div class="modal-dialog modal-simple modal-center" style="overflow-y: initial !important">
         <div class="modal-content" style="overflow-y: auto;">
             <form id="executepayment_form">
-                <input type="hidden" id="dlgFinPaymentOrderId" value=""/>
+                <input type="hidden" id="dlgFinPaymentOrderId" name="dlgFinPaymentOrderId" value=""/>
                 <div class="page-content">
                     <!-- Panel -->
                     <div class="panel">
