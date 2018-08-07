@@ -73,6 +73,7 @@ $route['admin_transactionhistory'] = "Admin_TransactionHistory_Controller";
 
 //routes investor
 $route['investor_dashboard'] = "Investor_Dashboard_Controller";
+$route['investor_investment'] = "Investor_Investment_Controller";
 
 //routes company
 $route['company_dashboard'] = "Company_Dashboard_Controller";

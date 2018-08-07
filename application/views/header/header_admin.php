@@ -788,7 +788,7 @@
                                                 <div>
                                                     <ul class="site-menu-sub site-menu-normal-list">
                                                         <li class="site-menu-item">
-                                                            <a href="#">
+                                                            <a href="<?php echo base_url(); ?>investor_investment">
                                                                 <span class="site-menu-title">My Investments</span>
                                                             </a>
                                                         </li>
