@@ -39,7 +39,6 @@ class User_Accountdata_Controller extends CI_Controller {
     }
     
     public function update_user_information() {
-        log_message('error', "helloooooo");
         $firstname = $this->input->post("firstname");
         $lastname = $this->input->post("lastname");
         $phone = $this->input->post("phone");

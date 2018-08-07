@@ -4,6 +4,8 @@ include_once "application/entities/CAdmin.php";
 
 class CAdminModel extends CI_Model { 
     
+    public static $cAdminId = "100";
+    
     public function __construct() {
         parent::__construct();
         $this->load->database();        
