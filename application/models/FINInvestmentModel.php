@@ -65,6 +65,19 @@ class FINInvestmentModel extends CI_Model
        }
        return $data;
     }  
+    
+    public function get_investment_project_list($userId){
+       $this->db->select('fin.fin_investment_id, fin.status as investmentstatus, fin.amount , date(fin.created) as investmentdate, cur.cursymbol, pr.c_project_id , pr.name,pr.companyname ,pr.projectstatus ');
+       $this->db->from('fin_investment as fin');
+       $this->db->join('c_project as pr', 'fin.c_project_id = pr.c_project_id ');
+       $this->db->join('c_currency cur', 'pr.c_currency_id =cur.c_currency_id ');
+       $this->db->join('c_investor as inv', 'fin.c_investor_id = inv.c_investor_id ');
+       $this->db->where('inv.c_user_id', $userId);
+       
+       $query =  $this->db->get();
+       return $query->result() ;
+    }
+    
 }
 
 ?>

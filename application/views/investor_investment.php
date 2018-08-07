@@ -41,7 +41,6 @@
                                                 <th class="none" >Company</th>
                                                 <th class="none" >Project Status</th>
                                                 <th class="none" >Investment Date</th>
-                                                <th class="none" >Project Status</th>
                                                 <th class="none" >Investment Status</th>
                                                 <th class="none" >Earnings</th>
                                               </tr>
@@ -49,7 +48,7 @@
                                             </thead>
                                             <tbody>
                                                  
-                                                        <tr>
+                                                      <!--  <tr>
                                                           <td>1</td>
                                                           <td>Shona</td>
                                                           <td>Woldt</td>
@@ -61,6 +60,7 @@
                                                             <span class="badge badge-table badge-success">Active</span>
                                                           </td>
                                                         </tr>
+                                                      -->
                                             </tbody>
                                           </table>
                                        
@@ -95,10 +95,10 @@
 
 <script type="text/javascript">
 var table;
+
 window.onload = function () {
     
    
-    console.log ('holis');
   
     $('#exampleAddRow').addClass('active');
     table = $('#exampleAddRow').DataTable({
@@ -111,6 +111,10 @@ window.onload = function () {
             "processing": true,  //mostrar waiting
             "serverSide": false, //consultar servidor ordenar , filtrar
             
+            "ajax": {
+                url : "<?php echo base_url('Investor_Investment_Controller/get_investment_list/?id='.$userid)?>",
+                type : 'GET'
+            },
             
 	    columnDefs: [ {
 	      className: 'control',
@@ -118,10 +122,6 @@ window.onload = function () {
 	      targets: -1
 		    }]
      });
- 
-  
-       
- 
  
 
 
