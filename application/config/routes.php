@@ -70,6 +70,7 @@ $route['user_accountdata'] = "User_Accountdata_Controller";
 $route['user_changepassword'] = "User_Changepassword_Controller";
 $route['admin_paypalaccount'] = "Admin_PaypalAccount_Controller";
 $route['admin_transactionhistory'] = "Admin_TransactionHistory_Controller";
+$route['admin_project_payout'] = 'Admin_Project_PPayout_Controller';
 
 //routes investor
 $route['investor_dashboard'] = "Investor_Dashboard_Controller";
