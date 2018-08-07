@@ -17,8 +17,6 @@ class FINPaymentHistory
     public $fromaccount;
     public $toaccount;
     public $description;
-    public $fin_investment_id; 
-    public $fin_returninvestment_id;
     
     public $from_user_id;
     public $to_user_id;
@@ -41,13 +39,11 @@ class FINPaymentHistory
        $finPaymentHistory->fromaccount = $result->fromaccount; 
        $finPaymentHistory->toaccount = $result->toaccount; 
        $finPaymentHistory->description = $result->description; 
-       $finPaymentHistory->fin_investment_id = $result->fin_investment_id; 
-       $finPaymentHistory->fin_returninvestment_id = $result->fin_returninvestment_id; 
        
        $finPaymentHistory->from_user_id = $result->from_user_id; 
        $finPaymentHistory->to_user_id = $result->to_user_id; 
        
-       return $finPaymentHistory;;
+       return $finPaymentHistory;
     }
 }
 

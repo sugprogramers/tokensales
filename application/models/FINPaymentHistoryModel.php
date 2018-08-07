@@ -40,8 +40,6 @@ class FINPaymentHistoryModel extends CI_Model
                 'fromaccount' => $finPaymentHistory->fromaccount,
                 'toaccount' => $finPaymentHistory->toaccount,
                 'description' => $finPaymentHistory->description,
-                'fin_investment_id' => $finPaymentHistory->fin_investment_id,
-                'fin_returninvestment_id' => $finPaymentHistory->fin_returninvestment_id,
                 'from_user_id' => $finPaymentHistory->from_user_id,
                 'to_user_id' => $finPaymentHistory->to_user_id
             );
@@ -60,8 +58,6 @@ class FINPaymentHistoryModel extends CI_Model
                 'fromaccount' => $finPaymentHistory->fromaccount,
                 'toaccount' => $finPaymentHistory->toaccount,
                 'description' => $finPaymentHistory->description,
-                'fin_investment_id' => $finPaymentHistory->fin_investment_id,
-                'fin_returninvestment_id' => $finPaymentHistory->fin_returninvestment_id,
                 'from_user_id' => $finPaymentHistory->from_user_id,
                 'to_user_id' => $finPaymentHistory->to_user_id
             );

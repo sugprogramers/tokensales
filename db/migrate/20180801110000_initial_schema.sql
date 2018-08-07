@@ -511,10 +511,9 @@ CREATE TABLE fin_payment_order
   scheduleddate timestamp without time zone NOT NULL,
   amount numeric NOT NULL,
 
-  --RETI: return of investment
   --INVPAYOUT: investor payout 
   --PROMPAYOUT: project manager payout
-  ordertype character varying(60) NOT NULL DEFAULT 'RETI'::character varying,
+  ordertype character varying(60) NOT NULL DEFAULT 'INVPAYOUT'::character varying,
   fin_investment_id character varying(32),
   c_project_id character varying(32),
   c_investor_id character varying(32),
