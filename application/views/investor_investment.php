@@ -1,3 +1,11 @@
+  <style>
+      /* Set the size of the div element that contains the map */
+      #map {
+        height: 300px;  /* The height is 400 pixels */
+        width: 100%;  /* The width is the width of the web page */
+       }
+    </style>
+    
 <div class="page">
    
     <!-- 
@@ -27,13 +35,9 @@
                         <div class="tab-content pt-20">
                           <div class="tab-pane active" id="exampleTabsLineTopOne" role="tabpanel">
                               <div class="row">
-                              
                                    <div class="col-md-6">
-                                       
                                           <table id="exampleAddRow" class="table table-hover table-striped" data-paging="true" data-sorting="true"
                                             data-filtering="true" style="width:100%">
-                                          
-                                           
                                             <thead>
                                               <tr>
                                                 <th class="all">Project</th>
@@ -47,26 +51,14 @@
                                               
                                             </thead>
                                             <tbody>
-                                                 
-                                                      <!--  <tr>
-                                                          <td>1</td>
-                                                          <td>Shona</td>
-                                                          <td>Woldt</td>
-                                                          <td>Shona</td>
-                                                          <td>Woldt</td>
-                                                          <td>Shona</td>
-                                                          <td>Woldt</td>
-                                                          <td>
-                                                            <span class="badge badge-table badge-success">Active</span>
-                                                          </td>
-                                                        </tr>
-                                                      -->
                                             </tbody>
                                           </table>
-                                       
-                                       
                                    </div>
                                    <div class="col-md-6">
+                                       <!-- Example Simple -->
+                                        
+                                        <div id="map"></div>
+                                        <!-- End Example Simple -->
                                    </div>
                               
                               </div>
@@ -122,10 +114,25 @@ window.onload = function () {
 	      targets: -1
 		    }]
      });
- 
-
-
 };
-
-             
 </script>
+
+<script>
+     function initMap() {
+        // The location of Uluru
+       // var uluru = {lat: -25.344, lng: 131.036};
+        var uluru = {lat: 41.850033, lng: -87.6500523}
+        // The map, centered at Uluru
+        var map = new google.maps.Map(
+            document.getElementById('map'), {zoom: 4, center: uluru,  mapTypeId: google.maps.MapTypeId.ROADMAP});
+        // The marker, positioned at Uluru
+        var marker = new google.maps.Marker({position: uluru, map: map});
+        
+      
+      }
+</script>
+
+
+<script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDV9sWkjQb7BDzfK_NwlnF4wDY66j1iRtg&callback=initMap">
+    </script>
