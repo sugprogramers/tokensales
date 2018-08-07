@@ -80,7 +80,11 @@ CREATE TABLE c_file
   updated timestamp without time zone NOT NULL DEFAULT now(),
   updatedby character varying(32) NOT NULL,
   name character varying(1000) NOT NULL,
-  datatype character varying(32), --PDF, TXT, IMG
+
+  --PDF: pdf
+  --TXT: plain text
+  --IMG: image
+  datatype character varying(32),
   path character varying(2000) NOT NULL,
   CONSTRAINT c_file_key PRIMARY KEY (c_file_id),
   CONSTRAINT c_file_isactive_check CHECK (isactive = ANY (ARRAY['Y'::bpchar, 'N'::bpchar]))
@@ -117,11 +121,17 @@ CREATE TABLE c_user
   city character varying(60) NOT NULL,
   postal character varying(10) NOT NULL,
 
-  usertype character varying(60) NOT NULL DEFAULT 'INV'::character varying, --ADM:admin INV:investor COMPMAN:project manager
+  --ADM: admin 
+  --INV: investor 
+  --COMPMAN: project manager
+  usertype character varying(60) NOT NULL DEFAULT 'INV'::character varying, 
 
   registertoken character varying(60),
   tokenexpirationdate timestamp without time zone,
-  status character varying(60) NOT NULL DEFAULT 'PEND'::character varying, --PEND:pending validation VAL:validated SUS:suspended
+
+  --PEND: pending validation
+  --VAL: validated
+  status character varying(60) NOT NULL DEFAULT 'PEND'::character varying,
 
   CONSTRAINT c_user_key PRIMARY KEY (c_user_id),
   CONSTRAINT c_user_c_country_fk FOREIGN KEY (c_country_id)
@@ -214,12 +224,16 @@ CREATE TABLE c_investor
   tax_ustin character varying(60),
   
   --IDENTIFICATION
-  documenttype character varying(60) DEFAULT 'PASS'::character varying, --PASS:Passport IN:Identification Number
+  --PASS: Passport 
+  --IN: Identification Number
+  documenttype character varying(60) DEFAULT 'PASS'::character varying,
   documentnumber character varying(60),
   c_docimgfront_id character varying(32),
   c_docimgback_id character varying(32),
 
-  status character varying(60) NOT NULL DEFAULT 'PEND'::character varying, --PEND:pending validation VAL:validated SUS:suspended
+  --PEND: pending validation
+  --VAL: validated
+  status character varying(60) NOT NULL DEFAULT 'PEND'::character varying,
   validateddate timestamp without time zone,
   validationnotes character varying(255),
 
@@ -266,7 +280,10 @@ CREATE TABLE c_emailqueue
   rcptto character varying(50) NOT NULL,
   subject character varying(50) NOT NULL,
   body text NOT NULL,
-  status character varying(60) NOT NULL,
+
+  --NSENT: not sent
+  --SENT: sent
+  status character varying(60) NOT NULL DEFAULT 'NSENT'::character varying,
   emaillog text NOT NULL,
   c_user_id character varying(32) NOT NULL,
 
@@ -317,11 +334,21 @@ CREATE TABLE c_project
   companyName character varying(60) NOT NULL,
   c_currency_id character varying(32) NOT NULL,
 
-  c_projecttype_id character varying(32), --Investment types Buytolet Buytosell DevelLoan
-  projectstatus character varying(60) NOT NULL DEFAULT 'PEND'::character varying, --PEND: pending evaluation FU:funding FI:finished
+  c_projecttype_id character varying(32),
 
+  --PEND: pending evaluation
+  --FU:funding
+  --COFU: funding completed
+  --NCOFU: funding did not complete
+  --VO: voided
+  --ACT: active
+  --FI:finished
+  projectstatus character varying(60) NOT NULL DEFAULT 'PEND'::character varying,
   
-  propertytype character varying(60) NOT NULL DEFAULT 'AP'::character varying, --AP:Apartment SUI:Suite BUI:Building ,etc
+  --AP: Apartment 
+  --SUI: Suite
+  --BUI: Building
+  propertytype character varying(60) NOT NULL DEFAULT 'AP'::character varying,
   qtyproperty numeric NOT NULL DEFAULT 1,
 
   address1 character varying(150),
@@ -408,7 +435,11 @@ CREATE TABLE c_projectdocument
   c_project_id character varying(32) NOT NULL,
   c_projectdocumenttype_id character varying(32) NOT NULL,
   c_file_id character varying(32) NOT NULL,
-  status character varying(60) NOT NULL DEFAULT 'PEND'::character varying, --PEND: pending evaluation APP:approved NAPP:disapproved
+
+  --PEND: pending evaluation 
+  --VAL: validated
+  --NVAL: not validated
+  status character varying(60) NOT NULL DEFAULT 'PEND'::character varying,
   CONSTRAINT c_projectdocument_key PRIMARY KEY (c_projectdocument_id),
   CONSTRAINT c_projectdocument_project_fk FOREIGN KEY (c_project_id)
       REFERENCES c_project (c_project_id) MATCH SIMPLE
@@ -438,7 +469,12 @@ CREATE TABLE fin_investment
   createdby character varying(32) NOT NULL,
   updated timestamp without time zone NOT NULL DEFAULT now(),
   updatedby character varying(32) NOT NULL,
-  status character varying(60) NOT NULL DEFAULT 'PEND'::character varying, --PEND:pending CONF:confirmed
+
+  --PEND: pending 
+  --ACT: active 
+  --FIN: finished 
+  --VO: voided
+  status character varying(60) NOT NULL DEFAULT 'PEND'::character varying,
   c_project_id character varying(32) NOT NULL,
   c_investor_id character varying(32) NOT NULL,
   startdate timestamp without time zone,
@@ -469,11 +505,16 @@ CREATE TABLE fin_payment_order
   createdby character varying(32) NOT NULL,
   updated timestamp without time zone NOT NULL DEFAULT now(),
   updatedby character varying(32) NOT NULL,
-  status character varying(60) NOT NULL DEFAULT 'PEND'::character varying, --PEND:pending CONF:confirmed
+  --PEND: pending 
+  --CO: completed
+  status character varying(60) NOT NULL DEFAULT 'PEND'::character varying,
   scheduleddate timestamp without time zone NOT NULL,
   amount numeric NOT NULL,
 
-  ordertype character varying(60) NOT NULL DEFAULT 'RETI'::character varying, --RETI:return of investment INVPAYOUT: investor payout PROMPAYOUT: project manager payout
+  --RETI: return of investment
+  --INVPAYOUT: investor payout 
+  --PROMPAYOUT: project manager payout
+  ordertype character varying(60) NOT NULL DEFAULT 'RETI'::character varying,
   fin_investment_id character varying(32),
   c_project_id character varying(32),
   c_investor_id character varying(32),
@@ -509,7 +550,13 @@ CREATE TABLE fin_payment_history
   updatedby character varying(32) NOT NULL,
  
   paymentdate timestamp without time zone NOT NULL,
-  status character varying(60) NOT NULL,
+  --PEND: pending
+  --CO: completed
+  --ERR: completed with error
+  status character varying(60) NOT NULL DEFAULT 'PEND'::character varying,
+
+  --INT: internal
+  --EXT: external
   type character varying(60) NOT NULL,
   c_currency_id character varying(32) NOT NULL,
   amount numeric NOT NULL,
