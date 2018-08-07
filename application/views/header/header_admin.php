@@ -567,7 +567,7 @@
                     <div>
                         <ul class="site-menu" data-plugin="menu">
 
-<?php if ($this->session->userdata("usertype") === "ADM") { ?>                            
+                            <?php if ($this->session->userdata("usertype") === "ADM") { ?>                            
                                 <li class="site-menu-category">Admin</li>
 
                                 <li class="dropdown site-menu-item has-sub" id="idDashboardAdmin">
@@ -582,7 +582,7 @@
                                     <a data-toggle="dropdown" href="javascript:void(0)" data-dropdown-toggle="false">
                                         <i class="site-menu-icon wb-folder" aria-hidden="true"></i>
                                         <span class="site-menu-title">My Data</span>
-                                        <span class="site-menu-arrow"></span>
+                                        <span class="site-menu-icon wb-chevron-down-mini" style="float: right;"></span><!--<span class="site-menu-arrow"></span>-->
                                     </a>
                                     <div class="dropdown-menu">
                                         <div class="site-menu-scroll-wrap is-list">
@@ -612,7 +612,7 @@
                                     <a data-toggle="dropdown" href="javascript:void(0)" data-dropdown-toggle="false">
                                         <i class="site-menu-icon wb-folder" aria-hidden="true"></i>
                                         <span class="site-menu-title">Projects</span>
-                                        <span class="site-menu-arrow"></span>
+                                        <span class="site-menu-icon wb-chevron-down-mini" style="float: right;"></span><!--<span class="site-menu-arrow"></span>-->
                                     </a>
                                     <div class="dropdown-menu">
                                         <div class="site-menu-scroll-wrap is-list">
@@ -631,18 +631,51 @@
                                                             </a>
                                                         </li>
 
+                                                        <li class="site-menu-item">
+                                                            <a href="#">
+                                                                <span class="site-menu-title">Pending Payouts</span>
+                                                            </a>
+                                                        </li>
+
+
                                                     </ul>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </li>
-                                <li class="dropdown site-menu-item has-sub" id="idListInvestorAdmin">
-                                    <a data-toggle="dropdown" href="<?php echo base_url(); ?>admin_list_investor" data-dropdown-toggle="false">
-                                        <i class="site-menu-icon wb-users" aria-hidden="true"></i>
-                                        <span class="site-menu-title">Investors</span>                                   
-                                    </a>
 
+
+
+                                <li class="dropdown site-menu-item has-sub" id="idListInvestorAdmin">
+                                    <a data-toggle="dropdown" href="javascript:void(0)" data-dropdown-toggle="false">
+                                        <i class="site-menu-icon wb-users" aria-hidden="true"></i>
+                                        <span class="site-menu-title">Investors</span>
+                                        <span class="site-menu-icon wb-chevron-down-mini" style="float: right;"></span>
+                                    </a>
+                                    <div class="dropdown-menu">
+                                        <div class="site-menu-scroll-wrap is-list">
+                                            <div>
+                                                <div>
+                                                    <ul class="site-menu-sub site-menu-normal-list">
+                                                        <li class="site-menu-item">
+                                                            <a href="<?php echo base_url(); ?>admin_list_investor">
+                                                                <span class="site-menu-title">Validate Investor</span>
+                                                            </a>
+                                                        </li>
+
+                                                        <li class="site-menu-item">
+                                                            <a href="#">
+                                                                <span class="site-menu-title">Pending Payouts</span>
+                                                            </a>
+                                                        </li>
+
+
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </li>
 
                                 <li class="dropdown site-menu-item has-sub" id="idListCompanyAdmin">
@@ -654,12 +687,36 @@
                                 </li>
 
                                 <li class="dropdown site-menu-item has-sub">
-                                    <a data-toggle="dropdown" href="#" data-dropdown-toggle="false">
-                                        <i class="site-menu-icon fa-paypal" aria-hidden="true"></i>
-                                        <span class="site-menu-title">Payments</span>                                   
+                                    <a data-toggle="dropdown" href="javascript:void(0)" data-dropdown-toggle="false">
+                                        <i class="site-menu-icon fa-bank" aria-hidden="true"></i>
+                                        <span class="site-menu-title">Bank Data</span>
+                                        <span class="site-menu-icon wb-chevron-down-mini" style="float: right;"></span>
                                     </a>
+                                    <div class="dropdown-menu">
+                                        <div class="site-menu-scroll-wrap is-list">
+                                            <div>
+                                                <div>
+                                                    <ul class="site-menu-sub site-menu-normal-list">
+                                                        <li class="site-menu-item">
+                                                            <a href="#">
+                                                                <span class="site-menu-title">Paypal Account</span>
+                                                            </a>
+                                                        </li>
 
+                                                        <li class="site-menu-item">
+                                                            <a href="#">
+                                                                <span class="site-menu-title">Transaction History</span>
+                                                            </a>
+                                                        </li>
+
+
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </li>
+
 
                                 <li class="dropdown site-menu-item has-sub">
                                     <a data-toggle="dropdown" href="#" data-dropdown-toggle="false" onclick="$('#logOutModal').modal('show');">
@@ -668,9 +725,17 @@
                                     </a>                               
                                 </li>
 
-<?php } ?>                              
+                            <?php } ?>   
 
-<?php if ($this->session->userdata("usertype") === "INV") { ?>                            
+
+
+
+
+
+
+
+
+                            <?php if ($this->session->userdata("usertype") === "INV") { ?>                            
                                 <li class="site-menu-category">Investor</li>
 
                                 <li class="dropdown site-menu-item has-sub" id="idDashboardInvestor">
@@ -678,12 +743,160 @@
                                         <i class="site-menu-icon wb-dashboard" aria-hidden="true"></i>
                                         <span class="site-menu-title">Dashboard</span>                                   
                                     </a>
+                                </li>
+                                
+                                 <li class="dropdown site-menu-item has-sub">
+                                    <a data-toggle="dropdown" href="javascript:void(0)" data-dropdown-toggle="false">
+                                        <i class="site-menu-icon wb-folder" aria-hidden="true"></i>
+                                        <span class="site-menu-title">My Data</span>
+                                        <span class="site-menu-icon wb-chevron-down-mini" style="float: right;"></span>
+                                    </a>
+                                    <div class="dropdown-menu">
+                                        <div class="site-menu-scroll-wrap is-list">
+                                            <div>
+                                                <div>
+                                                    <ul class="site-menu-sub site-menu-normal-list">
+                                                        <li class="site-menu-item">
+                                                            <a href="#">
+                                                                <span class="site-menu-title">Account Data</span>
+                                                            </a>
+                                                        </li>
 
+                                                        <li class="site-menu-item">
+                                                            <a href="#">
+                                                                <span class="site-menu-title">Change Password</span>
+                                                            </a>
+                                                        </li>
+
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </li>
 
-<?php } ?>                                 
                                 
-<?php if ($this->session->userdata("usertype") === "COMPMAN") { ?>                            
+                                 <li class="dropdown site-menu-item has-sub">
+                                    <a data-toggle="dropdown" href="javascript:void(0)" data-dropdown-toggle="false">
+                                        <i class="site-menu-icon fa-dollar" aria-hidden="true"></i>
+                                        <span class="site-menu-title">Investments</span>
+                                        <span class="site-menu-icon wb-chevron-down-mini" style="float: right;"></span>
+                                    </a>
+                                    <div class="dropdown-menu">
+                                        <div class="site-menu-scroll-wrap is-list">
+                                            <div>
+                                                <div>
+                                                    <ul class="site-menu-sub site-menu-normal-list">
+                                                        <li class="site-menu-item">
+                                                            <a href="#">
+                                                                <span class="site-menu-title">My Investments</span>
+                                                            </a>
+                                                        </li>
+
+                                                      
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                
+                                <li class="dropdown site-menu-item has-sub" >
+                                    <a data-toggle="dropdown" href="#" data-dropdown-toggle="false">
+                                        <i class="site-menu-icon wb-search" aria-hidden="true"></i>
+                                        <span class="site-menu-title">Opportunities</span>                                   
+                                    </a>
+                                </li>
+                                
+                                
+                                <li class="dropdown site-menu-item has-sub">
+                                    <a data-toggle="dropdown" href="javascript:void(0)" data-dropdown-toggle="false">
+                                        <i class="site-menu-icon fa-bank" aria-hidden="true"></i>
+                                        <span class="site-menu-title">Bank Data</span>
+                                        <span class="site-menu-icon wb-chevron-down-mini" style="float: right;"></span>
+                                    </a>
+                                    <div class="dropdown-menu">
+                                        <div class="site-menu-scroll-wrap is-list">
+                                            <div>
+                                                <div>
+                                                    <ul class="site-menu-sub site-menu-normal-list">
+                                                        <li class="site-menu-item">
+                                                            <a href="#">
+                                                                <span class="site-menu-title">Paypal Account</span>
+                                                            </a>
+                                                        </li>
+
+                                                        <li class="site-menu-item">
+                                                            <a href="#">
+                                                                <span class="site-menu-title">Deposit Funds</span>
+                                                            </a>
+                                                        </li>
+                                                         <li class="site-menu-item">
+                                                            <a href="#">
+                                                                <span class="site-menu-title">Withdraw Funds</span>
+                                                            </a>
+                                                        </li>
+                                                         <li class="site-menu-item">
+                                                            <a href="#">
+                                                                <span class="site-menu-title">Transaction History</span>
+                                                            </a>
+                                                        </li>
+                                                        
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                
+                                
+                                
+                                
+                                <li class="dropdown site-menu-item has-sub">
+                                    <a data-toggle="dropdown" href="javascript:void(0)" data-dropdown-toggle="false">
+                                        <i class="site-menu-icon wb-info-circle" aria-hidden="true"></i>
+                                        <span class="site-menu-title">Information</span>
+                                        <span class="site-menu-icon wb-chevron-down-mini" style="float: right;"></span>
+                                    </a>
+                                    <div class="dropdown-menu">
+                                        <div class="site-menu-scroll-wrap is-list">
+                                            <div>
+                                                <div>
+                                                    <ul class="site-menu-sub site-menu-normal-list">
+                                                        <li class="site-menu-item">
+                                                            <a href="#">
+                                                                <span class="site-menu-title">Basic Data</span>
+                                                            </a>
+                                                        </li>                                                        
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                
+                                
+
+                                <li class="dropdown site-menu-item has-sub">
+                                    <a data-toggle="dropdown" href="#" data-dropdown-toggle="false" onclick="$('#logOutModal').modal('show');">
+                                        <i class="site-menu-icon wb-power" aria-hidden="true"></i>
+                                        <span class="site-menu-title">Logout</span>                                   
+                                    </a>                               
+                                </li>
+
+                            <?php } ?>    
+
+
+
+
+
+
+
+
+
+
+
+                            <?php if ($this->session->userdata("usertype") === "COMPMAN") { ?>                            
                                 <li class="site-menu-category">Company</li>
 
                                 <li class="dropdown site-menu-item has-sub" id="idDashboardCompany">
@@ -691,16 +904,136 @@
                                         <i class="site-menu-icon wb-dashboard" aria-hidden="true"></i>
                                         <span class="site-menu-title">Dashboard</span>                                   
                                     </a>
+                                </li>
+                                
+                                 <li class="dropdown site-menu-item has-sub">
+                                    <a data-toggle="dropdown" href="javascript:void(0)" data-dropdown-toggle="false">
+                                        <i class="site-menu-icon wb-folder" aria-hidden="true"></i>
+                                        <span class="site-menu-title">My Data</span>
+                                        <span class="site-menu-icon wb-chevron-down-mini" style="float: right;"></span>
+                                    </a>
+                                    <div class="dropdown-menu">
+                                        <div class="site-menu-scroll-wrap is-list">
+                                            <div>
+                                                <div>
+                                                    <ul class="site-menu-sub site-menu-normal-list">
+                                                        <li class="site-menu-item">
+                                                            <a href="#">
+                                                                <span class="site-menu-title">Account Data</span>
+                                                            </a>
+                                                        </li>
 
+                                                        <li class="site-menu-item">
+                                                            <a href="#">
+                                                                <span class="site-menu-title">Change Password</span>
+                                                            </a>
+                                                        </li>
+
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </li>
 
-<?php } ?>                                  
+                                 <li class="dropdown site-menu-item has-sub">
+                                    <a data-toggle="dropdown" href="javascript:void(0)" data-dropdown-toggle="false">
+                                        <i class="site-menu-icon fa-cubes" aria-hidden="true"></i>
+                                        <span class="site-menu-title">Projects</span>
+                                        <span class="site-menu-icon wb-chevron-down-mini " style="float: right;"></span>
+                                    </a>
+                                    <div class="dropdown-menu">
+                                        <div class="site-menu-scroll-wrap is-list">
+                                            <div>
+                                                <div>
+                                                    <ul class="site-menu-sub site-menu-normal-list">
+                                                        <li class="site-menu-item">
+                                                            <a href="#">
+                                                                <span class="site-menu-title">My Projects</span>
+                                                            </a>
+                                                        </li>
+
+                                                        <li class="site-menu-item">
+                                                            <a href="#">
+                                                                <span class="site-menu-title">Pending Payouts</span>
+                                                            </a>
+                                                        </li>
+
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
                                 
                                 
+                                <li class="dropdown site-menu-item has-sub">
+                                    <a data-toggle="dropdown" href="javascript:void(0)" data-dropdown-toggle="false">
+                                        <i class="site-menu-icon fa-bank" aria-hidden="true"></i>
+                                        <span class="site-menu-title">Bank Data</span>
+                                        <span class="site-menu-icon wb-chevron-down-mini" style="float: right;"></span>
+                                    </a>
+                                    <div class="dropdown-menu">
+                                        <div class="site-menu-scroll-wrap is-list">
+                                            <div>
+                                                <div>
+                                                    <ul class="site-menu-sub site-menu-normal-list">
+                                                        <li class="site-menu-item">
+                                                            <a href="#">
+                                                                <span class="site-menu-title">Paypal Account</span>
+                                                            </a>
+                                                        </li>
+
+                                                        <li class="site-menu-item">
+                                                            <a href="#">
+                                                                <span class="site-menu-title">Transaction history</span>
+                                                            </a>
+                                                        </li>
+                                                        
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
                                 
-                                
-                                
-                                
+                                  
+                                <li class="dropdown site-menu-item has-sub">
+                                    <a data-toggle="dropdown" href="javascript:void(0)" data-dropdown-toggle="false">
+                                        <i class="site-menu-icon wb-info-circle" aria-hidden="true"></i>
+                                        <span class="site-menu-title">Information</span>
+                                        <span class="site-menu-icon wb-chevron-down-mini" style="float: right;"></span>
+                                    </a>
+                                    <div class="dropdown-menu">
+                                        <div class="site-menu-scroll-wrap is-list">
+                                            <div>
+                                                <div>
+                                                    <ul class="site-menu-sub site-menu-normal-list">
+                                                        <li class="site-menu-item">
+                                                            <a href="#">
+                                                                <span class="site-menu-title">Basic Data</span>
+                                                            </a>
+                                                        </li>                                                        
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+
+                                <li class="dropdown site-menu-item has-sub">
+                                    <a data-toggle="dropdown" href="#" data-dropdown-toggle="false" onclick="$('#logOutModal').modal('show');">
+                                        <i class="site-menu-icon wb-power" aria-hidden="true"></i>
+                                        <span class="site-menu-title">Logout</span>                                   
+                                    </a>                               
+                                </li>
+                            <?php } ?>                                  
+
+
+
+
+
+
                         </ul>
                     </div>
                 </div>
