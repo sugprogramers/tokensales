@@ -12,7 +12,7 @@ class CCountryModel extends CI_Model {
     }   
     
     public function get($id) {
-        $query = $this->db->get_where("c_country", array('c_country_id' => $id));
+        $query = $this->db->order_by("name", "asc")->get_where("c_country", array('c_country_id' => $id)); 
         $queryresult = $query->result();
         if (!$queryresult) {
             return null;

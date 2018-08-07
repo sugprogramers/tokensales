@@ -11,7 +11,7 @@ class CRegionModel extends CI_Model
     }
 
     public function get($id) {
-        $query = $this->db->get_where("c_region", array('c_region_id' => $id));
+        $query = $this->db->order_by("description", "asc")->get_where("c_region", array('c_region_id' => $id));
         $queryresult = $query->result();
         if (!$queryresult) {
             return null;
