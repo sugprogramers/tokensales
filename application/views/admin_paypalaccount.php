@@ -8,7 +8,7 @@
             <div class="panel-body">                               
 
                 <form method="post" id="paypalacct_form">
-                    <p>In order to receive/pay investors and project managers, enter your paypal account (admin paypal)</p>
+                    <p>In order to receive/pay investors and project managers, enter your paypal email address (admin paypal)</p>
                     <div></div>
 
                     <div class="row">
@@ -37,10 +37,13 @@
 
 <script type="text/javascript">
     window.onload = function () {
-        $('#idDashboardAdmin').addClass('active');
-        
-        $("#inpuPaypalAcct").val("<?php echo $paypalacct ?>");                
-        
+        $('#idAdminBankData').addClass('active');
+        $('#idAdminPaypalAcct').addClass('active');
+
+
+        $("#inpuPaypalAcct").val("<?php echo $paypalacct ?>");
+
+
         $("#paypalacct_form").submit(function (event) {
             event.preventDefault();
 
@@ -69,7 +72,7 @@
 
                 }
             });
-        });        
+        });
     };
-    
+
 </script>
