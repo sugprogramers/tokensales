@@ -18,8 +18,16 @@ class Admin_PaypalAccount_Controller extends CI_Controller {
     }
 
     public function index() {
+        /* @var $admin CAdmin */
+        $admin = $this->CAdminModel->loadByUserId($this->session->id);
+        $paypalacct = "";
+        if($admin) {
+            $paypalacct = $admin->paypalusername;
+        }
+        $data = array('paypalacct' => $paypalacct);
+        
         $this->load->view('header/header_admin');
-        $this->load->view('admin_paypalaccount');
+        $this->load->view('admin_paypalaccount', $data);
         $this->load->view('footer/footer_admin');
     }
 
@@ -32,7 +40,7 @@ class Admin_PaypalAccount_Controller extends CI_Controller {
             }
 
             /* @var $admin CAdmin */
-            $admin = $this->CAdminModel->get($this->session->id);
+            $admin = $this->CAdminModel->loadByUserId($this->session->id);
             if (!$admin) {
                 $admin = new CAdmin();
                 $admin->c_user_id = $this->session->id;

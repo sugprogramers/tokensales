@@ -39,6 +39,7 @@
     window.onload = function () {
         $('#idDashboardAdmin').addClass('active');
         
+        $("#inpuPaypalAcct").val("<?php echo $paypalacct ?>");                
         
         $("#paypalacct_form").submit(function (event) {
             event.preventDefault();
@@ -64,7 +65,6 @@
 
                     } else if (resp.status === "success") {
                         showSuccess('Your information has been updated.');
-                        $('#inpuPaypalAcct').val("");
                     }
 
                 }

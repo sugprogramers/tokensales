@@ -20,6 +20,17 @@ class CAdminModel extends CI_Model {
         return CAdmin::build($result);
     }
     
+    public function loadByUserId($userId) {
+        $query = $this->db->get_where("c_admin", array('c_user_id' => $userId));
+        $queryresult = $query->result();
+        if (!$queryresult) {
+            return null;
+        }
+        
+        $result = $queryresult[0];      
+        return CAdmin::build($result);
+    }
+    
     public function save($cAdmin, $updatedBy) {
         $now = (new DateTime())->format('Y-m-d H:i:s');
         if(!$cAdmin->c_admin_id){

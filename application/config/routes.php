@@ -68,6 +68,7 @@ $route['admin_list_company'] = "Admin_List_Company_Controller";
 $route['listalldocument'] = "Admin_List_DocumentType_Controller/listDataGrid";
 $route['user_accountdata'] = "User_Accountdata_Controller";
 $route['user_changepassword'] = "User_Changepassword_Controller";
+$route['admin_paypalaccount'] = "Admin_PaypalAccount_Controller";
 
 //routes investor
 $route['investor_dashboard'] = "Investor_Dashboard_Controller";
