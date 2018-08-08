@@ -79,18 +79,42 @@ class FINPaymentHistoryModel extends CI_Model
     
     public function get_paymentHistoryDetailById($finPaymentHistoryId){
         
-        $this->db->select('po.fin_payment_order_id ,ph.fin_payment_history_id, ph.description, ph.paymentdate, ph.type, ph.fromaccount, ph.toaccount, ph.from_user_id, ph.to_user_id, 
-p.name, p.companyname, p.targetamt, curr.iso_code, p.datelimit, po.amount, po.scheduleddate, pm.paypalusername, 
-pmu.address1, (curr.cursymbol || po.amount) as amountformatted');
+        $this->db->select('ph.fin_payment_history_id, ph.description, ph.paymentdate, ph.fromaccount, ph.toaccount, ph.from_user_id, ph.to_user_id, (curr.cursymbol || ph.amount) as amountformatted,
+            po.ordertype, p.name, p.companyname, pm.paypalusername, iu.firstname, iu.lastname ');
         $this->db->from('fin_payment_history as ph');
+        $this->db->join('c_currency as curr', 'ph.c_currency_id = curr.c_currency_id');
         $this->db->join('fin_payment_order as po','ph.fin_payment_order_id = po.fin_payment_order_id');
-        $this->db->join('c_project  as p', 'po.c_project_id = p.c_project_id ');
-        $this->db->join('c_currency as curr', 'p.c_currency_id = curr.c_currency_id');
-        $this->db->join('c_projectmanager as pm', 'p.c_projectmanager_id = pm.c_projectmanager_id');
-        $this->db->join('c_user as pmu', 'pm.c_user_id = pmu.c_user_id');
+        $this->db->join('c_project as p', 'po.c_project_id = p.c_project_id ', 'left');
+        $this->db->join('c_projectmanager as pm', 'p.c_projectmanager_id = pm.c_projectmanager_id', 'left');
+        $this->db->join('c_investor as i', 'po.c_investor_id = i.c_investor_id ', 'left');
+        $this->db->join('c_user as iu', 'i.c_user_id = iu.c_user_id ', 'left');
         $this->db->where('ph.fin_payment_history_id', $finPaymentHistoryId);
         return $this->db->get();
-    }    
+    }  
+    
+    public function get_statusName($status) {
+        if ($status === 'PEND') {
+            return 'Pending';
+        } 
+        if ($status === 'CO') {
+            return 'Completed';
+        } 
+        if ($status === 'ERR') {
+            return 'Error';
+        } 
+        return 'NONE';        
+    }
+    
+    public function get_typeName($type) {
+        if ($type === 'INT') {
+            return 'Internal';
+        } else if ($type === 'EXTIN') {
+            return 'External-In';
+        } else if ($type === 'EXTOUT') {
+            return 'External-Out';
+        } 
+        return 'NONE';        
+    }
 
 }
 

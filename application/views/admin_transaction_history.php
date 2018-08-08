@@ -39,103 +39,61 @@
     <div class="modal-dialog modal-simple modal-center" style="overflow-y: initial !important">
         <div class="modal-content" style="overflow-y: auto;">
             <form id="executepayment_form">
-                <input type="hidden" id="dlgFinPaymentOrderId" value=""/>
-                <div class="page-content">
-                    <!-- Panel -->
-                    <div class="panel">
-                        <div class="panel-body container-fluid">
-                            <div class="row">
-                                <div class="col-lg-3">
-                                    <a class="navbar-brand navbar-brand-center" href="#">
-                                        <img class="navbar-brand-logo navbar-brand-logo-normal" style="height: 32px;" src="<?php echo base_url() . "themes/default/remark/topbar"; ?>/assets/images/logo2.png"
-                                             title="Remark">
-                                        <span class="navbar-brand-text hidden-xs-down" style="color:#6cd9d0"> 
-                                            SMART 
-                                        </span> 
-                                        <span class="navbar-brand-text hidden-xs-down" style="color:rgba(26, 46, 73, 1);font-size: 10px;"> DEVELOPER </span>
-                                    </a>
-                                </div>
-                                <div class="col-lg-6 offset-lg-3 text-right">
-                                    <h4>Transaction Detail</h4>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <p>
-                                        <br> Payment Date:
-                                        <span class="font-size-15" id="dlgPaymentDate"></span>
-                                    </p>                                    
-                                </div>                             
-                            </div>                            
-                            <div class="row">
-                                <div class="col-lg-9">
-                                    <p>
-                                        <br> From:
-                                        <br>
-                                        <span class="font-size-15" id="dlgFromAccount"></span>
-                                    </p>                                    
-                                    <p>
-                                        <br> To:
-                                        <br>
-                                        <span class="font-size-15" id="dlgToAccount"></span>
-                                    </p>
-                                </div>                              
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <p>
-                                        <br> Description:                                        
-                                        <span class="font-size-15" id="dlgDescription"></span>
-                                    </p>                                    
-                                    <p>
-                                        <br> Project:
-                                        <br>
-                                        <span class="font-size-15" id="dlgProjectName"></span>
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <p>
-                                    <address id="dlgAddress">
-                                    </address>
-                                    </p>
-                                </div>
-                            </div>-
+                <input type="hidden" id="dlgFinPaymentHistoryId" value=""/>
 
-                            <div class="page-invoice-table table-responsive">
-                                <table class="table table-hover text-right">
-                                    <thead>
-                                        <tr>
-                                            <th class="text-center">#</th>
-                                            <th>Description</th>
-                                            <th class="text-right">Quantity</th>
-                                            <th class="text-right">Unit Cost</th>
-                                            <th class="text-right">Total</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="dlgPayoutItems">
-                                    </tbody>
-                                </table>
-                            </div>
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <div>
+                        <h4>Transaction Detail</h4>
+                        <abbr title="paymentdate">Date:</abbr> 
+                        <span class="font-size-15" id="dlgPaymentDate"></span>
+                    </div>                                  
+                </div>  
+                
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <br> From: 
+                            <br>
+                            <span class="font-size-15" id="dlgFromAccount"></span>
 
-                            <div class="text-right clearfix">
-                                <div class="float-right">
-                                    <p>Sub - Total amount:
-                                        <span id="dlgSubTotalAmount"></span>
-                                    </p>
-                                    <p class="page-invoice-amount">Grand Total:
-                                        <span id="dlgGrandTotalAmount"></span>
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="text-right">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                <button type="submit"  class="btn btn-primary">Process Payment</button>
-                            </div>
+                            <br>
+
+                            <br> <span id="dlgToTitle"></span>
+                            <br>
+                            <span class="font-size-15" id="dlgToAccount"></span>
+                        </div>                              
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <p>
+                                <br> Description:
+                                <br>
+                                <span class="font-size-15" id="dlgDescription"></span>
+                            </p>                                    
                         </div>
                     </div>
+
+                    <div class="page-invoice-table table-responsive">
+                        <table class="table table-hover text-right">
+                            <thead>
+                                <tr>
+                                    <th id="dlgPayoutItemTitleDetail" style="text-align: center"></th>
+                                    <th class="text-right">Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody id="dlgPayoutItems">
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+
             </form>
             <!-- End Panel -->
         </div>
@@ -182,19 +140,17 @@
                 if (resp.status === "error") {
                     showError(resp.msg);
                 } else if (resp.status === "success") {
-                    $('#dlgFinPaymentOrderId').val(resp.dlgFinPaymentOrderId);
-                    $('#dlgPaymentDate').text(resp.dlgPaymentDate);                    
+                    $('#dlgFinPaymentHistoryId').val(resp.dlgFinPaymentOrderId);
+                    $('#dlgPaymentDate').text(resp.dlgPaymentDate);
                     $('#dlgFromAccount').text(resp.dlgFromAccount);
                     $('#dlgToAccount').text(resp.dlgToAccount);
                     $('#dlgDescription').text(resp.dlgDescription);
-                    $('#dlgProjectName').text(resp.dlgProjectName);
-                    $('#dlgAddress').text(resp.dlgAddress);
+                    
+                    $('#dlgToTitle').text(resp.dlgToTitle);
+                    $('#dlgPayoutItemTitleDetail').text(resp.dlgPayoutItemTitleDetail);
 
                     $('#dlgPayoutItems').empty();
                     $('#dlgPayoutItems').append(resp.dlgPayoutItems);
-
-                    $('#dlgSubTotalAmount').text(resp.dlgSubTotalAmount);
-                    $('#dlgGrandTotalAmount').text(resp.dlgGrandTotalAmount);
 
                     $('#dialogExecutePayment').modal('show');
                 }
