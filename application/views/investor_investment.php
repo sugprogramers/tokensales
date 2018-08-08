@@ -36,7 +36,7 @@
                           <div class="tab-pane active" id="exampleTabsLineTopOne" role="tabpanel">
                               <div class="row">
                                    <div class="col-md-4">
-                                          <table id="exampleAddRow" class="table table-hover table-striped" data-paging="true" data-sorting="true"
+                                          <table id="exampleAddRow" class="table table-hover table-striped" data-paging="false" data-sorting="false"
                                             data-filtering="true" style="width:100%">
                                             <thead>
                                               <tr>
@@ -94,6 +94,8 @@
 <script type="text/javascript">
 var table;
 var map;
+var markers = [];
+
 window.onload = function () {
     
     $('#exampleAddRow').addClass('active');
@@ -113,6 +115,7 @@ window.onload = function () {
                 type : 'GET'
             },
             
+
 	    columnDefs: [ {
 	      className: 'control',
 	      orderable: false,
@@ -124,33 +127,42 @@ window.onload = function () {
      });
      
      
+     
+     
+     bounds  = new google.maps.LatLngBounds();
+     
      for(i=0;  i< table.rows().data().length;i++){
        var latitude = table.rows().data()[i][7]; // Column 7 Latitude
        var longitude = table.rows().data()[i][8]; // Column 8 Longitude
        var projectName = table.rows().data()[i][0]; // Column 0 ProjectName
+       var index = table.rows().data()[i][9]; // Column 9 Index Order RowData
        
        if(latitude == "" || longitude == "")
          continue;
      
-       randomPoint = new google.maps.LatLng( latitude, longitude);
+        locator = new google.maps.LatLng( latitude, longitude);
        
-        new google.maps.Marker({
-                              position: randomPoint, 
+        var marker = new google.maps.Marker({
+                              position: locator, 
                               map: map,
                               title: projectName
                             });
        
-       
-       
+       markers[index] = marker;
+       bounds.extend(locator);
      }
+     
+     
+     map.fitBounds(bounds); 
      
      /*
      console.log('holis');
      $.each( table.rows().data(), function( key, value ) {
        console.log('value ' + value);
      });*/
+
      
-     
+      
      
 };
 </script>

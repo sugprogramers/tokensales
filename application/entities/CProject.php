@@ -34,6 +34,10 @@ class CProject{
     public $homeimage_id;
     public $description;  
     
+    //maps
+    public $longitude;
+    public $latitude;  
+    
     public static function build($result){
         $cProject = new CProject();   
     
@@ -62,6 +66,9 @@ class CProject{
         $cProject->startdate = $result->startdate; 
         $cProject->homeimage_id = $result->homeimage_id; 
         $cProject->description = $result->description; 
+        
+        $cProject->longitude = $result->longitude; 
+        $cProject->latitude = $result->latitude; 
         
         return $cProject;
     }

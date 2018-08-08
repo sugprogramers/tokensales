@@ -49,7 +49,9 @@ class CProjectModel extends CI_Model {
                 'targetamt' => $cProject->targetamt,
                 'startdate' => $cProject->startdate,
                 'homeimage_id' => $cProject->homeimage_id,
-                'description' => $cProject->description
+                'description' => $cProject->description,
+                'latitude' => $cProject->latitude,
+                'longitude' => $cProject->longitude
             );
             return $this->db->insert('c_project', $data);
         }
@@ -79,7 +81,9 @@ class CProjectModel extends CI_Model {
                 'targetamt' => $cProject->targetamt,
                 'startdate' => $cProject->startdate,
                 'homeimage_id' => $cProject->homeimage_id,
-                'description' => $cProject->description
+                'description' => $cProject->description,
+                'latitude' => $cProject->latitude,
+                'longitude' => $cProject->longitude
             );
 
             $this->db->where('c_project_id', $cProject->c_project_id);
@@ -96,6 +100,21 @@ class CProjectModel extends CI_Model {
             $list[] = CProject::build($project);
         }
         return $list;
+    }
+    
+
+    public function getProjectStatusName($status){
+        log_message("ERROR","ESTADO :". $status);
+        switch ($status) {
+            case "PEND": return "Pending Evaluation";
+            case "COFU": return "Funding Complete";
+            case "NCOFU": return "Funding did not Complete";
+            case "VO": return "Voided";
+            case "ACT": return "Active";
+            case "FI": return "Finished";
+            default: break;
+        }
+        return "uknowkn";
     }
     
 }

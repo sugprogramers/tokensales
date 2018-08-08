@@ -78,6 +78,18 @@ class FINInvestmentModel extends CI_Model
        return $query->result() ;
     }
     
+    public function getInvestmentStatusName($status){
+        log_message("ERROR","ESTADO INVESTMENT :". $status);
+        switch ($status) {
+            case "PEND": return "Pending";
+            case "VO": return "Voided";
+            case "ACT": return "Active";
+            case "FIN": return "Finished";
+            default: break;
+        }
+        return "uknowkn";
+    }
+    
 }
 
 ?>

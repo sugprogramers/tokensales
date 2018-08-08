@@ -8,6 +8,7 @@ class Investor_Investment_Controller extends CI_Controller {
         parent::__construct();
         $this->load->helper('url');
         $this->load->model("FINInvestmentModel");
+        $this->load->model("CProjectModel");
         
         if($this->session->usertype !== "INV"){
             redirect(base_url() . 'login');
@@ -40,9 +41,9 @@ class Investor_Investment_Controller extends CI_Controller {
                 $obj->name,
                 $obj->amount . " " . $obj->cursymbol,               
                 $obj->companyname,
-                $obj->projectstatus,
+                $this->CProjectModel->getProjectStatusName($obj->projectstatus),
                 $obj->investmentdate,
-                $obj->investmentstatus,
+                $this->FINInvestmentModel->getInvestmentStatusName($obj->investmentstatus), 
                 "--",
                 $obj->longitude,
                 $obj->latitude,
