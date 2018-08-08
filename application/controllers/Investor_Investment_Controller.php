@@ -44,8 +44,8 @@ class Investor_Investment_Controller extends CI_Controller {
                 $obj->investmentdate,
                 $obj->investmentstatus,
                 "--",
-                "",
-                "",
+                "47.426341",
+                "-115.421390",
                $count
            );
            
@@ -67,6 +67,7 @@ class Investor_Investment_Controller extends CI_Controller {
    }
    
    
+   //deprecated
    public function get_locator() {
        
        $cUserId = $this->input->post("id"); // 

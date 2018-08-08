@@ -47,6 +47,10 @@
                                                 <th class="none" >Investment Date</th>
                                                 <th class="none" >Investment Status</th>
                                                 <th class="none" >Earnings</th>
+                                                
+                                                <th class="none" >Latitude</th>
+                                                <th class="none" >Longitude</th>
+                                                <th class="none" >index</th>
                                               </tr>
                                               
                                             </thead>
@@ -89,7 +93,7 @@
 
 <script type="text/javascript">
 var table;
-
+var map;
 window.onload = function () {
     
     $('#exampleAddRow').addClass('active');
@@ -104,6 +108,7 @@ window.onload = function () {
             "serverSide": false, //consultar servidor ordenar , filtrar
             
             "ajax": {
+                async: false,
                 url : "<?php echo base_url('Investor_Investment_Controller/get_investment_list/?id='.$userid)?>",
                 type : 'GET'
             },
@@ -112,15 +117,45 @@ window.onload = function () {
 	      className: 'control',
 	      orderable: false,
 	      targets: -1
-		    }]
+		    }, {"targets": [ 7 ], "visible": false},
+                       {"targets": [ 8 ], "visible": false},
+                       {"targets": [ 9 ], "visible": false}
+                ]
      });
+     
+     
+     for(i=0;  i< table.rows().data().length;i++){
+       var latitude = table.rows().data()[i][7]; // Column 7 Latitude
+       var longitude = table.rows().data()[i][8]; // Column 8 Longitude
+       var projectName = table.rows().data()[i][0]; // Column 0 ProjectName
+       
+       if(latitude == "" || longitude == "")
+         continue;
+     
+       randomPoint = new google.maps.LatLng( latitude, longitude);
+       
+        new google.maps.Marker({
+                              position: randomPoint, 
+                              map: map,
+                              title: projectName
+                            });
+       
+       
+       
+     }
+     
+     /*
+     console.log('holis');
+     $.each( table.rows().data(), function( key, value ) {
+       console.log('value ' + value);
+     });*/
+     
+     
+     
 };
 </script>
 
 
-<script>
-        
-</script>
 
 <script>
      function initMap() {
@@ -242,7 +277,7 @@ window.onload = function () {
          
         // The location of USA
         var usa = {lat: 36.2076441, lng: -113.7413709}
-        var map = new google.maps.Map(
+        map = new google.maps.Map(
             //document.getElementById('map'), {zoom: 3, center: usa,  mapTypeId: google.maps.MapTypeId.ROADMAP});
             document.getElementById('map'), {zoom: 3, 
                                             center: usa,
@@ -255,55 +290,7 @@ window.onload = function () {
         map.mapTypes.set('styled_map', styledMapType);
         map.setMapTypeId('styled_map');
         
-        $.ajax({
-            url: "<?php echo base_url('Investor_Investment_Controller/get_locator')?>",
-            type: "POST",
-            data: {'id': "<?php  $userId; ?>"},
-            success: function(data) {
-                 
-                   // console.log(data);
-                    var resp = $.parseJSON(data);//convertir data de json
-                    
-                    if (resp.status === "success") {  
-                         var markerBounds = new google.maps.LatLngBounds();
-                         $.each( resp.data, function( key, value ) {
-                            //console.log('---' + value.longitud);
-                            /*marker = new google.maps.Marker({
-                                position: new google.maps.LatLng(value.longitud, value.latitud),
-                                map: map,
-                                title: value.title
-                            });*/
         
-                            randomPoint = new google.maps.LatLng( value.longitud, value.latitud);
-                            
-                            
-                            // Draw a marker for each random point
-                            new google.maps.Marker({
-                              position: randomPoint, 
-                              map: map,
-                              title: value.title
-                            });
-                            
-                         });
-                         
-                        
-                         markerBounds.extend(randomPoint);
-                         //console.log("data : " + resp.data[0].longitud);
-                    } 
-                    
-                   //map.fitBounds(markerBounds,0);
-                   map.panToBounds(markerBounds);
-                
-                    /*marker = new google.maps.Marker({
-                    position: new google.maps.LatLng(data.lat, data.long),
-                    map: map,
-                    title: 'test'
-                });*/
-                
-            }
-        });
-      
-      
       }
 </script>
 
