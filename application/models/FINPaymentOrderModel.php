@@ -78,17 +78,28 @@ class FINPaymentOrderModel extends CI_Model
         $this->db->from('fin_payment_order as po');
         $this->db->join('c_project  as p', 'po.c_project_id = p.c_project_id ');
         $this->db->join('c_currency as curr', 'p.c_currency_id = curr.c_currency_id');
+        $this->db->where('po.status', 'PEND');
         return $this->db->get();
     }
     
     public function get_paymentOrderInfoById($finPaymentOrderId){
         
-        $this->db->select('po.fin_payment_order_id, p.name, p.companyname, p.targetamt, curr.iso_code, p.datelimit, po.amount, po.scheduleddate, pm.paypalusername, pmu.address1, (curr.cursymbol || po.amount) as amountformatted');
+        $this->db->select('po.fin_payment_order_id, p.name, p.companyname, p.targetamt, curr.iso_code, p.datelimit, po.amount, po.scheduleddate, pm.paypalusername, pmu.address1, (curr.cursymbol || po.amount) as amountformatted, curr.cursymbol, curr.iso_code');
         $this->db->from('fin_payment_order as po');
         $this->db->join('c_project  as p', 'po.c_project_id = p.c_project_id ');
         $this->db->join('c_currency as curr', 'p.c_currency_id = curr.c_currency_id');
         $this->db->join('c_projectmanager as pm', 'p.c_projectmanager_id = pm.c_projectmanager_id');
         $this->db->join('c_user as pmu', 'pm.c_user_id = pmu.c_user_id');
+        $this->db->where('po.fin_payment_order_id', $finPaymentOrderId);
+        $this->db->where('po.status', 'PEND');
+        return $this->db->get();
+    }
+    
+    public function get_projectInfoByOrderPaymentId($finPaymentOrderId){
+        
+        $this->db->select('p.name');
+        $this->db->from('fin_payment_order as po');
+        $this->db->join('c_project  as p', 'po.c_project_id = p.c_project_id ');
         $this->db->where('po.fin_payment_order_id', $finPaymentOrderId);
         return $this->db->get();
     }

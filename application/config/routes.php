@@ -81,6 +81,12 @@ $route['company_dashboard'] = "Company_Dashboard_Controller";
 $route['company_project'] = "Company_List_Project_Controller";
 $route['company_view_project'] = "Company_View_Project_Controller";
 
+//admin project payout
+$route['admin_list_project_ppayout'] = "Admin_List_Project_PPayout_Controller";
+$route['admin_project_ppayout/(:any)'] = "Admin_Project_PPayout_Controller/index/$1";
+$route['paypal/ipn_projectpaymentorder/(:any)'] = "paypal/IPN_ProjectPaymentOrder_Controller/index/$1";
+$route['paypal/ipn_projectpaymentorder_success/(:any)'] = "paypal/IPN_ProjectPaymentOrder_Controller/success/$1";
+$route['paypal/ipn_projectpaymentorder_cancel/(:any)'] = "paypal/IPN_ProjectPaymentOrder_Controller/cancel/$1";
 
 
 //Ejemplo Route test a sub funciones

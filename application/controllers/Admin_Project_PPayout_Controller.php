@@ -19,49 +19,16 @@ class Admin_Project_PPayout_Controller extends CI_Controller {
         }
     }
 
-    public function index() {
+    public function index($finPaymentOrderId) {
+        log_message('error', 'got id:'.$finPaymentOrderId);
+        $data = $this->get_paymentOrderInfoById($finPaymentOrderId);
         $this->load->view('header/header_admin');
-        $this->load->view('admin_project_ppayout');
+        $this->load->view('admin_project_ppayout', $data);
         $this->load->view('footer/footer_admin');
     }
-
-    public function get_items() {
-        $draw = intval($this->input->get("draw"));
-        $start = intval($this->input->get("start"));
-        $length = intval($this->input->get("length"));
-
-
-        $query = $this->FINPaymentOrderModel->get_projects_ppayout();
-        $data = [];
-        foreach ($query->result() as $r) {
-            $data[] = array(
-                $r->name,
-                $r->companyname,
-                $r->targetamt,
-                $r->iso_code,
-                DateTime::createFromFormat('Y-m-d H:i:s', $r->datelimit)->format('Y-m-d'),
-                $r->amount,
-                DateTime::createFromFormat('Y-m-d H:i:s', $r->scheduleddate)->format('Y-m-d'),
-                '<a class="btn btn-sm btn-icon btn-pure btn-default on-default edit-row" href="javascript:void(0)" title="Execute Payment" onclick="open_executepayment('."'".$r->fin_payment_order_id."'".')"><i class="icon wb-edit"></i></a>'
-            );
-        }
-
-        $result = array(
-            "draw" => $draw,
-            "recordsTotal" => $query->num_rows(),
-            "recordsFiltered" => $query->num_rows(),
-            "data" => $data
-        );
-
-
-        echo json_encode($result);
-        exit();
-    }
     
-    public function get_paymentOrderInfoById() {
+    public function get_paymentOrderInfoById($finPaymentOrderId) {
 
-        $finPaymentOrderId = $this->input->post("id");
-        log_message('error', $finPaymentOrderId);
         try {
             $query = $this->FINPaymentOrderModel->get_paymentOrderInfoById($finPaymentOrderId);
             $queryresult = $query->result();
@@ -85,24 +52,28 @@ class Admin_Project_PPayout_Controller extends CI_Controller {
 
             $result = array(
                 "status" => 'success',
+                "msg" => '',
                 "dlgFinPaymentOrderId" => $result->fin_payment_order_id,
                 "dlgCompanyName" => $result->companyname." (".$result->paypalusername.")",
+                "dlgPMPaypalUsername" => $result->paypalusername,
                 "dlgProjectName" => $result->name,
                 "dlgAddress" => $result->address1,
-                "dlgSubTotalAmount" => $result->amountformatted,
-                "dlgGrandTotalAmount" => $result->amountformatted,
-                "dlgPayoutItems" => $html
+                "dlgSubTotalAmount" => $result->amount,
+                "dlgGrandTotalAmount" => $result->amount,
+                "dlgCurrencySymbol" => $result->cursymbol,
+                "dlgCurrencyCode" => $result->iso_code,
+                "dlgPayoutItems" => $html,
             );
 
 
-            echo json_encode($result);
+            return $result;
         }catch(SDException $e){
-            $response = array('status' => 'error', 'msg' => $e->getMessage());
-            echo json_encode($response);
+            $result = array('status' => 'error', 'msg' => $e->getMessage());
+            return $result;
         }        
         catch(Exception $e){
-            $response = array('status' => 'error', 'msg' => 'Error Retreiving Payment Information. Please try again');
-            echo json_encode($response);
+            $result = array('status' => 'error', 'msg' => 'Error Retreiving Payment Information. Please try again');
+            return $result;
         }
     }
     

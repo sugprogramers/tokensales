@@ -1,202 +1,253 @@
 <div class="page">
     <div class="page-header">
-        <h1 class="page-title">Projects Pending for Loan Payout</h1>
         <div class="page-header-actions">
+            <ol class="breadcrumb breadcrumb-arrow">
+                <li class="breadcrumb-item"><a class="icon fa-clipboard" href="<?php echo base_url('admin_list_project_ppayout/') ?>">Projects Pending for Loan Payout</a></li>
+                <li class="breadcrumb-item"><a href="#">Process Project Loan Payout</a></li>
+            </ol>
         </div>
     </div>
-
-    <div class="page-content container-fluid">
+    <div class="page-content container-fluid">    
+        <!-- Panel Table Add Row -->
         <div class="panel">
-            <div class="panel-body">
+            <div class="panel-body nav-tabs-animate">
 
-                <table id="idTableListProjectsPPayout" class="table table-hover dataTable table-striped" role="grid" style="width:100%" >
-                    <thead>
-                        <tr>
-                            <th>Project</th>
-                            <th>Company Name</th>
-                            <th>Target Amount</th>
-                            <th>Currency</th>
-                            <th>Date Limit</th>
-                            <th>Payment Amount</th>
-                            <th>Scheduled Date</th>
-                            <th>Execute Payment</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
+                <div class="tab-content">
 
-            </div> 
-        </div> 
-    </div> 
-</div> 
+                    <div class="tab-pane active  animation-slide-left" role="tabpanel">
+                        <div class="margin-top-5">
 
-<!-- START DIALOG -->
-<!-- Modal -->
-<div class="modal fade" id="dialogExecutePayment" aria-hidden="true" aria-labelledby="dialogExecutePayment"
-     role="dialog" tabindex="-1">
 
-    <div class="modal-dialog modal-simple modal-center" style="overflow-y: initial !important">
-        <div class="modal-content" style="overflow-y: auto;">
-            <form id="executepayment_form">
-                <input type="hidden" id="dlgFinPaymentOrderId" name="dlgFinPaymentOrderId" value=""/>
-                <div class="page-content">
-                    <!-- Panel -->
-                    <div class="panel">
-                        <div class="panel-body container-fluid">
-                            <div class="row">
-                                <div class="col-lg-3">
-                                    <a class="navbar-brand navbar-brand-center" href="#">
-                                        <img class="navbar-brand-logo navbar-brand-logo-normal" style="height: 32px;" src="<?php echo base_url() . "themes/default/remark/topbar"; ?>/assets/images/logo2.png"
-                                             title="Remark">
-                                        <span class="navbar-brand-text hidden-xs-down" style="color:#6cd9d0"> 
-                                            SMART 
-                                        </span> 
-                                        <span class="navbar-brand-text hidden-xs-down" style="color:rgba(26, 46, 73, 1);font-size: 10px;"> DEVELOPER </span>
-                                    </a>
-                                </div>
-                                <div class="col-lg-6 offset-lg-3 text-right">
-                                    <h4>Payment Info</h4>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-9">
-                                    <p>
-                                        <br> To:
-                                        <br>
-                                        <span class="font-size-15" id="dlgCompanyName"></span>
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <p>
-                                        <br> Project:
-                                        <br>
-                                        <span class="font-size-15" id="dlgProjectName"></span>
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <p>
-                                    <address id="dlgAddress">
-                                    </address>
-                                    </p>
-                                </div>
-                            </div>-
 
-                            <div class="page-invoice-table table-responsive">
-                                <table class="table table-hover text-right">
-                                    <thead>
-                                        <tr>
-                                            <th class="text-center">#</th>
-                                            <th>Description</th>
-                                            <th class="text-right">Quantity</th>
-                                            <th class="text-right">Unit Cost</th>
-                                            <th class="text-right">Total</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="dlgPayoutItems">
-                                    </tbody>
-                                </table>
+
+                            <div class="example" id="wizarDiv">
+                                <div class="pearls row">
+                                    <div class="pearl current col-xs-6" style="width: 50%" id="step1" onclick="showDiv(1);">
+                                        <div class="pearl-icon"><i class="icon wb-file" aria-hidden="true"></i></div>
+                                        <span class="pearl-title">Payment Information</span>
+                                    </div>
+
+                                    <div class="pearl  col-xs-6" style="width: 50%" id="step2" >
+                                        <div class="pearl-icon"><i class="icon wb-payment" aria-hidden="true"></i></div>
+                                        <span class="pearl-title">Payment Options</span>
+                                    </div>
+                                </div>
+                            </div>           
+
+
+                            <div class="row" id="paymentInfoData">
+                                <div class="panel-body">
+                                    <form id="paymentInformation-form">
+                                        <input type="hidden" id="dlgFinPaymentOrderId" name="dlgFinPaymentOrderId" value=""/>
+                                        <div class="row">
+                                            <div class="col-lg-9">
+                                                <p>
+                                                    <br> To:
+                                                    <br>
+                                                    <span class="font-size-15" id="dlgCompanyName"></span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <p>
+                                                    <br> Project:
+                                                    <br>
+                                                    <span class="font-size-15" id="dlgProjectName"></span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <p>
+                                                <address id="dlgAddress">
+                                                </address>
+                                                </p>
+                                            </div>
+                                        </div>-
+
+                                        <div class="page-invoice-table table-responsive">
+                                            <table class="table table-hover text-right">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="text-center">#</th>
+                                                        <th>Description</th>
+                                                        <th class="text-right">Quantity</th>
+                                                        <th class="text-right">Unit Cost</th>
+                                                        <th class="text-right">Total</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="dlgPayoutItems">
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                        <div class="text-right clearfix">
+                                            <div class="float-right">
+                                                <p>Sub - Total amount:
+                                                    <span id="dlgSubTotalAmount"></span>
+                                                </p>
+                                                <p class="page-invoice-amount">Grand Total:
+                                                    <span id="dlgGrandTotalAmount"></span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="text-right">
+                                            <button type="submit" class="btn btn-primary"> Confirm &amp; Next <i class="icon wb-arrow-right" aria-hidden="true"></i></button>
+                                        </div>
+                                    </form>
+                                </div> 
                             </div>
 
-                            <div class="text-right clearfix">
-                                <div class="float-right">
-                                    <p>Sub - Total amount:
-                                        <span id="dlgSubTotalAmount"></span>
-                                    </p>
-                                    <p class="page-invoice-amount">Grand Total:
-                                        <span id="dlgGrandTotalAmount"></span>
-                                    </p>
+                            <div class="row" id="optionPaypal" style="display:none">
+                                <center> Once reviewed all payment information you can execute the payment using paypal. <br>
+                                    Please login using the provided button</center>
+                                <div class="example-wrap">
+
+                                    <div class="example">
+                                        <div class="row">
+                                            <div class="col-sm-4">
+
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <div class="pricing-list text-left">
+                                                    <div class="pricing-header bg-green-700">
+                                                        <div class="pricing-title">Payment for loan <!--Standard--> </div>
+                                                        <div class="pricing-price" style="padding: 0px 30px;">
+                                                            <span class="pricing-currency" id="paypalCurrency"></span>
+                                                            <span class="pricing-amount" id="paypalAmount"></span>
+                                                            <span class="pricing-period"></span>
+                                                        </div>
+                                                        <!--<p class="padding-horizontal-30 padding-bottom-25">Vestibulum lacinia arcu eget nulla. Class aptent taciti</p> -->
+                                                    </div>
+                                                    <div class="pricing-footer text-center  bg-blue-grey-100">
+
+
+                                                        <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" target="_top">
+                                                            <input type="hidden" name="cmd" value="_xclick">
+                                                            <input id="changeAmount" type="hidden" name="amount" value="">
+                                                            <input id="changeNotify" type='hidden' name='notify_url' value="" >
+                                                            <input type="hidden" name="return" id="changeReturn" value="<?php echo base_url('paypal/success') ?>">
+                                                            <input type="hidden" name="cancel_return" id="changeCancelReturn" value="<?php echo base_url('paypal/cancel') ?>">
+                                                            <input type="hidden" name="payer_email" id="changePayerEmail" value="" />
+
+                                                            <input type="hidden" name="lc" value="US">
+                                                            <input type="hidden" name="item_name" value="Payout Loan">
+                                                            <input type="hidden" name="currency_code" id="paypalCurrencyCode" value="">
+                                                            <input type="hidden" name="button_subtype" value="services">
+                                                            <input type="hidden" name="tax_rate" value="0.000">
+                                                            <input type="hidden" name="shipping" value="0.00">
+                                                            <input type="hidden" name="bn" value="PP-BuyNowBF:btn_buynowCC_LG.gif:NonHosted">
+                                                            <input type="image" src="https://www.sandbox.paypal.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+                                                            <img alt="" border="0" src="https://www.sandbox.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+                                                        </form>
+
+
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4">
+
+                                            </div>
+
+
+
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="text-right">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                <button type="submit"  class="btn btn-primary">Process Payment</button>
-                            </div>
-                       </div>
+
+
+
+
+                            </div>                   
+
+                        </div>
                     </div>
+
                 </div>
-            </form>
-            <!-- End Panel -->
+            </div>
         </div>
-
+        <!-- End Panel -->
     </div>
-
-</div>
-<!-- End Modal -->
-<!-- END DIALOG-->
+</div> 
 
 <script type="text/javascript">
     window.onload = function () {
-        var table = $('#idTableListProjectsPPayout').DataTable({
-            responsive: true,
-            "order": [[0, "desc"]],
-            "columnDefs": [{
-                    "targets": [6],
-                    "orderable": false
-                }],
-            "processing": false, //mostrar waiting
-            "serverSide": false, //consultar servidor ordenar , filtrar
-            "ajax": {
-                url: "<?php echo base_url('Admin_Project_PPayout_Controller/get_items') ?>",
-                type: 'POST'
-            },
-        });
-        new $.fn.dataTable.FixedHeader(table);
+                    
+        var status = "<?php echo $status ?>";
+        var msg = "<?php echo $msg ?>";
+        console.log(status);
+        if (status === "error") {                       
+            showError(msg);
+        } 
+        else if (status === "success") { 
+            $('#dlgFinPaymentOrderId').val("<?php echo $dlgFinPaymentOrderId ?>"); 
+            $('#dlgCompanyName').text("<?php echo $dlgCompanyName ?>"); 
+            $('#dlgProjectName').text("<?php echo $dlgProjectName ?>"); 
+            $('#dlgAddress').text("<?php echo $dlgAddress ?>"); 
+            
+            $('#dlgPayoutItems').empty();
+            $('#dlgPayoutItems').append('<?php echo $dlgPayoutItems ?>'); 
+                    
+            $('#dlgSubTotalAmount').text("<?php echo $dlgCurrencySymbol ?>" + "<?php echo $dlgSubTotalAmount ?>"); 
+            $('#dlgGrandTotalAmount').text("<?php echo $dlgCurrencySymbol ?>" + "<?php echo $dlgGrandTotalAmount ?>"); 
+
+        }
+        showDiv('1');
         
-        $("#executepayment_form").submit(function (event) {
+        $("#paymentInformation-form").submit(function (event) {
             event.preventDefault();
-            $.ajax({
-                url: "<?php echo base_url('Admin_Project_PPayout_Controller/execute_paymentorder')?>",
-                type: "POST",
-                data: $('#executepayment_form').serialize(),
-                async: true, 
-                success: function (data) {
-                    var resp = $.parseJSON(data);//convertir data de json
-                    if (resp.status === "error") {                       
-                        showError(resp.msg);
-                    } 
-                    else if (resp.status === "success") {  
-                        table.ajax.reload();
-                        $('#dialogExecutePayment').modal('hide')
-                        showSuccess(resp.msg);
-                    }                     
-                }
-            });
+            $('#paypalCurrency').text("<?php echo $dlgCurrencySymbol ?>"); 
+            $('#paypalAmount').text("<?php echo $dlgGrandTotalAmount ?>"); 
+
+            $('#changeAmount').val("<?php echo $dlgGrandTotalAmount ?>");
+            $('#changeNotify').val("<?php echo base_url('paypal/ipn_projectpaymentorder/') ?>" + "<?php echo $dlgFinPaymentOrderId ?>");
+            $('#changeReturn').val("<?php echo base_url('paypal/ipn_projectpaymentorder_success/') ?>" + "<?php echo $dlgFinPaymentOrderId ?>");
+            $('#changeCancelReturn').val("<?php echo base_url('paypal/ipn_projectpaymentorder_cancel/') ?>" + "<?php echo $dlgFinPaymentOrderId ?>");
+        
+            $('#changePayerEmail').val("<?php echo $dlgPMPaypalUsername ?>");
+            $('#paypalCurrencyCode').val("<?php echo $dlgCurrencyCode ?>");
+            showDiv('2');
         });
         
     };
     
+    function showDiv(type) {
+        if (type == '1')
+        {
+            var pnl = document.getElementById('paymentInfoData');
+            pnl.style.visibility = "visible";
+            pnl.style.display = "block";
 
-    function open_executepayment(id){
-        $.ajax({
-            url: "<?php echo base_url('Admin_Project_PPayout_Controller/get_paymentOrderInfoById') ?>",
-            type: "POST",
-            data: {'id': id},
-            success: function (data) {
-                var resp = $.parseJSON(data);//convertir data de json
-                if (resp.status === "error") {                       
-                    showError(resp.msg);
-                } 
-                else if (resp.status === "success") { 
-                    $('#dlgFinPaymentOrderId').val(resp.dlgFinPaymentOrderId); 
-                    $('#dlgCompanyName').text(resp.dlgCompanyName); 
-                    $('#dlgProjectName').text(resp.dlgProjectName); 
-                    $('#dlgAddress').text(resp.dlgAddress); 
-                    
-                    $('#dlgPayoutItems').empty();
-                    $('#dlgPayoutItems').append(resp.dlgPayoutItems); 
-                    
-                    $('#dlgSubTotalAmount').text(resp.dlgSubTotalAmount); 
-                    $('#dlgGrandTotalAmount').text(resp.dlgGrandTotalAmount); 
 
-                    $('#dialogExecutePayment').modal('show');
-                }                     
-            }
-        }); 
+            var pnl = document.getElementById('optionPaypal');
+            pnl.style.visibility = "hidden";
+            pnl.style.display = "none";
+
+
+            document.getElementById('step2').className = 'pearl col-xs-6';
+            document.getElementById('step1').className = 'pearl current col-xs-6';
+
+        }
+        if (type == '2')
+        {
+            var pnl = document.getElementById('paymentInfoData');
+            pnl.style.visibility = "hidden";
+            pnl.style.display = "none";
+
+
+
+            var pnl = document.getElementById('optionPaypal');
+            pnl.style.visibility = "visible";
+            pnl.style.display = "block";
+
+
+            document.getElementById('step1').className = 'pearl col-xs-6';
+            document.getElementById('step2').className = 'pearl current col-xs-6';
+
+        }
+
     }
 
 </script>

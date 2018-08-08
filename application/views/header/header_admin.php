@@ -632,7 +632,7 @@
                                                         </li>
 
                                                         <li class="site-menu-item">
-                                                            <a href="#">
+                                                            <a href="<?php echo base_url(); ?>admin_list_project_ppayout">
                                                                 <span class="site-menu-title">Pending Payouts</span>
                                                             </a>
                                                         </li>
