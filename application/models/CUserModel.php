@@ -5,6 +5,8 @@ include_once "application/entities/CUser.php";
 
 class CUserModel extends CI_Model
 {
+    public static $CUSER_ADMIN_ID = "100";
+    
     public function __construct(){
 	parent::__construct();
 	$this->load->database();

@@ -17,6 +17,7 @@ class FINPaymentHistory
     public $fromaccount;
     public $toaccount;
     public $description;
+    public $fin_payment_order_id;
     
     public $from_user_id;
     public $to_user_id;
@@ -39,6 +40,7 @@ class FINPaymentHistory
        $finPaymentHistory->fromaccount = $result->fromaccount; 
        $finPaymentHistory->toaccount = $result->toaccount; 
        $finPaymentHistory->description = $result->description; 
+       $finPaymentHistory->fin_payment_order_id = $result->fin_payment_order_id; 
        
        $finPaymentHistory->from_user_id = $result->from_user_id; 
        $finPaymentHistory->to_user_id = $result->to_user_id; 

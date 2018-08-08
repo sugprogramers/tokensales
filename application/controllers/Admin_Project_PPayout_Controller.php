@@ -37,7 +37,7 @@ class Admin_Project_PPayout_Controller extends CI_Controller {
             }
             $result = $queryresult[0];
             
-            $cAdmin = $this->CAdminModel->loadByUserId(CAdminModel::$cAdminId);
+            $cAdmin = $this->CAdminModel->loadByUserId(CUserModel::$CUSER_ADMIN_ID);
             if(!$cAdmin){
                 throw new SDException("Error loading payment information.");
             }

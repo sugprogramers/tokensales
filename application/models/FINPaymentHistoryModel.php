@@ -40,6 +40,7 @@ class FINPaymentHistoryModel extends CI_Model
                 'fromaccount' => $finPaymentHistory->fromaccount,
                 'toaccount' => $finPaymentHistory->toaccount,
                 'description' => $finPaymentHistory->description,
+                'fin_payment_order_id' => $finPaymentHistory->fin_payment_order_id,
                 'from_user_id' => $finPaymentHistory->from_user_id,
                 'to_user_id' => $finPaymentHistory->to_user_id
             );
@@ -58,6 +59,7 @@ class FINPaymentHistoryModel extends CI_Model
                 'fromaccount' => $finPaymentHistory->fromaccount,
                 'toaccount' => $finPaymentHistory->toaccount,
                 'description' => $finPaymentHistory->description,
+                'fin_payment_order_id' => $finPaymentHistory->fin_payment_order_id,
                 'from_user_id' => $finPaymentHistory->from_user_id,
                 'to_user_id' => $finPaymentHistory->to_user_id
             );
@@ -114,6 +116,17 @@ class FINPaymentHistoryModel extends CI_Model
             return 'External-Out';
         } 
         return 'NONE';        
+    }
+    
+    public function loadByPaymentOrderId($finPaymentOrderId) {
+        $query = $this->db->get_where("fin_payment_history", array('fin_payment_order_id' => $finPaymentOrderId));
+        $queryresult = $query->result();
+        if (!$queryresult) {
+            return null;
+        }
+        
+        $result = $queryresult[0];      
+        return FINPaymentHistory::build($result);
     }
 
 }

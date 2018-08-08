@@ -129,10 +129,9 @@
                                                             <input id="changeNotify" type='hidden' name='notify_url' value="" >
                                                             <input type="hidden" name="return" id="changeReturn" value="<?php echo base_url('paypal/success') ?>">
                                                             <input type="hidden" name="cancel_return" id="changeCancelReturn" value="<?php echo base_url('paypal/cancel') ?>">
-                                                            <input type="hidden" name="payer_email" id="changePayerEmail" value="" />
-
+                                                            <input type="hidden" name="business" value="" id="changeBusiness">
                                                             <input type="hidden" name="lc" value="US">
-                                                            <input type="hidden" name="item_name" value="Payout Loan">
+                                                            <input type="hidden" name="item_name1" value="Payout Loan">
                                                             <input type="hidden" name="currency_code" id="paypalCurrencyCode" value="">
                                                             <input type="hidden" name="button_subtype" value="services">
                                                             <input type="hidden" name="tax_rate" value="0.000">
@@ -206,7 +205,7 @@
             $('#changeReturn').val("<?php echo base_url('paypal/ipn_projectpaymentorder_success/') ?>" + "<?php echo $dlgFinPaymentOrderId ?>");
             $('#changeCancelReturn').val("<?php echo base_url('paypal/ipn_projectpaymentorder_cancel/') ?>" + "<?php echo $dlgFinPaymentOrderId ?>");
         
-            $('#changePayerEmail').val("<?php echo $dlgPMPaypalUsername ?>");
+            $('#changeBusiness').val("<?php echo $dlgPMPaypalUsername ?>");
             $('#paypalCurrencyCode').val("<?php echo $dlgCurrencyCode ?>");
             showDiv('2');
         });

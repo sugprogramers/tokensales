@@ -36,7 +36,6 @@ class FINPaymentOrderModel extends CI_Model
                 'scheduleddate' => $finPaymentOrder->scheduleddate,
                 'amount' => $finPaymentOrder->amount,
                 'ordertype' => $finPaymentOrder->ordertype,
-                'fin_investment_id' => $finPaymentOrder->fin_investment_id,
                 'c_project_id' => $finPaymentOrder->c_project_id,
                 'c_investor_id' => $finPaymentOrder->c_investor_id,
                 'paymentdate' => $finPaymentOrder->paymentdate
@@ -52,7 +51,6 @@ class FINPaymentOrderModel extends CI_Model
                 'scheduleddate' => $finPaymentOrder->scheduleddate,
                 'amount' => $finPaymentOrder->amount,
                 'ordertype' => $finPaymentOrder->ordertype,
-                'fin_investment_id' => $finPaymentOrder->fin_investment_id,
                 'c_project_id' => $finPaymentOrder->c_project_id,
                 'c_investor_id' => $finPaymentOrder->c_investor_id,
                 'paymentdate' => $finPaymentOrder->paymentdate
@@ -91,7 +89,9 @@ class FINPaymentOrderModel extends CI_Model
         $this->db->join('c_projectmanager as pm', 'p.c_projectmanager_id = pm.c_projectmanager_id');
         $this->db->join('c_user as pmu', 'pm.c_user_id = pmu.c_user_id');
         $this->db->where('po.fin_payment_order_id', $finPaymentOrderId);
+        $this->db->where('po.ordertype', 'PROMPAYOUT');
         $this->db->where('po.status', 'PEND');
+        $this->db->where('p.status', 'COFU');
         return $this->db->get();
     }
     
@@ -103,5 +103,6 @@ class FINPaymentOrderModel extends CI_Model
         $this->db->where('po.fin_payment_order_id', $finPaymentOrderId);
         return $this->db->get();
     }
+    
 
 }

@@ -581,10 +581,34 @@ CREATE TABLE fin_payment_history
   CONSTRAINT fin_payment_history_touser_fk FOREIGN KEY (to_user_id)
       REFERENCES c_user (c_user_id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT fin_payment_history_po_uniq UNIQUE (fin_payment_order_id),
   CONSTRAINT fin_payment_history_isactive_check CHECK (isactive = ANY (ARRAY['Y'::bpchar, 'N'::bpchar]))
 )
 WITH (
   OIDS=FALSE
 );
 ALTER TABLE fin_payment_history
+  OWNER TO smart;
+
+
+CREATE OR REPLACE FUNCTION uuid_generate_v4()
+  RETURNS uuid AS
+'$libdir/uuid-ossp', 'uuid_generate_v4'
+  LANGUAGE c VOLATILE STRICT
+  COST 1;
+ALTER FUNCTION uuid_generate_v4()
+  OWNER TO smart;
+
+CREATE OR REPLACE FUNCTION get_uuid()
+  RETURNS character varying AS
+$BODY$ DECLARE
+var VARCHAR:=uuid_generate_v4();
+BEGIN
+ WHILE var=uuid_generate_v4()::varchar LOOP
+END LOOP; 
+  return replace(upper(uuid_generate_v4()::varchar),'-','');
+END;   $BODY$
+  LANGUAGE plpgsql VOLATILE
+  COST 100;
+ALTER FUNCTION get_uuid()
   OWNER TO smart;
