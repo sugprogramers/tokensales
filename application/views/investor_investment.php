@@ -35,7 +35,7 @@
                         <div class="tab-content pt-20">
                           <div class="tab-pane active" id="exampleTabsLineTopOne" role="tabpanel">
                               <div class="row">
-                                   <div class="col-md-6">
+                                   <div class="col-md-4">
                                           <table id="exampleAddRow" class="table table-hover table-striped" data-paging="true" data-sorting="true"
                                             data-filtering="true" style="width:100%">
                                             <thead>
@@ -54,7 +54,9 @@
                                             </tbody>
                                           </table>
                                    </div>
-                                   <div class="col-md-6">
+                                   <div class="col-md-1">
+                                   </div>
+                                   <div class="col-md-7">
                                        <!-- Example Simple -->
                                         
                                         <div id="map"></div>
@@ -90,8 +92,6 @@ var table;
 
 window.onload = function () {
     
-   
-  
     $('#exampleAddRow').addClass('active');
     table = $('#exampleAddRow').DataTable({
             responsive: true,
@@ -117,22 +117,202 @@ window.onload = function () {
 };
 </script>
 
+
+<script>
+        
+</script>
+
 <script>
      function initMap() {
-        // The location of Uluru
-       // var uluru = {lat: -25.344, lng: 131.036};
-        var uluru = {lat: 41.850033, lng: -87.6500523}
-        // The map, centered at Uluru
+         
+         // Create a new StyledMapType object, passing it an array of styles,
+        // and the name to be displayed on the map type control.
+        var styledMapType = new google.maps.StyledMapType(
+            [
+              {elementType: 'geometry', stylers: [{color: '#ebe3cd'}]},
+              {elementType: 'labels.text.fill', stylers: [{color: '#523735'}]},
+              {elementType: 'labels.text.stroke', stylers: [{color: '#f5f1e6'}]},
+              {
+                featureType: 'administrative',
+                elementType: 'geometry.stroke',
+                stylers: [{color: '#c9b2a6'}]
+              },
+              {
+                featureType: 'administrative.land_parcel',
+                elementType: 'geometry.stroke',
+                stylers: [{color: '#dcd2be'}]
+              },
+              {
+                featureType: 'administrative.land_parcel',
+                elementType: 'labels.text.fill',
+                stylers: [{color: '#ae9e90'}]
+              },
+              {
+                featureType: 'landscape.natural',
+                elementType: 'geometry',
+                stylers: [{color: '#dfd2ae'}]
+              },
+              {
+                featureType: 'poi',
+                elementType: 'geometry',
+                stylers: [{color: '#dfd2ae'}]
+              },
+              {
+                featureType: 'poi',
+                elementType: 'labels.text.fill',
+                stylers: [{color: '#93817c'}]
+              },
+              {
+                featureType: 'poi.park',
+                elementType: 'geometry.fill',
+                stylers: [{color: '#a5b076'}]
+              },
+              {
+                featureType: 'poi.park',
+                elementType: 'labels.text.fill',
+                stylers: [{color: '#447530'}]
+              },
+              {
+                featureType: 'road',
+                elementType: 'geometry',
+                stylers: [{color: '#f5f1e6'}]
+              },
+              {
+                featureType: 'road.arterial',
+                elementType: 'geometry',
+                stylers: [{color: '#fdfcf8'}]
+              },
+              {
+                featureType: 'road.highway',
+                elementType: 'geometry',
+                stylers: [{color: '#f8c967'}]
+              },
+              {
+                featureType: 'road.highway',
+                elementType: 'geometry.stroke',
+                stylers: [{color: '#e9bc62'}]
+              },
+              {
+                featureType: 'road.highway.controlled_access',
+                elementType: 'geometry',
+                stylers: [{color: '#e98d58'}]
+              },
+              {
+                featureType: 'road.highway.controlled_access',
+                elementType: 'geometry.stroke',
+                stylers: [{color: '#db8555'}]
+              },
+              {
+                featureType: 'road.local',
+                elementType: 'labels.text.fill',
+                stylers: [{color: '#806b63'}]
+              },
+              {
+                featureType: 'transit.line',
+                elementType: 'geometry',
+                stylers: [{color: '#dfd2ae'}]
+              },
+              {
+                featureType: 'transit.line',
+                elementType: 'labels.text.fill',
+                stylers: [{color: '#8f7d77'}]
+              },
+              {
+                featureType: 'transit.line',
+                elementType: 'labels.text.stroke',
+                stylers: [{color: '#ebe3cd'}]
+              },
+              {
+                featureType: 'transit.station',
+                elementType: 'geometry',
+                stylers: [{color: '#dfd2ae'}]
+              },
+              {
+                featureType: 'water',
+                elementType: 'geometry.fill',
+                stylers: [{color: '#b9d3c2'}]
+              },
+              {
+                featureType: 'water',
+                elementType: 'labels.text.fill',
+                stylers: [{color: '#92998d'}]
+              }
+            ],
+            {name: 'Styled Map'});
+         
+        // The location of USA
+        var usa = {lat: 36.2076441, lng: -113.7413709}
         var map = new google.maps.Map(
-            document.getElementById('map'), {zoom: 4, center: uluru,  mapTypeId: google.maps.MapTypeId.ROADMAP});
-        // The marker, positioned at Uluru
-        var marker = new google.maps.Marker({position: uluru, map: map});
+            //document.getElementById('map'), {zoom: 3, center: usa,  mapTypeId: google.maps.MapTypeId.ROADMAP});
+            document.getElementById('map'), {zoom: 3, 
+                                            center: usa,
+                                            mapTypeControlOptions: {
+                                                mapTypeIds: ['roadmap', 'satellite', 'hybrid', 'terrain',
+                                                        'styled_map']
+                                              }
+             });
+             
+        map.mapTypes.set('styled_map', styledMapType);
+        map.setMapTypeId('styled_map');
         
+        $.ajax({
+            url: "<?php echo base_url('Investor_Investment_Controller/get_locator')?>",
+            type: "POST",
+            data: {'id': "<?php  $userId; ?>"},
+            success: function(data) {
+                 
+                   // console.log(data);
+                    var resp = $.parseJSON(data);//convertir data de json
+                    
+                    if (resp.status === "success") {  
+                         var markerBounds = new google.maps.LatLngBounds();
+                         $.each( resp.data, function( key, value ) {
+                            //console.log('---' + value.longitud);
+                            /*marker = new google.maps.Marker({
+                                position: new google.maps.LatLng(value.longitud, value.latitud),
+                                map: map,
+                                title: value.title
+                            });*/
+        
+                            randomPoint = new google.maps.LatLng( value.longitud, value.latitud);
+                            
+                            
+                            // Draw a marker for each random point
+                            new google.maps.Marker({
+                              position: randomPoint, 
+                              map: map,
+                              title: value.title
+                            });
+                            
+                         });
+                         
+                        
+                         markerBounds.extend(randomPoint);
+                         //console.log("data : " + resp.data[0].longitud);
+                    } 
+                    
+                   //map.fitBounds(markerBounds,0);
+                   map.panToBounds(markerBounds);
+                
+                    /*marker = new google.maps.Marker({
+                    position: new google.maps.LatLng(data.lat, data.long),
+                    map: map,
+                    title: 'test'
+                });*/
+                
+            }
+        });
+      
       
       }
 </script>
 
 
+
+
+
 <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDV9sWkjQb7BDzfK_NwlnF4wDY66j1iRtg&callback=initMap">
-    </script>
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAI49kT8nqt6CKwnstK2S2kJuabIPcbvOE
+&callback=initMap">
+</script>
+

@@ -33,6 +33,7 @@ class Investor_Investment_Controller extends CI_Controller {
       $query = $this->FINInvestmentModel->get_investment_project_list($userId);
       $data = [];
         
+      $count = 0;
        foreach ($query as $obj) {
            
            $data[] = array(
@@ -42,8 +43,13 @@ class Investor_Investment_Controller extends CI_Controller {
                 $obj->projectstatus,
                 $obj->investmentdate,
                 $obj->investmentstatus,
-                "--"
+                "--",
+                "",
+                "",
+               $count
            );
+           
+           $count++;
           
        }
       
@@ -59,6 +65,49 @@ class Investor_Investment_Controller extends CI_Controller {
       
       exit();
    }
+   
+   
+   public function get_locator() {
+       
+       $cUserId = $this->input->post("id"); // 
+       echo $cUserId;
+       try{ 
+           // $query = $this->FINInvestmentModel->get_investment_project_list($userId);
+            $data = [];
+            
+            /*foreach ($query as $obj) {
+           
+              $data[] = array("longitud" =>  $obj->longitud,
+                              "latitud" => $obj->latitud
+               );
+          
+            }*/
+            
+             $data[] = array("longitud" =>  '47.426341',
+                              "latitud" => '-115.421390',
+                              "title" => 'project 1');
+             
+              $data[] = array("longitud" =>  '45.431016',
+                              "latitud" => '-99.273460',
+                              "title" => 'project 2');
+              
+               $data[] = array("longitud" =>  '40.568565',
+                              "latitud" => '-106.398504',
+                              "title" => 'project 3');
+            
+       
+            
+          //  $dataTotal[] = array($data)
+
+              $response = array('redirect' => '', 'status' => 'success', 'data' => $data);
+              echo json_encode($response);
+          
+            
+       } catch (Exception $e) {
+            $response = array('redirect' => '', 'status' => 'error', 'msg' => $e->getMessage());
+            echo json_encode($response);
+       }
+    }
     
    
 }
