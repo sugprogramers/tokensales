@@ -60,16 +60,33 @@
                                 </div>
                             </div>
                             <div class="row">
+                                <div class="col-lg-12">
+                                    <p>
+                                        <br> Payment Date:
+                                        <span class="font-size-15" id="dlgPaymentDate"></span>
+                                    </p>                                    
+                                </div>                             
+                            </div>                            
+                            <div class="row">
                                 <div class="col-lg-9">
+                                    <p>
+                                        <br> From:
+                                        <br>
+                                        <span class="font-size-15" id="dlgFromAccount"></span>
+                                    </p>                                    
                                     <p>
                                         <br> To:
                                         <br>
-                                        <span class="font-size-15" id="dlgCompanyName"></span>
+                                        <span class="font-size-15" id="dlgToAccount"></span>
                                     </p>
-                                </div>
+                                </div>                              
                             </div>
                             <div class="row">
-                                <div class="col-lg-6">
+                                <div class="col-lg-12">
+                                    <p>
+                                        <br> Description:                                        
+                                        <span class="font-size-15" id="dlgDescription"></span>
+                                    </p>                                    
                                     <p>
                                         <br> Project:
                                         <br>
@@ -166,7 +183,10 @@
                     showError(resp.msg);
                 } else if (resp.status === "success") {
                     $('#dlgFinPaymentOrderId').val(resp.dlgFinPaymentOrderId);
-                    $('#dlgCompanyName').text(resp.dlgCompanyName);
+                    $('#dlgPaymentDate').text(resp.dlgPaymentDate);                    
+                    $('#dlgFromAccount').text(resp.dlgFromAccount);
+                    $('#dlgToAccount').text(resp.dlgToAccount);
+                    $('#dlgDescription').text(resp.dlgDescription);
                     $('#dlgProjectName').text(resp.dlgProjectName);
                     $('#dlgAddress').text(resp.dlgAddress);
 

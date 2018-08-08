@@ -514,7 +514,6 @@ CREATE TABLE fin_payment_order
   --INVPAYOUT: investor payout 
   --PROMPAYOUT: project manager payout
   ordertype character varying(60) NOT NULL DEFAULT 'INVPAYOUT'::character varying,
-  fin_investment_id character varying(32),
   c_project_id character varying(32),
   c_investor_id character varying(32),
 
@@ -553,9 +552,10 @@ CREATE TABLE fin_payment_history
   --CO: completed
   --ERR: completed with error
   status character varying(60) NOT NULL DEFAULT 'PEND'::character varying,
-
-  --INT: internal
-  --EXT: external
+  
+  --INT: internal 
+  --EXTIN: external in 
+  --EXTOUT: external out
   type character varying(60) NOT NULL,
   c_currency_id character varying(32) NOT NULL,
   amount numeric NOT NULL,

@@ -97,6 +97,10 @@ class Admin_TransactionHistory_Controller extends CI_Controller {
             }
             $result = $queryresult[0];
            
+            $from_user = $this->CUserModel->get($result->from_user_id);
+            $to_user = $this->CUserModel->get($result->to_user_id);
+            $paymentdate = $this->createDateTimeStrFormat($result->paymentdate, 'Y-m-d H:i:s');
+            log_message('error', $paymentdate);
             
             $html = '<tr>';
             $html .= '<td class="text-center">1</td>';
@@ -105,11 +109,14 @@ class Admin_TransactionHistory_Controller extends CI_Controller {
             $html .= '<td>'.$result->amountformatted.'</td>';
             $html .= '<td>'.$result->amountformatted.'</td>';
             $html .= '</tr>';
-
+             
             $result = array(
                 "status" => 'success',
-                "dlgFinPaymentOrderId" => $result->fin_payment_order_id,
-                "dlgCompanyName" => $result->companyname." (".$result->paypalusername.")",
+                "dlgFinPaymentOrderId" => $result->fin_payment_history_id,
+                "dlgPaymentDate" => $paymentdate, 
+                "dlgFromAccount" => $result->fromaccount." (user: ".$from_user->email.")",
+                "dlgToAccount" => $result->toaccount." (user: ".$to_user->email.")",
+                "dlgDescription" => $result->description,
                 "dlgProjectName" => $result->name,
                 "dlgAddress" => $result->address1,
                 "dlgSubTotalAmount" => $result->amountformatted,

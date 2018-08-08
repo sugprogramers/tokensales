@@ -79,13 +79,16 @@ class FINPaymentHistoryModel extends CI_Model
     
     public function get_paymentHistoryDetailById($finPaymentHistoryId){
         
-        $this->db->select('po.fin_payment_order_id, p.name, p.companyname, p.targetamt, curr.iso_code, p.datelimit, po.amount, po.scheduleddate, pm.paypalusername, pmu.address1, (curr.cursymbol || po.amount) as amountformatted');
-        $this->db->from('fin_payment_order as po');
+        $this->db->select('po.fin_payment_order_id ,ph.fin_payment_history_id, ph.description, ph.paymentdate, ph.type, ph.fromaccount, ph.toaccount, ph.from_user_id, ph.to_user_id, 
+p.name, p.companyname, p.targetamt, curr.iso_code, p.datelimit, po.amount, po.scheduleddate, pm.paypalusername, 
+pmu.address1, (curr.cursymbol || po.amount) as amountformatted');
+        $this->db->from('fin_payment_history as ph');
+        $this->db->join('fin_payment_order as po','ph.fin_payment_order_id = po.fin_payment_order_id');
         $this->db->join('c_project  as p', 'po.c_project_id = p.c_project_id ');
         $this->db->join('c_currency as curr', 'p.c_currency_id = curr.c_currency_id');
         $this->db->join('c_projectmanager as pm', 'p.c_projectmanager_id = pm.c_projectmanager_id');
         $this->db->join('c_user as pmu', 'pm.c_user_id = pmu.c_user_id');
-        $this->db->where('po.fin_payment_order_id', 'PAYMENTORDER_04');//$finPaymentHistoryId);
+        $this->db->where('ph.fin_payment_history_id', $finPaymentHistoryId);
         return $this->db->get();
     }    
 
