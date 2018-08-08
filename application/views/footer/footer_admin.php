@@ -63,18 +63,34 @@
   <script src="<?php echo base_url()."themes/default/remark"; ?>/global/vendor/datatables.net-responsive/dataTables.responsive.min599c.js?v4.0.2"></script>
   <script src="<?php echo base_url()."themes/default/remark"; ?>/global/vendor/bootbox/bootbox.min599c.js?v4.0.2"></script>
   
+  <!-- ALERt confirmation -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
+  
+  
+  
+  
+  <!--  list porjects -->    
+  <script src="<?php echo base_url()."themes/default/remark"; ?>/global/js/Plugin/sticky-header.min599c.js?v4.0.2"></script>  
+  <script src="<?php echo base_url()."themes/default/remark"; ?>/global/js/Plugin/animate-list.min599c.js?v4.0.2"></script>
+  <script src="<?php echo base_url()."themes/default/remark"; ?>/global/js/Plugin/action-btn.min599c.js?v4.0.2"></script>
+  <!-- <script src="<?php echo base_url()."themes/default/remark"; ?>/global/js/Plugin/asselectable.min599c.js?v4.0.2"></script>
+  <script src="<?php echo base_url()."themes/default/remark"; ?>/global/js/Plugin/selectable.min599c.js?v4.0.2"></script> -->
+  <script src="<?php echo base_url()."themes/default/remark/topbar"; ?>/assets/js/BaseApp.min599c.js?v4.0.2"></script>
+  <script src="<?php echo base_url()."themes/default/remark/topbar"; ?>/assets/js/App/Media.min599c.js?v4.0.2"></script>
+  <script src="<?php echo base_url()."themes/default/remark/topbar"; ?>/assets/examples/js/apps/media.min599c.js?v4.0.2"></script>
+  
+  
 
-  <script>
+ <script>
     (function(document, window, $) {
       'use strict';
 
-      var Site = window.Site;
+      /*var Site = window.Site;
       $(document).ready(function() {
         Site.run();
-      });
+      });*/
     })(document, window, jQuery);
-  </script>
+  </script> 
 
   <script>
     function showWarning(val) {

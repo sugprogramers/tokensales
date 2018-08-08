@@ -53,8 +53,7 @@
         <link rel="stylesheet" href="<?php echo base_url() . "themes/default/remark"; ?>/global/vendor/datatables.net-responsive-bs4/dataTables.responsive.bootstrap4.min599c.css?v4.0.2">
         <link rel="stylesheet" href="<?php echo base_url() . "themes/default/remark"; ?>/global/vendor/datatables.net-buttons-bs4/dataTables.buttons.bootstrap4.min599c.css?v4.0.2">
 
-
-        <!--[if lt IE 9]>
+         <!--[if lt IE 9]>
           <script src="<?php echo base_url() . "themes/default/remark"; ?>/global/vendor/html5shiv/html5shiv.min.js?v4.0.2"></script>
           <![endif]-->
 
@@ -70,6 +69,7 @@
         </script>
 
         <link id="skinStyle" href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/assets/skins/cyan.css" rel="stylesheet" type="text/css">
+        
     </head>
     <body class="animsition site-navbar-small ">
         <!--[if lt IE 8]>
@@ -582,7 +582,7 @@
                                     <a data-toggle="dropdown" href="javascript:void(0)" data-dropdown-toggle="false">
                                         <i class="site-menu-icon wb-folder" aria-hidden="true"></i>
                                         <span class="site-menu-title">My Data</span>
-                                        <span class="site-menu-icon wb-chevron-down-mini" style="float: right;"></span><!--<span class="site-menu-arrow"></span>-->
+                                        <span class="site-menu-icon wb-chevron-down-mini" ></span><!--<span class="site-menu-arrow"></span>-->
                                     </a>
                                     <div class="dropdown-menu">
                                         <div class="site-menu-scroll-wrap is-list">
@@ -612,7 +612,7 @@
                                     <a data-toggle="dropdown" href="javascript:void(0)" data-dropdown-toggle="false">
                                         <i class="site-menu-icon wb-folder" aria-hidden="true"></i>
                                         <span class="site-menu-title">Projects</span>
-                                        <span class="site-menu-icon wb-chevron-down-mini" style="float: right;"></span><!--<span class="site-menu-arrow"></span>-->
+                                        <span class="site-menu-icon wb-chevron-down-mini" ></span><!--<span class="site-menu-arrow"></span>-->
                                     </a>
                                     <div class="dropdown-menu">
                                         <div class="site-menu-scroll-wrap is-list">
@@ -651,7 +651,7 @@
                                     <a data-toggle="dropdown" href="javascript:void(0)" data-dropdown-toggle="false">
                                         <i class="site-menu-icon wb-users" aria-hidden="true"></i>
                                         <span class="site-menu-title">Investors</span>
-                                        <span class="site-menu-icon wb-chevron-down-mini" style="float: right;"></span>
+                                        <span class="site-menu-icon wb-chevron-down-mini" ></span>
                                     </a>
                                     <div class="dropdown-menu">
                                         <div class="site-menu-scroll-wrap is-list">
@@ -690,7 +690,7 @@
                                     <a data-toggle="dropdown" href="javascript:void(0)" data-dropdown-toggle="false">
                                         <i class="site-menu-icon fa-bank" aria-hidden="true"></i>
                                         <span class="site-menu-title">Bank Data</span>
-                                        <span class="site-menu-icon wb-chevron-down-mini" style="float: right;"></span>
+                                        <span class="site-menu-icon wb-chevron-down-mini" ></span>
                                     </a>
                                     <div class="dropdown-menu">
                                         <div class="site-menu-scroll-wrap is-list">
@@ -749,7 +749,7 @@
                                     <a data-toggle="dropdown" href="javascript:void(0)" data-dropdown-toggle="false">
                                         <i class="site-menu-icon wb-folder" aria-hidden="true"></i>
                                         <span class="site-menu-title">My Data</span>
-                                        <span class="site-menu-icon wb-chevron-down-mini" style="float: right;"></span>
+                                        <span class="site-menu-icon wb-chevron-down-mini" ></span>
                                     </a>
                                     <div class="dropdown-menu">
                                         <div class="site-menu-scroll-wrap is-list">
@@ -780,7 +780,7 @@
                                     <a data-toggle="dropdown" href="javascript:void(0)" data-dropdown-toggle="false">
                                         <i class="site-menu-icon fa-dollar" aria-hidden="true"></i>
                                         <span class="site-menu-title">Investments</span>
-                                        <span class="site-menu-icon wb-chevron-down-mini" style="float: right;"></span>
+                                        <span class="site-menu-icon wb-chevron-down-mini" ></span>
                                     </a>
                                     <div class="dropdown-menu">
                                         <div class="site-menu-scroll-wrap is-list">
@@ -813,7 +813,7 @@
                                     <a data-toggle="dropdown" href="javascript:void(0)" data-dropdown-toggle="false">
                                         <i class="site-menu-icon fa-bank" aria-hidden="true"></i>
                                         <span class="site-menu-title">Bank Data</span>
-                                        <span class="site-menu-icon wb-chevron-down-mini" style="float: right;"></span>
+                                        <span class="site-menu-icon wb-chevron-down-mini" ></span>
                                     </a>
                                     <div class="dropdown-menu">
                                         <div class="site-menu-scroll-wrap is-list">
@@ -856,7 +856,7 @@
                                     <a data-toggle="dropdown" href="javascript:void(0)" data-dropdown-toggle="false">
                                         <i class="site-menu-icon wb-info-circle" aria-hidden="true"></i>
                                         <span class="site-menu-title">Information</span>
-                                        <span class="site-menu-icon wb-chevron-down-mini" style="float: right;"></span>
+                                        <span class="site-menu-icon wb-chevron-down-mini" ></span>
                                     </a>
                                     <div class="dropdown-menu">
                                         <div class="site-menu-scroll-wrap is-list">
@@ -910,7 +910,7 @@
                                     <a data-toggle="dropdown" href="javascript:void(0)" data-dropdown-toggle="false">
                                         <i class="site-menu-icon wb-folder" aria-hidden="true"></i>
                                         <span class="site-menu-title">My Data</span>
-                                        <span class="site-menu-icon wb-chevron-down-mini" style="float: right;"></span>
+                                        <span class="site-menu-icon wb-chevron-down-mini" ></span>
                                     </a>
                                     <div class="dropdown-menu">
                                         <div class="site-menu-scroll-wrap is-list">
@@ -940,7 +940,7 @@
                                     <a data-toggle="dropdown" href="javascript:void(0)" data-dropdown-toggle="false">
                                         <i class="site-menu-icon fa-cubes" aria-hidden="true"></i>
                                         <span class="site-menu-title">Projects</span>
-                                        <span class="site-menu-icon wb-chevron-down-mini " style="float: right;"></span>
+                                        <span class="site-menu-icon wb-chevron-down-mini " ></span>
                                     </a>
                                     <div class="dropdown-menu">
                                         <div class="site-menu-scroll-wrap is-list">
@@ -971,7 +971,7 @@
                                     <a data-toggle="dropdown" href="javascript:void(0)" data-dropdown-toggle="false">
                                         <i class="site-menu-icon fa-bank" aria-hidden="true"></i>
                                         <span class="site-menu-title">Bank Data</span>
-                                        <span class="site-menu-icon wb-chevron-down-mini" style="float: right;"></span>
+                                        <span class="site-menu-icon wb-chevron-down-mini" ></span>
                                     </a>
                                     <div class="dropdown-menu">
                                         <div class="site-menu-scroll-wrap is-list">
@@ -1002,7 +1002,7 @@
                                     <a data-toggle="dropdown" href="javascript:void(0)" data-dropdown-toggle="false">
                                         <i class="site-menu-icon wb-info-circle" aria-hidden="true"></i>
                                         <span class="site-menu-title">Information</span>
-                                        <span class="site-menu-icon wb-chevron-down-mini" style="float: right;"></span>
+                                        <span class="site-menu-icon wb-chevron-down-mini" ></span>
                                     </a>
                                     <div class="dropdown-menu">
                                         <div class="site-menu-scroll-wrap is-list">
