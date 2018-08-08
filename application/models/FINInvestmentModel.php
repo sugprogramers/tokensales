@@ -67,7 +67,7 @@ class FINInvestmentModel extends CI_Model
     }  
     
     public function get_investment_project_list($userId){
-       $this->db->select('fin.fin_investment_id, fin.status as investmentstatus, fin.amount , date(fin.created) as investmentdate, cur.cursymbol, pr.c_project_id , pr.name,pr.companyname ,pr.projectstatus ');
+       $this->db->select("fin.fin_investment_id, fin.status as investmentstatus, fin.amount , date(fin.created) as investmentdate, cur.cursymbol, pr.c_project_id , pr.name,pr.companyname ,pr.projectstatus, COALESCE(pr.longitude,'') as longitude, COALESCE(pr.latitude,'') as latitude ");
        $this->db->from('fin_investment as fin');
        $this->db->join('c_project as pr', 'fin.c_project_id = pr.c_project_id ');
        $this->db->join('c_currency cur', 'pr.c_currency_id =cur.c_currency_id ');

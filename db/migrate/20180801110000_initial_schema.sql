@@ -367,7 +367,10 @@ CREATE TABLE c_project
 
   --PROJECT PRESENTATION
   homeimage_id character varying(32),
-  description text, 
+  description text,
+
+  longitude character varying(40),
+  latitude character varying(40),
 
   CONSTRAINT c_project_key PRIMARY KEY (c_project_id),
   CONSTRAINT c_project_c_proman FOREIGN KEY (c_projectmanager_id)

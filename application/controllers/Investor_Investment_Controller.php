@@ -44,8 +44,8 @@ class Investor_Investment_Controller extends CI_Controller {
                 $obj->investmentdate,
                 $obj->investmentstatus,
                 "--",
-                "47.426341",
-                "-115.421390",
+                $obj->longitude,
+                $obj->latitude,
                $count
            );
            
