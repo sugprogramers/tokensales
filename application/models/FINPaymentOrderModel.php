@@ -76,7 +76,9 @@ class FINPaymentOrderModel extends CI_Model
         $this->db->from('fin_payment_order as po');
         $this->db->join('c_project  as p', 'po.c_project_id = p.c_project_id ');
         $this->db->join('c_currency as curr', 'p.c_currency_id = curr.c_currency_id');
+        $this->db->where('po.ordertype', 'PROMPAYOUT');
         $this->db->where('po.status', 'PEND');
+        $this->db->where('p.projectstatus', 'COFU');
         return $this->db->get();
     }
     
@@ -91,7 +93,7 @@ class FINPaymentOrderModel extends CI_Model
         $this->db->where('po.fin_payment_order_id', $finPaymentOrderId);
         $this->db->where('po.ordertype', 'PROMPAYOUT');
         $this->db->where('po.status', 'PEND');
-        $this->db->where('p.status', 'COFU');
+        $this->db->where('p.projectstatus', 'COFU');
         return $this->db->get();
     }
     

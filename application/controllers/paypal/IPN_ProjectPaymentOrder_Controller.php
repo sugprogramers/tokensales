@@ -73,7 +73,7 @@ class IPN_ProjectPaymentOrder_Controller extends CI_Controller {
             $finPaymentHistory->to_user_id = $cUserTo; 
             
             $this->FINPaymentHistoryModel->save($finPaymentHistory, CUserModel::$CUSER_ADMIN_ID);
-            
+            $this->db->query("SELECT fin_project_processloan(?);", array($finPaymentOrder->fin_payment_order_id));
             $this->db->trans_commit();
         }catch(SDException $e){
             $this->db->trans_rollback();

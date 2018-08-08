@@ -612,3 +612,90 @@ END;   $BODY$
   COST 100;
 ALTER FUNCTION get_uuid()
   OWNER TO smart;
+
+CREATE OR REPLACE FUNCTION dateformat()
+  RETURNS character varying AS
+$BODY$ 
+BEGIN
+RETURN 'DD-MM-YYYY';
+EXCEPTION 
+  WHEN OTHERS THEN 
+    RETURN NULL;
+END;
+$BODY$
+  LANGUAGE plpgsql IMMUTABLE
+  COST 100;
+ALTER FUNCTION dateformat()
+  OWNER TO tad;
+
+CREATE OR REPLACE FUNCTION to_timestamp(timestamp with time zone)
+  RETURNS timestamp without time zone AS
+$BODY$
+BEGIN
+RETURN to_timestamp(to_char($1, dateFormat()), dateFormat());
+END;
+$BODY$
+  LANGUAGE plpgsql IMMUTABLE
+  COST 100;
+ALTER FUNCTION to_timestamp(timestamp with time zone)
+  OWNER TO tad;
+
+CREATE OR REPLACE FUNCTION trunc(timestamp with time zone)
+  RETURNS date AS
+$BODY$
+BEGIN
+RETURN to_timestamp(to_char($1, dateFormat()), dateFormat());
+END;
+$BODY$
+  LANGUAGE plpgsql IMMUTABLE
+  COST 100;
+ALTER FUNCTION trunc(timestamp with time zone)
+  OWNER TO tad;
+
+
+CREATE OR REPLACE FUNCTION fin_project_processloan(IN p_fin_payment_order_id character varying)
+  RETURNS void AS
+$BODY$ DECLARE 
+  CUR_PaymentOrder RECORD;
+  CUR_PaymentHistory RECORD;
+  CUR_Project RECORD;
+  now TIMESTAMP;
+  v_Aux NUMERIC;
+  BEGIN
+  
+  SELECT * INTO CUR_PaymentOrder FROM FIN_Payment_Order WHERE FIN_Payment_Order_ID = p_fin_payment_order_id FOR UPDATE;
+  IF(CUR_PaymentOrder.ordertype <> 'PROMPAYOUT' || CUR_PaymentOrder.status <> 'PEND') THEN
+    RAISE EXCEPTION '%','@FIN_ProcessProjectPaymentOrderIncorrectStatus@';
+  END IF;
+
+  SELECT * INTO CUR_Project FROM C_Project WHERE C_Project_ID = CUR_PaymentOrder.C_Project_ID FOR UPDATE;
+  IF(CUR_Project.projectstatus <> 'COFU') THEN
+    RAISE EXCEPTION '%','@FIN_ProcessProjectPaymentOrderIncorrectProjectStatus@';
+  END IF;
+
+  SELECT * INTO CUR_PaymentHistory FROM FIN_Payment_History WHERE C_Project_ID = CUR_PaymentOrder.C_Project_ID FOR UPDATE;
+  IF(CUR_PaymentHistory.status <> 'PEND') THEN
+    RAISE EXCEPTION '%','@FIN_ProcessProjectPaymentOrderIncorrectPhistoryStatus@';
+  END IF;
+
+  SELECT count(*) INTO v_Aux
+  FROM FIN_Investment
+  WHERE c_project_id = CUR_Project.c_project_id
+  AND status<>'PEND';
+
+  IF(v_Aux <> 0) THEN
+    RAISE EXCEPTION '%','@FIN_ProcessProjectPaymentOrderIncorrectInvestmentStatus@';
+  END IF;
+
+  now := TO_DATE(NOW());
+  UPDATE C_Investment SET status='ACT', startdate=now WHERE  c_project_id = CUR_Project.c_project_id;
+  UPDATE C_Project SET projectstatus='ACT', startdate=now  WHERE  c_project_id = CUR_Project.c_project_id;
+  UPDATE FIN_Payment_Order SET status='CO', paymentdate=CUR_PaymentHistory.paymentdate WHERE  CUR_PaymentOrder = CUR_PaymentOrder.fin_payment_order_id;
+  UPDATE FIN_Payment_History SET status='CO' WHERE  fin_payment_history_id = CUR_PaymentHistory.fin_payment_history_id;
+
+  RETURN;
+END ; $BODY$
+  LANGUAGE plpgsql VOLATILE
+  COST 100;
+ALTER FUNCTION fin_project_processloan(character varying)
+  OWNER TO smart;

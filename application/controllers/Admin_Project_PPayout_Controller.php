@@ -12,6 +12,7 @@ class Admin_Project_PPayout_Controller extends CI_Controller {
         $this->load->helper('url');
         $this->load->model("FINPaymentOrderModel");
         $this->load->model("CAdminModel");
+        $this->load->model("CUserModel");
         
        
         if($this->session->usertype !== "ADM"){
