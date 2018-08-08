@@ -78,7 +78,8 @@ $route['investor_investment'] = "Investor_Investment_Controller";
 
 //routes company
 $route['company_dashboard'] = "Company_Dashboard_Controller";
-
+$route['company_project'] = "Company_List_Project_Controller";
+$route['company_view_project'] = "Company_View_Project_Controller";
 
 
 
