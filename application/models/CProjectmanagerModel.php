@@ -18,6 +18,17 @@ class CProjectmanagerModel extends CI_Model {
         
         $result = $queryresult[0];      
         return CProjectmanager::build($result);
+    }    
+    
+    public function loadByUserId($userId) {
+        $query = $this->db->get_where("c_projectmanager", array('c_user_id' => $userId));
+        $queryresult = $query->result();
+        if (!$queryresult) {
+            return null;
+        }
+        
+        $result = $queryresult[0];      
+        return CProjectmanager::build($result);
     }
     
     public function save($cProjectmanager, $updatedBy) {

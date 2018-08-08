@@ -8,7 +8,7 @@
             <div class="panel-body">                               
 
                 <form method="post" id="paypalacct_form">
-                    <p>In order to receive/pay investors and project managers, enter your paypal email address (admin paypal)</p>
+                    <p>In order to receive funds for a project, enter your paypal email address</p>
                     <div></div>
 
                     <div class="row">
@@ -37,8 +37,8 @@
 
 <script type="text/javascript">
     window.onload = function () {
-        $('#idCompanyBankData').addClass('active');
-        $('#idCompanyPaypalAcct').addClass('active');
+        $('#idAdminBankData').addClass('active');
+        $('#idAdminPaypalAcct').addClass('active');
 
 
         $("#inputPaypalAcct").val("<?php echo $paypalacct ?>");
@@ -54,7 +54,7 @@
             }
 
             $.ajax({
-                url: "<?php echo base_url('Admin_PaypalAccount_Controller/update_paypal_acct') ?>",
+                url: "<?php echo base_url('Company_PaypalAccount_Controller/update_paypal_acct') ?>",
                 type: "POST",
                 data: $(this).serialize(),
                 success: function (data) {

@@ -967,7 +967,7 @@
                                 </li>
                                 
                                 
-                                <li class="dropdown site-menu-item has-sub">
+                                <li class="dropdown site-menu-item has-sub" id="idCompanyBankData">
                                     <a data-toggle="dropdown" href="javascript:void(0)" data-dropdown-toggle="false">
                                         <i class="site-menu-icon fa-bank" aria-hidden="true"></i>
                                         <span class="site-menu-title">Bank Data</span>
@@ -978,14 +978,14 @@
                                             <div>
                                                 <div>
                                                     <ul class="site-menu-sub site-menu-normal-list">
-                                                        <li class="site-menu-item">
-                                                            <a href="#">
+                                                        <li class="site-menu-item" id="idCompanyPaypalAcct">
+                                                            <a href="<?php echo base_url(); ?>company_paypalaccount">
                                                                 <span class="site-menu-title">Paypal Account</span>
                                                             </a>
                                                         </li>
 
-                                                        <li class="site-menu-item">
-                                                            <a href="#">
+                                                        <li class="site-menu-item" id="idCompanyTransactionHistory">
+                                                            <a href="<?php echo base_url(); ?>company_transactionhistory">
                                                                 <span class="site-menu-title">Transaction history</span>
                                                             </a>
                                                         </li>
