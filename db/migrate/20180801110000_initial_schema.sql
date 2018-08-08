@@ -520,9 +520,6 @@ CREATE TABLE fin_payment_order
   paymentdate timestamp without time zone,
 
   CONSTRAINT fin_payment_order_key PRIMARY KEY (fin_payment_order_id),
-  CONSTRAINT fin_payment_order_investment_fk FOREIGN KEY (fin_investment_id)
-      REFERENCES fin_investment (fin_investment_id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION,
   CONSTRAINT fin_payment_order_project_fk FOREIGN KEY (c_project_id)
       REFERENCES c_project (c_project_id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION,
