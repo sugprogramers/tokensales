@@ -68,7 +68,7 @@
 
 <div class="page">
     <div class="page-header">  
-        <h1 class="page-title">General Account Data</h1>
+        <h1 class="page-title">Investor Account Data</h1>
     </div>
 
 
@@ -76,159 +76,217 @@
         <div class="panel">
             <div class="panel-body">     
 
-                <form method="post" >
+                       
+                
+                
+                
+                <div class="example-wrap">
+                <div class="nav-tabs-vertical" data-plugin="tabs">
+                  <ul class="nav nav-tabs nav-tabs-line mr-25" role="tablist">
+                    <li class="nav-item" role="presentation"><a class="nav-link active" data-toggle="tab" href="#exampleTabsLineLeftOne"
+                        aria-controls="exampleTabsLineLeftOne" role="tab">User Data</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" data-toggle="tab" href="#exampleTabsLineLeftTwo"
+                        aria-controls="exampleTabsLineLeftTwo" role="tab">Tax Information</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" data-toggle="tab" href="#exampleTabsLineLeftThree"
+                        aria-controls="exampleTabsLineLeftThree" role="tab">Identification</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" data-toggle="tab" href="#exampleTabsLineLeftFour"
+                        aria-controls="exampleTabsLineLeftFour" role="tab">Paypal</a></li>
+                  </ul>
+                  <div class="tab-content py-15">
+                    <div class="tab-pane active" id="exampleTabsLineLeftOne" role="tabpanel">
+                    
+                                 <form id="identification-form" method="post" >
 
-                    <div class="resumee content level3 documentation">
+                                    <div class="resumee content level3 documentation">
 
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <div class="titleform">
-                                    <p class="grey-border">User data</p>
-                                </div>
-                            </div>
-                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="titleform">
+                                                    <p class="grey-border">User data</p>
+                                                </div>
+                                            </div>
+                                        </div>
 
-                        <div class="row">
-                            <div class="col-sm-4">
+                                        <div class="row">
+                                            <div class="col-sm-4">
 
-                                <div class="form-group ">
-                                    <label class="control-label" for="userFirstName">First Name *</label>
-                                    <input type="text" required class="form-control" id="inputFirstname" name="firstname" placeholder="First Name" style="font-size: 14px; border-radius:0;">
-                                </div>
+                                                <div class="form-group ">
+                                                    <label class="control-label" for="userFirstName">First Name *</label>
+                                                    <input type="text" required class="form-control" id="inputFirstname" name="firstname" placeholder="First Name" style="font-size: 14px; border-radius:0;">
+                                                </div>
 
-                            </div>
-                            <div class="col-sm-4">
+                                            </div>
+                                            <div class="col-sm-4">
 
-                                <div class="form-group ">
-                                    <label class="control-label" for="userLastName">Last Name *</label>
-                                    <input type="text" required class="form-control" id="inputLastname" name="lastname" placeholder="Last Name" style="font-size: 14px; border-radius:0;">
-                                </div>
-                            </div>
-
-
-                        </div>
+                                                <div class="form-group ">
+                                                    <label class="control-label" for="userLastName">Last Name *</label>
+                                                    <input type="text" required class="form-control" id="inputLastname" name="lastname" placeholder="Last Name" style="font-size: 14px; border-radius:0;">
+                                                </div>
+                                            </div>
 
 
-                        <div class="row">
+                                        </div>
 
-                            <div class="col-sm-6 col-md-4">
 
-                                <div class="form-group ">
-                                    <label class="control-label" for="userEmail">Email address *</label>
-                                    <input type="email" disabled="true" required class="form-control" id="inputEmail" name="email" placeholder="Email Address" style="font-size: 14px; border-radius:0;">
+                                        <div class="row">
 
-                                </div>
+                                            <div class="col-sm-6 col-md-4">
 
-                                <input type="hidden" name="userEmail" value="gnudebian1991@aol.com">
-                            </div>
+                                                <div class="form-group ">
+                                                    <label class="control-label" for="userEmail">Email address *</label>
+                                                    <input type="email" disabled="true" required class="form-control" id="inputEmail" name="email" placeholder="Email Address" style="font-size: 14px; border-radius:0;">
 
-                            <div class="col-sm-6 col-md-4">
-                                <div class="form-group">
-                                    <label class="control-label" for="userPhone">Phone *</label>
-                                    <br>
-                                    <input type="tel" required class="form-control" id="inputPhone" name="phone" placeholder="Phone" style="font-size: 14px; border-radius:0;">
+                                                </div>
 
-                                    <span class="help-block"></span>
-                                </div>
-                            </div>
+                                                <input type="hidden" name="userEmail" value="gnudebian1991@aol.com">
+                                            </div>
 
-                            <div class="col-sm-4">
+                                            <div class="col-sm-6 col-md-4">
+                                                <div class="form-group">
+                                                    <label class="control-label" for="userPhone">Phone *</label>
+                                                    <br>
+                                                    <input type="tel" required class="form-control" id="inputPhone" name="phone" data-plugin="formatter" data-pattern="+[[999]] [[999]]-[[999]]-[[9999]]" style="font-size: 14px; border-radius:0;">
 
-                                <div class="form-group ">
-                                    <label class="control-label" for="dateBirth">Birth Date *</label>
-                                    <input type="text" required class="form-control" class="form-control" data-plugin="datepicker" id="inputBirthday" name="birthday" style="font-size: 14px; border-radius:0;">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="separador-datos"></div>
-                    </div>
+                                                    <span class="help-block"></span>
+                                                </div>
+                                            </div>
 
-                    <div id="user-address-section" class="resumee content level3 documentation">
+                                            <div class="col-sm-4">
 
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <div class="titleform">
-                                    <p class="grey-border">Residence</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-sm-6 col-md-4">
-                                <div class="form-group">
-                                    <label class="control-label" for="userCountry">Country*</label>
-                                    <div class="form-group">
-                                        <select id="country_cmb" required class="form-control" name="country" required="" placeholder="Country" style="font-size: 14px; border-radius:0;"></select>
+                                                <div class="form-group ">
+                                                    <label class="control-label" for="dateBirth">Birth Date *</label>
+                                                    <input type="text" required class="form-control" class="form-control" data-plugin="datepicker" id="inputBirthday" name="birthday" style="font-size: 14px; border-radius:0;">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="separador-datos"></div>
                                     </div>
 
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-md-4">
-                                <div class="form-group">
-                                    <label class="control-label" for="userRegion">Region*</label>
-                                    <div class="form-group">
-                                        <select id="region_cmb" required class="form-control" name="region" required="" placeholder="Region" style="font-size: 14px; border-radius:0;"></select>                        
+                                    <div id="user-address-section" class="resumee content level3 documentation">
+
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="titleform">
+                                                    <p class="grey-border">Residence</p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-sm-6 col-md-4">
+                                                <div class="form-group">
+                                                    <label class="control-label" for="userCountry">Country*</label>
+                                                    <div class="form-group">
+                                                        <select id="country_cmb" required class="form-control" name="country" required="" placeholder="Country" style="font-size: 14px; border-radius:0;"></select>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6 col-md-4">
+                                                <div class="form-group">
+                                                    <label class="control-label" for="userRegion">Region*</label>
+                                                    <div class="form-group">
+                                                        <select id="region_cmb" required class="form-control" name="region" required="" placeholder="Region" style="font-size: 14px; border-radius:0;"></select>                        
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-sm-12">
+
+                                                <div class="form-group ">
+                                                    <label class="control-label" for="userAddress">Address Line 1 *</label>
+                                                    <input type="text" required class="form-control" id="inputAddress1" name="address1" placeholder="Address Line 1" style="font-size: 14px; border-radius:0;">
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-sm-12">
+
+                                                <div class="form-group ">
+                                                    <label class="control-label" for="userAddress2">Address Line 2</label>
+                                                    <input type="text" class="form-control" id="inputAddress2" name="address2" placeholder="Address Line 2" style="font-size: 14px; border-radius:0;">
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-sm-3">
+
+                                                <div class="form-group ">
+                                                    <label class="control-label" for="userPostalCode">Postal Code *</label>
+                                                    <input type="text" required class="form-control" id="inputPostal" name="postal" placeholder="Postal Code" style="font-size: 14px; border-radius:0;">
+
+                                                </div>
+
+                                            </div>
+
+                                            <div class="col-sm-5">
+
+                                                <div class="form-group ">
+                                                    <label class="control-label" for="userCity">City *</label>
+                                                    <input type="text" required class="form-control" id="inputCity" name="city" placeholder="City" style="font-size: 14px; border-radius:0;">
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="separador-datos"></div>
+
                                     </div>
 
-                                </div>
-                            </div>
+                                    <div class="form-group text-right">
+                                        <button type="submit" class="btn btn-primary">Update information</button>
+                                    </div>
 
-                        </div>
+                                </form>
 
-                        <div class="row">
-                            <div class="col-sm-12">
-
-                                <div class="form-group ">
-                                    <label class="control-label" for="userAddress">Address Line 1 *</label>
-                                    <input type="text" required class="form-control" id="inputAddress1" name="address1" placeholder="Address Line 1" style="font-size: 14px; border-radius:0;">
-                                </div>
-
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-sm-12">
-
-                                <div class="form-group ">
-                                    <label class="control-label" for="userAddress2">Address Line 2</label>
-                                    <input type="text" class="form-control" id="inputAddress2" name="address2" placeholder="Address Line 2" style="font-size: 14px; border-radius:0;">
-                                </div>
-
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-sm-3">
-
-                                <div class="form-group ">
-                                    <label class="control-label" for="userPostalCode">Postal Code *</label>
-                                    <input type="text" required class="form-control" id="inputPostal" name="postal" placeholder="Postal Code" style="font-size: 14px; border-radius:0;">
-
-                                </div>
-
-                            </div>
-
-                            <div class="col-sm-5">
-
-                                <div class="form-group ">
-                                    <label class="control-label" for="userCity">City *</label>
-                                    <input type="text" required class="form-control" id="inputCity" name="city" placeholder="City" style="font-size: 14px; border-radius:0;">
-                                </div>
-
-                            </div>
-                        </div>
-
-                        <div class="separador-datos"></div>
-
+                                <p>Fields marked with * are mandatory</p>
+                        
+                        
                     </div>
-
-                    <div class="form-group text-right">
-                        <button type="submit" class="btn btn-primary">Update information</button>
+                    <div class="tab-pane" id="exampleTabsLineLeftTwo" role="tabpanel">
+                     
+                        
                     </div>
-
-                </form>
-
-                <p>Fields marked with * are mandatory</p>
+                    <div class="tab-pane" id="exampleTabsLineLeftThree" role="tabpanel">
+                     
+                        
+                    </div>
+                    <div class="tab-pane" id="exampleTabsLineLeftFour" role="tabpanel">
+                    
+                        
+                    </div>
+                  </div>
+                </div>
+              </div>
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+               
 
             </div> 
         </div> 
@@ -247,7 +305,9 @@
         return new Date(parts[0], parts[1] - 1, parts[2]);
     }
     window.onload = function () {
-        // onload country_cmb
+        
+        
+         // onload country_cmb
         $.ajax({
             url: "<?php echo base_url('Register_Controller/get_country_list') ?>",
             type: "POST",
@@ -287,25 +347,37 @@
         $("#inputAddress2").val("<?php echo $address2 ?>");
         $("#inputPostal").val("<?php echo $postal ?>");
         $("#inputCity").val("<?php echo $city ?>");
+        
+        console.log('ENTRA2');
 
         $("#identification-form").submit(function (event) {
             event.preventDefault();
+           
+            console.log($(this).serialize());
 
             $.ajax({
                 url: "<?php echo base_url('User_Accountdata_Controller/update_user_information') ?>",
                 type: "POST",
                 data: $(this).serialize(),
+              
                 success: function (data) {
-                    var resp = $.parseJSON(data);
+                    console.log('data' + data);
+                    /*var resp = $.parseJSON(data);
                     if (resp.status === "error") {
                         showError(resp.msg);
                     } else if (resp.status === "success") {
                         showSuccess('Your information has been updated.');
                     }
+                    */
 
                 }
             });
         });
 
+        console.log('ENTRA4');
+
+       
+
     };
+    
 </script>
