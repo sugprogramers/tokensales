@@ -76,7 +76,7 @@
         <div class="panel">
             <div class="panel-body">     
 
-                <form method="post" >
+                <form id="identification-form" method="post" >
 
                     <div class="resumee content level3 documentation">
 
@@ -126,7 +126,7 @@
                                 <div class="form-group">
                                     <label class="control-label" for="userPhone">Phone *</label>
                                     <br>
-                                    <input type="tel" required class="form-control" id="inputPhone" name="phone" placeholder="Phone" style="font-size: 14px; border-radius:0;">
+                                    <input type="tel" required class="form-control" id="inputPhone" name="phone" data-plugin="formatter" data-pattern="+[[999]] [[999]]-[[999]]-[[9999]]" style="font-size: 14px; border-radius:0;">
 
                                     <span class="help-block"></span>
                                 </div>
