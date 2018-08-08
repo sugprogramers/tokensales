@@ -21,11 +21,11 @@ class Company_PaypalAccount_Controller extends CI_Controller {
         /* @var $projectmanager CProjectmanager */
         $projectmanager = $this->CProjectmanagerModel->loadByUserId($this->session->id);
         $paypalacct = "";
-        if($projectmanager) {
+        if ($projectmanager) {
             $paypalacct = $projectmanager->paypalusername;
         }
         $data = array('paypalacct' => $paypalacct);
-        
+
         $this->load->view('header/header_admin');
         $this->load->view('company_paypalaccount', $data);
         $this->load->view('footer/footer_admin');
@@ -42,11 +42,10 @@ class Company_PaypalAccount_Controller extends CI_Controller {
             /* @var $projectmanager CProjectmanager */
             $projectmanager = $this->CProjectmanagerModel->loadByUserId($this->session->id);
             if (!$projectmanager) {
-                $projectmanager = new CAdmin();
+                $projectmanager = new CProjectmanager();
                 $projectmanager->c_user_id = $this->session->id;
                 $projectmanager->isactive = 'Y';
                 $projectmanager->paypalusername = $paypalacct;
-                
             } else {
                 $projectmanager->paypalusername = $paypalacct;
             }
