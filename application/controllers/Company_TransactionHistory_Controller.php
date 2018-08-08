@@ -3,7 +3,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 include 'application/libraries/SDException.php';
 
-class Admin_TransactionHistory_Controller extends CI_Controller {
+class Company_TransactionHistory_Controller extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
@@ -12,14 +12,14 @@ class Admin_TransactionHistory_Controller extends CI_Controller {
         $this->load->model("CCurrencyModel");
         $this->load->model("CUserModel");
 
-        if ($this->session->usertype !== "ADM") {
+        if ($this->session->usertype !== "COMPMAN") {
             redirect(base_url() . 'login');
         }
     }
 
     public function index() {
         $this->load->view('header/header_admin');
-        $this->load->view('admin_transaction_history');
+        $this->load->view('company_transaction_history');
         $this->load->view('footer/footer_admin');
     }
 
@@ -30,18 +30,19 @@ class Admin_TransactionHistory_Controller extends CI_Controller {
 
         $data = array();
         try {
-            $payment_history_list = $this->FINPaymentHistoryModel->getAll();
 
-            /* @var $payhist FINPaymentHistory */
-            foreach ($payment_history_list as $payhist) {
+            $query = $this->FINPaymentHistoryModel->loadByUser($this->session->id);            
+                        
+            foreach ($query->result() as $payhist) {
                 $curr = $this->CCurrencyModel->get($payhist->c_currency_id);
                 $paymentdate = $this->createDateTimeStrFormat($payhist->paymentdate, 'Y-m-d H:i:s');
 
                 $html_action = '';
                 if ($payhist->type === "EXTOUT") {
-                    $html_action = '<a class="btn btn-sm btn-icon btn-pure btn-default on-default edit-row" href="javascript:void(0)" title="Detail" onclick="open_viewdetail(' . "'" . $payhist->fin_payment_history_id . "'" . ')"><i class="icon wb-more-vertical"></i></a>';
+                    $html_action = '<a class="btn btn-sm btn-icon btn-pure btn-default on-default edit-row" href="javascript:void(0)" title="Detail" onclick="open_viewdetail1(' . "'" . $payhist->fin_payment_history_id . "'" . ')"><i class="icon wb-more-vertical"></i></a>';
                 }
-
+ 
+ 
                 $data[] = array(
                     $paymentdate,
                     $curr->iso_code,
@@ -57,8 +58,8 @@ class Admin_TransactionHistory_Controller extends CI_Controller {
 
             $result = array(
                 "draw" => $draw,
-                "recordsTotal" => count($payment_history_list),
-                "recordsFiltered" => count($payment_history_list),
+                "recordsTotal" => $query->num_rows(),
+                "recordsFiltered" => $query->num_rows(),
                 "data" => $data
             );
         } catch (Exception $e) {

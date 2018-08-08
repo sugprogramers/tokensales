@@ -37,8 +37,8 @@
 
 <script type="text/javascript">
     window.onload = function () {
-        $('#idAdminBankData').addClass('active');
-        $('#idAdminPaypalAcct').addClass('active');
+        $('#idCompanyBankData').addClass('active');
+        $('#idCompanyPaypalAcct').addClass('active');
 
 
         $("#inputPaypalAcct").val("<?php echo $paypalacct ?>");

@@ -19,8 +19,8 @@ class FINPaymentHistoryModel extends CI_Model
         
        $result = $queryresult[0]; 
        return FINPaymentHistory::build($result);
-    }
-
+    }            
+    
     public function save($finPaymentHistory, $updatedBy) {
         $now = (new DateTime())->format('Y-m-d H:i:s');
         if(!$finPaymentHistory->fin_payment_history_id){
@@ -78,6 +78,16 @@ class FINPaymentHistoryModel extends CI_Model
        }
        return $data;
     }   
+
+    
+    public function loadByUser($userId){
+        
+        //$this->db->table('fin_payment_history');
+        $this->db->where('from_user_id', $userId);
+        $this->db->or_where('to_user_id', $userId);
+        
+        return $this->db->get('fin_payment_history');
+    } 
     
     public function get_paymentHistoryDetailById($finPaymentHistoryId){
         
@@ -92,7 +102,8 @@ class FINPaymentHistoryModel extends CI_Model
         $this->db->join('c_user as iu', 'i.c_user_id = iu.c_user_id ', 'left');
         $this->db->where('ph.fin_payment_history_id', $finPaymentHistoryId);
         return $this->db->get();
-    }  
+    } 
+    
     
     public function get_statusName($status) {
         if ($status === 'PEND') {

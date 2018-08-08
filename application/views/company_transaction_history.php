@@ -7,7 +7,7 @@
         <div class="panel">
             <div class="panel-body">
 
-                <table id="transaction_history_table" class="table table-hover dataTable table-striped" role="grid" style="width:100%" >
+                <table id="cmptransaction_history_table" class="table table-hover dataTable table-striped" role="grid" style="width:100%" >
                     <thead>
                         <tr>
                             <th>Payment Date</th>                            
@@ -33,12 +33,12 @@
 
 <!-- START DIALOG -->
 <!-- Modal -->
-<div class="modal fade" id="dialogAdminTransactionHistory" aria-hidden="true" aria-labelledby="dialogAdminTransactionHistory"
+<div class="modal fade" id="dialogCompanyTransactionHistory" aria-hidden="true" aria-labelledby="dialogCompanyTransactionHistory"
      role="dialog" tabindex="-1">
 
     <div class="modal-dialog modal-simple modal-center" style="overflow-y: initial !important">
         <div class="modal-content" style="overflow-y: auto;">
-            <form id="admtransactionhistory_form">
+            <form id="comptransactionhistory_form">
                 <input type="hidden" id="dlgFinPaymentHistoryId" value=""/>
 
                 <div class="modal-header">
@@ -107,11 +107,11 @@
 
 <script type="text/javascript">
     window.onload = function () {
-        $('#idAdminBankData').addClass('active');
-        $('#idAdminTransactionHistory').addClass('active');
+        $('#idCompanyBankData').addClass('active');
+        $('#idCompanyTransactionHistory').addClass('active');
 
 
-        var table = $('#transaction_history_table').DataTable({
+        var table = $('#cmptransaction_history_table').DataTable({
             responsive: true,
             "order": [[0, "desc"]],
             "columnDefs": [{
@@ -121,7 +121,7 @@
             "processing": false, //mostrar waiting
             "serverSide": false, //consultar servidor ordenar , filtrar
             "ajax": {
-                url: "<?php echo base_url('Admin_TransactionHistory_Controller/get_items') ?>",
+                url: "<?php echo base_url('Company_TransactionHistory_Controller/get_items') ?>",
                 type: 'GET'
             }
         });
@@ -130,9 +130,9 @@
     };
 
 
-    function open_viewdetail(id) {
+    function open_viewdetail1(id) {
         $.ajax({
-            url: "<?php echo base_url('Admin_TransactionHistory_Controller/get_paymentHistoryDetailById') ?>",
+            url: "<?php echo base_url('Company_TransactionHistory_Controller/get_paymentHistoryDetailById') ?>",
             type: "POST",
             data: {'id': id},
             success: function (data) {
@@ -152,7 +152,7 @@
                     $('#dlgPayoutItems').empty();
                     $('#dlgPayoutItems').append(resp.dlgPayoutItems);
 
-                    $('#dialogAdminTransactionHistory').modal('show');
+                    $('#dialogCompanyTransactionHistory').modal('show');
                 }
             }
         });
