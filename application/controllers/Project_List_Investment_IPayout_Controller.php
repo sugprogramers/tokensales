@@ -31,14 +31,16 @@ class Project_List_Investment_IPayout_Controller extends CI_Controller {
         $length = intval($this->input->get("length"));
 
 
-        $query = $this->FINPaymentOrderModel->get_investors_ipayout();
+        $query = $this->FINPaymentOrderModel->get_project_investments_ipayout();
         $data = [];
         foreach ($query->result() as $r) {
+            log_message('error', json_encode($r));
             $data[] = array(
                 '<input class="dg_check_item" type="checkbox" name="dg_payment_order_'.$r->fin_payment_order_id.'" value="'.$r->fin_payment_order_id.'" onclick="toggle_payment_order_checkbox(this)" />',
-                $r->name,
-                $r->email,
-                'Paypal: '.$r->payin_paypalusername,
+                $r->projectName,
+                $r->companyName,
+                $r->investorname,
+                $r->investorEmail,
                 $r->amount,
                 $r->iso_code,
                 DateTime::createFromFormat('Y-m-d H:i:s', $r->scheduleddate)->format('Y-m-d')

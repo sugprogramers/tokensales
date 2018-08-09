@@ -142,5 +142,44 @@ class FINPaymentOrderModel extends CI_Model
         return $this->db->get();
     }
     
+    public function get_project_investments_ipayout(){
+        $this->db->select("po.fin_payment_order_id, p.name as projectName, p.name as companyName, u.email as investorEmail, (u.firstname || ' ' || u.lastname) as investorname, curr.iso_code, po.amount, po.scheduleddate");
+        $this->db->from('fin_payment_order as po');
+        $this->db->join('fin_investment  as iv', 'po.fin_investment_id = iv.fin_investment_id ');
+        $this->db->join('c_project  as p', 'iv.c_project_id = p.c_project_id ');
+        $this->db->join('c_investor as i', 'iv.c_investor_id = i.c_investor_id ');
+        $this->db->join('c_user as u', 'i.c_user_id = u.c_user_id ');
+        $this->db->join('c_currency as curr', "p.c_currency_id = curr.c_currency_id");
+        $this->db->where('po.ordertype', 'RETIPAYIN');
+        $this->db->where('po.status', 'PEND');
+        return $this->db->get();
+    }
+    
+    public function get_projectInvestmentPaymentOrderInfoById($finPaymentOrderId){
+        
+        $this->db->select("po.fin_payment_order_id, p.name as projectName, p.name as companyName, u.email as investorEmail, (u.firstname || ' ' || u.lastname) as investorname, po.amount , (curr.cursymbol || po.amount) as amountformatted, curr.cursymbol, curr.iso_code");
+        $this->db->from('fin_payment_order as po');
+        $this->db->join('fin_investment  as iv', 'po.fin_investment_id = iv.fin_investment_id ');
+        $this->db->join('c_project  as p', 'iv.c_project_id = p.c_project_id ');
+        $this->db->join('c_investor as i', 'iv.c_investor_id = i.c_investor_id ');
+        $this->db->join('c_user as u', 'i.c_user_id = u.c_user_id ');
+        $this->db->join('c_currency as curr', "p.c_currency_id = curr.c_currency_id");
+        $this->db->where('po.ordertype', 'RETIPAYIN');
+        $this->db->where('po.status', 'PEND');
+        return $this->db->get();
+    }
+    
+    public function get_projectInvestmentInfoByOrderPaymentId($finPaymentOrderId){
+        
+        $this->db->select("p.name as projectName, p.name as companyName, u.email as investorEmail, (u.firstname || ' ' || u.lastname) as investorname");
+        $this->db->from('fin_payment_order as po');
+        $this->db->join('fin_investment  as iv', 'po.fin_investment_id = iv.fin_investment_id ');
+        $this->db->join('c_project  as p', 'iv.c_project_id = p.c_project_id ');
+        $this->db->join('c_investor as i', 'iv.c_investor_id = i.c_investor_id ');
+        $this->db->join('c_user as u', 'i.c_user_id = u.c_user_id ');
+        $this->db->where('po.fin_payment_order_id', $finPaymentOrderId);
+        return $this->db->get();
+    }
+    
 
 }

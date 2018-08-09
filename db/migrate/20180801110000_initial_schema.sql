@@ -738,3 +738,41 @@ END ; $BODY$
   COST 100;
 ALTER FUNCTION fin_investor_processpayout(character varying)
   OWNER TO smart;
+
+CREATE OR REPLACE FUNCTION fin_projectinvestment_processpayout(IN p_fin_payment_order_id character varying)
+  RETURNS void AS
+$BODY$ DECLARE 
+  CUR_PaymentOrder RECORD;
+  CUR_PaymentHistory RECORD;
+  CUR_Investment RECORD;
+  CUR_Investor RECORD;
+  v_Aux NUMERIC;
+  BEGIN
+  
+  SELECT * INTO CUR_PaymentOrder FROM FIN_Payment_Order WHERE FIN_Payment_Order_ID = p_fin_payment_order_id FOR UPDATE;
+  IF(CUR_PaymentOrder.ordertype <> 'RETIPAYIN' OR CUR_PaymentOrder.status <> 'PEND') THEN
+    RAISE EXCEPTION '%','@FIN_ProcessProjectInvestmentPaymentOrderIncorrectStatus@';
+  END IF;
+
+  SELECT * INTO CUR_Investment FROM FIN_Investment WHERE FIN_Investment_ID = CUR_PaymentOrder.FIN_Investment_ID FOR UPDATE;
+  SELECT * INTO CUR_Investor FROM C_Investor WHERE C_Investor_ID = CUR_Investment.C_Investor_ID FOR UPDATE;
+
+  SELECT * INTO CUR_PaymentHistory FROM FIN_Payment_History WHERE fin_payment_order_id = CUR_PaymentOrder.fin_payment_order_id FOR UPDATE;
+  IF(CUR_PaymentHistory.status <> 'PEND') THEN
+    RAISE EXCEPTION '%','@FIN_ProcessProjectInvestmentPaymentOrderIncorrectPhistoryStatus@';
+  END IF;
+
+
+  UPDATE FIN_Payment_Order SET status='CO', paymentdate=CUR_PaymentHistory.paymentdate WHERE  fin_payment_order_id = CUR_PaymentOrder.fin_payment_order_id;
+  UPDATE FIN_Payment_History SET status='CO' WHERE  fin_payment_history_id = CUR_PaymentHistory.fin_payment_history_id;
+  UPDATE C_Investor SET 
+    payoutbalance = CUR_Investor.payoutbalance + CUR_PaymentOrder.amount,
+    pendingbalance = CUR_Investor.pendingbalance - CUR_PaymentOrder.amount
+  WHERE c_investor_id = CUR_Investor.c_investor_id;
+
+  RETURN;
+END ; $BODY$
+  LANGUAGE plpgsql VOLATILE
+  COST 100;
+ALTER FUNCTION fin_projectinvestment_processpayout(character varying)
+  OWNER TO smart;

@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 include 'application/libraries/SDException.php';
 
 
-class Admin_Investor_IPayout_Controller extends CI_Controller {
+class Project_Investment_IPayout_Controller extends CI_Controller {
 
     
     public function __construct() {
@@ -15,7 +15,7 @@ class Admin_Investor_IPayout_Controller extends CI_Controller {
         $this->load->model("CUserModel");
         
        
-        if($this->session->usertype !== "ADM"){
+        if($this->session->usertype !== "COMPMAN"){
             redirect(base_url() . 'login');
         }
     }
@@ -23,14 +23,14 @@ class Admin_Investor_IPayout_Controller extends CI_Controller {
     public function index($finPaymentOrderId) {
         $data = $this->get_paymentOrderInfoById($finPaymentOrderId);
         $this->load->view('header/header_admin');
-        $this->load->view('admin_investor_ipayout', $data);
+        $this->load->view('project_investment_ipayout', $data);
         $this->load->view('footer/footer_admin');
     }
     
     public function get_paymentOrderInfoById($finPaymentOrderId) {
 
         try {
-            $query = $this->FINPaymentOrderModel->get_investorPaymentOrderInfoById($finPaymentOrderId);
+            $query = $this->FINPaymentOrderModel->get_projectInvestmentPaymentOrderInfoById($finPaymentOrderId);
             $queryresult = $query->result();
             if(!$queryresult){
                 throw new SDException("Pending Payment order not found.");
@@ -41,10 +41,11 @@ class Admin_Investor_IPayout_Controller extends CI_Controller {
             if(!$cAdmin){
                 throw new SDException("Error loading payment information.");
             }
+            $cUser = $this->CUserModel->get(CUserModel::$CUSER_ADMIN_ID);
             
             $html = '<tr>';
             $html .= '<td class="text-center">1</td>';
-            $html .= '<td class="text-left">Investor Withdrawal</td>';
+            $html .= '<td class="text-left">Return of investment payment to investor: '.$result->investorname." (".$result->investorEmail.")".' for project: '.$result->projectName.'</td>';
             $html .= '<td>1</td>';
             $html .= '<td>'.$result->amountformatted.'</td>';
             $html .= '<td>'.$result->amountformatted.'</td>';
@@ -54,11 +55,11 @@ class Admin_Investor_IPayout_Controller extends CI_Controller {
                 "status" => 'success',
                 "msg" => '',
                 "dlgFinPaymentOrderId" => $result->fin_payment_order_id,
-                "dlgName" => $result->name." (".$result->email.")",
-                "dlgPaymentMethod" => "Paypal: ".$result->payin_paypalusername,
-                "dlgIPaypalUsername" => $result->payin_paypalusername,
-                "dlgInvestorName" => $result->name,
-                "dlgAddress" => $result->address1,
+                "dlgName" => $cUser->firstname." ".$cUser->lastname,
+                "dlgPaymentMethod" => "Paypal: ".$cAdmin->paypalusername,
+                "dlgAdminPaypalUsername" => $cAdmin->paypalusername,
+                "dlgProjectName" => $result->projectName,
+                "dlgAddress" => $cUser->address1,
                 "dlgSubTotalAmount" => $result->amount,
                 "dlgGrandTotalAmount" => $result->amount,
                 "dlgCurrencySymbol" => $result->cursymbol,
