@@ -2,7 +2,7 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Company_View_Project_Controller extends CI_Controller {
+class Company_Edit_Project_Controller extends CI_Controller {
             
     public function __construct() {
         parent::__construct();
@@ -15,7 +15,7 @@ class Company_View_Project_Controller extends CI_Controller {
 
     public function index() {       
         $this->load->view('header/header_admin');
-        $this->load->view('company_view_project');
+        $this->load->view('company_edit_project');
         $this->load->view('footer/footer_admin');        
     }
     

@@ -87,7 +87,7 @@ $route['investor_basicdata'] = "Investor_BasicData_Controller";
 //routes company
 $route['company_dashboard'] = "Company_Dashboard_Controller";
 $route['company_project'] = "Company_List_Project_Controller";
-$route['company_view_project'] = "Company_View_Project_Controller";
+$route['company_edit_project'] = "Company_Edit_Project_Controller";
 $route['company_paypalaccount'] = "Company_PaypalAccount_Controller";
 $route['company_transactionhistory'] = "Company_TransactionHistory_Controller";
 $route['company_basicdata'] = "Company_BasicData_Controller";
