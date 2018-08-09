@@ -44,7 +44,7 @@
 
                         <div class="col-sm-12">
                             <div class="form-group ">
-                                <label class="control-label" for="propertytype">Property Type *</label>
+                                <label class="control-label" for="propertytype">Address *</label>
                                 <select  required class="form-control"  id="propertytipe" name="propertytipe" style="font-size: 14px; border-radius:0;">
                                     <option value="AP" >Apartment</option>
                                     <option value="SUI" >Suite</option>
@@ -52,7 +52,45 @@
                                 </select>    
                             </div>
                         </div>
+                        
+                        
+                         <div class="col-sm-12">
+                            <div class="form-group ">
+                                <label class="control-label" for="address">Company Name *</label>
+                                <input type="text" required class="form-control" id="address" name="address" placeholder="Address" style="font-size: 14px; border-radius:0;">
+                            </div>
+                        </div>
 
+                        
+                           <div class="col-sm-12">
+
+                                <div class="form-group ">
+                                    <label class="control-label" for="country">Country *</label>
+                                    <select id="country_cmb" required class="form-control" name="country" required="" placeholder="Country" style="font-size: 14px; border-radius:0;"></select>                      
+
+                                </div>
+
+                            </div>
+
+                            <div class="col-sm-12">
+
+                                <div class="form-group ">
+                                    <label class="control-label" for="country">Region *</label>
+                                    <select id="region_cmb" required class="form-control" name="region" required="" placeholder="Region" style="font-size: 14px; border-radius:0;"></select>                        
+
+                                </div>
+
+                            </div>    
+                        
+                         <div class="col-sm-12">
+
+                                <div class="form-group ">
+                                    <label class="control-label" for="country">City *</label>
+                                    <input type="text" required class="form-control" id="inputCity" name="city" placeholder="City" style="font-size: 14px; border-radius:0;">
+
+                                </div>
+
+                            </div>
 
                     </div>
 
