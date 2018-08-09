@@ -78,12 +78,15 @@ $route['investor_investment'] = "Investor_Investment_Controller";
 $route['investor_data'] = "Investor_Data_Controller";
 $route['investor_changepassword'] = "Investor_Changepassword_Controller";
 $route['investor_paypalaccount'] = "Investor_PaypalAccount_Controller";
-$route['investor_depositfunds'] = "Investor_DepositFunds_Controller";
 $route['investor_withdrawfunds'] = "Investor_WithdrawFunds_Controller";
 $route['investor_transactionhistory'] = "Investor_TransactionHistory_Controller";
 $route['investor_basicdata'] = "Investor_BasicData_Controller";
 
-
+$route['investor_depositfunds'] = "Investor_DepositFunds_Controller";
+$route['investor_processdepositfunds/(:any)/(:any)'] = "Investor_ProcessDepositFunds_Controller/index/$1/$2";
+$route['paypal/ipn_investor_depositpaymenthistory/(:any)/(:any)'] = "paypal/IPN_Investor_DepositPaymentHistory_Controller/index/$1/$2";
+$route['paypal/ipn_investor_depositpaymenthistory_success/(:any)/(:any)'] = "paypal/IPN_Investor_DepositPaymentHistory_Controller/success/$1/$2";
+$route['paypal/ipn_investor_depositpaymenthistory_cancel/(:any)/(:any)'] = "paypal/IPN_Investor_DepositPaymentHistory_Controller/cancel/$1/$2";
 
 //routes company
 $route['company_dashboard'] = "Company_Dashboard_Controller";
