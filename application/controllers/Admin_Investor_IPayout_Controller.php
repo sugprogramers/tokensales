@@ -44,7 +44,7 @@ class Admin_Investor_IPayout_Controller extends CI_Controller {
             
             $html = '<tr>';
             $html .= '<td class="text-center">1</td>';
-            $html .= '<td class="text-left">Loan Payout</td>';
+            $html .= '<td class="text-left">Investor Withdrawal</td>';
             $html .= '<td>1</td>';
             $html .= '<td>'.$result->amountformatted.'</td>';
             $html .= '<td>'.$result->amountformatted.'</td>';
@@ -55,6 +55,7 @@ class Admin_Investor_IPayout_Controller extends CI_Controller {
                 "msg" => '',
                 "dlgFinPaymentOrderId" => $result->fin_payment_order_id,
                 "dlgName" => $result->name." (".$result->email.")",
+                "dlgPaymentMethod" => "Paypal: ".$result->payin_paypalusername,
                 "dlgIPaypalUsername" => $result->payin_paypalusername,
                 "dlgInvestorName" => $result->name,
                 "dlgAddress" => $result->address1,

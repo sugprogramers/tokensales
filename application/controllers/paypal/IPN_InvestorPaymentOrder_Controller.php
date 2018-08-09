@@ -33,6 +33,10 @@ class IPN_InvestorPaymentOrder_Controller extends CI_Controller {
                 throw new SDException("investor not found");
             }
             
+            if($cInvestor->payoutbalance < $finPaymentOrder->amount){
+                throw new SDException("investor unsufficient funds in payoutbalance");
+            }
+            
             $oldfinPaymentHistory = $this->FINPaymentHistoryModel->loadByPaymentOrderId($finPaymentOrder->fin_payment_order_id);
             if($oldfinPaymentHistory != null){
                 throw new SDException("payment order already processed");

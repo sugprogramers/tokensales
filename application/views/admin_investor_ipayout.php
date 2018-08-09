@@ -44,16 +44,16 @@
                                                 <p>
                                                     <br> To:
                                                     <br>
-                                                    <span class="font-size-15" id="dlgCompanyName"></span>
+                                                    <span class="font-size-15" id="dlgName"></span>
                                                 </p>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-lg-6">
                                                 <p>
-                                                    <br> Project:
+                                                    <br> Payment Method:
                                                     <br>
-                                                    <span class="font-size-15" id="dlgProjectName"></span>
+                                                    <span class="font-size-15" id="dlgPaymentMethod"></span>
                                                 </p>
                                             </div>
                                         </div>
@@ -112,7 +112,7 @@
                                             <div class="col-sm-4">
                                                 <div class="pricing-list text-left">
                                                     <div class="pricing-header bg-green-700">
-                                                        <div class="pricing-title">Payment for loan <!--Standard--> </div>
+                                                        <div class="pricing-title">Payment for investor withdrawal <!--Standard--> </div>
                                                         <div class="pricing-price" style="padding: 0px 30px;">
                                                             <span class="pricing-currency" id="paypalCurrency"></span>
                                                             <span class="pricing-amount" id="paypalAmount"></span>
@@ -131,7 +131,7 @@
                                                             <input type="hidden" name="cancel_return" id="changeCancelReturn" value="<?php echo base_url('paypal/cancel') ?>">
                                                             <input type="hidden" name="business" value="" id="changeBusiness">
                                                             <input type="hidden" name="lc" value="US">
-                                                            <input type="hidden" name="item_name1" value="Payout Loan">
+                                                            <input type="hidden" name="item_name1" value="Investor Withdrawal">
                                                             <input type="hidden" name="currency_code" id="paypalCurrencyCode" value="">
                                                             <input type="hidden" name="button_subtype" value="services">
                                                             <input type="hidden" name="tax_rate" value="0.000">
@@ -182,8 +182,8 @@
         } 
         else if (status === "success") { 
             $('#dlgFinPaymentOrderId').val("<?php echo $dlgFinPaymentOrderId ?>"); 
-            $('#dlgCompanyName').text("<?php echo $dlgCompanyName ?>"); 
-            $('#dlgProjectName').text("<?php echo $dlgProjectName ?>"); 
+            $('#dlgName').text("<?php echo $dlgName ?>"); 
+            $('#dlgPaymentMethod').text("<?php echo $dlgPaymentMethod ?>"); 
             $('#dlgAddress').text("<?php echo $dlgAddress ?>"); 
             
             $('#dlgPayoutItems').empty();
@@ -201,11 +201,11 @@
             $('#paypalAmount').text("<?php echo $dlgGrandTotalAmount ?>"); 
 
             $('#changeAmount').val("<?php echo $dlgGrandTotalAmount ?>");
-            $('#changeNotify').val("<?php echo base_url('paypal/ipn_projectpaymentorder/') ?>" + "<?php echo $dlgFinPaymentOrderId ?>");
-            $('#changeReturn').val("<?php echo base_url('paypal/ipn_projectpaymentorder_success/') ?>" + "<?php echo $dlgFinPaymentOrderId ?>");
-            $('#changeCancelReturn').val("<?php echo base_url('paypal/ipn_projectpaymentorder_cancel/') ?>" + "<?php echo $dlgFinPaymentOrderId ?>");
+            $('#changeNotify').val("<?php echo base_url('paypal/ipn_investorpaymentorder/') ?>" + "<?php echo $dlgFinPaymentOrderId ?>");
+            $('#changeReturn').val("<?php echo base_url('paypal/ipn_investorpaymentorder_success/') ?>" + "<?php echo $dlgFinPaymentOrderId ?>");
+            $('#changeCancelReturn').val("<?php echo base_url('paypal/ipn_investorpaymentorder_cancel/') ?>" + "<?php echo $dlgFinPaymentOrderId ?>");
         
-            $('#changeBusiness').val("<?php echo $dlgPMPaypalUsername ?>");
+            $('#changeBusiness').val("<?php echo $dlgIPaypalUsername ?>");
             $('#paypalCurrencyCode').val("<?php echo $dlgCurrencyCode ?>");
             showDiv('2');
         });
