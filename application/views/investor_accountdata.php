@@ -64,6 +64,8 @@
         color:#666;
         display:block
     }
+
+    
 </style>
 
 <div class="page">
@@ -332,12 +334,52 @@
                                      <div class="form-group text-right">
                                         <button type="submit" class="btn btn-primary">Update information</button>
                                     </div>
-                                    
+                                    <p>Fields marked with * are mandatory</p>
                                 </form>       
                         
                     </div>
                     <div class="tab-pane" id="exampleTabsLineLeftThree" role="tabpanel">
-                     
+                        <form id="identification_form" method="post" >
+                            <div class="resumee content level3 documentation">      
+                              <div class="row">
+                                <div class="col-sm-12">
+                                   <div class="titleform">
+                                     <p class="grey-border">Identification</p>
+                                   </div>
+                                </div>
+                              </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="form-group ">
+                                        <label class="control-label" for="propertytype">Document Type *</label>
+                                        <select  required class="form-control"  id="userdoctype" name="userdocumentype" style="font-size: 14px; border-radius:0;">
+                                            <option value="PASS" >Apartment</option>
+                                            <option value="IN" >Identity Card</option>
+                                        </select>    
+                                    </div>
+                                  <div class="form-group ">
+                                    <label class="control-label" for="userDocNumber">Document Number *</label>
+                                    <input type="text" required class="form-control" id="inputDocNumber" name="docno" placeholder="Document Nro." style="font-size: 14px; border-radius:0;">
+                                  </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div id="targetOuter">
+                                          <input type="file" id="input-file-now" data-plugin="dropify" data-default-file=""/>
+                                    </div>
+                                    
+                                </div>
+                                <div class="col-sm-4">
+                                    <input type="file" id="input-file-now" data-plugin="dropify" data-default-file=""/>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group text-right">
+                               <button type="submit" class="btn btn-primary">Update information</button>
+                            </div>
+                            <p>Fields marked with * are mandatory</p>
+                        </form>
                         
                     </div>
                     <div class="tab-pane" id="exampleTabsLineLeftFour" role="tabpanel">
@@ -579,3 +621,4 @@
     };
     
 </script>
+
