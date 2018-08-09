@@ -86,7 +86,7 @@
                     <li class="nav-item" role="presentation"><a class="nav-link active" data-toggle="tab" href="#exampleTabsLineLeftOne"
                         aria-controls="exampleTabsLineLeftOne" role="tab">User Data</a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" data-toggle="tab" href="#exampleTabsLineLeftTwo"
-                        aria-controls="exampleTabsLineLeftTwo" role="tab">Tax Information</a></li>
+                        aria-controls="exampleTabsLineLeftTwo" role="tab">Tax Residence</a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" data-toggle="tab" href="#exampleTabsLineLeftThree"
                         aria-controls="exampleTabsLineLeftThree" role="tab">Identification</a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" data-toggle="tab" href="#exampleTabsLineLeftFour"
@@ -94,7 +94,6 @@
                   </ul>
                   <div class="tab-content py-15">
                     <div class="tab-pane active" id="exampleTabsLineLeftOne" role="tabpanel">
-                    
                                  <form id="identification-form" method="post" >
 
                                     <div class="resumee content level3 documentation">
@@ -193,7 +192,7 @@
                                             </div>
 
                                         </div>
-
+                                     <!--
                                         <div class="row">
                                             <div class="col-sm-12">
 
@@ -236,6 +235,7 @@
 
                                             </div>
                                         </div>
+                                      -->
 
                                         <div class="separador-datos"></div>
 
@@ -253,6 +253,81 @@
                     </div>
                     <div class="tab-pane" id="exampleTabsLineLeftTwo" role="tabpanel">
                      
+                                <form id="tax-form" method="post" >
+                                    <div class="resumee content level3 documentation">      
+                                        
+                                         <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="titleform">
+                                                    <p class="grey-border">Tax Residence</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <input id="investorId" type="hidden" name="investorid">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                             <div class="form-group">
+                                                    
+                                                    <div class="form-group">
+                                                        <label class="control-label" for="userTaxCountry">Country*</label>
+                                                        <select id="taxcountry_cmb" required class="form-control" name="taxcountry" required="" placeholder="Country" style="font-size: 14px; border-radius:0;"></select>
+                                                    </div>
+                                             </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="form-group ">
+                                                    <label class="control-label" for="userTaxFiscalNumber">Fiscal Number *</label>
+                                                    <input type="text" required class="form-control" id="inputTaxFiscalNumber" name="taxfiscalnumber" placeholder="Fiscal Number" style="font-size: 14px; border-radius:0;">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <div class="form-group ">
+                                                    <label class="control-label" for="userTaxUsTin">US TIN</label>
+                                                    <input type="text" required class="form-control" id="inputTaxUstin" name="taxtin" placeholder="US TIN" style="font-size: 14px; border-radius:0;">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="form-group ">
+                                                    <label class="control-label" for="userTaxAddress">Residential Address*</label>
+                                                    <input type="text" required class="form-control" id="inputTaxAddress" name="taxaddress" placeholder="Residential Address" style="font-size: 14px; border-radius:0;">
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row">
+                                        <div class="col-sm-3">
+
+                                            <div class="form-group ">
+                                                <label class="control-label" for="userTaxPostalCode">Postal Code *</label>
+                                                <input type="text" required class="form-control" id="inputTaxPostal" name="taxpostal" placeholder="Postal Code" style="font-size: 14px; border-radius:0;">
+
+                                            </div>
+
+                                        </div>
+
+                                        <div class="col-sm-5">
+                                            <div class="form-group ">
+                                                <label class="control-label" for="userTaxCity">City *</label>
+                                                <input type="text" required class="form-control" id="inputTaxCity" name="taxcity" placeholder="City" style="font-size: 14px; border-radius:0;">
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                     <div class="form-group text-right">
+                                        <button type="submit" class="btn btn-primary">Update information</button>
+                                    </div>
+                                    
+                                </form>       
                         
                     </div>
                     <div class="tab-pane" id="exampleTabsLineLeftThree" role="tabpanel">
@@ -305,8 +380,7 @@
         return new Date(parts[0], parts[1] - 1, parts[2]);
     }
     window.onload = function () {
-        
-        
+ 
          // onload country_cmb
         $.ajax({
             url: "<?php echo base_url('Register_Controller/get_country_list') ?>",
@@ -316,10 +390,23 @@
                 var resp = $.parseJSON(data);//convertir data de json
                 $("#country_cmb").empty();
                 $("#country_cmb").append(resp.html);
-
                 $('#country_cmb').trigger('change');
+                
             }
         });
+        
+         $.ajax({
+            url: "<?php echo base_url('Register_Controller/get_country_list') ?>",
+            type: "POST",
+            data: {countryId: "<?php echo $c_country_id ?>"},
+            success: function (data) {
+                var resp = $.parseJSON(data);//convertir data de json
+                $("#taxcountry_cmb").empty();
+                $("#taxcountry_cmb").append(resp.html);
+            }
+        });
+        
+        
 
         $("#country_cmb").change(function (event) {
             event.preventDefault();
@@ -337,44 +424,83 @@
                 }
             });
         });
-
+        
+        
+        
+        
+        //USER DATA
         $("#inputFirstname").val("<?php echo $firstname ?>");
         $("#inputLastname").val("<?php echo $lastname ?>");
         $("#inputEmail").val("<?php echo $email ?>");
         $("#inputPhone").val("<?php echo $phone ?>");
         $("#inputBirthday").datepicker("setDate", toDate("<?php echo $birthday ?>"));
+        
+        /* //INFORMATION IS ALREADY IN INVESTOR
         $("#inputAddress1").val("<?php echo $address1 ?>");
         $("#inputAddress2").val("<?php echo $address2 ?>");
         $("#inputPostal").val("<?php echo $postal ?>");
         $("#inputCity").val("<?php echo $city ?>");
+        */
         
-        console.log('ENTRA2');
-
+        //INVESTOR
+        $("#investorId").val("<?php echo $c_investor_id ?>");
+        $("#inputTaxFiscalNumber").val("<?php echo $taxfiscalnumber ?>");
+        $("#inputTaxUstin").val("<?php echo $taxtin ?>");
+        $("#inputTaxAddress").val("<?php echo $taxaddress ?>");
+        $("#inputTaxPostal").val("<?php echo $taxpostal ?>");
+        $("#inputTaxCity").val("<?php echo $taxcity ?>");
+        
+        
+        //// FORM USER DATA
         $("#identification-form").submit(function (event) {
             event.preventDefault();
-           
-            console.log($(this).serialize());
 
             $.ajax({
-                url: "<?php echo base_url('User_Accountdata_Controller/update_user_information') ?>",
+                url: "<?php echo base_url('Investor_Data_Controller/update_user_information') ?>",
                 type: "POST",
                 data: $(this).serialize(),
               
                 success: function (data) {
-                    console.log('data' + data);
-                    /*var resp = $.parseJSON(data);
+                    
+                    var resp = $.parseJSON(data);
                     if (resp.status === "error") {
                         showError(resp.msg);
                     } else if (resp.status === "success") {
                         showSuccess('Your information has been updated.');
                     }
-                    */
+                    
 
                 }
             });
         });
+        
+        
+        //// FORM TAX INFORMATION
+        $("#tax-form").submit(function (event) {
+            event.preventDefault();
+           console.log($(this).serialize());
+            $.ajax({
+                url: "<?php echo base_url('Investor_Data_Controller/update_tax_information') ?>",
+                type: "POST",
+                data: $(this).serialize(),
+              
+                success: function (data) {
+                    
+                    var resp = $.parseJSON(data);
+                    if (resp.status === "error") {
+                        showError(resp.msg);
+                    } else if (resp.status === "success") {
+                        showSuccess('Your information has been updated.');
+                    }
+                }
+            });
+        });
+        
+        //// FORM IDENTIFICATION
+        
+        
+        //// FORM PAYPAL
 
-        console.log('ENTRA4');
 
        
 

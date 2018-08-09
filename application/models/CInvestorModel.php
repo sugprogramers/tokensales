@@ -20,6 +20,16 @@ class CInvestorModel extends CI_Model {
         return CInvestor::build($result);
     }
     
+    public function getByUserId($id) {
+        $query = $this->db->get_where("c_investor", array('c_user_id' => $id));
+        $queryresult = $query->result();
+        if (!$queryresult) {
+            return null;
+        }
+        $result = $queryresult[0];      
+        return CInvestor::build($result);
+    }
+    
     public function save($cInvestor, $updatedBy) {
         $now = (new DateTime())->format('Y-m-d H:i:s');
         if(!$cInvestor->c_investor_id){
