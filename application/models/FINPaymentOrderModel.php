@@ -82,7 +82,7 @@ class FINPaymentOrderModel extends CI_Model
         return $this->db->get();
     }
     
-    public function get_paymentOrderInfoById($finPaymentOrderId){
+    public function get_projectPaymentOrderInfoById($finPaymentOrderId){
         
         $this->db->select('po.fin_payment_order_id, p.name, p.companyname, p.targetamt, curr.iso_code, p.datelimit, po.amount, po.scheduleddate, pm.paypalusername, pmu.address1, (curr.cursymbol || po.amount) as amountformatted, curr.cursymbol, curr.iso_code');
         $this->db->from('fin_payment_order as po');
@@ -102,6 +102,40 @@ class FINPaymentOrderModel extends CI_Model
         $this->db->select('p.name');
         $this->db->from('fin_payment_order as po');
         $this->db->join('c_project  as p', 'po.c_project_id = p.c_project_id ');
+        $this->db->where('po.fin_payment_order_id', $finPaymentOrderId);
+        return $this->db->get();
+    }
+    
+    public function get_investors_ipayout(){
+        $this->db->select("po.fin_payment_order_id, u.email, (u.firstname || ' ' || u.lastname) as name, p.payin_paypalusername, curr.iso_code, po.amount, po.scheduleddate");
+        $this->db->from('fin_payment_order as po');
+        $this->db->join('c_investor  as p', 'po.c_investor_id = p.c_investor_id ');
+        $this->db->join('c_user  as u', 'p.c_user_id = u.c_user_id ');
+        $this->db->join('c_currency as curr', "'100' = curr.c_currency_id");
+        $this->db->where('po.ordertype', 'INVPAYOUT');
+        $this->db->where('po.status', 'PEND');
+        return $this->db->get();
+    }
+    
+    public function get_investorPaymentOrderInfoById($finPaymentOrderId){
+        
+        $this->db->select("po.fin_payment_order_id,u.email, (u.firstname || ' ' || u.lastname) as name, po.amount, po.scheduleddate, p.payin_paypalusername, p.tax_address1 as address1, (curr.cursymbol || po.amount) as amountformatted, curr.cursymbol, curr.iso_code");
+        $this->db->from('fin_payment_order as po');
+        $this->db->join('c_investor  as p', 'po.c_investor_id = p.c_investor_id ');
+        $this->db->join('c_currency as curr', "'100' = curr.c_currency_id");
+        $this->db->join('c_user as u', 'u.c_user_id = p.c_user_id');
+        $this->db->where('po.fin_payment_order_id', $finPaymentOrderId);
+        $this->db->where('po.ordertype', 'INVPAYOUT');
+        $this->db->where('po.status', 'PEND');
+        return $this->db->get();
+    }
+    
+    public function get_investorInfoByOrderPaymentId($finPaymentOrderId){
+        
+        $this->db->select('u.email');
+        $this->db->from('fin_payment_order as po');
+        $this->db->join('c_investor as p', 'po.c_investor_id = p.c_investor_id ');
+        $this->db->join('c_user as u', 'p.c_user_id = u.c_user_id ');
         $this->db->where('po.fin_payment_order_id', $finPaymentOrderId);
         return $this->db->get();
     }

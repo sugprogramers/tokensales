@@ -3,15 +3,14 @@
 include 'application/libraries/PaypalIPN.php';
 include 'application/libraries/SDException.php';
 
-class IPN_ProjectPaymentOrder_Controller extends CI_Controller {
+class IPN_InvestorPaymentOrder_Controller extends CI_Controller {
             
     public function __construct() {
         parent::__construct();
         $this->load->helper('url');
         $this->load->model("FINPaymentOrderModel");
         $this->load->model("FINPaymentHistoryModel");
-        $this->load->model("CProjectModel");
-        $this->load->model("CProjectmanagerModel");
+        $this->load->model("CInvestorModel");
         $this->load->model("CUserModel");
     }
     
@@ -25,36 +24,30 @@ class IPN_ProjectPaymentOrder_Controller extends CI_Controller {
                 throw new SDException("payment order not found");
             }
             
-            if($finPaymentOrder->ordertype != 'PROMPAYOUT' || $finPaymentOrder->status != 'PEND'){
+            if($finPaymentOrder->ordertype != 'INVPAYOUT' || $finPaymentOrder->status != 'PEND'){
                 throw new SDException("incorrect payment order status");
             }
             
-            $cProject = $this->CProjectModel->get($finPaymentOrder->c_project_id);
-            if(!$cProject){
-                throw new SDException("project not found");
-            }
-            
-            if($cProject->projectstatus != 'COFU'){
-                throw new SDException("incorrect project status");
+            $cInvestor = $this->CInvestorModel->get($finPaymentOrder->c_investor_id);
+            if(!$cInvestor){
+                throw new SDException("investor not found");
             }
             
             $oldfinPaymentHistory = $this->FINPaymentHistoryModel->loadByPaymentOrderId($finPaymentOrder->fin_payment_order_id);
             if($oldfinPaymentHistory != null){
                 throw new SDException("payment order already processed");
             }
-            
-            $cProjectmanager = $this->CProjectmanagerModel->get($cProject->c_projectmanager_id);
-            
+                        
             $cUserFrom = CUserModel::$CUSER_ADMIN_ID;
-            $cUserTo = $cProjectmanager->c_user_id;
+            $cUserTo = $cInvestor->c_user_id;
             
             //THESE WILL NEED TO BE RETREIVED VIA POST
             $now = date("Y-m-d H:i:s");
-            $c_currency_id = $cProject->c_currency_id;
+            $c_currency_id = "100";
             $amount = $finPaymentOrder->amount;
             $fromaccount = "fromaccount@gmail.com";
             $toaccount = "toaccount@gmail.com";
-            $description = "description payout for project:".$finPaymentOrder->c_project_id;
+            $description = "description payout for investor:".$finPaymentOrder->c_investor_id;
             
             
             $finPaymentHistory = new FINPaymentHistory();
@@ -72,7 +65,7 @@ class IPN_ProjectPaymentOrder_Controller extends CI_Controller {
             $finPaymentHistory->to_user_id = $cUserTo; 
             
             $this->FINPaymentHistoryModel->save($finPaymentHistory, CUserModel::$CUSER_ADMIN_ID);
-            $this->db->query("SELECT fin_project_processpayout(?);", array($finPaymentOrder->fin_payment_order_id));
+            $this->db->query("SELECT fin_investor_processpayout(?);", array($finPaymentOrder->fin_payment_order_id));
             $this->db->trans_commit();
         }catch(SDException $e){
             $this->db->trans_rollback();
@@ -92,9 +85,9 @@ class IPN_ProjectPaymentOrder_Controller extends CI_Controller {
         if($this->session->usertype !== "ADM"){
             redirect(base_url() . 'login');
         }
-        $data = $this->get_projectInfoByOrderPaymentId($finPaymentOrderId);
+        $data = $this->get_investorInfoByOrderPaymentId($finPaymentOrderId);
         $this->load->view('header/header_admin');
-        $this->load->view('paypal/ipn_projectpaymentorder_success',$data);
+        $this->load->view('paypal/ipn_investorpaymentorder_success',$data);
         $this->load->view('footer/footer_admin');    
         
     }
@@ -103,16 +96,16 @@ class IPN_ProjectPaymentOrder_Controller extends CI_Controller {
         if($this->session->usertype !== "ADM"){
             redirect(base_url() . 'login');
         }
-        $data = $this->get_projectInfoByOrderPaymentId($finPaymentOrderId);
+        $data = $this->get_investorInfoByOrderPaymentId($finPaymentOrderId);
         $this->load->view('header/header_admin');
-        $this->load->view('paypal/ipn_projectpaymentorder_cancel',$data);
+        $this->load->view('paypal/ipn_investorpaymentorder_cancel',$data);
         $this->load->view('footer/footer_admin');
     }
     
-    public function get_projectInfoByOrderPaymentId($finPaymentOrderId) {
+    public function get_investorInfoByOrderPaymentId($finPaymentOrderId) {
 
         try {
-            $query = $this->FINPaymentOrderModel->get_projectInfoByOrderPaymentId($finPaymentOrderId);
+            $query = $this->FINPaymentOrderModel->get_investorInfoByOrderPaymentId($finPaymentOrderId);
             $queryresult = $query->result();
             if(!$queryresult){
                 throw new SDException("Payment order not found.");
@@ -122,7 +115,7 @@ class IPN_ProjectPaymentOrder_Controller extends CI_Controller {
             $result = array(
                 "status" => 'success',
                 "msg" => '',
-                "projectName" => $result->name,
+                "email" => $result->email,
             );
 
 

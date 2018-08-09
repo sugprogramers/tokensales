@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 include 'application/libraries/SDException.php';
 
 
-class Admin_Project_PPayout_Controller extends CI_Controller {
+class Admin_Investor_IPayout_Controller extends CI_Controller {
 
     
     public function __construct() {
@@ -21,17 +21,16 @@ class Admin_Project_PPayout_Controller extends CI_Controller {
     }
 
     public function index($finPaymentOrderId) {
-        log_message('error', 'got id:'.$finPaymentOrderId);
         $data = $this->get_paymentOrderInfoById($finPaymentOrderId);
         $this->load->view('header/header_admin');
-        $this->load->view('admin_project_ppayout', $data);
+        $this->load->view('admin_investor_ipayout', $data);
         $this->load->view('footer/footer_admin');
     }
     
     public function get_paymentOrderInfoById($finPaymentOrderId) {
 
         try {
-            $query = $this->FINPaymentOrderModel->get_projectPaymentOrderInfoById($finPaymentOrderId);
+            $query = $this->FINPaymentOrderModel->get_investorPaymentOrderInfoById($finPaymentOrderId);
             $queryresult = $query->result();
             if(!$queryresult){
                 throw new SDException("Pending Payment order not found.");
@@ -55,9 +54,9 @@ class Admin_Project_PPayout_Controller extends CI_Controller {
                 "status" => 'success',
                 "msg" => '',
                 "dlgFinPaymentOrderId" => $result->fin_payment_order_id,
-                "dlgCompanyName" => $result->companyname." (".$result->paypalusername.")",
-                "dlgPMPaypalUsername" => $result->paypalusername,
-                "dlgProjectName" => $result->name,
+                "dlgName" => $result->name." (".$result->email.")",
+                "dlgIPaypalUsername" => $result->payin_paypalusername,
+                "dlgInvestorName" => $result->name,
                 "dlgAddress" => $result->address1,
                 "dlgSubTotalAmount" => $result->amount,
                 "dlgGrandTotalAmount" => $result->amount,
