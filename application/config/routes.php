@@ -76,6 +76,7 @@ $route['admin_project_payout'] = 'Admin_Project_PPayout_Controller';
 $route['investor_dashboard'] = "Investor_Dashboard_Controller";
 $route['investor_investment'] = "Investor_Investment_Controller";
 $route['investor_data'] = "Investor_Data_Controller";
+$route['investor_changepassword'] = "Investor_Changepassword_Controller";
 $route['investor_paypalaccount'] = "Investor_PaypalAccount_Controller";
 $route['investor_depositfunds'] = "Investor_DepositFunds_Controller";
 $route['investor_withdrawfunds'] = "Investor_WithdrawFunds_Controller";

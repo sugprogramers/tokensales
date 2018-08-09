@@ -763,7 +763,7 @@
                                                         </li>
 
                                                         <li class="site-menu-item">
-                                                            <a href="#">
+                                                            <a href="<?php echo base_url(); ?>investor_changepassword">
                                                                 <span class="site-menu-title">Change Password</span>
                                                             </a>
                                                         </li>
