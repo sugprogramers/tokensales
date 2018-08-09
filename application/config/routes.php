@@ -91,6 +91,13 @@ $route['paypal/ipn_projectpaymentorder/(:any)'] = "paypal/IPN_ProjectPaymentOrde
 $route['paypal/ipn_projectpaymentorder_success/(:any)'] = "paypal/IPN_ProjectPaymentOrder_Controller/success/$1";
 $route['paypal/ipn_projectpaymentorder_cancel/(:any)'] = "paypal/IPN_ProjectPaymentOrder_Controller/cancel/$1";
 
+//admin investor payout
+$route['admin_list_investor_ipayout'] = "Admin_List_Investor_IPayout_Controller";
+$route['admin_investor_ipayout/(:any)'] = "Admin_Investor_IPayout_Controller/index/$1";
+$route['paypal/ipn_investorpaymentorder/(:any)'] = "paypal/IPN_InvestorPaymentOrder_Controller/index/$1";
+$route['paypal/ipn_investorpaymentorder_success/(:any)'] = "paypal/IPN_InvestorPaymentOrder_Controller/success/$1";
+$route['paypal/ipn_investorpaymentorder_cancel/(:any)'] = "paypal/IPN_InvestorPaymentOrder_Controller/cancel/$1";
+
 
 //Ejemplo Route test a sub funciones
 /*$route['default'] = "admin/Administrator";
