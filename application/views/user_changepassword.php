@@ -49,7 +49,7 @@
                 <div class="row">
                     <div class="col-sm-offset-3 col-sm-6">
 
-                        <form method="post">
+                        <form method="post" id="passwordChangeForm">
                             <p>You can change your password here:</p>
                             <div></div>
                             <div class="resumee">
