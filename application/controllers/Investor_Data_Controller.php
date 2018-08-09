@@ -42,9 +42,6 @@ class Investor_Data_Controller extends CI_Controller {
                 'email' => $cUser->email,
         );
         
-        log_message('ERROR', "SITIZEN33" . (($cInvestor->tax_isuscitizen=="Y")?"Y":"N"));
-        
-        
         $dataInvestor = array(
                 'c_investor_id' => ($cInvestor)?$cInvestor->c_investor_id:"",
                 'c_tax_country_id' => ($cInvestor)?$cInvestor->c_tax_country_id:"",
@@ -54,6 +51,7 @@ class Investor_Data_Controller extends CI_Controller {
                 'taxcity' => ($cInvestor)?$cInvestor->tax_city:"",
                 'taxpostal' => ($cInvestor)?$cInvestor->tax_postal:"",
                 'taxisuscitizen' => ($cInvestor)?(($cInvestor->tax_isuscitizen=="Y")?"Y":"N"):"N",
+                'paypalacct' => ($cInvestor)?$cInvestor->payin_paypalusername:"",
         );
         
         $data = $data + $dataInvestor; //merge_array($data, $dataInvestor)
@@ -163,8 +161,9 @@ class Investor_Data_Controller extends CI_Controller {
         
         //investor info
         $cInvestorF = $this->CInvestorModel->getByUserId($this->session->id);
-        
         $investorId = ($cInvestorF)?$cInvestorF->c_investor_id:"";
+        
+        
         $fiscalNumber = $this->input->post("taxfiscalnumber");
         $isCitizen =   ($this->input->post("isuscitizen"))?"Y":"N";
         $tin = $this->input->post("taxtin");       
@@ -193,7 +192,6 @@ class Investor_Data_Controller extends CI_Controller {
                 throw new SDException("Residential Address is not set");
             }
             
-            log_message("ERROR", "CITY: " . $city);
             $cInvestor = $this->CInvestorModel->get($investorId);  
             if(!$cInvestor)
                 $cInvestor = new CInvestor;
@@ -223,7 +221,45 @@ class Investor_Data_Controller extends CI_Controller {
         }
     }
     
-    
+    public function update_tax_paypal_information() {
+        
+        //investor info
+        $cInvestorF = $this->CInvestorModel->getByUserId($this->session->id);
+        $investorId = ($cInvestorF)?$cInvestorF->c_investor_id:"";
+        
+        $paypal = $this->input->post("paypalacct");
+        
+        try {      
+            
+            if(!isset($paypal) || trim($paypal) == '' ) {
+                throw new SDException("Paypal Account is not set");
+            }            
+
+            $cInvestor = $this->CInvestorModel->get($investorId);  
+            if(!$cInvestor){
+                $cInvestor = new CInvestor;
+                $user = $this->session->id;
+            }else
+                $user = $cInvestor->c_user_id;
+            
+            
+            $cInvestor->c_user_id = $user;
+            $cInvestor->payin_paypalusername= $paypal;
+            
+            $this->CInvestorModel->save($cInvestor, $this->session->id);
+ 
+            $response = array('redirect' => '', 'status' => 'success'); 
+            echo json_encode($response);
+            
+        }catch(SDException $e){
+            $response = array('status' => 'error', 'msg' => $e->getMessage());
+            echo json_encode($response);
+        }        
+        catch(Exception $e){
+            $response = array('status' => 'error', 'msg' => 'InternalError');
+            echo json_encode($response);
+        }
+    }
     
     
    

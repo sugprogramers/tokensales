@@ -166,7 +166,7 @@
                                         <div class="row">
                                             <div class="col-sm-12">
                                                 <div class="titleform">
-                                                    <p class="grey-border">Residence</p>
+                                                    <p class="grey-border">Nationality</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -341,8 +341,39 @@
                         
                     </div>
                     <div class="tab-pane" id="exampleTabsLineLeftFour" role="tabpanel">
-                    
-                        
+                        <form id="paypalacct_form" method="post" >
+                            <div class="resumee content level3 documentation">      
+                              <div class="row">
+                                <div class="col-sm-12">
+                                   <div class="titleform">
+                                     <p class="grey-border">Paypal Account</p>
+                                   </div>
+                                </div>
+                              </div>
+                            </div>
+                                
+                            <p>In order to receive return investments of projects, enter your paypal email address</p>
+                            <div></div>
+
+                            <div class="row">
+                              <div class="col-sm-6">
+                                <div class="form-group ">
+                                  <label class="control-label" for="paypalaccount">Paypal Account</label>
+                                  <input type="email" required class="form-control" id="inputPaypalAcct" name="paypalacct" placeholder="Paypal Account" style="font-size: 14px; border-radius:0;">
+                                </div>
+                              </div>
+                              <div class="col-sm-6"></div>                        
+                            </div>                    
+
+                            <div class="row">
+                                <div class="col-sm-6">
+                                  <div class="form-group text-right">
+                                    <button type="submit" class="btn btn-primary">Save changes</button>
+                                  </div>
+                                </div> 
+                                <div class="col-sm-6"></div>  
+                            </div> 
+                        </form>
                     </div>
                   </div>
                 </div>
@@ -472,6 +503,9 @@
          $("#divTaxUs").show();
         }
         
+        $("#inputPaypalAcct").val("<?php echo $paypalacct ?>");
+        
+        
         
         //// FORM USER DATA
         $("#identification-form").submit(function (event) {
@@ -522,7 +556,23 @@
         
         
         //// FORM PAYPAL
+        $("#paypalacct_form").submit(function (event) {
+            event.preventDefault();
 
+            $.ajax({
+                url: "<?php echo base_url('Investor_Data_Controller/update_tax_paypal_information') ?>",
+                type: "POST",
+                data: $(this).serialize(),
+                success: function (data) {
+                    var resp = $.parseJSON(data);
+                    if (resp.status === "error") {
+                        showError(resp.msg);
+                    }else if (resp.status === "success") {
+                        showSuccess('Your information has been updated.');
+                    }
+                }
+            });
+        });
 
        
 
