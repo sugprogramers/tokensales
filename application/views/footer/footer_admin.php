@@ -73,12 +73,12 @@
   <script src="<?php echo base_url()."themes/default/remark"; ?>/global/js/Plugin/sticky-header.min599c.js?v4.0.2"></script>  
   <script src="<?php echo base_url()."themes/default/remark"; ?>/global/js/Plugin/animate-list.min599c.js?v4.0.2"></script>
   <script src="<?php echo base_url()."themes/default/remark"; ?>/global/js/Plugin/action-btn.min599c.js?v4.0.2"></script>
-  <!-- <script src="<?php echo base_url()."themes/default/remark"; ?>/global/js/Plugin/asselectable.min599c.js?v4.0.2"></script>
-  <script src="<?php echo base_url()."themes/default/remark"; ?>/global/js/Plugin/selectable.min599c.js?v4.0.2"></script> -->
   <script src="<?php echo base_url()."themes/default/remark/topbar"; ?>/assets/js/BaseApp.min599c.js?v4.0.2"></script>
   <script src="<?php echo base_url()."themes/default/remark/topbar"; ?>/assets/js/App/Media.min599c.js?v4.0.2"></script>
   <script src="<?php echo base_url()."themes/default/remark/topbar"; ?>/assets/examples/js/apps/media.min599c.js?v4.0.2"></script>
   
+   <script src="<?php echo base_url()."themes/default/remark"; ?>/global/js/Plugin/dropify.min599c.js?v4.0.2"></script>
+   <script src="<?php echo base_url()."themes/default/remark"; ?>/global/vendor/dropify/dropify.min599c.js?v4.0.2"></script>
   
 
  <script>
@@ -89,6 +89,7 @@
       $(document).ready(function() {
         Site.run();
       });*/
+        
     })(document, window, jQuery);
   </script> 
 

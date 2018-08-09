@@ -102,6 +102,17 @@ class CProjectModel extends CI_Model {
         return $list;
     }
     
+    
+    function getById($id) {
+        $this->db->where("c_project_id", $id);        
+        $resultados = $this->db->get("c_project");
+        if ($resultados->num_rows() > 0) {
+            return $resultados->row();
+        } else {
+            return false;
+        }
+    }
+    
 
     public function getProjectStatusName($status){
         log_message("ERROR","ESTADO :". $status);

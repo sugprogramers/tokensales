@@ -186,7 +186,7 @@
                                     
                                     
                                     
-                                    <li onclick="alert('newww');">
+                                    <li onclick="window.location.href = '<?php echo base_url('company_edit_project')?>';">
                                         <div class="media-item" >
                                             <div class="image-wrap" style="background: #e4eaec;" >
                                                  <img class="overlay-figure" src="<?php echo base_url() . "themes/default/remark/topbar/assets/images"; ?>/new-project.png" alt="...">
