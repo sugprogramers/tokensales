@@ -1,4 +1,4 @@
-<header class="slidePanel-header overlay" style="height:350px;width:100%;background-image: url('http://localhost/smart_developer/themes/default/remark/global/photos/focus-5-960x640.jpg');"
+<header class="slidePanel-header overlay" style="height:350px;width:100%; background-position: center center;background-image: url('http://localhost/smart_developer/themes/default/remark/global/photos/focus-5-960x640.jpg');"
   data-method="scroll" data-min="100">
     <div class="overlay-top overlay-panel overlay-background" style="padding: 0px 15px;background: rgba(0,0,0,0.5);">
         <div class="slidePanel-actions btn-group" aria-label="actions" role="group" style="min-height: 0px;">

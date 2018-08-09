@@ -1,5 +1,10 @@
 <link rel="stylesheet" href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/assets/examples/css/apps/media.min599c.css?v4.0.2">
-
+<style> 
+    .site-navbar-small .slidePanel-left, .site-navbar-small .slidePanel-right {
+        top: 0;
+        z-index:2000;
+    }
+</style>
 <div class="page">
     <div class="page-header">
         <h1 class="page-title">My Projects</h1>
@@ -53,13 +58,17 @@
                                     <li>
                                         <div class="media-item" >
 
-                                            <div class="image-wrap"  data-toggle="slidePanel" data-url="<?php echo base_url() . "themes/default/tpl"; ?>/panel.tpl">
+                                            <div class="image-wrap"  data-toggle="slidePanel" data-url="<?php echo base_url() . "themes/default/tpl"; ?>/panel.tpl"  onclick="nuevo('id1');">
                                                 <figure class="overlay overlay-hover">
                                                     <img class="overlay-figure" src="<?php echo base_url() . "themes/default/remark"; ?>/global/photos/focus-5-960x640.jpg" alt="...">
-                                                    <figcaption class="overlay-panel overlay-background overlay-slide-left">
-                                                        <div class="img-text-hover"><h3>Title</h3>
+                                                    <figcaption class="overlay-panel overlay-background overlay-slide-left ">
+
+                                                        <div class="img-text-hover">
+                                                            <h3>Title</h3>
                                                             <p>Lorem <a href="javascript:void(0)">ipsum dolor</a> sit amet,consetetur sadipscing elitr.</p>
+
                                                         </div>
+
                                                     </figcaption>
                                                 </figure>
                                             </div>
@@ -69,7 +78,7 @@
                                                           data-animations="fadeInDown fadeInLeft fadeInUp fadeInRight"  ></span>
                                                     <div class="dropdown-menu dropdown-menu-right" role="menu">
                                                         <a class="dropdown-item" href="javascript:void(0)"><i class="icon wb-pencil" aria-hidden="true"></i>Edit</a>
-                                                        <a class="dropdown-item" href="javascript:void(0)"><i class="icon wb-trash" aria-hidden="true"></i>Delete</a>
+                                                        <a class="dropdown-item" href="javascript:void(0)" ><i class="icon wb-trash" aria-hidden="true" ></i>Delete</a>
                                                     </div>
                                                 </div> 
                                                 <div class="title">Lorem ipsum</div>
@@ -93,7 +102,7 @@
                                     <li>
                                         <div class="media-item" >
 
-                                            <div class="image-wrap"  data-toggle="slidePanel" data-url="<?php echo base_url() . "themes/default/tpl"; ?>/panel.tpl">
+                                            <div class="image-wrap"  data-toggle="slidePanel" data-url="<?php echo base_url() . "themes/default/tpl"; ?>/panel.tpl" onclick="nuevo('id2');">
                                                 <figure class="overlay overlay-hover">
                                                     <img class="overlay-figure" src="<?php echo base_url() . "themes/default/remark"; ?>/global/photos/focus-6-960x640.jpg" alt="...">
                                                     <figcaption class="overlay-panel overlay-background overlay-slide-top">
@@ -133,7 +142,7 @@
                                     <li>
                                         <div class="media-item" >
 
-                                            <div class="image-wrap"  data-toggle="slidePanel" data-url="<?php echo base_url() . "themes/default/tpl"; ?>/panel.tpl" >
+                                            <div class="image-wrap"  data-toggle="slidePanel" data-url="<?php echo base_url() . "themes/default/tpl"; ?>/panel.tpl" onclick="nuevo('id3');">
                                                 <figure class="overlay overlay-hover">
                                                     <img class="overlay-figure" src="<?php echo base_url() . "themes/default/remark"; ?>/global/photos/focus-3-960x640.jpg" alt="...">
                                                     <figcaption class="overlay-panel overlay-background overlay-slide-right">
@@ -169,6 +178,20 @@
                                             </div>
                                         </div>
                                     </li>
+                                    
+                                    
+                                     <li>
+                                        <div class="media-item" >
+                                            <div class="image-wrap"  >
+                                                <div class="overlay-figure">  <br>  <br>  <br>  <br> </div>
+                                            </div>
+                                            <div class="info-wrap">
+                                                 <div class="title">Add New Project</div>
+                                                <div class="time">You must create a new project , click here</div>
+                                            </div>
+                                        </div>
+                                     </li>    
+
                                 </ul>
                             </div>
                         </div>
@@ -184,14 +207,23 @@
 </div> 
 
 <script type="text/javascript">
+    
+    var general = '0';
     window.onload = function () {
         $('#idCompanyProjects').addClass('active');
         $('#idCompanyListProject').addClass('active');
-        $(document).on('slidePanel::afterLoad', function (e) {
-            document.getElementById("tituloNew").innerHTML = "nuevooo";
-        });
+
+$(document).on('slidePanel::afterLoad', function (e) {
+            document.getElementById("tituloNew").innerHTML = "nuevooo"+general;
+            
+          // alert(general);
+   });
+        
     };
 
+function nuevo(id1){
+   general = id1;
+}
 
 
 </script>
