@@ -954,7 +954,7 @@
                                                         </li>
 
                                                         <li class="site-menu-item">
-                                                            <a href="#">
+                                                            <a href="<?php echo base_url(); ?>project_list_investment_ipayout">
                                                                 <span class="site-menu-title">Pending Payouts</span>
                                                             </a>
                                                         </li>
