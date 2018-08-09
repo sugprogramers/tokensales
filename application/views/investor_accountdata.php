@@ -285,6 +285,12 @@
                                     
                                     <div class="row">
                                         <div class="col-sm-4">
+                                       <div class="checkbox-custom checkbox-default">
+                                         <input type="checkbox" id="userisuscitizen" name="isuscitizen"  checked autocomplete="on"/>
+                                         <label for="inputBasicRemember">Are you a person related to the US (US Person)?</label>
+                                       </div>
+                                            </div>
+                                        <div id="divTaxUs" class="col-sm-4">
                                             <div class="form-group ">
                                                     <label class="control-label" for="userTaxUsTin">US TIN</label>
                                                     <input type="text" required class="form-control" id="inputTaxUstin" name="taxtin" placeholder="US TIN" style="font-size: 14px; border-radius:0;">
@@ -426,6 +432,15 @@
         });
         
         
+        $('#userisuscitizen').click(function() {
+            if( $(this).is(':checked')) {
+                $("#divTaxUs").show();
+            } else {
+                $("#divTaxUs").hide();
+            }
+        });
+        
+        
         
         
         //USER DATA
@@ -449,6 +464,13 @@
         $("#inputTaxAddress").val("<?php echo $taxaddress ?>");
         $("#inputTaxPostal").val("<?php echo $taxpostal ?>");
         $("#inputTaxCity").val("<?php echo $taxcity ?>");
+           
+        $('#userisuscitizen')[0].checked = false;
+        $("#divTaxUs").hide();
+        if("<?php echo $taxisuscitizen ?>" === "Y"){
+         $('#userisuscitizen')[0].checked = true;
+         $("#divTaxUs").show();
+        }
         
         
         //// FORM USER DATA

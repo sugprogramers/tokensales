@@ -42,6 +42,9 @@ class Investor_Data_Controller extends CI_Controller {
                 'email' => $cUser->email,
         );
         
+        log_message('ERROR', "SITIZEN33" . (($cInvestor->tax_isuscitizen=="Y")?"Y":"N"));
+        
+        
         $dataInvestor = array(
                 'c_investor_id' => ($cInvestor)?$cInvestor->c_investor_id:"",
                 'c_tax_country_id' => ($cInvestor)?$cInvestor->c_tax_country_id:"",
@@ -50,6 +53,7 @@ class Investor_Data_Controller extends CI_Controller {
                 'taxaddress' => ($cInvestor)?$cInvestor->tax_address1:"",
                 'taxcity' => ($cInvestor)?$cInvestor->tax_city:"",
                 'taxpostal' => ($cInvestor)?$cInvestor->tax_postal:"",
+                'taxisuscitizen' => ($cInvestor)?(($cInvestor->tax_isuscitizen=="Y")?"Y":"N"):"N",
         );
         
         $data = $data + $dataInvestor; //merge_array($data, $dataInvestor)
@@ -162,6 +166,7 @@ class Investor_Data_Controller extends CI_Controller {
         
         $investorId = ($cInvestorF)?$cInvestorF->c_investor_id:"";
         $fiscalNumber = $this->input->post("taxfiscalnumber");
+        $isCitizen =   ($this->input->post("isuscitizen"))?"Y":"N";
         $tin = $this->input->post("taxtin");       
         $countryId = $this->input->post("taxcountry");
         $address = $this->input->post("taxaddress");
@@ -199,6 +204,7 @@ class Investor_Data_Controller extends CI_Controller {
             $cInvestor->tax_city = $city;
             $cInvestor->tax_postal = $postal;
             $cInvestor->tax_fiscalnumber = $fiscalNumber;
+            $cInvestor->tax_isuscitizen = $isCitizen; 
             $cInvestor->tax_ustin = $tin;
             $cInvestor->payin_paypalusername= $paypal;
             
