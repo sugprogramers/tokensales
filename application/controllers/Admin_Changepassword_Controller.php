@@ -18,7 +18,7 @@ class Admin_Changepassword_Controller extends CI_Controller {
 
     public function index() {
         $this->load->view('header/header_admin');
-        $this->load->view('user_changepassword');
+        $this->load->view('admin_changepassword');
         $this->load->view('footer/footer_admin');
     }
     

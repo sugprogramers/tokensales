@@ -110,7 +110,7 @@
 
 
             $.ajax({
-                url: "<?php echo base_url('Admin_Changepassword_Controller/changePassword') ?>",
+                url: "<?php echo base_url('Company_Changepassword_Controller/changePassword') ?>",
                 type: "POST",
                 data: $(this).serialize(),
                 success: function (data) {

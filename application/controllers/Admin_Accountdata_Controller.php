@@ -34,7 +34,7 @@ class Admin_Accountdata_Controller extends CI_Controller {
                 'email' => $cUser->email,
         );
         $this->load->view('header/header_admin');
-        $this->load->view('user_accountdata', $data);
+        $this->load->view('admin_accountdata', $data);
         $this->load->view('footer/footer_admin');
     }
     
