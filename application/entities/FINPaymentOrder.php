@@ -15,6 +15,7 @@ class FINPaymentOrder
     public  $ordertype;
     public  $c_project_id;
     public  $c_investor_id;
+    public  $fin_investment_id;
     
     public  $paymentdate;
      
@@ -35,6 +36,7 @@ class FINPaymentOrder
        $finPaymentOrder->ordertype = $result->ordertype; 
        $finPaymentOrder->c_project_id = $result->c_project_id; 
        $finPaymentOrder->c_investor_id = $result->c_investor_id; 
+       $finPaymentOrder->fin_investment_id = $result->fin_investment_id; 
 
        $finPaymentOrder->paymentdate = $result->paymentdate; 
        return $finPaymentOrder;

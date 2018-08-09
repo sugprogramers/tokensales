@@ -516,10 +516,11 @@ CREATE TABLE fin_payment_order
 
   --INVPAYOUT: investor payout 
   --PROMPAYOUT: project manager payout
+  --RETIPAYIN: project loan interest payin
   ordertype character varying(60) NOT NULL DEFAULT 'INVPAYOUT'::character varying,
   c_project_id character varying(32),
   c_investor_id character varying(32),
-
+  fin_investment_id character varying(32),
   paymentdate timestamp without time zone,
 
   CONSTRAINT fin_payment_order_key PRIMARY KEY (fin_payment_order_id),
@@ -528,6 +529,9 @@ CREATE TABLE fin_payment_order
       ON UPDATE NO ACTION ON DELETE NO ACTION,
   CONSTRAINT fin_payment_order_investor_fk FOREIGN KEY (c_investor_id)
       REFERENCES c_investor (c_investor_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT fin_payment_order_investment_fk FOREIGN KEY (fin_investment_id)
+      REFERENCES fin_investment (fin_investment_id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION,
   CONSTRAINT fin_payment_order_isactive_check CHECK (isactive = ANY (ARRAY['Y'::bpchar, 'N'::bpchar]))
  

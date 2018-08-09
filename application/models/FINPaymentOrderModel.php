@@ -38,6 +38,7 @@ class FINPaymentOrderModel extends CI_Model
                 'ordertype' => $finPaymentOrder->ordertype,
                 'c_project_id' => $finPaymentOrder->c_project_id,
                 'c_investor_id' => $finPaymentOrder->c_investor_id,
+                'fin_investment_id' => $finPaymentOrder->fin_investment_id,
                 'paymentdate' => $finPaymentOrder->paymentdate
             );
             return $this->db->insert('fin_payment_order', $data);
@@ -53,6 +54,7 @@ class FINPaymentOrderModel extends CI_Model
                 'ordertype' => $finPaymentOrder->ordertype,
                 'c_project_id' => $finPaymentOrder->c_project_id,
                 'c_investor_id' => $finPaymentOrder->c_investor_id,
+                'fin_investment_id' => $finPaymentOrder->fin_investment_id,
                 'paymentdate' => $finPaymentOrder->paymentdate
             );
 
