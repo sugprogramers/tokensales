@@ -809,7 +809,7 @@
                                 </li>
                                 
                                 
-                                <li class="dropdown site-menu-item has-sub">
+                                <li class="dropdown site-menu-item has-sub" id="idInvestorBankData">
                                     <a data-toggle="dropdown" href="javascript:void(0)" data-dropdown-toggle="false">
                                         <i class="site-menu-icon fa-bank" aria-hidden="true"></i>
                                         <span class="site-menu-title">Bank Data</span>
@@ -820,24 +820,24 @@
                                             <div>
                                                 <div>
                                                     <ul class="site-menu-sub site-menu-normal-list">
-                                                        <li class="site-menu-item">
-                                                            <a href="#">
+                                                        <li class="site-menu-item" id="idInvestorPaypalAccount">
+                                                            <a href="<?php echo base_url(); ?>investor_paypalaccount">
                                                                 <span class="site-menu-title">Paypal Account</span>
                                                             </a>
                                                         </li>
 
-                                                        <li class="site-menu-item">
-                                                            <a href="#">
+                                                        <li class="site-menu-item" id="idInvestorDepositFunds">
+                                                            <a href="<?php echo base_url(); ?>investor_depositfunds">
                                                                 <span class="site-menu-title">Deposit Funds</span>
                                                             </a>
                                                         </li>
-                                                         <li class="site-menu-item">
-                                                            <a href="#">
+                                                         <li class="site-menu-item" id="idInvestorWithdrawFunds">
+                                                            <a href="<?php echo base_url(); ?>investor_withdrawfunds">
                                                                 <span class="site-menu-title">Withdraw Funds</span>
                                                             </a>
                                                         </li>
-                                                         <li class="site-menu-item">
-                                                            <a href="#">
+                                                         <li class="site-menu-item"id="idInvestorTransactionHistory">
+                                                            <a href="<?php echo base_url(); ?>investor_transactionhistory">
                                                                 <span class="site-menu-title">Transaction History</span>
                                                             </a>
                                                         </li>
@@ -852,7 +852,7 @@
                                 
                                 
                                 
-                                <li class="dropdown site-menu-item has-sub">
+                                <li class="dropdown site-menu-item has-sub" id="idInvestorInformation">
                                     <a data-toggle="dropdown" href="javascript:void(0)" data-dropdown-toggle="false">
                                         <i class="site-menu-icon wb-info-circle" aria-hidden="true"></i>
                                         <span class="site-menu-title">Information</span>
@@ -863,8 +863,8 @@
                                             <div>
                                                 <div>
                                                     <ul class="site-menu-sub site-menu-normal-list">
-                                                        <li class="site-menu-item">
-                                                            <a href="#">
+                                                        <li class="site-menu-item" id="idInvestorBasicData">
+                                                            <a href="<?php echo base_url(); ?>investor_basicdata">
                                                                 <span class="site-menu-title">Basic Data</span>
                                                             </a>
                                                         </li>                                                        
