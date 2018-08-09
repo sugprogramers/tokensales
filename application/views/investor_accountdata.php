@@ -349,7 +349,7 @@
                                 </div>
                               </div>
                             </div>
-                            
+                            <p><b>PASSPORT/ NATIONAL ID CARD.</b> The document must be valid on the date of submission. <br> The image of the document needs to be readable and complete (without cutted edges, covered parts etc). When submitting a National ID card, make sure to upload images of both sides..</p>
                             <div class="row">
                                 <div class="col-sm-4">
                                     <div class="form-group ">
@@ -420,28 +420,7 @@
                   </div>
                 </div>
               </div>
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-               
-
+            
             </div> 
         </div> 
     </div> 
