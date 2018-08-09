@@ -590,13 +590,13 @@
                                                 <div>
                                                     <ul class="site-menu-sub site-menu-normal-list">
                                                         <li class="site-menu-item">
-                                                            <a href="<?php echo base_url(); ?>user_accountdata">
+                                                            <a href="<?php echo base_url(); ?>admin_accountdata">
                                                                 <span class="site-menu-title">Account Data</span>
                                                             </a>
                                                         </li>
 
                                                         <li class="site-menu-item">
-                                                            <a href="<?php echo base_url(); ?>user_changepassword">
+                                                            <a href="<?php echo base_url(); ?>admin_changepassword">
                                                                 <span class="site-menu-title">Change Password</span>
                                                             </a>
                                                         </li>
@@ -918,13 +918,13 @@
                                                 <div>
                                                     <ul class="site-menu-sub site-menu-normal-list">
                                                         <li class="site-menu-item">
-                                                            <a href="#">
+                                                            <a href="<?php echo base_url(); ?>company_accountdata">
                                                                 <span class="site-menu-title">Account Data</span>
                                                             </a>
                                                         </li>
 
                                                         <li class="site-menu-item">
-                                                            <a href="#">
+                                                            <a href="<?php echo base_url(); ?>company_changepassword">
                                                                 <span class="site-menu-title">Change Password</span>
                                                             </a>
                                                         </li>

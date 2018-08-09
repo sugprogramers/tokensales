@@ -292,7 +292,7 @@
             event.preventDefault();
 
             $.ajax({
-                url: "<?php echo base_url('User_Accountdata_Controller/update_user_information') ?>",
+                url: "<?php echo base_url('Admin_Accountdata_Controller/update_user_information') ?>",
                 type: "POST",
                 data: $(this).serialize(),
                 success: function (data) {

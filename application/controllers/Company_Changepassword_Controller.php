@@ -4,21 +4,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 include 'application/libraries/SDException.php';
 
 
-class User_Changepassword_Controller extends CI_Controller {
+class Company_Changepassword_Controller extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
         $this->load->helper('url');
         $this->load->model("CUserModel");
         
-        if($this->session->usertype !== "ADM"){
+        if($this->session->usertype !== "COMPMAN"){
             redirect(base_url() . 'login');
         }
     }
 
     public function index() {
         $this->load->view('header/header_admin');
-        $this->load->view('user_changepassword');
+        $this->load->view('company_changepassword');
         $this->load->view('footer/footer_admin');
     }
     

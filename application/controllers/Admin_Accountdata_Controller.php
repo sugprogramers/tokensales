@@ -3,7 +3,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 include 'application/libraries/SDException.php';
 
-class User_Accountdata_Controller extends CI_Controller {
+class Admin_Accountdata_Controller extends CI_Controller {
 
     public function __construct() {
         parent::__construct();

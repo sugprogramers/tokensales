@@ -66,8 +66,8 @@ $route['admin_dashboard'] = "Admin_Dashboard_Controller";
 $route['admin_list_investor'] = "Admin_List_Investor_Controller";
 $route['admin_list_company'] = "Admin_List_Company_Controller";
 $route['listalldocument'] = "Admin_List_DocumentType_Controller/listDataGrid";
-$route['user_accountdata'] = "User_Accountdata_Controller";
-$route['user_changepassword'] = "User_Changepassword_Controller";
+$route['admin_accountdata'] = "Admin_Accountdata_Controller";
+$route['admin_changepassword'] = "Admin_Changepassword_Controller";
 $route['admin_paypalaccount'] = "Admin_PaypalAccount_Controller";
 $route['admin_transactionhistory'] = "Admin_TransactionHistory_Controller";
 $route['admin_project_payout'] = 'Admin_Project_PPayout_Controller';
@@ -92,6 +92,8 @@ $route['company_edit_project'] = "Company_Edit_Project_Controller";
 $route['company_paypalaccount'] = "Company_PaypalAccount_Controller";
 $route['company_transactionhistory'] = "Company_TransactionHistory_Controller";
 $route['company_basicdata'] = "Company_BasicData_Controller";
+$route['company_accountdata'] = "Company_Accountdata_Controller";
+$route['company_changepassword'] = "Company_Changepassword_Controller";
 
 //admin project payout
 $route['admin_list_project_ppayout'] = "Admin_List_Project_PPayout_Controller";
