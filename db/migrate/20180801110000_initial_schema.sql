@@ -776,3 +776,84 @@ END ; $BODY$
   COST 100;
 ALTER FUNCTION fin_projectinvestment_processpayout(character varying)
   OWNER TO smart;
+
+
+CREATE OR REPLACE FUNCTION UDF_PMT (
+ InterestRate  NUMERIC(18,8),  --monthly interest rate in decimals
+ Nper          INTEGER,        --number of months
+ Pv            NUMERIC(18,4),  --principal of the loan
+ Fv            NUMERIC(18,4),
+ Typ           INTEGER
+)
+RETURNS NUMERIC(18,2)
+AS $$
+    SELECT round(
+        CASE
+        WHEN Typ = 0 THEN 
+            (InterestRate / 100) /
+            (Power(1 + InterestRate / 100, Nper) - 1) *
+            (Pv * Power(1 + InterestRate / 100, Nper) + Fv)
+        WHEN Typ = 1 THEN
+            (InterestRate / 100) /
+            (Power(1 + InterestRate / 100, Nper) - 1) *
+            (Pv * Power(1 + InterestRate / 100, Nper) + Fv) /
+            (1 + InterestRate / 100)
+        END, 2)
+$$ LANGUAGE SQL;
+
+CREATE OR REPLACE FUNCTION fin_project_returninvestment_schedule()
+  RETURNS void AS
+$BODY$ DECLARE 
+  CUR_Investment RECORD;
+  CUR_Project RECORD;
+  v_Aux NUMERIC;
+  v_startdate TIMESTAMP;
+  v_monthindex NUMERIC;
+  v_monthlyinterest NUMERIC;
+  v_pmt NUMERIC;
+  BEGIN
+  
+  FOR CUR_Project IN (SELECT p.* FROM C_Project p INNER JOIN C_Projecttype pt ON p.c_projecttype_id = pt.c_projecttype_id WHERE p.projectstatus='ACT' AND pt.name='Development Loan')
+  LOOP
+    v_startdate := TRUNC(CUR_Project.startdate) + interval '30' day;
+    v_monthindex := 1;
+    v_monthlyinterest := ROUND(CUR_Project.totalyieldperc/CUR_Project.loanterm,5);
+    v_pmt := UDF_PMT(v_monthlyinterest, CUR_Project.loanterm, CUR_Project.amount, 0, 0);
+
+    WHILE (v_startdate <= TRUNC(NOW()) AND v_monthindex <= CUR_Project.loanterm)
+    LOOP
+		FOR CUR_Investment IN (SELECT * FROM FIN_Investment WHERE C_Project_ID = CUR_Project.c_project_id)
+		LOOP
+		  SELECT count(*)
+		    INTO v_Aux
+		    FROM FIN_Payment_Order
+		  WHERE ordertype='RETIPAYIN'
+		  AND fin_investment_id = CUR_Investment.fin_investment_id
+		  AND TRUNC(scheduleddate) = TRUNC(v_startdate);
+
+		  IF(v_Aux == 0) THEN
+            
+			INSERT INTO fin_payment_order(
+				    fin_payment_order_id, isactive, created, createdby, updated, 
+				    updatedby, status, scheduleddate, amount, ordertype, c_project_id, 
+				    c_investor_id, fin_investment_id, paymentdate)
+			VALUES (
+                    get_uuid(), 'Y', DATE(NOW()), '100', DATE(NOW()), 
+				    '100', 'PEND', v_startdate, v_pmt, 'RETIPAYIN', NULL, 
+				    NULL, CUR_Investment.fin_investment_id, NULL
+            );
+		  END IF;
+
+		END LOOP;
+        v_startdate := TRUNC(v_startdate) + interval '30' day;
+        v_monthindex := v_monthindex + 1;
+    END LOOP;
+
+  END LOOP;
+
+  RETURN;
+END ; $BODY$
+  LANGUAGE plpgsql VOLATILE
+  COST 100;
+ALTER FUNCTION fin_project_returninvestment_schedule()
+  OWNER TO smart;
