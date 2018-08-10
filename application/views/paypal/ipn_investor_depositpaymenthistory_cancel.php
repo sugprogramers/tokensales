@@ -17,7 +17,8 @@
                         <div id="alertMessage">
                             <blockquote class="blockquote custom-blockquote blockquote-danger">
                                 <p class="mb-0">OPERATION CANCELLED</p>
-                                <footer class="blockquote-footer">Pending deposit for investor: <?php if(isset($email )) echo $email  ?>
+                                <footer class="blockquote-footer">Pending deposit of <?php if(isset($amount )) echo $amount  ?> USD 
+                                    for investor: <?php if(isset($email )) echo $email  ?>
                                     was cancelled. Please try again.
                                 </footer>
                             </blockquote>

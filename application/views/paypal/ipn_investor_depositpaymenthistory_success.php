@@ -17,7 +17,8 @@
                         <div id="alertMessage">
                             <blockquote class="blockquote custom-blockquote blockquote-success">
                                 <p class="mb-0">SUCCESS</p>
-                                <footer class="blockquote-footer">Pending deposit for investor: <?php if(isset($email )) echo $email  ?>
+                                <footer class="blockquote-footer">Pending deposit of <?php if(isset($amount )) echo $amount  ?> USD 
+                                    for investor: <?php if(isset($email )) echo $email  ?>
                                     executed successfully. Balance will be updated in a few minutes.
                                 </footer>
                             </blockquote>
