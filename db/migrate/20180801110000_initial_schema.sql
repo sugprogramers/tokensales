@@ -859,7 +859,7 @@ ALTER FUNCTION fin_project_returninvestment_schedule()
   OWNER TO smart;
 
 
-CREATE OR REPLACE FUNCTION fin_investor_processpayout(IN p_fin_payment_history_id character varying, IN p_c_invoice_id character varying,IN p_amount numeric)
+CREATE OR REPLACE FUNCTION fin_investor_processpayin(IN p_fin_payment_history_id character varying, IN p_c_invoice_id character varying,IN p_amount numeric)
   RETURNS void AS
 $BODY$ DECLARE 
   CUR_PaymentHistory RECORD;
@@ -887,7 +887,9 @@ $BODY$ DECLARE
 END ; $BODY$
   LANGUAGE plpgsql VOLATILE
   COST 100;
-ALTER FUNCTION fin_investor_processpayout(character varying, character varying, numeric)
+ALTER FUNCTION fin_investor_processpayin(character varying, character varying, numeric)
   OWNER TO smart;
+
+
 
 
