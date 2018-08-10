@@ -2,7 +2,7 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 include 'application/libraries/SDException.php';
-include_once "application/libraries/UUID.php";
+
 
 class Company_Edit_Project_Controller extends CI_Controller {
 

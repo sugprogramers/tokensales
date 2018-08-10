@@ -107,11 +107,24 @@ class CProjectModel extends CI_Model {
         $this->db->where("c_project_id", $id);        
         $resultados = $this->db->get("c_project");
         if ($resultados->num_rows() > 0) {
-            return $resultados->row();
+            return $resultados->result_array();
         } else {
             return false;
         }
     }
+    function getAllByCompany($id) {
+        $this->db->where("*");  
+        $this->db->from('c_project');
+        $this->db->join('c_projectmanager', 'c_projectmanager.c_projectmanager_id = c_project.c_projectmanager_id');
+        $this->db->where('c_project.c_user_id',$id);
+        $result = $this->db->get();  
+        $list = array();
+        foreach($result as $project) {
+            $list[] = CProject::build($project);
+        }
+        return $list;
+    }
+    
     
 
     public function getProjectStatusName($status){
