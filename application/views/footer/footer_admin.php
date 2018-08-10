@@ -80,9 +80,13 @@
   <script src="<?php echo base_url()."themes/default/remark/topbar"; ?>/assets/js/App/Media.min599c.js?v4.0.2"></script>
   <script src="<?php echo base_url()."themes/default/remark/topbar"; ?>/assets/examples/js/apps/media.min599c.js?v4.0.2"></script>
   
+  <!-- upload dropify -->
   <script src="<?php echo base_url()."themes/default/remark"; ?>/global/js/Plugin/dropify.min599c.js?v4.0.2"></script>
   <script src="<?php echo base_url()."themes/default/remark"; ?>/global/vendor/dropify/dropify.min599c.js?v4.0.2"></script>
   
+  <!-- touchspin number -->
+  <script src="<?php echo base_url()."themes/default/remark"; ?>/global/vendor/bootstrap-touchspin/bootstrap-touchspin.min599c.js?v4.0.2"></script>
+  <script src="<?php echo base_url()."themes/default/remark"; ?>/global/js/Plugin/bootstrap-touchspin.min599c.js?v4.0.2"></script>
 
  <script>
     (function(document, window, $) {
