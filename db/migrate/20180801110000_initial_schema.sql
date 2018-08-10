@@ -691,8 +691,8 @@ $BODY$ DECLARE
   END IF;
 
 
-  UPDATE C_Investment SET status='ACT', startdate=now WHERE  c_project_id = CUR_Project.c_project_id;
-  UPDATE C_Project SET projectstatus='ACT', startdate=now  WHERE  c_project_id = CUR_Project.c_project_id;
+  UPDATE FIN_Investment SET status='ACT', startdate=CUR_PaymentHistory.paymentdate WHERE  c_project_id = CUR_Project.c_project_id;
+  UPDATE C_Project SET projectstatus='ACT', startdate=CUR_PaymentHistory.paymentdate  WHERE  c_project_id = CUR_Project.c_project_id;
   UPDATE FIN_Payment_Order SET status='CO', paymentdate=CUR_PaymentHistory.paymentdate WHERE  fin_payment_order_id = CUR_PaymentOrder.fin_payment_order_id;
   UPDATE FIN_Payment_History SET status='CO' WHERE  fin_payment_history_id = CUR_PaymentHistory.fin_payment_history_id;
 
