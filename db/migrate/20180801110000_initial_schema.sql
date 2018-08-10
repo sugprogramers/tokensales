@@ -857,3 +857,37 @@ END ; $BODY$
   COST 100;
 ALTER FUNCTION fin_project_returninvestment_schedule()
   OWNER TO smart;
+
+
+CREATE OR REPLACE FUNCTION fin_investor_processpayout(IN p_fin_payment_history_id character varying, IN p_c_invoice_id character varying,IN p_amount numeric)
+  RETURNS void AS
+$BODY$ DECLARE 
+  CUR_PaymentHistory RECORD;
+  CUR_Investor RECORD;
+
+  BEGIN
+ 
+  SELECT * INTO CUR_PaymentHistory FROM FIN_Payment_History WHERE FIN_Payment_History_ID = p_fin_payment_history_id FOR UPDATE;
+  IF(CUR_PaymentHistory.status <> 'PEND') THEN
+    RAISE EXCEPTION '%','@FIN_ProcessInvestorDepositIncorrectPhistoryStatus@';
+  END IF;
+  IF(CUR_PaymentHistory.amount <> p_amount) THEN
+    RAISE EXCEPTION '%','@FIN_ProcessInvestorDepositIncorrectPhistoryAmount@';
+  END IF;
+
+  SELECT * INTO CUR_Investor FROM C_Investor WHERE C_Investor_ID = p_c_invoice_id FOR UPDATE;
+  IF(CUR_Investor.c_user_id < CUR_PaymentHistory.from_user_id) THEN
+    RAISE EXCEPTION '%','@FIN_ProcessInvestorDepositIncorrectUser@';
+  END IF;
+
+  UPDATE FIN_Payment_History SET status='CO' WHERE  fin_payment_history_id = CUR_PaymentHistory.fin_payment_history_id;
+  UPDATE C_Investor SET payinbalance = CUR_Investor.payinbalance + p_amount WHERE c_investor_id = CUR_Investor.c_investor_id;
+
+  RETURN;
+END ; $BODY$
+  LANGUAGE plpgsql VOLATILE
+  COST 100;
+ALTER FUNCTION fin_investor_processpayout(character varying, character varying, numeric)
+  OWNER TO smart;
+
+
