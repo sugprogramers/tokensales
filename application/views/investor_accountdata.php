@@ -354,8 +354,8 @@
                                 <div class="col-sm-4">
                                     <div class="form-group ">
                                         <label class="control-label" for="propertytype">Document Type *</label>
-                                        <select  required class="form-control"  id="userdoctype" name="userdocumentype" style="font-size: 14px; border-radius:0;">
-                                            <option value="PASS" >Apartment</option>
+                                        <select  required class="form-control"  id="inputDoctype" name="userdocumentype" style="font-size: 14px; border-radius:0;">
+                                            <option value="PASS" >Passport</option>
                                             <option value="IN" >Identity Card</option>
                                         </select>    
                                     </div>
@@ -363,10 +363,27 @@
                                     <label class="control-label" >Document Number *</label>
                                     <input type="text" required class="form-control" id="inputDocNumber" name="userdocno" placeholder="Document Nro." style="font-size: 14px; border-radius:0;">
                                   </div>
+                                  
+                                  <div id="imagesUploaded" class="form-group ">
+                                    <div>
+                                        <label class="control-label" >Images Uploaded</label>
+                                    </div> 
+                                    <div class="row">  
+                                        <div id="divimgfront" class="col-sm-5">  
+                                          <img class="img-rounded img-bordered img-bordered-primary"  id="imgInvestorFront" name="profile_image" src=""  />
+                                        </div>
+                                        <div id="divimgback" class="col-sm-5">
+                                         <img class="img-rounded img-bordered img-bordered-primary"  id="imgInvestorBack" name="profile_image2" src="" width="150" height="150" />
+                                        </div>
+                                    </div>
+                                  </div>
                                 </div>
+                                                                      
+                                
                                 <div class="col-sm-4">
                                    <div class="form-group "> 
                                      <label class="control-label" for="imagenfront" >Front Image</label>
+                                     
                                      <input type="file" id="inputImgFront" class="form-control" data-plugin="dropify" data-default-file="" name="imagenfront"/>
                                    </div>
                                 </div>
@@ -430,6 +447,12 @@
 
 
 
+</div>
+
+<div id="myModal" class="modal">
+  <span class="close">&times;</span>
+  <img class="modal-content" id="img01">
+  <div id="caption"></div>
 </div>
 
 
@@ -529,6 +552,31 @@
         
         $("#inputPaypalAcct").val("<?php echo $paypalacct ?>");
         
+        $("#inputDoctype").val("<?php echo $documenttype ?>");
+        $("#inputDocNumber").val("<?php echo $documentno ?>");
+        $("#divTaxUs").hide();
+        
+        $("#imagesUploaded").hide();
+        $("#divimgfront").hide();
+        $("#divimgback").hide();
+        
+        if("<?php echo $imgFront ?>" !== ""){
+            $("#imagesUploaded").show();
+            $("#divimgfront").show();
+        $("#imgInvestorFront").attr("src","<?php echo $imgFront ?>");
+        $("#imgInvestorFront").attr("width",150);
+        $("#imgInvestorFront").attr("height",150);
+    
+        } 
+        
+        if("<?php echo $imgBack ?>" !== ""){
+            $("#imagesUploaded").show();
+            $("#divimgback").show();
+        $("#imgInvestorBack").attr("src","<?php echo $imgBack ?>");
+        $("#imgInvestorBack").attr("width",150);
+        $("#imgInvestorBack").attr("height",150);
+  
+        }
         
         
         //// FORM USER DATA
@@ -597,6 +645,9 @@
                     if (resp.status === "error") {
                         showError(resp.msg);
                     }else if (resp.status === "success") {
+                        $("#imagesUploaded").hide();
+                        $("#divimgfront").hide();
+                        $("#divimgback").hide();
                         showSuccess('Your information has been updated.');
                     }
                 }
@@ -628,4 +679,10 @@
     };
     
 </script>
+
+
+
+
+
+
 

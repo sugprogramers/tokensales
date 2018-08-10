@@ -43,6 +43,11 @@ class Investor_Data_Controller extends CI_Controller {
                 'email' => $cUser->email,
         );
         
+        $fileFront = $this->CFileModel->get(($cInvestor)?$cInvestor->c_docimgfront_id:"");
+        $pathFront = ($fileFront)?$fileFront->path.$fileFront->name : "";
+        $fileBack = $this->CFileModel->get(($cInvestor)?$cInvestor->c_docimgback_id:"");
+        $pathBack = ($fileBack)?$fileBack->path.$fileBack->name : "";
+        
         $dataInvestor = array(
                 'c_investor_id' => ($cInvestor)?$cInvestor->c_investor_id:"",
                 'c_tax_country_id' => ($cInvestor)?$cInvestor->c_tax_country_id:"",
@@ -53,6 +58,12 @@ class Investor_Data_Controller extends CI_Controller {
                 'taxpostal' => ($cInvestor)?$cInvestor->tax_postal:"",
                 'taxisuscitizen' => ($cInvestor)?(($cInvestor->tax_isuscitizen=="Y")?"Y":"N"):"N",
                 'paypalacct' => ($cInvestor)?$cInvestor->payin_paypalusername:"",
+            
+                'documenttype' => ($cInvestor)?$cInvestor->documenttype:"",
+                'documentno' => ($cInvestor)?$cInvestor->documentnumber:"",
+                
+                'imgFront' => $pathFront, //"./upload/imgs/2d2391831b36f5135e472d02be29145d.png",
+                'imgBack' => $pathBack,//"./upload/imgs/072eaa5741ba4213221ed5138eb2d7a9.png",
         );
         
         $data = $data + $dataInvestor; //merge_array($data, $dataInvestor)
@@ -77,14 +88,10 @@ class Investor_Data_Controller extends CI_Controller {
         
       $count = 0;
       foreach ($query as $obj) {
-           
            $data[] = array(
                 $obj->name,
-              
            );
-           
            $count++;
-          
        }
       
       $result = array(
@@ -194,9 +201,11 @@ class Investor_Data_Controller extends CI_Controller {
             }
             
             $cInvestor = $this->CInvestorModel->get($investorId);  
-            if(!$cInvestor)
+            if(!$cInvestor){
                 $cInvestor = new CInvestor;
+            }
             
+            $cInvestor->isactive ="Y";
             $cInvestor->c_user_id = $this->session->id;
             $cInvestor->c_tax_country_id = $countryId;
             $cInvestor->tax_address1 = $address;
@@ -243,7 +252,7 @@ class Investor_Data_Controller extends CI_Controller {
             }else
                 $user = $cInvestor->c_user_id;
             
-            
+            $cInvestor->isactive = "Y";
             $cInvestor->c_user_id = $user;
             $cInvestor->payin_paypalusername= $paypal;
             
@@ -269,13 +278,15 @@ class Investor_Data_Controller extends CI_Controller {
         $docnumber = $this->input->post("userdocno");
         
         //log_message("ERROR",base_url()."upload/imgs/");
-        $path = base_url()."upload/";
-        $config['upload_path']= "./upload/";
+        $path = "./upload/imgs/";
+        $config['upload_path']= $path;
         $config['allowed_types']='gif|jpg|png';
-        $config['max_size']             = 100;
+        $config['encrypt_name'] = TRUE;
+       
+        /*$config['max_size']             = 100;
         $config['max_width']            = 1024;
         $config['max_height']           = 768;
-
+        */
         $this->load->library('upload',$config);
         
         $fileFront = new CFile();
@@ -290,7 +301,7 @@ class Investor_Data_Controller extends CI_Controller {
                 
                 $fileFront->isactive = "Y";
                 $fileFront->name = $imgFromName;
-                $fileFront->path = $imgFromName;
+                $fileFront->path = $path;
                 $fileFront->datatype = "IMG";
                 $this->CFileModel->save($fileFront, $this->session->id);
                 
@@ -302,7 +313,7 @@ class Investor_Data_Controller extends CI_Controller {
                 //Create File OBJ/
                 $fileBack->isactive = "Y";
                 $fileBack->name = $imgBackName;
-                $fileBack->path = $imgBackName;
+                $fileBack->path = $path;
                 $fileBack->datatype = "IMG";
                 $this->CFileModel->save($fileBack, $this->session->id);
             }
@@ -323,7 +334,8 @@ class Investor_Data_Controller extends CI_Controller {
            $cInvestor->payin_paypalusername= $paypal;
            $cInvestor->c_docimgfront_id = $fileFront->c_file_id;
            $cInvestor->c_docimgback_id = $fileBack->c_file_id;
-                   
+           $cInvestor->documentnumber = $docnumber; 
+           $cInvestor->documenttype = $doctype;
            $this->CInvestorModel->save($cInvestor, $this->session->id);
            
          
