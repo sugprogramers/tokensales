@@ -9,6 +9,7 @@ class Investor_Data_Controller extends CI_Controller {
         $this->load->helper('url');
         $this->load->model("CUserModel");
         $this->load->model("CInvestorModel");
+        $this->load->model("CFileModel");
         
         if($this->session->usertype !== "INV"){
             redirect(base_url() . 'login');
@@ -261,6 +262,92 @@ class Investor_Data_Controller extends CI_Controller {
         }
     }
     
+    public function update_identification_information() {
+        
+        
+        $doctype = $this->input->post("userdocumentype");
+        $docnumber = $this->input->post("userdocno");
+        
+        //log_message("ERROR",base_url()."upload/imgs/");
+        $path = base_url()."upload/";
+        $config['upload_path']= "./upload/";
+        $config['allowed_types']='gif|jpg|png';
+        $config['max_size']             = 100;
+        $config['max_width']            = 1024;
+        $config['max_height']           = 768;
+
+        $this->load->library('upload',$config);
+        
+        $fileFront = new CFile();
+        $fileBack = new CFile();
+        
+        try {   
+            
+            if($this->upload->do_upload("imagenfront")){
+                $dataF = array('upload_data' => $this->upload->data());
+                $imgFromName = $dataF['upload_data']['file_name'];
+                //Create File OBJ/
+                
+                $fileFront->isactive = "Y";
+                $fileFront->name = $imgFromName;
+                $fileFront->path = $imgFromName;
+                $fileFront->datatype = "IMG";
+                $this->CFileModel->save($fileFront, $this->session->id);
+                
+            }
+
+            if($this->upload->do_upload("imagenback")){
+                $dataB = array('upload_data' => $this->upload->data());
+                $imgBackName = $dataB['upload_data']['file_name'];
+                //Create File OBJ/
+                $fileBack->isactive = "Y";
+                $fileBack->name = $imgBackName;
+                $fileBack->path = $imgBackName;
+                $fileBack->datatype = "IMG";
+                $this->CFileModel->save($fileBack, $this->session->id);
+            }
+        
+           //investor info
+           $cInvestorF = $this->CInvestorModel->getByUserId($this->session->id);
+           $investorId = ($cInvestorF)?$cInvestorF->c_investor_id:"";
+           $paypal = ($cInvestorF)?$cInvestorF->payin_paypalusername:"";
+           
+           $cInvestor = $this->CInvestorModel->get($investorId);  
+           if(!$cInvestor){
+                $cInvestor = new CInvestor;
+                $user = $this->session->id;
+           }else
+                $user = $cInvestor->c_user_id;
+           
+           $cInvestor->c_user_id = $user;
+           $cInvestor->payin_paypalusername= $paypal;
+           $cInvestor->c_docimgfront_id = $fileFront->c_file_id;
+           $cInvestor->c_docimgback_id = $fileBack->c_file_id;
+                   
+           $this->CInvestorModel->save($cInvestor, $this->session->id);
+           
+         
+           $response = array('redirect' => '', 'status' => 'success'); 
+           echo json_encode($response);
+            
+        }catch(SDException $e){
+            $response = array('status' => 'error', 'msg' => $e->getMessage());
+            echo json_encode($response);
+        }        
+        catch(Exception $e){
+            $response = array('status' => 'error', 'msg' => 'InternalError');
+            echo json_encode($response);
+        }
+    }
     
+    /*$data1 = array(
+                'menu_id' => $this->input->post('selectmenuid'),
+                'submenu_id' => $this->input->post('selectsubmenu'),
+                'imagetitle' => $this->input->post('imagetitle'),
+                'imgpath' => $data['upload_data']['file_name']
+                );  */
+            //$result= $this->Admin_model->save_imagepath($data1);
+            
+           // echo print_r($data,true);
    
 }

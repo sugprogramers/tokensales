@@ -360,18 +360,21 @@
                                         </select>    
                                     </div>
                                   <div class="form-group ">
-                                    <label class="control-label" for="userDocNumber">Document Number *</label>
-                                    <input type="text" required class="form-control" id="inputDocNumber" name="docno" placeholder="Document Nro." style="font-size: 14px; border-radius:0;">
+                                    <label class="control-label" >Document Number *</label>
+                                    <input type="text" required class="form-control" id="inputDocNumber" name="userdocno" placeholder="Document Nro." style="font-size: 14px; border-radius:0;">
                                   </div>
                                 </div>
                                 <div class="col-sm-4">
-                                    <div id="targetOuter">
-                                          <input type="file" id="input-file-now" data-plugin="dropify" data-default-file=""/>
-                                    </div>
-                                    
+                                   <div class="form-group "> 
+                                     <label class="control-label" for="imagenfront" >Front Image</label>
+                                     <input type="file" id="inputImgFront" class="form-control" data-plugin="dropify" data-default-file="" name="imagenfront"/>
+                                   </div>
                                 </div>
                                 <div class="col-sm-4">
-                                    <input type="file" id="input-file-now" data-plugin="dropify" data-default-file=""/>
+                                    <div class="form-group ">
+                                    <label class="control-label" for="imagenback" >Back Image</label>
+                                    <input type="file" id="inputImgBack" class="form-control" data-plugin="dropify" data-default-file="" name="imagenback"/>
+                                    </div>
                                 </div>
                             </div>
                             
@@ -574,7 +577,32 @@
         });
         
         //// FORM IDENTIFICATION
-        
+        $("#identification_form").submit(function (event) {
+            event.preventDefault();
+            
+           var formData = new FormData(this);
+           
+            
+            $.ajax({
+                url: "<?php echo base_url('Investor_Data_Controller/update_identification_information') ?>",
+                type: "POST",
+                data: formData,
+                processData:false,
+                contentType:false,
+                cache:false,
+                async:false,
+                success: function (data) {
+                    //console.log("data: " . data);
+                    var resp = $.parseJSON(data);
+                    if (resp.status === "error") {
+                        showError(resp.msg);
+                    }else if (resp.status === "success") {
+                        showSuccess('Your information has been updated.');
+                    }
+                }
+            });
+           
+        });
         
         //// FORM PAYPAL
         $("#paypalacct_form").submit(function (event) {
