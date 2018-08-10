@@ -630,7 +630,7 @@ $BODY$
   LANGUAGE plpgsql IMMUTABLE
   COST 100;
 ALTER FUNCTION dateformat()
-  OWNER TO tad;
+  OWNER TO smart;
 
 CREATE OR REPLACE FUNCTION to_timestamp(timestamp with time zone)
   RETURNS timestamp without time zone AS
@@ -642,7 +642,7 @@ $BODY$
   LANGUAGE plpgsql IMMUTABLE
   COST 100;
 ALTER FUNCTION to_timestamp(timestamp with time zone)
-  OWNER TO tad;
+  OWNER TO smart;
 
 CREATE OR REPLACE FUNCTION trunc(timestamp with time zone)
   RETURNS date AS
@@ -654,7 +654,7 @@ $BODY$
   LANGUAGE plpgsql IMMUTABLE
   COST 100;
 ALTER FUNCTION trunc(timestamp with time zone)
-  OWNER TO tad;
+  OWNER TO smart;
 
 
 CREATE OR REPLACE FUNCTION fin_project_processpayout(p_fin_payment_order_id character varying)
