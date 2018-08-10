@@ -60,7 +60,7 @@ class IPN_ProjectInvestmentPaymentOrder_Controller extends CI_Controller {
             $finPaymentHistory->isactive = 'Y';
             $finPaymentHistory->paymentdate = $now;
             $finPaymentHistory->status = "PEND";
-            $finPaymentHistory->type = "RETIPAYIN";
+            $finPaymentHistory->type = "EXTIN";
             $finPaymentHistory->c_currency_id = $c_currency_id; 
             $finPaymentHistory->amount = $amount; 
             $finPaymentHistory->fromaccount = $fromaccount; 
