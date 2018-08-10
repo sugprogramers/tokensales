@@ -9,6 +9,8 @@ class Admin_List_Investor_Controller extends CI_Controller {
         parent::__construct();
         $this->load->helper('url');
         $this->load->model("CUserModel");
+        $this->load->model("CInvestorModel");
+        $this->load->model("FINInvestmentModel");
         
        
         if($this->session->usertype !== "ADM"){
@@ -31,14 +33,22 @@ class Admin_List_Investor_Controller extends CI_Controller {
         $query = $this->CUserModel->get_all_investor();
         $data = [];
         foreach ($query->result() as $r) {
+            
+            $objInvestor = $this->CInvestorModel->getByUserId($r->c_user_id);
+            if(!$objInvestor)
+                continue;
+            
+            $status = $this->CInvestorModel->getInvestorStatusName($objInvestor->status);
+            $notes = $objInvestor->validationnotes;
+            $investamt = $this->FINInvestmentModel->getTotalInvestedByInvestor($objInvestor->c_investor_id);
             $data[] = array(
-                $r->c_user_id,
                 $r->email,
-                $r->password,
-                $r->firstname,
-                $r->lastname,
-                '<a class="btn btn-sm btn-icon btn-pure btn-default on-default edit-row" href="javascript:void(0)" title="Edit" onclick="edit_document('."'".$r->c_user_id."'".')"><i class="icon wb-edit"></i></a>
-		 <a class="btn btn-sm btn-icon btn-pure btn-default on-default edit-row" href="javascript:void(0)" title="Remove" onclick="delete_document('."'".$r->c_user_id."'".')"><i class="icon wb-trash"></i></a>'
+                $r->firstname . " " .$r->lastname,
+                $investamt,
+                $notes,
+                $status,
+                '<a class="btn btn-sm btn-icon btn-pure btn-default on-default edit-row" href="javascript:void(0)" title="Edit Notes" onclick="edit_document('."'".$objInvestor->c_investor_id."'".')"><i class="icon wb-edit"></i></a>
+		 <a class="btn btn-sm btn-icon btn-pure btn-default on-default edit-row" href="javascript:void(0)" title="View Info" onclick="investor_viewinfo('."'".$objInvestor->c_investor_id."'".')"><i class="icon wb-search"></i></a>'
             );
         }
 

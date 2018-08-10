@@ -78,6 +78,21 @@ class FINInvestmentModel extends CI_Model
        return $query->result() ;
     }
     
+     public function getTotalInvestedByInvestor($investorId){
+         log_message("ERROR","--***-- " .  $investorId);
+         //Esto a lo largo debe de ser una consulta mas compleja 
+         //donde saca el real investment, quitando las devoluciones y todo eso
+         $this->db->select("COALESCE(sum(amount),0) as amount ");
+         $this->db->from('fin_investment');
+         $this->db->where('c_investor_id', $investorId);
+         $query =  $this->db->get();
+         $queryresult = $query->result();
+         if (!$queryresult)
+            return "0";
+        
+         return $queryresult[0]->amount;
+    }
+    
     public function getInvestmentStatusName($status){
         log_message("ERROR","ESTADO INVESTMENT :". $status);
         switch ($status) {

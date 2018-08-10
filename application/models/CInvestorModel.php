@@ -103,7 +103,16 @@ class CInvestorModel extends CI_Model {
             $list[] = CInvestor::build($investor);
         }
         return $list;
-    }    
+    }  
+    
+    public function getInvestorStatusName($status){
+        switch ($status) {
+            case "PEND": return "Pending Evaluation";
+            case "VAL": return "Validated";
+            default: break;
+        }
+        return "uknowkn";
+    }
     
 }
 

@@ -17,11 +17,12 @@
                 <table id="idTableListInvestor" class="table table-hover dataTable table-striped" role="grid" style="width:100%" >
                     <thead>
                         <tr>
-                            <th>ID</th>
+                            
                             <th>Email</th>
-                            <th>Password</th>
-                            <th>FirstName</th>
-                            <th>LastName</th>
+                            <th>Investor</th>
+                            <th>Total Invested Capital</th>
+                            <th>Validation Notes</th>
+                            <th>Status</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -56,46 +57,12 @@
 
     };
     
-    function delete_document(id) {
-            bootbox.confirm({
-                title: "Confirm Delete", message: "Delete Item "+id+"?",
-                buttons: {
-                    cancel: {label: '<i class="fa fa-times"></i> Cancel', className: 'btn-danger'},
-                    confirm: {label: '<i class="fa fa-check"></i> Confirm', className: 'btn-success'}
-                },
-                callback: function (result) {
-                    if (result) {
-                          showSuccess('fsffs');
-                    }
-                }
-            });
-        }
+    function investor_viewinfo(id) {
+          
+         
+     }
 
 
 </script>
 
 
-
-<!--
-TEMPLATE
-<div class="page">
-    <div class="page-header">
-        <h1 class="page-title">Page Headers</h1>
-        <div class="page-header-actions">
-            <ol class="breadcrumb breadcrumb-arrow">
-                <li class="breadcrumb-item"><a class="icon fa-clipboard" href="#">Home</a></li>
-                <li class="breadcrumb-item"><a href="#">Layouts</a></li>
-                <li class="breadcrumb-item active">Headers</li>
-            </ol>
-        </div>
-    </div>
-
-    <div class="page-content container-fluid">
-        <div class="panel">
-            <div class="panel-body">
-
-            </div> 
-        </div> 
-    </div> 
-</div>  
--->
