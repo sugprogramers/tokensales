@@ -19,11 +19,14 @@ class Investor_DepositFunds_Controller extends CI_Controller {
     public function index() {
         /* @var $investor CInvestor */
         $investor = $this->CInvestorModel->getByUserId($this->session->id);
-        $payinbalance = 0;
+        
+        $investorId = '';
+        $payinbalance = 0;        
         if ($investor) {
+            $investorId = $investor->c_investor_id;
             $payinbalance = $investor->payinbalance;
         }
-        $data = array('payinbalance' => $payinbalance);
+        $data = array('payinbalance' => $payinbalance, 'investorId' => $investorId);
 
         $this->load->view('header/header_admin');
         $this->load->view('investor_depositfunds', $data);

@@ -18,7 +18,6 @@
                             <p>This is your current available balance.</p>
                         </div>
                     </div>
-                    <br>
 
                     <div class="row">
                         <div class="col-md-12">
@@ -34,12 +33,10 @@
                         </div>
                     </div>                    
 
-                    <br>
-
                     <div class="row">
                         <div class="col-sm-6">
                             <label class="control-label" for="amount">Amount*</label>
-                            <input type="number" required class="form-control" id="inputAmount" name="amount" placeholder="USD Amount" style="font-size: 14px; border-radius:0;">                            
+                            <input type="number" required class="form-control" id="inputAmount" name="amount" placeholder="USD Amount" step=".01" style="font-size: 14px; border-radius:0;">                            
                         </div>
                     </div>
 
@@ -68,13 +65,18 @@
 
         $("#depositFunds-form").submit(function (event) {
             event.preventDefault();
-            var selectedPaymentOrderId = $("#idPayinBalance").val();
-            if (!selectedPaymentOrderId) {
+            var payinBalanceAmt = $("#inputAmount").val();            
+            if (!payinBalanceAmt) {
                 showError('Please enter a amount to deposit.');
                 return;
             }
+            var investorId = "<?php echo $investorId; ?>";
+            if (investorId === '') {
+                showError('Error loading payment information.');
+                return;
+            }            
             
-            window.location.href = "<?php echo base_url('project_investment_ipayout/') ?>" + selectedPaymentOrderId;
+            window.location.href = "<?php echo base_url('investor_processdepositfunds/') ?>" + investorId + "/" + payinBalanceAmt;
         });
 
     };
