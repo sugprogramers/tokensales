@@ -342,7 +342,7 @@ CREATE TABLE c_project
   --NCOFU: funding did not complete
   --VO: voided
   --ACT: active
-  --FI:finished
+  --FIN:finished
   projectstatus character varying(60) NOT NULL DEFAULT 'PEND'::character varying,
   
   --AP: Apartment 
@@ -739,13 +739,14 @@ END ; $BODY$
 ALTER FUNCTION fin_investor_processpayout(character varying)
   OWNER TO smart;
 
-CREATE OR REPLACE FUNCTION fin_projectinvestment_processpayout(IN p_fin_payment_order_id character varying)
+CREATE OR REPLACE FUNCTION fin_projectinvestment_processpayout(p_fin_payment_order_id character varying)
   RETURNS void AS
 $BODY$ DECLARE 
   CUR_PaymentOrder RECORD;
   CUR_PaymentHistory RECORD;
   CUR_Investment RECORD;
   CUR_Investor RECORD;
+  CUR_Project RECORD;
   v_Aux NUMERIC;
   BEGIN
   
@@ -755,6 +756,7 @@ $BODY$ DECLARE
   END IF;
 
   SELECT * INTO CUR_Investment FROM FIN_Investment WHERE FIN_Investment_ID = CUR_PaymentOrder.FIN_Investment_ID FOR UPDATE;
+  SELECT * INTO CUR_Project FROM C_Project WHERE C_Project_ID = CUR_Investment.C_Project_ID FOR UPDATE;
   SELECT * INTO CUR_Investor FROM C_Investor WHERE C_Investor_ID = CUR_Investment.C_Investor_ID FOR UPDATE;
 
   SELECT * INTO CUR_PaymentHistory FROM FIN_Payment_History WHERE fin_payment_order_id = CUR_PaymentOrder.fin_payment_order_id FOR UPDATE;
@@ -769,6 +771,28 @@ $BODY$ DECLARE
     payoutbalance = CUR_Investor.payoutbalance + CUR_PaymentOrder.amount,
     pendingbalance = CUR_Investor.pendingbalance - CUR_PaymentOrder.amount
   WHERE c_investor_id = CUR_Investor.c_investor_id;
+
+  SELECT count(*) INTO v_Aux
+  FROM FIN_Payment_Order po 
+  INNER JOIN FIN_Investment iv ON po.fin_investment_id = iv.fin_investment_id
+  WHERE CUR_PaymentOrder.ordertype = 'RETIPAYIN'
+  AND po.status='CO'
+  AND vi.fin_investment_id = CUR_Investment.fin_investment_id;
+
+  IF(v_Aux >= CUR_Project.loanterm) THEN
+    --Investment have been completely paid
+    UPDATE FIN_Investment SET status = 'FIN' WHERE fin_investment_id = CUR_Investment.fin_investment_id;
+  END IF;
+
+  SELECT count(*) INTO v_Aux
+  FROM FIN_Investment iv
+  WHERE iv.status <> 'FIN'
+  AND vi.c_project_id = CUR_Project.c_project_id;
+
+  IF(v_Aux == 0) THEN
+    --All investment have been completely paid for this project
+    UPDATE C_Project SET projectstatus='FIN' WHERE c_project_id = CUR_Project.c_project_id;
+  END IF;
 
   RETURN;
 END ; $BODY$
