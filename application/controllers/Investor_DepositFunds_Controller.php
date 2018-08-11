@@ -26,7 +26,8 @@ class Investor_DepositFunds_Controller extends CI_Controller {
             $investorId = $investor->c_investor_id;
             $payinbalance = $investor->payinbalance;
         }
-        $data = array('payinbalance' => $payinbalance, 'investorId' => $investorId);
+        // temporary curr_symbol
+        $data = array('investorId' => $investorId, 'payinbalance' => $payinbalance, 'curr_symbol' => '$');
 
         $this->load->view('header/header_admin');
         $this->load->view('investor_depositfunds', $data);

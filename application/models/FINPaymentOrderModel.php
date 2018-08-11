@@ -181,5 +181,23 @@ class FINPaymentOrderModel extends CI_Model
         return $this->db->get();
     }
     
+    public function get_payOutPaymentOrderByInvestor($cInvestorId){              
+        $this->db->select('po.fin_payment_order_id, po.status, po.scheduleddate, po.amount, po.created');
+        $this->db->from('fin_payment_order as po');
+        $this->db->where('po.c_investor_id', $cInvestorId);
+        $this->db->where('po.ordertype', 'INVPAYOUT');
+        $this->db->where('po.status !=', 'CO');
+        return $this->db->get();
+    }
+    
+    public function get_statusName($status) {
+        if ($status === 'PEND') {
+            return 'Pending';
+        } 
+        if ($status === 'CO') {
+            return 'Completed';
+        }         
+        return 'NONE';        
+    }
 
 }

@@ -33,7 +33,7 @@ class IPN_Investor_DepositPaymentHistory_Controller extends CI_Controller {
             $amount = $payinAmount;
             $fromaccount = "fromaccount@gmail.com";
             $toaccount = "toaccount@gmail.com";
-            $description = "description payin for investor payin-balanbce:" . $investor->c_investor_id;
+            $description = "description payin of investor to increment payin-balance:" . $investor->c_investor_id;
 
 
             $finPaymentHistory = new FINPaymentHistory();
