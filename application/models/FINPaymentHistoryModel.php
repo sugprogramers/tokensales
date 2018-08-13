@@ -139,6 +139,17 @@ class FINPaymentHistoryModel extends CI_Model
         $result = $queryresult[0];      
         return FINPaymentHistory::build($result);
     }
+    
+    public function get_payOutPaymentHistoryByInvestorId($cInvestorId){
+        $this->db->select('ph.fin_payment_history_id, ph.description, ph.paymentdate, ph.amount, ph.fromaccount, ph.toaccount, ph.c_currency_id,
+            ph.status, po.fin_payment_order_id ');
+        $this->db->from('fin_payment_history as ph');
+        $this->db->join('fin_payment_order as po','ph.fin_payment_order_id = po.fin_payment_order_id');
+        $this->db->where('ph.type', 'EXTOUT');
+        $this->db->where('po.c_investor_id', $cInvestorId);
+        $this->db->where('po.ordertype', 'INVPAYOUT');
+        return $this->db->get();
+    }     
 
 }
 
