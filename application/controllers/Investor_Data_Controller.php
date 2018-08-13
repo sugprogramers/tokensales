@@ -201,9 +201,16 @@ class Investor_Data_Controller extends CI_Controller {
             }
             
             $cInvestor = $this->CInvestorModel->get($investorId);  
-            if(!$cInvestor){
+            $status ="PEND";
+            $user = $this->session->id;
+            if(!$cInvestor)
                 $cInvestor = new CInvestor;
+            else{
+                $status =$cInvestor->status;
+                $user = $cInvestor->c_user_id;
             }
+                
+            
             
             $cInvestor->isactive ="Y";
             $cInvestor->c_user_id = $this->session->id;
@@ -211,6 +218,7 @@ class Investor_Data_Controller extends CI_Controller {
             $cInvestor->tax_address1 = $address;
             $cInvestor->tax_city = $city;
             $cInvestor->tax_postal = $postal;
+            $cInvestor->status = $status;
             $cInvestor->tax_fiscalnumber = $fiscalNumber;
             $cInvestor->tax_isuscitizen = $isCitizen; 
             $cInvestor->tax_ustin = $tin;
@@ -246,14 +254,19 @@ class Investor_Data_Controller extends CI_Controller {
             }            
 
             $cInvestor = $this->CInvestorModel->get($investorId);  
+            $user = $this->session->id;
+            $status ="PEND";
             if(!$cInvestor){
                 $cInvestor = new CInvestor;
-                $user = $this->session->id;
-            }else
+            }else{
+                $status =$cInvestor->status;
                 $user = $cInvestor->c_user_id;
+            }
             
             $cInvestor->isactive = "Y";
             $cInvestor->c_user_id = $user;
+            $cInvestor->status = $status;
+            
             $cInvestor->payin_paypalusername= $paypal;
             
             $this->CInvestorModel->save($cInvestor, $this->session->id);
@@ -324,13 +337,18 @@ class Investor_Data_Controller extends CI_Controller {
            $paypal = ($cInvestorF)?$cInvestorF->payin_paypalusername:"";
            
            $cInvestor = $this->CInvestorModel->get($investorId);  
-           if(!$cInvestor){
+           $user = $this->session->id;
+           $status ="PEND";
+           if(!$cInvestor)
                 $cInvestor = new CInvestor;
-                $user = $this->session->id;
-           }else
+           else{
                 $user = $cInvestor->c_user_id;
+                $status =$cInvestor->status;
+           }
            
            $cInvestor->c_user_id = $user;
+           $cInvestor->status = $status;
+           
            $cInvestor->payin_paypalusername= $paypal;
            $cInvestor->c_docimgfront_id = $fileFront->c_file_id;
            $cInvestor->c_docimgback_id = $fileBack->c_file_id;
