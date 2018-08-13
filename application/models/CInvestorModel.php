@@ -109,7 +109,8 @@ class CInvestorModel extends CI_Model {
        
        $this->db->select("usr.firstname, usr.lastname, usr.email, usr.phone, (date(usr.birthday))::CHARACTER(11) as birthday, co.name as usercountry, re.description as userregion," 
                          ."txc.name as taxcountry, inv.tax_fiscalnumber  , inv.tax_address1, inv.tax_postal, inv.tax_city, inv.tax_ustin, "
-                         ."inv.documenttype, inv.documentnumber, ff.path as filefrontpath ,ff.name as filefrontname , bf.path as filebackpath ,bf.name as filebackname ");
+                         ."inv.documenttype, inv.documentnumber, ff.path as filefrontpath ,ff.name as filefrontname , bf.path as filebackpath ,bf.name as filebackname, "
+                         . " inv.validationnotes, inv.status as investorstatus ");
        $this->db->from('c_investor inv');
        $this->db->join('c_user usr ', 'inv.c_user_id = usr.c_user_id ', 'left');
        $this->db->join('c_country co', 'usr.c_country_id = co.c_country_id ', 'left');

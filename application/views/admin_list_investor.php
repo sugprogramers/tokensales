@@ -123,6 +123,8 @@
                               aria-controls="exampleLine2" role="tab">Tax Info</a></li>
                           <li class="nav-item" role="presentation"><a class="nav-link" data-toggle="tab" href="#exampleLine3"
                               aria-controls="exampleLine3" role="tab">Identification</a></li>
+                          <li class="nav-item" role="presentation"><a class="nav-link" data-toggle="tab" href="#exampleLine4"
+                              aria-controls="exampleLine4" role="tab">Approve</a></li>
                          
                         </ul>
 
@@ -307,7 +309,46 @@
                                 </div>
                                 
                             </div>
-                            
+                              
+                             <div class="tab-pane" id="exampleLine4" role="tabpanel">
+                                 
+                                <div class="row">
+                                   <div class="col-sm-12">
+                                      <div class="titleform">
+                                        <p class="grey-border" style="margin-top: 0px">Change Status to Investor</p>
+                                      </div>
+                                     </div>
+                                </div>
+
+                                  
+                                  <form id="register_form" >
+                                      
+                                    <div class="row">
+                                     <input id="InvestorId" type="hidden" name="objid">
+                                     <div class="col-xl-12 form-group">
+                                        <p>Notes for Investor</p>
+                                        <textarea id="dlgDescription" class="form-control" rows="3" name="statusDescription" placeholder=""></textarea>
+                                     </div>
+                                    </div>
+                                      
+                                      
+                                    
+                                     <div class="modal-footer">
+                                             <div class="checkbox-custom checkbox-default">
+                                                <input type="checkbox" id="inputBasicOff" name="investerStatus"  checked autocomplete="on"/>
+                                                <label for="inputBasicRemember">Validate</label>
+                                              </div>
+                                    </div>
+                                      
+                                   <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                        <button type="submit"  class="btn btn-primary">  Save changes</button>
+                                    </div>
+                                      
+                                   </form>
+                                  
+                                  
+                             </div>
                           </div>
                         </div>
                       </div>
@@ -317,9 +358,11 @@
 
 
 <script type="text/javascript">
-    window.onload = function () {
+var table;
+var frm;
+  window.onload = function () {
         $('#idListInvestorAdmin').addClass('active');
-        var table = $('#idTableListInvestor').DataTable({
+        table = $('#idTableListInvestor').DataTable({
             responsive: true,
             "order": [[0, "desc"]],
             "columnDefs": [{
@@ -341,8 +384,8 @@
     function investor_viewinfo(id) {
          
          
-         $('#examplePositionCenter').modal('show');
-         
+        $('#examplePositionCenter').modal('show');
+        frm = $("#register_form");
          
         $.ajax({
                 url: "<?php echo base_url('Admin_List_Investor_Controller/get_customItemById')?>",
@@ -351,9 +394,7 @@
                     
                     
                 success: function (data) {
-                    console.log(data);
                     var resp = $.parseJSON(data);//convertir data de json
-                    console.log(resp);
                     if (resp.status === "error") {                       
                          showError('Error Insert Data - Please Try Again');
                     } 
@@ -380,9 +421,6 @@
                         $("#divimgfront").hide();
                         $("#divimgback").hide();
                         
-                        console.log(resp.data['imgFront']);
-                        console.log(resp.data['imgBack']);
-                        
                         if(resp.data['imgFront'] != null){
                                 $("#imagesUploaded").show();
                                 $("#divimgfront").show();
@@ -400,16 +438,38 @@
                                 $("#imgInvestorBack").attr("height",150);
 
                         }
-
-
-
- 
+                        
+                        $('#InvestorId').val(id);
+                        $('#dlgDescription').val(resp.data['validationnotes']);
+                        console.log(resp.data['investorstatus']);
+                        $('#inputBasicOff')[0].checked = false;
+                          if(resp.data['investorstatus']=="Y")
+                            $('#inputBasicOff')[0].checked = true;
                     }                
               }
        }); 
          
          
-         
+        $("#register_form").submit(function (event) {
+            event.preventDefault();
+            $.ajax({
+                url: "<?php echo base_url('Admin_List_Investor_Controller/change_status')?>",
+                type: "POST",
+                data: $('#register_form').serialize(),
+                async: true, 
+                success: function (data) {
+                    
+                    var resp = $.parseJSON(data);//convertir data de json
+                    if (resp.status === "error") {                       
+                         showError(resp.msg);
+                    } 
+                    if (resp.status === "success") {  
+                        $('#examplePositionCenter').modal('hide')
+                        table.ajax.reload();
+                    }                     
+                }
+            });
+        }); 
          
          
      }

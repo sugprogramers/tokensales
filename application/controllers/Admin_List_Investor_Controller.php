@@ -100,8 +100,11 @@ class Admin_List_Investor_Controller extends CI_Controller {
                         'documentno' => $result->documentnumber,
                         'imgFront' => $result->filefrontpath.$result->filefrontname,
                         'imgBack' => $result->filebackpath.$result->filebackname,
-
-             );
+                
+                        'validationnotes' => $result->validationnotes,
+                        'investorstatus' => (($result->investorstatus=="VAL")?"Y":"N"),
+                
+            );
       
         
          $data = $data+ $dataInvestor;
@@ -113,6 +116,38 @@ class Admin_List_Investor_Controller extends CI_Controller {
        } catch(SDException $e){
             $result = array('status' => 'error', 'msg' => $e->getMessage());
             return $result;
+       } catch (Exception $e) {
+            $response = array('redirect' => '', 'status' => 'error', 'msg' => $e->getMessage());
+            echo json_encode($response);
+       }
+    }
+    
+    
+    public function change_status(){
+       $now = (new DateTime())->format('Y-m-d H:i:s');
+       $cInvestorId = $this->input->post("objid");
+       
+       $description = $this->input->post("statusDescription");
+       
+       $status = "PEND" ;
+       $now= null;
+       if($this->input->post("investerStatus")){
+         $status = "VAL" ;
+         $now = (new DateTime())->format('Y-m-d H:i:s');
+       }
+       
+       try {
+            $investor =  $this->CInvestorModel->get($cInvestorId);  
+             if(!$investor)
+                throw new Exception ("Investor not Found");
+
+            $investor->validationnotes = $description;
+            $investor->status = $status;
+            $investor->validateddate = $now;
+            $this->CInvestorModel->save($investor, $this->session->id);
+            $response = array('redirect' => '', 'status' => 'success');
+            echo json_encode($response);
+            
        } catch (Exception $e) {
             $response = array('redirect' => '', 'status' => 'error', 'msg' => $e->getMessage());
             echo json_encode($response);
