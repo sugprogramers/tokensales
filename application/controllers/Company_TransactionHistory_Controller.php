@@ -38,7 +38,7 @@ class Company_TransactionHistory_Controller extends CI_Controller {
                 $paymentdate = $this->createDateTimeStrFormat($payhist->paymentdate, 'Y-m-d H:i:s');
 
                 $html_action = '';
-                if ($payhist->type === "EXTOUT") {
+                if ($payhist->fin_payment_order_id != null && $payhist->fin_payment_order_id !== '') {
                     $html_action = '<a class="btn btn-sm btn-icon btn-pure btn-default on-default edit-row" href="javascript:void(0)" title="Detail" onclick="open_viewdetail1(' . "'" . $payhist->fin_payment_history_id . "'" . ')"><i class="icon wb-more-vertical"></i></a>';
                 }
  

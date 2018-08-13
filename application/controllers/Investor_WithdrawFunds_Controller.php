@@ -145,13 +145,7 @@ class Investor_WithdrawFunds_Controller extends CI_Controller {
 
         $data = array();
         try {
-            /* @var $investor CInvestor */
-            $investor = $this->CInvestorModel->getByUserId($this->session->id);
-            if (!$investor) {
-                throw new SDException("Investor not found.");
-            }      
-            
-            $query = $this->FINPaymentHistoryModel->get_payOutPaymentHistoryByInvestorId($investor->c_investor_id);   
+            $query = $this->FINPaymentHistoryModel->get_payOutPaymentHistoryByUserId($this->session->id);   
         
             foreach ($query->result() as $payhist) {
                 $curr = $this->CCurrencyModel->get($payhist->c_currency_id);
