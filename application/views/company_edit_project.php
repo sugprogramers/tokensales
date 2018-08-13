@@ -358,10 +358,16 @@
 
 <script type="text/javascript">
     window.onload = function () {
+        var action = "<?php echo $action; ?>";
+        var c_project_id = "<?php if (isset($c_project_id)) echo $c_project_id; ?>";
+        console.log(action);
+        
+        
         //load list data to controls
         $.ajax({
             url: "<?php echo base_url('Company_Edit_Project_Controller/get_country_list') ?>",
             type: "POST",
+            async: true,
             success: function (data) {
                 var resp = $.parseJSON(data);//convertir data de json
                 $("#country").empty();
@@ -373,6 +379,7 @@
         $.ajax({
             url: "<?php echo base_url('Company_Edit_Project_Controller/get_cprojecttype_list') ?>",
             type: "POST",
+            async: true,
             success: function (data) {
                 var resp = $.parseJSON(data);//convertir data de json
                 $("#cprojecttype").empty();
@@ -383,6 +390,7 @@
         $.ajax({
             url: "<?php echo base_url('Company_Edit_Project_Controller/get_cprojectmanager_list') ?>",
             type: "POST",
+            async: true,
             success: function (data) {
                 var resp = $.parseJSON(data);//convertir data de json
                 $("#cprojectmanager").empty();
@@ -395,6 +403,7 @@
          $.ajax({
             url: "<?php echo base_url('Company_Edit_Project_Controller/get_currency_list') ?>",
             type: "POST",
+            async: true,
             success: function (data) {
                 var resp = $.parseJSON(data);//convertir data de json
                 $("#currency").empty();
@@ -402,8 +411,7 @@
             }
         });
                
-
-        $("#country").change(function (event) {
+       $("#country").change(function (event) {
             event.preventDefault();
             $.ajax({
                 url: "<?php echo base_url('Company_Edit_Project_Controller/get_region_list') ?>",
@@ -417,11 +425,23 @@
             });
         });
 
+
+       //edit default
+       if (action === "edit") { 
+       
+             $('#nameproject').val("<?php if (isset($name)) echo $name; ?>"); 
+             $('#companyname').val("<?php if (isset($companyname)) echo $companyname; ?>"); 
+             $('#propertytype').val("<?php echo "BUI"; ?>"); 
+             $('#latitude').val("<?php if (isset($latitude)) echo $latitude; ?>"); 
+             $('#longitude').val("<?php if (isset($longitude)) echo $longitude; ?>"); 
+             
+        } 
+
        //save 
         $("#project_form").submit(function (event) {
             event.preventDefault();
             $.ajax({
-                url: "<?php echo base_url('Company_Edit_Project_Controller/save');if ($action == 'edit') echo "/" . $c_project_id; ?>",
+                url: "<?php echo base_url('Company_Edit_Project_Controller/save');?>/"+c_project_id,
                 type: "POST",
                 data: $(this).serialize(),
                 success: function (data) {

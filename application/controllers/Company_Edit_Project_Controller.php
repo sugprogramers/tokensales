@@ -3,7 +3,6 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 include 'application/libraries/SDException.php';
 
-
 class Company_Edit_Project_Controller extends CI_Controller {
 
     public function __construct() {
@@ -13,7 +12,7 @@ class Company_Edit_Project_Controller extends CI_Controller {
         $this->load->model("CCountryModel");
         $this->load->model("CRegionModel");
         $this->load->model("CProjecttypeModel");
-        $this->load->model("CProjectmanagerModel");        
+        $this->load->model("CProjectmanagerModel");
         $this->load->model("CCurrencyModel");
 
         if ($this->session->usertype !== "COMPMAN") {
@@ -25,7 +24,7 @@ class Company_Edit_Project_Controller extends CI_Controller {
         $data = array('action' => 'new');
         $all = $this->CProjectModel->getById($c_project_id);
         if ($c_project_id != null && $all) {
-            $data = array('action' => 'edit') + $all;
+            $data = array('action' => 'edit') + $all[0];
         }
         $this->load->view('header/header_admin');
         $this->load->view('company_edit_project', $data);
@@ -36,8 +35,8 @@ class Company_Edit_Project_Controller extends CI_Controller {
         try {
             $obj = $this->saveValidate($c_project_id);
             $this->CProjectModel->save($obj, $this->session->id);
-            
-            $response = array('redirect' =>  base_url() . 'company_edit_project/'.$obj->c_project_id, 'status' => 'success','msg' =>'');
+
+            $response = array('redirect' => base_url() . 'company_edit_project/' . $obj->c_project_id, 'status' => 'success', 'msg' => '');
             echo json_encode($response);
             exit();
         } catch (Exception $e) {
@@ -55,9 +54,9 @@ class Company_Edit_Project_Controller extends CI_Controller {
         $address = $this->input->post("address");
         $country = $this->input->post("country");
         $region = $this->input->post("region");
-        $city = $this->input->post("city");        
+        $city = $this->input->post("city");
         $cprojecttype = $this->input->post("cprojecttype");
-        $cprojectmanager = $this->input->post("cprojectmanager");        
+        $cprojectmanager = $this->input->post("cprojectmanager");
         $description = $this->input->post("description");
         $months = $this->input->post("months");
         $yield = $this->input->post("yield");
@@ -67,7 +66,7 @@ class Company_Edit_Project_Controller extends CI_Controller {
         $currency = $this->input->post("currency");
         $qtyproperty = $this->input->post("qtyproperty");
 
-         //throw new SDException($cprojectmanager);
+        //throw new SDException($cprojectmanager);
         if (!isset($nameproject) || trim($nameproject) == '') {
             throw new SDException("Invalid Project Name");
         }
@@ -155,20 +154,18 @@ class Company_Edit_Project_Controller extends CI_Controller {
         $response = array('html' => $html);
         echo json_encode($response);
     }
-    
+
     public function get_cprojectmanager_list() {
 
         $country_list = $this->CProjectmanagerModel->getAll();
 
         $html = '<option value="">Choose a Project Manager</option>';
         foreach ($country_list as $country) {
-            $html .= '<option value="' . $country->c_projectmanager_id . '">' . $country->paypalusername. '</option>';
+            $html .= '<option value="' . $country->c_projectmanager_id . '">' . $country->paypalusername . '</option>';
         }
         $response = array('html' => $html);
         echo json_encode($response);
-    }  
-    
-    
+    }
 
     public function get_currency_list() {
 
