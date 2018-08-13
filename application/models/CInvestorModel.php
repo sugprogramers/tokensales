@@ -103,7 +103,25 @@ class CInvestorModel extends CI_Model {
             $list[] = CInvestor::build($investor);
         }
         return $list;
-    }  
+    }
+    
+    public function getInvestorCustomDataById($investorId){
+       
+       $this->db->select("usr.firstname, usr.lastname, usr.email, usr.phone, (date(usr.birthday))::CHARACTER(11) as birthday, co.name as usercountry, re.description as userregion," 
+                         ."txc.name as taxcountry, inv.tax_fiscalnumber  , inv.tax_address1, inv.tax_postal, inv.tax_city, inv.tax_ustin, "
+                         ."inv.documenttype, inv.documentnumber, ff.path as filefrontpath ,ff.name as filefrontname , bf.path as filebackpath ,bf.name as filebackname ");
+       $this->db->from('c_investor inv');
+       $this->db->join('c_user usr ', 'inv.c_user_id = usr.c_user_id ', 'left');
+       $this->db->join('c_country co', 'usr.c_country_id = co.c_country_id ', 'left');
+       $this->db->join('c_region re', 'usr.c_region_id = re.c_region_id ', 'left');
+       $this->db->join('c_country txc', 'inv.c_tax_country_id = txc.c_country_id ', 'left');
+       $this->db->join('c_file ff', 'inv.c_docimgfront_id = ff.c_file_id ', 'left');
+       $this->db->join('c_file bf', 'inv.c_docimgback_id = bf.c_file_id  ', 'left');
+       $this->db->where('inv.c_investor_id', $investorId);
+       
+       return $query =  $this->db->get();
+    }
+    
     
     public function getInvestorStatusName($status){
         switch ($status) {
@@ -113,6 +131,18 @@ class CInvestorModel extends CI_Model {
         }
         return "uknowkn";
     }
+    
+    
+    public function getInvestorDocumentTypeName($doctype){
+        switch ($doctype) {
+            case "PASS": return "Passport";
+            case "IN": return "Identification Number";
+            default: break;
+        }
+        return "uknowkn";
+    }
+    
+    
     
 }
 

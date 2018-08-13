@@ -103,7 +103,7 @@
                                         <div class="row">
                                             <div class="col-sm-12">
                                                 <div class="titleform">
-                                                    <p class="grey-border">User data</p>
+                                                    <p class="grey-border" style="margin-top: 0px">User data</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -168,7 +168,7 @@
                                         <div class="row">
                                             <div class="col-sm-12">
                                                 <div class="titleform">
-                                                    <p class="grey-border">Nationality</p>
+                                                    <p class="grey-border" >Nationality</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -261,7 +261,7 @@
                                          <div class="row">
                                             <div class="col-sm-12">
                                                 <div class="titleform">
-                                                    <p class="grey-border">Tax Residence</p>
+                                                    <p class="grey-border" style="margin-top: 0px">Tax Residence</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -344,7 +344,7 @@
                               <div class="row">
                                 <div class="col-sm-12">
                                    <div class="titleform">
-                                     <p class="grey-border">Identification</p>
+                                     <p class="grey-border" style="margin-top: 0px">Identification</p>
                                    </div>
                                 </div>
                               </div>
@@ -373,7 +373,7 @@
                                           <img class="img-rounded img-bordered img-bordered-primary"  id="imgInvestorFront" name="profile_image" src=""  />
                                         </div>
                                         <div id="divimgback" class="col-sm-5">
-                                         <img class="img-rounded img-bordered img-bordered-primary"  id="imgInvestorBack" name="profile_image2" src="" width="150" height="150" />
+                                         <img class="img-rounded img-bordered img-bordered-primary"  id="imgInvestorBack" name="profile_image2" src=""/>
                                         </div>
                                     </div>
                                   </div>
@@ -408,7 +408,7 @@
                               <div class="row">
                                 <div class="col-sm-12">
                                    <div class="titleform">
-                                     <p class="grey-border">Paypal Account</p>
+                                     <p class="grey-border" style="margin-top: 0px">Paypal Account</p>
                                    </div>
                                 </div>
                               </div>

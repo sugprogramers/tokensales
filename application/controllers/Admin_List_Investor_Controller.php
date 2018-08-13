@@ -11,7 +11,6 @@ class Admin_List_Investor_Controller extends CI_Controller {
         $this->load->model("CUserModel");
         $this->load->model("CInvestorModel");
         $this->load->model("FINInvestmentModel");
-        
        
         if($this->session->usertype !== "ADM"){
             redirect(base_url() . 'login');
@@ -62,6 +61,62 @@ class Admin_List_Investor_Controller extends CI_Controller {
 
         echo json_encode($result);
         exit();
+    }
+    
+    
+    public function get_customItemById() {
+       
+       $cInvestorId = $this->input->post("id");
+       
+       try{ 
+       $query = $this->CInvestorModel->getInvestorCustomDataById($cInvestorId);  
+       $queryresult = $query->result();
+        if(!$queryresult)
+           throw new SDException("No Data About Investor.");
+          
+       $result = $queryresult[0];
+
+       $data = [];
+       $dataInvestor = [];
+       
+           
+           $data = array( 'investorname' => $result->firstname . " " . $result->lastname,
+                        'investoremail' => $result->email, 
+                        'investorphone' => $result->phone,
+                        'investorborn' => $result->birthday,
+                        'investorcountry' => $result->usercountry,
+                        'investorcity' => $result->userregion,
+                        );
+         
+            //Investment info
+            $dataInvestor = array(
+                        'investortaxcountry' => $result->taxcountry,
+                        'investortaxfiscalnumber' => $result->tax_fiscalnumber,
+                        'investortaxaddress' => $result->tax_address1,
+                        'investortaxpostal' => $result->tax_postal,
+                        'investortaxcity' => $result->tax_city,
+                        'investortin' => $result->tax_ustin,
+                        'documenttype' => $this->CInvestorModel->getInvestorDocumentTypeName($result->documenttype),
+                        'documentno' => $result->documentnumber,
+                        'imgFront' => $result->filefrontpath.$result->filefrontname,
+                        'imgBack' => $result->filebackpath.$result->filebackname,
+
+             );
+      
+        
+         $data = $data+ $dataInvestor;
+         
+         $response = array('redirect' => '', 'status' => 'success', 'data' => $data);
+         echo json_encode($response);
+       
+            
+       } catch(SDException $e){
+            $result = array('status' => 'error', 'msg' => $e->getMessage());
+            return $result;
+       } catch (Exception $e) {
+            $response = array('redirect' => '', 'status' => 'error', 'msg' => $e->getMessage());
+            echo json_encode($response);
+       }
     }
 
 }
