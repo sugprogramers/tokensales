@@ -1,5 +1,6 @@
 <?php
 
+include 'application/libraries/SDException.php';
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Investor_Data_Controller extends CI_Controller {
@@ -179,10 +180,18 @@ class Investor_Data_Controller extends CI_Controller {
         $address = $this->input->post("taxaddress");
         $city = $this->input->post("taxcity");
         $postal = $this->input->post("taxpostal");
+        
+        $status = ($cInvestorF)?$cInvestorF->status:"PEND";
+        $user = ($cInvestorF)?$cInvestorF->c_user_id:$this->session->id; 
         $paypal = ($cInvestorF)?$cInvestorF->payin_paypalusername:"";
+        $payinbalance = ($cInvestorF)?$cInvestorF->payinbalance:0;
+        $payoutbalance = ($cInvestorF)?$cInvestorF->payoutbalance:0;
+        $pendingbalance = ($cInvestorF)?$cInvestorF->pendingbalance:0;
+        
+        
         
         try {      
-            
+            log_message("ERROR", 'FISCAL NUMBER: ' . $fiscalNumber);
             if(!isset($fiscalNumber) || trim($fiscalNumber) == '' ) {
                 throw new SDException("Fiscal Number is not set");
             }            
@@ -200,19 +209,12 @@ class Investor_Data_Controller extends CI_Controller {
                 throw new SDException("Residential Address is not set");
             }
             
-            $cInvestor = $this->CInvestorModel->get($investorId);  
-            $status ="PEND";
-            $user = $this->session->id;
+            $cInvestor = $this->CInvestorModel->get($investorId); 
+            
             if(!$cInvestor)
-                $cInvestor = new CInvestor;
-            else{
-                $status =$cInvestor->status;
-                $user = $cInvestor->c_user_id;
-            }
-                
+                $cInvestor= new CInvestor();
             
-            
-            $cInvestor->isactive ="Y";
+            $cInvestor->isactive = "Y";
             $cInvestor->c_user_id = $this->session->id;
             $cInvestor->c_tax_country_id = $countryId;
             $cInvestor->tax_address1 = $address;
@@ -223,6 +225,9 @@ class Investor_Data_Controller extends CI_Controller {
             $cInvestor->tax_isuscitizen = $isCitizen; 
             $cInvestor->tax_ustin = $tin;
             $cInvestor->payin_paypalusername= $paypal;
+            $cInvestor->payinbalance= $payinbalance;
+            $cInvestor->payoutbalance= $payoutbalance;
+            $cInvestor->pendingbalance= $pendingbalance;
             
             $this->CInvestorModel->save($cInvestor, $this->session->id);
  
@@ -244,8 +249,16 @@ class Investor_Data_Controller extends CI_Controller {
         //investor info
         $cInvestorF = $this->CInvestorModel->getByUserId($this->session->id);
         $investorId = ($cInvestorF)?$cInvestorF->c_investor_id:"";
-        
         $paypal = $this->input->post("paypalacct");
+        
+        
+        $isCitizen = ($cInvestorF)?$cInvestorF->tax_isuscitizen:"Y";
+        $status = ($cInvestorF)?$cInvestorF->status:"PEND";
+        $user = ($cInvestorF)?$cInvestorF->c_user_id:$this->session->id; 
+        $payinbalance = ($cInvestorF)?$cInvestorF->payinbalance:0;
+        $payoutbalance = ($cInvestorF)?$cInvestorF->payoutbalance:0;
+        $pendingbalance = ($cInvestorF)?$cInvestorF->pendingbalance:0;
+        
         
         try {      
             
@@ -254,20 +267,22 @@ class Investor_Data_Controller extends CI_Controller {
             }            
 
             $cInvestor = $this->CInvestorModel->get($investorId);  
-            $user = $this->session->id;
-            $status ="PEND";
-            if(!$cInvestor){
-                $cInvestor = new CInvestor;
-            }else{
-                $status =$cInvestor->status;
-                $user = $cInvestor->c_user_id;
-            }
-            
+            if(!$cInvestor)
+                $cInvestor= new CInvestor();
+           
             $cInvestor->isactive = "Y";
             $cInvestor->c_user_id = $user;
             $cInvestor->status = $status;
             
+            
+            $cInvestor->tax_isuscitizen = $isCitizen; 
             $cInvestor->payin_paypalusername= $paypal;
+            $cInvestor->payinbalance= $payinbalance;
+            $cInvestor->payoutbalance= $payoutbalance;
+            $cInvestor->pendingbalance= $pendingbalance;
+            
+            
+            
             
             $this->CInvestorModel->save($cInvestor, $this->session->id);
  
@@ -336,24 +351,34 @@ class Investor_Data_Controller extends CI_Controller {
            $investorId = ($cInvestorF)?$cInvestorF->c_investor_id:"";
            $paypal = ($cInvestorF)?$cInvestorF->payin_paypalusername:"";
            
+            $isCitizen = ($cInvestorF)?$cInvestorF->tax_isuscitizen:"Y";
+            $status = ($cInvestorF)?$cInvestorF->status:"PEND";
+            $user = ($cInvestorF)?$cInvestorF->c_user_id:$this->session->id; 
+            $payinbalance = ($cInvestorF)?$cInvestorF->payinbalance:0;
+            $payoutbalance = ($cInvestorF)?$cInvestorF->payoutbalance:0;
+            $pendingbalance = ($cInvestorF)?$cInvestorF->pendingbalance:0;
+           
+           
            $cInvestor = $this->CInvestorModel->get($investorId);  
-           $user = $this->session->id;
-           $status ="PEND";
            if(!$cInvestor)
-                $cInvestor = new CInvestor;
-           else{
-                $user = $cInvestor->c_user_id;
-                $status =$cInvestor->status;
-           }
+                $cInvestor= new CInvestor();
            
            $cInvestor->c_user_id = $user;
            $cInvestor->status = $status;
-           
-           $cInvestor->payin_paypalusername= $paypal;
+           $cInvestor->isactive = "Y";
            $cInvestor->c_docimgfront_id = $fileFront->c_file_id;
            $cInvestor->c_docimgback_id = $fileBack->c_file_id;
            $cInvestor->documentnumber = $docnumber; 
            $cInvestor->documenttype = $doctype;
+           
+           $cInvestor->tax_isuscitizen = $isCitizen; 
+           $cInvestor->payin_paypalusername= $paypal;
+           $cInvestor->payinbalance= $payinbalance;
+           $cInvestor->payoutbalance= $payoutbalance;
+           $cInvestor->pendingbalance= $pendingbalance;
+           
+           
+           
            $this->CInvestorModel->save($cInvestor, $this->session->id);
            
          
@@ -370,14 +395,6 @@ class Investor_Data_Controller extends CI_Controller {
         }
     }
     
-    /*$data1 = array(
-                'menu_id' => $this->input->post('selectmenuid'),
-                'submenu_id' => $this->input->post('selectsubmenu'),
-                'imagetitle' => $this->input->post('imagetitle'),
-                'imgpath' => $data['upload_data']['file_name']
-                );  */
-            //$result= $this->Admin_model->save_imagepath($data1);
-            
-           // echo print_r($data,true);
+    
    
 }
