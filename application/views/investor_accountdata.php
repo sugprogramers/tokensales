@@ -512,9 +512,9 @@
         
         $('#userisuscitizen').click(function() {
             if( $(this).is(':checked')) {
-                $("#divTaxUs").show();
+                $("#inputTaxUstin").prop('disabled', false);
             } else {
-                $("#divTaxUs").hide();
+                $("#inputTaxUstin").prop('disabled', true);
             }
         });
         
@@ -544,17 +544,18 @@
         $("#inputTaxCity").val("<?php echo $taxcity ?>");
            
         $('#userisuscitizen')[0].checked = false;
-        $("#divTaxUs").hide();
+        
+        $("#inputTaxUstin").prop('disabled', true);
         if("<?php echo $taxisuscitizen ?>" === "Y"){
          $('#userisuscitizen')[0].checked = true;
-         $("#divTaxUs").show();
+         $("#inputTaxUstin").prop('disabled', false);
         }
         
         $("#inputPaypalAcct").val("<?php echo $paypalacct ?>");
         
         $("#inputDoctype").val("<?php echo $documenttype ?>");
         $("#inputDocNumber").val("<?php echo $documentno ?>");
-        $("#divTaxUs").hide();
+        
         
         $("#imagesUploaded").hide();
         $("#divimgfront").hide();
