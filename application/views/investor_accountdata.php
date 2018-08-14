@@ -606,14 +606,12 @@
         //// FORM TAX INFORMATION
         $("#tax-form").submit(function (event) {
             event.preventDefault();
-           console.log($(this).serialize());
             $.ajax({
                 url: "<?php echo base_url('Investor_Data_Controller/update_tax_information') ?>",
                 type: "POST",
                 data: $(this).serialize(),
               
                 success: function (data) {
-                    
                     var resp = $.parseJSON(data);
                     if (resp.status === "error") {
                         showError(resp.msg);
