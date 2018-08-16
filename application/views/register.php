@@ -85,17 +85,18 @@
                         </div>                        
 
                         <div class="row">
-                            <div class="col-sm-6">
+                            <div class="col-sm-6" id="inputNameSection">
 
                                 <div class="form-group ">
-                                    <label class="control-label usuario" for="userFirstName">Name*</label>
+                                    <label class="control-label usuario" id="lblName" for="userFirstName">Name*</label>
+                                    <label class="control-label usuario text-hide" id="lblComercialName" for="userFirstName">Name of the legal representative*</label>
                                     <input type="text" required class="form-control" id="inputFirstname" name="firstname" placeholder="First Name" style="font-size: 14px; border-radius:0;">
 
                                 </div>
 
                             </div>
 
-                            <div class="col-sm-6">
+                            <div class="col-sm-6" id="inputLastnameSection">
 
                                 <div class="form-group ">
                                     <label class="control-label" for="userLastName">Lastname *</label>
@@ -121,8 +122,8 @@
                             <div class="col-sm-6">
 
                                 <div class="form-group ">
-                                    <label class="control-label" for="password">Password *</label>
-                                    <input type="password" required class="form-control" id="inputPassword" name="password" placeholder="Password" style="font-size: 14px; border-radius:0;">
+                                    <label class="control-label" for="password">Password *</label>                                    
+                                    <input type="password" id="inputPassword" name="password" value="" class="form-control password-control" required pattern="(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$!¡¿?*()%^&amp;+=]).{8,}" placeholder="Password" style="font-size: 14px; border-radius:0;">
 
                                 </div>
 
@@ -200,7 +201,7 @@
                             <div class="col-sm-6">
 
                                 <div class="form-group ">
-                                    <label class="control-label" for="country">Address Line 1</label>
+                                    <label class="control-label" for="country">Address Line 1*</label>
                                     <input type="text" required class="form-control" id="inputAddress1" name="address1" placeholder="Address Line 1" style="font-size: 14px; border-radius:0;">
 
                                 </div>
@@ -231,7 +232,7 @@
 
                         <input type="hidden" name="step" value="one">
 
-                        <div id="wrongPass" class="password-wrong">The password must contain at least 8 characters and consist of at least one uppercase letter, one lowercase letter, one number and one symbol.<br><br> <strong>Symbols allowed: @ , # , $ , ! , ¡ , ¿ , ? , * , ( , ) , % , ^ , &amp; , + , = </strong></div>
+                        <div id="wrongPassDiv" class="summary-errors alert alert-danger alert-dismissible">The password must contain at least 8 characters and consist of at least one uppercase letter, one lowercase letter, one number and one symbol.<br><br> <strong>Symbols allowed: @ , # , $ , ! , ¡ , ¿ , ? , * , ( , ) , % , ^ , &amp; , + , = </strong></div>
 
                         <div class="form-group">
                             <input type="hidden" name="helpMyCashClickId" value="">
@@ -309,6 +310,36 @@
                 }
             });
         });
+
+        $('input[type=radio][name=usertype]').change(function () {
+            if (this.value === 'investor') {
+                $("#lblName").removeClass('text-hide');
+                $("#lblComercialName").addClass('text-hide');
+                $("#inputFirstname").attr("placeholder", "Firstname");
+
+                $("#inputLastname").prop('required', true);
+
+                $('#inputNameSection').addClass('col-sm-6').removeClass('col-sm-12');
+                $("#inputLastnameSection").show();
+
+            } else if (this.value === 'company') {
+                $("#lblName").addClass("text-hide");
+                $("#lblComercialName").removeClass("text-hide");
+                $("#inputFirstname").attr("placeholder", "Comercial Name");
+
+                $("#inputLastname").prop('required', false);
+
+                $('#inputNameSection').addClass('col-sm-12').removeClass('col-sm-6');
+                $("#inputLastnameSection").hide();
+            }
+        });
+
+        $('#wrongPassDiv').hide();
+        $('input[type=password][name=password]')[0].oninvalid = function () {            
+            //this.setCustomValidity("Please enter at least 8 length. Symbols allowed: @, #, $, !, ¡, ¿, ?, *, (, ), %, ^, &, +, =");
+            $('#wrongPassDiv').show();            
+        };
+
 
         $("#register_form").submit(function (event) {
             event.preventDefault();

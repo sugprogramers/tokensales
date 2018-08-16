@@ -23,7 +23,6 @@ class Company_Accountdata_Controller extends CI_Controller {
         $data = array(
                 'phone' => $cUser->phone,
                 'firstname' => $cUser->firstname,
-                'lastname' => $cUser->lastname,
                 'birthday' => $birthday,
                 'address1' => $cUser->address1,
                 'address2' => $cUser->address2,
@@ -40,7 +39,6 @@ class Company_Accountdata_Controller extends CI_Controller {
     
     public function update_user_information() {
         $firstname = $this->input->post("firstname");
-        $lastname = $this->input->post("lastname");
         $phone = $this->input->post("phone");
         $birthday = $this->input->post("birthday");       
         $countryId = $this->input->post("country");
@@ -51,8 +49,8 @@ class Company_Accountdata_Controller extends CI_Controller {
         $address2 = $this->input->post("address2");
       
         try {      
-            if(!isset($firstname) || trim($firstname) == '' || !isset($lastname) || trim($lastname) == '') {
-                throw new SDException("Firtname/Lastname is not set");
+            if(!isset($firstname) || trim($firstname) == '') {
+                throw new SDException("Firtname is not set");
             }
             if(!isset($phone) || trim($phone) == '' ) {
                 throw new SDException("Phone is not set");
@@ -78,7 +76,6 @@ class Company_Accountdata_Controller extends CI_Controller {
             /* @var $user CUser */
             $cUser = $this->CUserModel->get($this->session->id);            
             $cUser->firstname = $firstname;
-            $cUser->lastname = $lastname;
             $cUser->birthday = $birthday_date;
             $cUser->phone = $phone;
             $cUser->c_country_id = $countryId;

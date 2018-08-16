@@ -97,6 +97,7 @@
                                 </div>
 
                             </div>
+                            <!--
                             <div class="col-sm-4">
 
                                 <div class="form-group ">
@@ -104,13 +105,8 @@
                                     <input type="text" required class="form-control" id="inputLastname" name="lastname" placeholder="Last Name" style="font-size: 14px; border-radius:0;">
                                 </div>
                             </div>
-
-
-                        </div>
-
-
-                        <div class="row">
-
+                            -->    
+                            
                             <div class="col-sm-6 col-md-4">
 
                                 <div class="form-group ">
@@ -120,7 +116,12 @@
                                 </div>
 
                                 <input type="hidden" name="userEmail" value="gnudebian1991@aol.com">
-                            </div>
+                            </div>                            
+
+                        </div>
+
+
+                        <div class="row">
 
                             <div class="col-sm-6 col-md-4">
                                 <div class="form-group">
@@ -279,7 +280,7 @@
         });
 
         $("#inputFirstname").val("<?php echo $firstname ?>");
-        $("#inputLastname").val("<?php echo $lastname ?>");
+        
         $("#inputEmail").val("<?php echo $email ?>");
         $("#inputPhone").val("<?php echo $phone ?>");
         $("#inputBirthday").datepicker("setDate", toDate("<?php echo $birthday ?>"));
