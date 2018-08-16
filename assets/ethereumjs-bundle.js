@@ -4,10 +4,11 @@ module.exports = {
     ethSigUtil: require('eth-sig-util'),
     ethQuery : require('ethjs-query'),
     ethContract : require('ethjs-contract'),
-    ethjs : require('ethjs')
+    ethjs : require('ethjs'),
+    safeBuffer : require('safe-buffer')
 } 
 
-},{"eth-sig-util":109,"ethereumjs-util":113,"ethjs":136,"ethjs-contract":120,"ethjs-query":130}],2:[function(require,module,exports){
+},{"eth-sig-util":109,"ethereumjs-util":113,"ethjs":136,"ethjs-contract":120,"ethjs-query":130,"safe-buffer":176}],2:[function(require,module,exports){
 module.exports = { "default": require("core-js/library/fn/json/stringify"), __esModule: true };
 },{"core-js/library/fn/json/stringify":13}],3:[function(require,module,exports){
 module.exports = { "default": require("core-js/library/fn/object/assign"), __esModule: true };
