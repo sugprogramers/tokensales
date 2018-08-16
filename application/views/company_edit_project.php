@@ -2,6 +2,8 @@
 <link rel="stylesheet" href="<?php echo base_url() . "themes/default/remark"; ?>/global/vendor/dropify/dropify.min599c.css?v4.0.2">
 <link rel="stylesheet" href="<?php echo base_url() . "themes/default/remark"; ?>/global/vendor/bootstrap-touchspin/bootstrap-touchspin.min599c.css?v4.0.2">
 
+<link rel="stylesheet" href="<?php echo base_url() . "themes/default/remark"; ?>/global/vendor/summernote/summernote.min599c.css?v4.0.2">
+<link rel="stylesheet" href="<?php echo base_url() . "themes/default/remark"; ?>/global/vendor/summernote/summernote/css/summernote-libreicon-theme.css">
 <div class="page">
     <div class="page-header">
         <h1 class="page-title"><?php if ($action == 'edit') echo 'Edit';if ($action == 'new') echo 'New'; ?> Project </h1>
@@ -52,9 +54,9 @@
                                     </select>
                                 </div>
                             </div>
-                            
-                            
-                             <div class="col-sm-12">
+
+
+                            <div class="col-sm-12">
                                 <div class="form-group ">
                                     <label class="control-label" for="qtyproperty">Quantity property *</label>
                                     <input type="text" class="form-control" id="qtyproperty" name="qtyproperty" data-plugin="TouchSpin" value="1" required />
@@ -74,7 +76,7 @@
                                 <div class="col-sm-5" style="padding-right: 0;">
                                     <div class="form-group ">
 
-                                        <input type="text" required class="form-control" disabled id="latitude" name="latitude" placeholder="Latitude" style="font-size: 14px; border-radius:0;">
+                                        <input type="text" required class="form-control" id="latitude" name="latitude" placeholder="Latitude" style="font-size: 14px; border-radius:0;">
 
                                     </div>
                                 </div>
@@ -82,7 +84,7 @@
                                 <div class="col-sm-5" style="padding-right: 0;">
                                     <div class="form-group ">
 
-                                        <input type="text" required class="form-control" disabled id="longitude" name="longitude" placeholder="Longitude" style="font-size: 14px; border-radius:0;">
+                                        <input type="text" required class="form-control"  id="longitude" name="longitude" placeholder="Longitude" style="font-size: 14px; border-radius:0;">
 
                                     </div>
                                 </div>
@@ -149,8 +151,8 @@
                                 </div>
 
                             </div>
-                            
-                             <div class="col-sm-12">
+
+                            <div class="col-sm-12">
 
                                 <div class="form-group ">
                                     <label class="control-label" for="cprojectmanager">Project Manager *</label>
@@ -164,8 +166,12 @@
 
                                 <div class="form-group ">
                                     <label class="control-label" for="description">Description *</label>
-                                    <textarea class="form-control" required  id="description" name="description" placeholder="Description" style="font-size: 14px; border-radius:0; height: 100px;"></textarea>
-
+                                    
+                                    <!--<div id="summernote" data-plugin="summernote">   
+                                    </div>   -->
+                                    
+                                    <textarea data-plugin="summernote" class="form-control" required id="description" name="description" placeholder="Description" style="font-size: 14px; border-radius:0; height: 100px;"></textarea>
+                                    
 
                                 </div>
 
@@ -180,20 +186,36 @@
                                 <h4 class="example-title">Project Image</h4>
                             </div>
 
-                            <div class="col-sm-12">
-                                <!--  data-default-file="../../global/photos/view-8-960x640.jpg" -->
-                                <input class="dropify" type="file" id="input-file-now-custom-1" data-plugin="dropify" data-height="220" data-allowed-file-extensions="*"/>
-                                <br>
-                            </div>
+                            <div class="row col-sm-12">
+                                
+                                <div class="col-sm-6 ">
+                                    <label class="control-label" for="imagenback" >New Image</label>
+                                    <input class="dropify" type="file" id="photo" required name="photo" data-plugin="dropify" data-allowed-file-extensions="jpg png jpeg"   /> <!-- data-height="100" -->
+
+                                </div>
+                                
+                                <div class="col-sm-6">
+                                    <label class="control-label" for="imagenback" >Old Image</label> 
 
 
+                                    <div class="col-sm-12" style="width: 100%;padding: 5px 10px;border: 1px solid #e4eaec;position: relative;display: block;;">
+                                        <img class="img-bordered-primary vcenter"  id="oldimage" name="oldimage" src="<?php echo base_url() . "themes/default/remark"; ?>/topbar/assets/images/nophoto2.jpg" style="width: 100%;" />
+                                    </div>
+                                    <input type="hidden" id="idcfilephoto" class="form-control" value="0" name="idcfilephoto"  >
+                                    <!-- <input type="text" id="isactive" class="form-control" value="Y" name="isactive" >
+                                    <input type="text" id="projectstatus" class="form-control" value="PEND" name="projectstatus" > -->
+                                </div>
 
+                            </div>    
+
+
+                            <br>
                             <div class="col-sm-12">
                                 <h4 class="example-title">loan information</h4>
                             </div>
-                            
-                            
-                             <div class="col-sm-12">
+
+
+                            <div class="col-sm-12">
 
                                 <div class="form-group ">
                                     <label class="control-label" for="currency">Currency *</label>
@@ -258,6 +280,7 @@
                                     <label class="control-label" for="start">Start Date *</label>
                                     <div class="input-group">                                       
                                         <input type="text" id="start" name="start" class="form-control" data-plugin="datepicker" required>
+
                                         <span class="input-group-addon">
                                             <i class="icon wb-calendar" aria-hidden="true"></i>
                                         </span>
@@ -265,6 +288,9 @@
                                 </div>
 
                             </div>
+                            
+                            
+                           
 
 
                         </div>
@@ -311,27 +337,26 @@
                 <div id="map"></div>
 
                 <script>
+                    var marker;
+                    var map;
                     function initMap() {
-                        var myLatLng = {lat: 34.0520467298, lng: -117.7413709};
-
-                        var map = new google.maps.Map(document.getElementById('map'), {
+                        var myLatLng = {lat: 25.769054, lng: -80.216266};
+                         map = new google.maps.Map(document.getElementById('map'), {
                             zoom: 10,
                             center: myLatLng
                         });
                         //new google.maps.LatLng(35.137879, -82.836914),
-                        var marker = new google.maps.Marker({
+                        marker = new google.maps.Marker({
                             position: myLatLng,
                             map: map,
                             title: 'Location of my project',
                             draggable: true,
                             animation: google.maps.Animation.DROP
                         });
+                        
                         google.maps.event.addListener(marker, 'dragend', function (evt)
-                        {
-                            document.getElementById("latitude").value = evt.latLng.lat();
+                        {   document.getElementById("latitude").value = evt.latLng.lat();
                             document.getElementById("longitude").value = evt.latLng.lng();
-                            //evt.latLng.lat()
-                            //evt.latLng.lng().toFixed(3)
                         });
                     }
                 </script>
@@ -357,17 +382,38 @@
 
 
 <script type="text/javascript">
+    function toDate(dateStr) {
+        var parts = dateStr.split("-")
+        return new Date(parts[0], parts[1] - 1, parts[2]);
+    }  
+  
     window.onload = function () {
+
         var action = "<?php echo $action; ?>";
         var c_project_id = "<?php if (isset($c_project_id)) echo $c_project_id; ?>";
         console.log(action);
-        
-        
+        $("#country").change(function (event) {
+            event.preventDefault();
+            $.ajax({
+                url: "<?php echo base_url('Company_Edit_Project_Controller/get_region_list') ?>",
+                type: "POST",
+                async: false,
+                data: {"countryId": $('#country').val()},
+                success: function (data) {
+                    var resp = $.parseJSON(data);//convertir data de json
+                    $("#region").empty();
+                    $("#region").append(resp.html);
+                }
+            });
+        });
+
+
+
         //load list data to controls
         $.ajax({
             url: "<?php echo base_url('Company_Edit_Project_Controller/get_country_list') ?>",
             type: "POST",
-            async: true,
+            async: false,
             success: function (data) {
                 var resp = $.parseJSON(data);//convertir data de json
                 $("#country").empty();
@@ -379,84 +425,104 @@
         $.ajax({
             url: "<?php echo base_url('Company_Edit_Project_Controller/get_cprojecttype_list') ?>",
             type: "POST",
-            async: true,
+            async: false,
             success: function (data) {
                 var resp = $.parseJSON(data);//convertir data de json
                 $("#cprojecttype").empty();
                 $("#cprojecttype").append(resp.html);
             }
         });
-        
+
         $.ajax({
             url: "<?php echo base_url('Company_Edit_Project_Controller/get_cprojectmanager_list') ?>",
             type: "POST",
-            async: true,
+            async: false,
             success: function (data) {
                 var resp = $.parseJSON(data);//convertir data de json
                 $("#cprojectmanager").empty();
                 $("#cprojectmanager").append(resp.html);
             }
         });
-        
-        
-        
-         $.ajax({
+
+
+
+        $.ajax({
             url: "<?php echo base_url('Company_Edit_Project_Controller/get_currency_list') ?>",
             type: "POST",
-            async: true,
+            async: false,
             success: function (data) {
                 var resp = $.parseJSON(data);//convertir data de json
                 $("#currency").empty();
                 $("#currency").append(resp.html);
             }
         });
-               
-       $("#country").change(function (event) {
-            event.preventDefault();
-            $.ajax({
-                url: "<?php echo base_url('Company_Edit_Project_Controller/get_region_list') ?>",
-                type: "POST",
-                data: {"countryId": $('#country').val()},
-                success: function (data) {
-                    var resp = $.parseJSON(data);//convertir data de json
-                    $("#region").empty();
-                    $("#region").append(resp.html);
-                }
-            });
-        });
 
 
-       //edit default
-       if (action === "edit") { 
-       
-             $('#nameproject').val("<?php if (isset($name)) echo $name; ?>"); 
-             $('#companyname').val("<?php if (isset($companyname)) echo $companyname; ?>"); 
-             $('#propertytype').val("<?php echo "BUI"; ?>"); 
-             $('#latitude').val("<?php if (isset($latitude)) echo $latitude; ?>"); 
-             $('#longitude').val("<?php if (isset($longitude)) echo $longitude; ?>"); 
-             
-        } 
 
-       //save 
+        //edit default
+        if (action === "edit") {
+
+            $('#nameproject').val("<?php if (isset($name)) echo $name; ?>");
+            $('#companyname').val("<?php if (isset($companyname)) echo $companyname; ?>");
+            $('#propertytype').val("<?php if (isset($propertytype)) echo $propertytype; ?>");
+            $('#latitude').val("<?php if (isset($latitude)) echo $latitude; ?>");
+            $('#longitude').val("<?php if (isset($longitude)) echo $longitude; ?>");
+            map.setZoom(14);
+            map.setCenter(new google.maps.LatLng("<?php if (isset($latitude)) {echo $latitude;} else {echo "25.769054";} ?>", "<?php if (isset($longitude)) { echo $longitude;} else {echo "-80.216266";} ?>"));
+            marker.setPosition(new google.maps.LatLng("<?php if (isset($latitude)) {echo $latitude;} else {echo "25.769054";} ?>", "<?php if (isset($longitude)) { echo $longitude;} else {echo "-80.216266";} ?>"));
+            google.maps.event.trigger(map, 'resize'); 
+            $('#qtyproperty').val("<?php if (isset($qtyproperty)) echo $qtyproperty; ?>");
+            $('#address').val("<?php if (isset($address1)) echo $address1; ?>");
+            $('#country').val("<?php if (isset($c_country_id)) echo $c_country_id; ?>");
+            $('#region').val("<?php if (isset($c_region_id)) echo $c_region_id; ?>");
+            $('#city').val("<?php if (isset($city)) echo $city; ?>");
+            $('#cprojecttype').val("<?php if (isset($c_projecttype_id)) echo $c_projecttype_id; ?>");
+            $('#cprojectmanager').val("<?php if (isset($c_projectmanager_id)) echo $c_projectmanager_id; ?>");            
+            //$('#description').val("<?php if (isset($description)) echo $description; ?>");
+            $('#description').summernote('code', '<?php if (isset($description)) echo $description; ?>');
+
+            $('#idcfilephoto').val("<?php if (isset($homeimage_id)) echo $homeimage_id; ?>");
+            $('#oldimage').attr('src', "<?php if (isset($namefile) && trim($namefile) != '' && file_exists("upload/imgs/$namefile")) {    echo base_url() . 'upload/imgs/' . $namefile;} else {    echo base_url() . 'themes/default/remark/topbar/assets/images/nophoto2.jpg';} ?>");
+            $('#photo').removeAttr('required');
+
+            $('#currency').val("<?php if (isset($c_currency_id)) echo $c_currency_id; ?>");
+            $('#months').val("<?php if (isset($loanterm)) echo $loanterm; ?>");
+            $('#yield').val("<?php if (isset($totalyieldperc)) echo $totalyieldperc; ?>");
+            $('#financial').val("<?php if (isset($targetamt)) echo $targetamt; ?>");
+
+            $('#limit').datepicker("setDate", toDate("<?php if (isset($datelimit)) echo $datelimit; ?>"));
+            $('#start').datepicker("setDate", toDate("<?php if (isset($startdate)) echo $startdate; ?>"));
+
+
+        }
+
+
+        var url_base = "<?php echo base_url('Company_Edit_Project_Controller/save'); ?>/" + c_project_id;
+        //save 
         $("#project_form").submit(function (event) {
             event.preventDefault();
             $.ajax({
-                url: "<?php echo base_url('Company_Edit_Project_Controller/save');?>/"+c_project_id,
+                url: url_base,
                 type: "POST",
-                data: $(this).serialize(),
+                data: new FormData(this),
+                processData: false,
+                contentType: false,
+                cache: false,
+                async: false,
                 success: function (data) {
                     var resp = $.parseJSON(data);
                     if (resp.status === "error") {
                         showError(resp.msg);
                     }
                     if (resp.status === "success") {
-                        showSuccess("SUCCESS");
-                         window.location.href = resp.redirect;
+                        url_base = "<?php echo base_url('Company_Edit_Project_Controller/save'); ?>/" + resp.c_project_id;
+                        showSuccess("Success Save");
+                        //window.location.href = resp.redirect;
                     }
 
                 }
             });
-            
+
         });
 
         //select menu 

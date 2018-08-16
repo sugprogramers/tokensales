@@ -14,6 +14,7 @@ class Company_Edit_Project_Controller extends CI_Controller {
         $this->load->model("CProjecttypeModel");
         $this->load->model("CProjectmanagerModel");
         $this->load->model("CCurrencyModel");
+        $this->load->model("CFileModel");
 
         if ($this->session->usertype !== "COMPMAN") {
             redirect(base_url() . 'login');
@@ -24,8 +25,16 @@ class Company_Edit_Project_Controller extends CI_Controller {
         $data = array('action' => 'new');
         $all = $this->CProjectModel->getById($c_project_id);
         if ($c_project_id != null && $all) {
+            $all[0]['datelimit'] = DateTime::createFromFormat('Y-m-d H:i:s', $all[0]['datelimit'])->format('Y-m-d');
+            $all[0]['startdate'] = DateTime::createFromFormat('Y-m-d H:i:s', $all[0]['startdate'])->format('Y-m-d');
+            $all[0]['description'] = str_replace("'", "\'", $all[0]['description']);
             $data = array('action' => 'edit') + $all[0];
         }
+        
+        
+        //print_r($data);
+        
+        
         $this->load->view('header/header_admin');
         $this->load->view('company_edit_project', $data);
         $this->load->view('footer/footer_admin');
@@ -33,10 +42,12 @@ class Company_Edit_Project_Controller extends CI_Controller {
 
     public function save($c_project_id = null) {
         try {
-            $obj = $this->saveValidate($c_project_id);
-            $this->CProjectModel->save($obj, $this->session->id);
 
-            $response = array('redirect' => base_url() . 'company_edit_project/' . $obj->c_project_id, 'status' => 'success', 'msg' => '');
+            $idfilephoto = $this->upload_Image();
+            $obj = $this->saveValidate($c_project_id, $idfilephoto);
+            $this->CProjectModel->save($obj, $this->session->id);
+            
+            $response = array('redirect' => base_url() . 'company_edit_project/' . $obj->c_project_id, 'status' => 'success', 'msg' => '', 'c_project_id' => $obj->c_project_id);
             echo json_encode($response);
             exit();
         } catch (Exception $e) {
@@ -45,7 +56,7 @@ class Company_Edit_Project_Controller extends CI_Controller {
         }
     }
 
-    private function saveValidate($c_project_id = null) {
+    private function saveValidate($c_project_id = null, $idphoto = null) {
         $nameproject = $this->input->post("nameproject");
         $companyname = $this->input->post("companyname");
         $propertytype = $this->input->post("propertytype");
@@ -65,6 +76,7 @@ class Company_Edit_Project_Controller extends CI_Controller {
         $start = $this->input->post("start");
         $currency = $this->input->post("currency");
         $qtyproperty = $this->input->post("qtyproperty");
+
 
         //throw new SDException($cprojectmanager);
         if (!isset($nameproject) || trim($nameproject) == '') {
@@ -91,15 +103,72 @@ class Company_Edit_Project_Controller extends CI_Controller {
         $new->startdate = (new DateTime($start))->format('Y-m-d H:i:s');
         $new->c_currency_id = $currency;
         $new->qtyproperty = $qtyproperty;
+
+
         if ($c_project_id != null) {
+            $all = $this->CProjectModel->getById($c_project_id);
             $new->c_project_id = $c_project_id;
+            $new->isactive = $all[0]['isactive'];
+            $new->projectstatus = $all[0]['projectstatus'];
+            $new->homeimage_id = $idphoto;
         } else {
+            $new->c_project_id = null;
             $new->isactive = "Y";
             $new->projectstatus = "PEND";
+            $new->homeimage_id = $idphoto;
         }
 
-
         return $new;
+    }
+
+    public function upload_Image() {
+
+        $path = "./upload/imgs/";
+        $config['upload_path'] = $path;
+        $config['allowed_types'] = 'gif|jpg|png|jpeg';
+        $config['encrypt_name'] = TRUE;
+        $this->load->library('upload', $config);
+
+        $id = $this->input->post("idcfilephoto");
+
+        $photo = $this->CFileModel->get($id);
+
+        if ((!isset($_FILES['photo']['name']) || $_FILES['photo']['name'] == "" ) && $photo != null) {
+            return $id;
+        }
+
+        if ($photo == null) {
+            $photo = new CFile();
+        }
+
+        try {
+            if ($this->upload->do_upload('photo')) {
+
+                $dataF = array('upload_data' => $this->upload->data());
+                $imgFromName = $dataF['upload_data']['file_name'];
+                $photo->isactive = "Y";
+                $photo->name = $imgFromName;
+                $photo->path = $path;
+                $photo->datatype = "IMG";
+                $this->CFileModel->save($photo, $this->session->id);
+                
+                $configr['image_library'] = 'gd2';
+                $configr['source_image'] = $path.$imgFromName;
+                $configr['create_thumb'] = false;
+                $configr['maintain_ratio'] = false;
+                $configr['width']         = 960;
+                $configr['height']       = 640;
+
+                $this->load->library('image_lib', $configr);
+                $this->image_lib->resize();
+
+                return $photo->c_file_id;
+            } else {
+                throw new SDException("Error Upload File " . $this->upload->display_errors());
+            }
+        } catch (Exception $e) {
+            throw new SDException(" $id - " . $_FILES['photo']['name'] . " -" . $e->getMessage());
+        }
     }
 
     public function get_country_list() {

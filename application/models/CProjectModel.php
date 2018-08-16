@@ -64,9 +64,6 @@ class CProjectModel extends CI_Model {
                 'c_projectmanager_id' => $cProject->c_projectmanager_id,
                 'companyname' => $cProject->companyname,
                 'c_currency_id' => $cProject->c_currency_id,
-                'datecontract' => $cProject->datecontract,
-                'startdate' => $cProject->startdate,
-                'datefinish' => $cProject->datefinish,
                 'c_projecttype_id' => $cProject->c_projecttype_id,
                 'projectstatus' => $cProject->projectstatus,
                 'propertytype' => $cProject->propertytype,
@@ -103,15 +100,13 @@ class CProjectModel extends CI_Model {
     }
     
     
-    
-    
-    
-    
-    
-    
     function getById($id) {
-        $this->db->where("c_project_id", $id);        
-        $resultados = $this->db->get("c_project");
+        
+        $this->db->select('c_project.* , c_file.name as namefile'); 
+        $this->db->from('c_project');
+        $this->db->join('c_file', 'c_file.c_file_id = c_project.homeimage_id' ,'left');
+        $this->db->where("c_project.c_project_id", $id);   
+        $resultados = $this->db->get();
         if ($resultados->num_rows() > 0) {
             return $resultados->result_array();
         } else {
@@ -119,10 +114,11 @@ class CProjectModel extends CI_Model {
         }
     }
     function getAllByCompany($id) {
-        $this->db->select('c_project.*, c_projectmanager.* , c_currency.cursymbol');         
+        $this->db->select('c_project.*, c_projectmanager.* , c_currency.cursymbol , c_file.name as namefile');         
         $this->db->from('c_project');
         $this->db->join('c_projectmanager', 'c_project.c_projectmanager_id = c_projectmanager.c_projectmanager_id');
         $this->db->join('c_currency', 'c_project.c_currency_id = c_currency.c_currency_id');
+        $this->db->join('c_file', 'c_file.c_file_id = c_project.homeimage_id' ,'left');
         $this->db->where('c_projectmanager.c_user_id',$id);
         return  $this->db->get();        
     }

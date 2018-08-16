@@ -1,0 +1,112 @@
+/* Force Popover appear directly under Toolbar, handy for Image Popover that appears off page. */
+.note-hint-popover .popover-content{max-height:150px;padding:3px;overflow:auto}
+.note-hint-popover .popover-content .note-hint-group .note-hint-item{display:block!important;padding:3px}
+.note-hint-popover .popover-content .note-hint-group .note-hint-item.active,
+.note-hint-popover .popover-content .note-hint-group .note-hint-item:hover{display:block;clear:both;font-weight:400;line-height:1.4;color:#fff;text-decoration:none;white-space:nowrap;cursor:pointer;background-color:#428bca;outline:0}
+.note-image-popover{position:absolute!important;background-color:#f5f5f5;top:-10px!important;left:0!important;right:0!important;border-top:0;border-left:0;border-right:0;-webkit-border-radius:0;border-radius:0}
+.note-image-popover .arrow{display:none!important}
+/* Give Disabled Toolbar Buttons a Disabled Look. */
+.note-btn.disabled{opacity:.25}
+.note-icon,
+[class^="note-icon-"],
+[class*=" note-icon-"]{
+    display:inline-block;
+    font:normal normal normal 14px/1;
+    width:14px;
+    height:14px;
+    vertical-align:-15%;
+    text-rendering:auto;
+    fill:currentColor;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale
+}
+.note-icon-align:before{content:url(../svg/libre-align-justify.svg)}
+.note-icon-align-center:before{content:url(../svg/libre-align-center.svg)}
+.note-icon-align-indent:before{content:url(../svg/libre-indent.svg)}
+.note-icon-align-justify:before{content:url(../svg/libre-align-justify.svg)}
+.note-icon-align-left:before{content:url(../svg/libre-align-left.svg)}
+.note-icon-align-outdent:before{content:url(../svg/libre-outdent.svg)}
+.note-icon-align-right:before{content:url(../svg/libre-align-right.svg)}
+.note-icon-arrows-alt:before{content:url(../svg/libre-fullscreen.svg)}
+.note-icon-bold:before{content:url(../svg/libre-bold.svg)}
+.note-icon-caret:before{content:url(../svg/libre-caret-down.svg)}
+.note-icon-chain-broken:before{content:url(../svg/libre-link.svg)}
+.note-icon-circle:before{content:url(../svg/libre-circle.svg)}
+.note-icon-close:before{content:url(../svg/libre-close.svg)}
+.note-icon-code:before{content:url(../svg/libre-code.svg)}
+.note-icon-eraser:before{content:url(../svg/libre-eraser.svg)}
+.note-icon-font:before{content:url(../svg/libre-font.svg)}
+.note-icon-frame:before{content:''}
+.note-icon-italic:before{content:url(../svg/libre-italic.svg)}
+.note-icon-link:before{content:url(../svg/libre-link.svg)}
+.note-icon-magic:before{content:url(../svg/libre-magic.svg)}
+.note-icon-menu-check:before{content:url(../svg/libre-check-yes.svg)}
+.note-icon-minus:before{content:url(../svg/libre-minus.svg)}
+.note-icon-orderedlist:before{content:url(../svg/libre-list-ol.svg)}
+.note-icon-pencil:before{content:url(../svg/libre-pencil.svg)}
+.note-icon-picture:before{content:url(../svg/libre-picture.svg)}
+.note-icon-question:before{content:url(../svg/libre-question.svg)}
+.note-icon-redo:before{content:url(../svg/libre-redo.svg)}
+.note-icon-special-character:before{content:url(../svg/libre-special-character.svg)}
+.note-icon-square:before{content:url(../svg/libre-square.svg)}
+.note-icon-strikethrough:before{content:url(../svg/libre-strikethrough.svg)}
+.note-icon-subscript:before{content:url(../svg/libre-subscript.svg)}
+.note-icon-summernote:before{content:url(../svg/libre-tech-summernote.svg)}
+.note-icon-superscript:before{content:url(../svg/libre-superscript.svg)}
+.note-icon-table:before{content:url(../svg/libre-table.svg)}
+.note-icon-text-height:before{content:url(../svg/libre-text-height.svg)}
+.note-icon-trash:before{content:url(../svg/libre-trash.svg)}
+.note-icon-underline:before{content:url(../svg/libre-underline.svg)}
+.note-icon-undo:before{content:url(../svg/libre-undo.svg)}
+.note-icon-unorderedlist:before{content:url(../svg/libre-list-ul.svg)}
+.note-icon-video:before{content:url(../svg/libre-film.svg)}
+/* LibreICONS Extras */
+.note-icon-edit:before{content:url(../svg/libre-edit.svg)}
+.note-icon-browse-media{content:url(../svg/libre-browse-media.svg)}
+.note-icon-save{content:url(../svg/libre-floppy.svg)}
+
+
+/* adicionales sin before */
+
+.note-icon-align{content:url(../svg/libre-align-justify.svg)}
+.note-icon-align-center{content:url(../svg/libre-align-center.svg)}
+.note-icon-align-indent{content:url(../svg/libre-indent.svg)}
+.note-icon-align-justify{content:url(../svg/libre-align-justify.svg)}
+.note-icon-align-left{content:url(../svg/libre-align-left.svg)}
+.note-icon-align-outdent{content:url(../svg/libre-outdent.svg)}
+.note-icon-align-right{content:url(../svg/libre-align-right.svg)}
+.note-icon-arrows-alt{content:url(../svg/libre-fullscreen.svg)}
+.note-icon-bold{content:url(../svg/libre-bold.svg)}
+.note-icon-caret{content:url(../svg/libre-caret-down.svg)}
+.note-icon-chain-broken{content:url(../svg/libre-link.svg)}
+.note-icon-circle{content:url(../svg/libre-circle.svg)}
+.note-icon-close{content:url(../svg/libre-close.svg)}
+.note-icon-code{content:url(../svg/libre-code.svg)}
+.note-icon-eraser{content:url(../svg/libre-eraser.svg)}
+.note-icon-font{content:url(../svg/libre-font.svg)}
+.note-icon-frame{content:''}
+.note-icon-italic{content:url(../svg/libre-italic.svg)}
+.note-icon-link{content:url(../svg/libre-link.svg)}
+.note-icon-magic{content:url(../svg/libre-magic.svg)}
+.note-icon-menu-check{content:url(../svg/libre-check-yes.svg)}
+.note-icon-minus{content:url(../svg/libre-minus.svg)}
+.note-icon-orderedlist{content:url(../svg/libre-list-ol.svg)}
+.note-icon-pencil{content:url(../svg/libre-pencil.svg)}
+.note-icon-picture{content:url(../svg/libre-picture.svg)}
+.note-icon-question{content:url(../svg/libre-question.svg)}
+.note-icon-redo{content:url(../svg/libre-redo.svg)}
+.note-icon-special-character{content:url(../svg/libre-special-character.svg)}
+.note-icon-square{content:url(../svg/libre-square.svg)}
+.note-icon-strikethrough{content:url(../svg/libre-strikethrough.svg)}
+.note-icon-subscript{content:url(../svg/libre-subscript.svg)}
+.note-icon-summernote{content:url(../svg/libre-tech-summernote.svg)}
+.note-icon-superscript{content:url(../svg/libre-superscript.svg)}
+.note-icon-table{content:url(../svg/libre-table.svg)}
+.note-icon-text-height{content:url(../svg/libre-text-height.svg)}
+.note-icon-trash{content:url(../svg/libre-trash.svg)}
+.note-icon-underline{content:url(../svg/libre-underline.svg)}
+.note-icon-undo{content:url(../svg/libre-undo.svg)}
+.note-icon-unorderedlist{content:url(../svg/libre-list-ul.svg)}
+.note-icon-video{content:url(../svg/libre-film.svg)}
+.note-icon-edit{content:url(../svg/libre-edit.svg)}
+

@@ -1,4 +1,6 @@
+
 <link rel="stylesheet" href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/assets/examples/css/apps/media.min599c.css?v4.0.2">
+
 <style> 
     .site-navbar-small .slidePanel-left, .site-navbar-small .slidePanel-right {
         top: 0;
@@ -125,18 +127,114 @@
     </div> 
 </div> 
 
+
+
+
+
+<div class="modal fade modal-rotate-from-left" id="exampleNifty3dRotateInLeft"
+     aria-hidden="true" aria-labelledby="exampleModalTitle" role="dialog"
+     tabindex="-1">
+    <div class="modal-dialog modal-simple">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title">Select Location</h4>
+            </div>
+            <div class="modal-body">
+
+                <style>
+
+                    #map {
+                        min-height: 400px;
+                        height: 400px;
+                        width: 100%;
+                    }
+                </style>
+                <div id="map"></div>
+
+                <script>
+                    var marker;
+                    var map;
+                    function initMap() {
+                        var myLatLng = {lat: 25.769054, lng: -80.216266};
+                        map = new google.maps.Map(document.getElementById('map'), {
+                            zoom: 10,
+                            center: myLatLng
+                        });
+                        //new google.maps.LatLng(35.137879, -82.836914),
+                        marker = new google.maps.Marker({
+                            position: myLatLng,
+                            map: map,
+                            title: 'Location of my project',
+                            draggable: true,
+                            animation: google.maps.Animation.DROP
+                        });
+
+                        google.maps.event.addListener(marker, 'dragend', function (evt)
+                        {
+                            document.getElementById("latitude").value = evt.latLng.lat();
+                            document.getElementById("longitude").value = evt.latLng.lng();
+                        });
+                    }
+                </script>
+
+                <script async defer
+                        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAI49kT8nqt6CKwnstK2S2kJuabIPcbvOE&callback=initMap">
+                </script>
+
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
 <script type="text/javascript">
 
-    var general = '0';
-    
+    var c_project_id = '0';
+
     window.onload = function () {
-        Listar(); 
-       
+        Listar();
 
         $(document).on('slidePanel::afterLoad', function (e) {
-            document.getElementById("tituloNew").innerHTML = "nuevooo" + general;
-            // alert(general);
+
+            $.ajax({
+                url: "<?php echo base_url('Company_List_Project_Controller/get_project/'); ?>" + c_project_id,
+                type: "POST",
+                async: false,
+                success: function (data) {
+                    var resp = $.parseJSON(data);//convertir data de json
+                    if (resp.status === "error") {
+                        showError('Error no show item');
+                    }
+                    if (resp.status === "success") {
+                        $("#panelgeneral").resize();
+                        $("#panelgeneral").resize();
+                        $('#tituloNew').html(resp.name);
+                        $('#imageNew').css('background-image', 'url(' + '<?php echo base_url() . "upload/imgs/"; ?>' + resp.namefile + ')');
+                        $('#descriptionNew').html(resp.description);
+
+                    }
+                }
+            });
+
+
         });
+
+
+
+
 
         $('#idCompanyProjects').addClass('active');
         $('#idCompanyListProject').addClass('active');
@@ -156,8 +254,16 @@
 
     }
 
+    function Ubicacion(latitude, longitude) {        
+        $("#exampleNifty3dRotateInLeft").modal('show');
+        map.setZoom(14);
+        map.setCenter(new google.maps.LatLng(latitude));
+        marker.setPosition(new google.maps.LatLng(longitude));   
+        google.maps.event.trigger(map, 'resize');         
+    }
+    
     function Mostrar(id) {
-        general = id;
+        c_project_id = id;
     }
     function Eliminar(id) {
         bootbox.confirm({
