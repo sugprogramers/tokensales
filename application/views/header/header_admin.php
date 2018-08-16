@@ -73,6 +73,8 @@
         <script>
             Breakpoints();
         </script>
+        <!-- Ethereum JS -->
+        <script src="<?php echo base_url('/assets/ethereumjs-bundle.js') ?>" ></script>
 
         <link id="skinStyle" href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/assets/skins/cyan.css" rel="stylesheet" type="text/css">
         
