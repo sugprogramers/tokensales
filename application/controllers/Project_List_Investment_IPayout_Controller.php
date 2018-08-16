@@ -12,6 +12,7 @@ class Project_List_Investment_IPayout_Controller extends CI_Controller {
         $this->load->helper('url');
         $this->load->model("FINPaymentOrderModel");
         $this->load->model("CAdminModel");
+        $this->load->model("CProjectmanagerModel");
         
        
         if($this->session->usertype !== "COMPMAN"){
@@ -30,8 +31,12 @@ class Project_List_Investment_IPayout_Controller extends CI_Controller {
         $start = intval($this->input->get("start"));
         $length = intval($this->input->get("length"));
 
+        $cUser = $this->session->id;
+        
+        $cProjectManager = $this->CProjectmanagerModel->loadByUserId($cUser);
+        $cProjectManagerId = ($cProjectManager)?$cProjectManager->c_projectmanager_id:"";
 
-        $query = $this->FINPaymentOrderModel->get_project_investments_ipayout();
+        $query = $this->FINPaymentOrderModel->get_project_investments_ipayout($cProjectManagerId);
         $data = [];
         foreach ($query->result() as $r) {
             log_message('error', json_encode($r));

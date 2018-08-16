@@ -142,7 +142,7 @@ class FINPaymentOrderModel extends CI_Model
         return $this->db->get();
     }
     
-    public function get_project_investments_ipayout(){
+    public function get_project_investments_ipayout($cProjectManagerId){
         $this->db->select("po.fin_payment_order_id, p.name as projectName, p.name as companyName, u.email as investorEmail, (u.firstname || ' ' || u.lastname) as investorname, curr.iso_code, po.amount, po.scheduleddate");
         $this->db->from('fin_payment_order as po');
         $this->db->join('fin_investment  as iv', 'po.fin_investment_id = iv.fin_investment_id ');
@@ -152,6 +152,7 @@ class FINPaymentOrderModel extends CI_Model
         $this->db->join('c_currency as curr', "p.c_currency_id = curr.c_currency_id");
         $this->db->where('po.ordertype', 'RETIPAYIN');
         $this->db->where('po.status', 'PEND');
+        $this->db->where('p.c_projectmanager_id', $cProjectManagerId);
         return $this->db->get();
     }
     
