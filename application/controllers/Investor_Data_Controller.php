@@ -322,6 +322,8 @@ class Investor_Data_Controller extends CI_Controller {
         
         try {   
             
+            
+            
             if($this->upload->do_upload("imagenfront")){
                 $dataF = array('upload_data' => $this->upload->data());
                 $imgFromName = $dataF['upload_data']['file_name'];
@@ -333,6 +335,9 @@ class Investor_Data_Controller extends CI_Controller {
                 $fileFront->datatype = "IMG";
                 $this->CFileModel->save($fileFront, $this->session->id);
                 
+            }else{
+                if(!strpos(strtolower($this->upload->error_msg[0]), 'not select a file'))
+                  throw new SDException($this->upload->error_msg[0]);
             }
 
             if($this->upload->do_upload("imagenback")){
@@ -344,6 +349,9 @@ class Investor_Data_Controller extends CI_Controller {
                 $fileBack->path = $path;
                 $fileBack->datatype = "IMG";
                 $this->CFileModel->save($fileBack, $this->session->id);
+            }else{
+                if(!strpos(strtolower($this->upload->error_msg[0]), 'not select a file'))
+                  throw new SDException($this->upload->error_msg[0]);
             }
         
            //investor info
