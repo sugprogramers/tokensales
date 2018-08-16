@@ -14,7 +14,12 @@ class Company_Edit_Project_Controller extends CI_Controller {
         $this->load->model("CProjecttypeModel");
         $this->load->model("CProjectmanagerModel");
         $this->load->model("CCurrencyModel");
+
         $this->load->model("CFileModel");
+        $this->load->model("CProjectdocumenttypeModel");
+        $this->load->model("CProjectdocumentModel");
+
+
 
         if ($this->session->usertype !== "COMPMAN") {
             redirect(base_url() . 'login');
@@ -22,19 +27,24 @@ class Company_Edit_Project_Controller extends CI_Controller {
     }
 
     public function index($c_project_id = null) {
-        $data = array('action' => 'new');
+
         $all = $this->CProjectModel->getById($c_project_id);
         if ($c_project_id != null && $all) {
+
             $all[0]['datelimit'] = DateTime::createFromFormat('Y-m-d H:i:s', $all[0]['datelimit'])->format('Y-m-d');
             $all[0]['startdate'] = DateTime::createFromFormat('Y-m-d H:i:s', $all[0]['startdate'])->format('Y-m-d');
             $all[0]['description'] = str_replace("'", "\'", $all[0]['description']);
             $data = array('action' => 'edit') + $all[0];
+            $documents = $this->CProjectdocumenttypeModel->getAllByAdminByProjectId($c_project_id);
+            $data = $data + array('docs' => $documents);
+        } else {
+            $data = array('action' => 'new');
+            $documents = $this->CProjectdocumenttypeModel->getAllByAdmin();
+            $data = $data + array('docs' => $documents);
         }
-        
-        
+
         //print_r($data);
-        
-        
+
         $this->load->view('header/header_admin');
         $this->load->view('company_edit_project', $data);
         $this->load->view('footer/footer_admin');
@@ -42,11 +52,22 @@ class Company_Edit_Project_Controller extends CI_Controller {
 
     public function save($c_project_id = null) {
         try {
+            /* $documents = $this->CProjectdocumenttypeModel->getAllByAdmin();
+              foreach ($documents as $filesadmin) {
+              if( isset($_FILES[$filesadmin['c_projectdocumenttype_id']]['name']) ) {
+              throw new SDException("Existe ".$filesadmin['c_projectdocumenttype_id']);
+              }
+              else{
+              throw new SDException("No existe ".$filesadmin['c_projectdocumenttype_id']);
+              }
+              } */
 
             $idfilephoto = $this->upload_Image();
             $obj = $this->saveValidate($c_project_id, $idfilephoto);
             $this->CProjectModel->save($obj, $this->session->id);
-            
+
+            $this->upload_Docs($obj->c_project_id);
+
             $response = array('redirect' => base_url() . 'company_edit_project/' . $obj->c_project_id, 'status' => 'success', 'msg' => '', 'c_project_id' => $obj->c_project_id);
             echo json_encode($response);
             exit();
@@ -128,6 +149,7 @@ class Company_Edit_Project_Controller extends CI_Controller {
         $config['allowed_types'] = 'gif|jpg|png|jpeg';
         $config['encrypt_name'] = TRUE;
         $this->load->library('upload', $config);
+        $this->upload->initialize($config);
 
         $id = $this->input->post("idcfilephoto");
 
@@ -151,13 +173,13 @@ class Company_Edit_Project_Controller extends CI_Controller {
                 $photo->path = $path;
                 $photo->datatype = "IMG";
                 $this->CFileModel->save($photo, $this->session->id);
-                
+
                 $configr['image_library'] = 'gd2';
-                $configr['source_image'] = $path.$imgFromName;
+                $configr['source_image'] = $path . $imgFromName;
                 $configr['create_thumb'] = false;
                 $configr['maintain_ratio'] = false;
-                $configr['width']         = 960;
-                $configr['height']       = 640;
+                $configr['width'] = 960;
+                $configr['height'] = 640;
 
                 $this->load->library('image_lib', $configr);
                 $this->image_lib->resize();
@@ -168,6 +190,53 @@ class Company_Edit_Project_Controller extends CI_Controller {
             }
         } catch (Exception $e) {
             throw new SDException(" $id - " . $_FILES['photo']['name'] . " -" . $e->getMessage());
+        }
+    }
+
+    public function upload_Docs($c_project_id) {
+
+        $path = "./upload/docs/";
+        $config['upload_path'] = $path;
+        $config['allowed_types'] = 'pdf';
+        $config['encrypt_name'] = TRUE;
+        $this->load->library('upload', $config);
+        $this->upload->initialize($config);
+
+        $documents = $this->CProjectdocumenttypeModel->getAllByAdmin();
+
+        foreach ($documents as $filesadmin) {
+            try {
+                $doc = $this->CProjectdocumentModel->getByProjectAndDocuemnt($c_project_id, $filesadmin['c_projectdocumenttype_id']);
+                if ($doc == null) {
+                    $doc = new CProjectdocument();
+                    $doc->status = "PEND";
+                    $doc->c_file_id = "0";
+                }
+
+                $filedoc = $this->CFileModel->get($doc->c_file_id);
+                if ($filedoc == null) {
+                    $filedoc = new CFile();
+                }
+
+                if (isset($_FILES[$filesadmin['c_projectdocumenttype_id']]['name']) && $this->upload->do_upload($filesadmin['c_projectdocumenttype_id'])) {
+
+                    $dataF = array('upload_data' => $this->upload->data());
+                    $imgFromName = $dataF['upload_data']['file_name'];
+                    $filedoc->isactive = "Y";
+                    $filedoc->name = $imgFromName;
+                    $filedoc->path = $path;
+                    $filedoc->datatype = "PDF";
+                    $this->CFileModel->save($filedoc, $this->session->id);
+
+                    $doc->c_file_id = $filedoc->c_file_id;
+                    $doc->c_project_id = $c_project_id;
+                    $doc->c_projectdocumenttype_id = $filesadmin['c_projectdocumenttype_id'];
+                    $doc->isactive = "Y";
+                    $this->CProjectdocumentModel->save($doc, $this->session->id);
+                }
+            } catch (Exception $e) {
+                
+            }
         }
     }
 

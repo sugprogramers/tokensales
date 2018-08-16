@@ -66,6 +66,17 @@ class CProjectdocumentModel extends CI_Model {
         return $list;
     }    
     
+     public function getByProjectAndDocuemnt($c_project_id,$c_projectdocumenttype_id) {
+        $query = $this->db->get_where("c_projectdocument", array('c_project_id' => $c_project_id , 'c_projectdocumenttype_id' => $c_projectdocumenttype_id));
+        $queryresult = $query->result();
+        if (!$queryresult) {
+            return null;
+        }
+        
+        $result = $queryresult[0];     
+        return CProjectdocument::build($result);
+    }
+    
 }
 
 ?>

@@ -92,6 +92,8 @@
 <script src="<?php echo base_url() . "themes/default/remark"; ?>/global/vendor/summernote/summernote.min599c.js?v4.0.2"></script>
 <script src="<?php echo base_url() . "themes/default/remark"; ?>/global/js/Plugin/summernote.min599c.js?v4.0.2"></script>
 
+<!-- subir archivos -->
+<script src="<?php echo base_url() . "themes/default/remark"; ?>/global/js/Plugin/input-group-file.min599c.js?v4.0.2"></script>
 
 <script>
      (function (document, window, $) {

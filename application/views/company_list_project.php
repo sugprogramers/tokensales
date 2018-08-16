@@ -172,11 +172,7 @@
                             animation: google.maps.Animation.DROP
                         });
 
-                        google.maps.event.addListener(marker, 'dragend', function (evt)
-                        {
-                            document.getElementById("latitude").value = evt.latLng.lat();
-                            document.getElementById("longitude").value = evt.latLng.lng();
-                        });
+                       
                     }
                 </script>
 
@@ -257,9 +253,9 @@
     function Ubicacion(latitude, longitude) {        
         $("#exampleNifty3dRotateInLeft").modal('show');
         map.setZoom(14);
-        map.setCenter(new google.maps.LatLng(latitude));
-        marker.setPosition(new google.maps.LatLng(longitude));   
-        google.maps.event.trigger(map, 'resize');         
+        map.setCenter(new google.maps.LatLng(latitude,longitude));
+        marker.setPosition(new google.maps.LatLng(latitude,longitude));   
+             
     }
     
     function Mostrar(id) {

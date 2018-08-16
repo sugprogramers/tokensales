@@ -290,6 +290,45 @@
                             </div>
                             
                             
+                             <div class="col-sm-12">
+                                <h4 class="example-title">Documents for Project</h4>
+                            </div>
+
+                           
+                                
+                                <?php 
+                                
+                                if ($action == 'new' || $action == 'edit'){
+                                    foreach ($docs as $entry) {                                         
+                                      
+                                 ?>
+                                 <div class="col-sm-12">
+                                  <div class="form-group">
+                                     
+                                      
+                                    <label class="control-label" ><?php echo  $entry['name']; if($entry['ismandatory']=="Y") echo "*";?></label><br>
+                                     <?php 
+                                      if(isset($entry['namefile'])){
+                                          echo  '<label class="control-label" ><a target="_blank" href="'. base_url().'upload/docs/'.$entry['namefile'].'">Preview Doc <i class="icon wb-link" aria-hidden="true"></i></a></label>';
+                                      }
+                                      ?>
+                                    <div class="input-group input-group-file" data-plugin="inputGroupFile">
+                                      <input type="text" class="form-control" readonly="">
+                                      <span class="input-group-btn">
+                                        <span class="btn btn-success btn-file">
+                                          <i class="icon wb-upload" aria-hidden="true"></i>
+                                          <input type="file" <?php  if($entry['ismandatory']=="Y" && $action == 'new') echo "required";?> name="<?php echo  $entry['c_projectdocumenttype_id'];?>" id="<?php echo  $entry['c_projectdocumenttype_id'];?>" accept="application/pdf">
+                                        </span>
+                                      </span>
+                                    </div>
+                                  </div>
+                                 </div>     
+                                <?php                                         
+                                     }
+                                } 
+                                ?>
+                                
+                           
                            
 
 

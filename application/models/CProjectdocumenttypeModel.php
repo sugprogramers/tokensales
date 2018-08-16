@@ -67,6 +67,31 @@ class CProjectdocumenttypeModel extends CI_Model
         return $this->db->delete('c_projectdocumenttype');
     }
     
+     function getAllByAdmin() {        
+        $resultados = $this->db->get('c_projectdocumenttype');
+        if ($resultados->num_rows() > 0) {
+            return $resultados->result_array();
+        } else {
+            return false;
+        }
+    }
+    
+    function getAllByAdminByProjectId($c_project_id){
+        
+        $this->db->select('c_projectdocumenttype.*, c_file.name as namefile');         
+        $this->db->from('c_projectdocumenttype');
+        $this->db->join('c_projectdocument', 'c_projectdocumenttype.c_projectdocumenttype_id = c_projectdocument.c_projectdocumenttype_id and c_projectdocument.c_project_id=\''.$c_project_id.'\'','left');
+        $this->db->join('c_file', 'c_projectdocument.c_file_id = c_file.c_file_id' ,'left');
+        //$this->db->where('c_projectdocument.c_project_id',$c_project_id);
+        $resultados =  $this->db->get();   
+        
+        if ($resultados->num_rows() > 0) {
+            return $resultados->result_array();
+        } else {
+            return false;
+        }
+    }
+    
     
     
 }
