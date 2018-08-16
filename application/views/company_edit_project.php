@@ -306,7 +306,7 @@
                                   <div class="form-group">
                                      
                                       
-                                    <label class="control-label" ><?php echo  $entry['name']; if($entry['ismandatory']=="Y") echo "*";?></label><br>
+                                    <label class="control-label" ><?php echo  ucfirst($entry['name']); if($entry['ismandatory']=="Y") echo "*";?></label><br>
                                      <?php 
                                       if(isset($entry['namefile'])){
                                           echo  '<label class="control-label" ><a target="_blank" href="'. base_url().'upload/docs/'.$entry['namefile'].'">Preview Doc <i class="icon wb-link" aria-hidden="true"></i></a></label>';

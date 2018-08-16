@@ -32,5 +32,8 @@
 .app-media .media-list.is-list .img-text-hover{display:none}
 .app-media .media-list.is-grid .img-text-hover{display:block}
 
+.app-media .media-list.is-list .sub-detalle-property{display:none}
+.app-media .media-list.is-grid .sub-detalle-property{display:block}
+
 
 

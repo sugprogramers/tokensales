@@ -8,7 +8,8 @@ class Company_List_Project_Controller extends CI_Controller {
         parent::__construct();
         $this->load->helper('url');
         $this->load->model("CProjectModel");
-
+        $this->load->model("CProjectdocumenttypeModel");
+        
         if ($this->session->usertype !== "COMPMAN") {
             redirect(base_url() . 'login');
         }
@@ -50,20 +51,38 @@ class Company_List_Project_Controller extends CI_Controller {
             if($all){
              
              $response = array('redirect' => '', 'status' => 'success');
+             
+             $all[0]['datelimit'] = DateTime::createFromFormat('Y-m-d H:i:s', $all[0]['datelimit'])->format('Y-m-d');
+             $all[0]['startdate'] = DateTime::createFromFormat('Y-m-d H:i:s', $all[0]['startdate'])->format('Y-m-d');
              $response = $response + $all[0];
+             $documents = $this->CProjectdocumenttypeModel->getAllByAdminByProjectId($id);
+             $response = $response + array('docs' => $this->get_htm_docs($documents));
+             
               echo json_encode($response);
             }
             else{
-                 $response = array('redirect' => '', 'status' => 'error', 'msg' => 'invalid project');
-                  echo json_encode($response);
+             $response = array('redirect' => '', 'status' => 'error', 'msg' => 'invalid project');
+              
+             echo json_encode($response);
             }
-            
             
         } catch (Exception $e) {
             $response = array('redirect' => '', 'status' => 'error', 'msg' => $e->getMessage());
             echo json_encode($response);
         }
     }
+    
+    private function get_htm_docs($documents){
+         $html = '';
+         foreach ($documents as $entry) {   
+            if(isset($entry['namefile'])){
+               $html .=   '<h4>'.ucfirst($entry['name']).'</h4><label class="control-label" ><a target="_blank" href="'. base_url().'upload/docs/'.$entry['namefile'].'">Preview Doc <i class="icon wb-link" aria-hidden="true"></i></a></label>';
+            }
+         }
+         if(trim($html)=='') $html='<h4>There are no documents</h4>';
+         return $html;
+    }
+    
     
     private function get_htm_item($c_project_id, $name, $description, $companyname, $targetamt, $cursymbol, $namefile ,$latitude , $longitude) {
 
@@ -109,6 +128,13 @@ return
             </div> 
             <div class="title">'.$companyname.'</div>
             <div class="time">'.$cursymbol.$targetamt.'</div>
+            <div class="sub-detalle-property">
+            <div class="example ">
+            
+                  <div class="asRange" data-plugin="asRange" data-namespace="rangeUi" style="width: 100%;margin: 0;" data-min="1" data-max="100" data-value="'.rand(10, 100).'"></div>
+            
+            </div>
+            </div>    
             <div class="media-item-actions btn-group" >
                 <button class="btn btn-icon btn-pure btn-default" data-original-title="Edit" data-toggle="tooltip"
                         data-container="body" data-placement="top" data-trigger="hover"

@@ -20,13 +20,16 @@
                 <div class="nav-tabs-horizontal" data-plugin="tabs">
                     <ul class="nav nav-tabs nav-tabs-line tabs-line-top" role="tablist">
                         <li class="nav-item" role="presentation">
-                            <a class="nav-link active" data-toggle="tab" href="#exampleTabsLineTopOne"  aria-controls="exampleTabsLineTopOne" role="tab" onclick='$("#panelgeneral").resize();$("#panelgeneral").resize();'>Loan</a>
+                            <a class="nav-link active" data-toggle="tab" href="#exampleTabsLineTopOne"  aria-controls="exampleTabsLineTopOne" role="tab" onclick='$("#panelgeneral").resize();
+                                    $("#panelgeneral").resize();'>Loan</a>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <a class="nav-link" data-toggle="tab" href="#exampleTabsLineTopTwo"   aria-controls="exampleTabsLineTopTwo" role="tab" onclick='$("#panelgeneral").resize();$("#panelgeneral").resize();'>Description</a>
+                            <a class="nav-link" data-toggle="tab" href="#exampleTabsLineTopTwo"   aria-controls="exampleTabsLineTopTwo" role="tab" onclick='$("#panelgeneral").resize();
+                                    $("#panelgeneral").resize();'>Description</a>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <a class="nav-link" data-toggle="tab" href="#exampleTabsLineTopThree"   aria-controls="exampleTabsLineTopTwo" role="tab" onclick='$("#panelgeneral").resize();$("#panelgeneral").resize();'>Documents</a>
+                            <a class="nav-link" data-toggle="tab" href="#exampleTabsLineTopThree"   aria-controls="exampleTabsLineTopTwo" role="tab" onclick='$("#panelgeneral").resize();
+                                    $("#panelgeneral").resize();'>Documents</a>
                         </li>
                     </ul>
                     <div class="tab-content pt-10">
@@ -39,14 +42,14 @@
 
                             </div>
                         </div>
-                       
+
                         <div class="tab-pane"  id="exampleTabsLineTopTwo" role="tabpanel" >
                             <div class="row" >
                                 <div class="col-md-12">
 
 
-                                    <div id="descriptionNew"  >   <!--onresize="$('#panelgeneral').resize();"-->
-                                        <p>  gds gsd gd g gsd gsd gsd gds gd gd gds gsd gsd gds gsd </p> 
+                                    <div id="descriptionNew"  > 
+
                                     </div>
 
 
@@ -54,6 +57,23 @@
                             </div>
 
                         </div>
+
+                        <div class="tab-pane"  id="exampleTabsLineTopThree" role="tabpanel" >
+                            <div class="row" >
+                                <div class="col-md-12">
+
+
+                                    <div id="docsNew"  >  
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+                        </div>
+
+
+
                     </div>
                 </div>
             </div>

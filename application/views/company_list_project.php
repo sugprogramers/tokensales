@@ -1,6 +1,9 @@
 
 <link rel="stylesheet" href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/assets/examples/css/apps/media.min599c.css?v4.0.2">
-
+<!--
+<link rel="stylesheet" href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/assets/examples/css/forms/advanced.min599c.css?v4.0.2">
+-->
+<link rel="stylesheet" href="<?php echo base_url() . "themes/default/remark"; ?>/global/vendor/asrange/asRange.min599c.css?v4.0.2">
 <style> 
     .site-navbar-small .slidePanel-left, .site-navbar-small .slidePanel-right {
         top: 0;
@@ -215,11 +218,12 @@
                         showError('Error no show item');
                     }
                     if (resp.status === "success") {
-                        $("#panelgeneral").resize();
-                        $("#panelgeneral").resize();
+                        $("#panelgeneral").resize();$("#panelgeneral").resize();
+                        
                         $('#tituloNew').html(resp.name);
                         $('#imageNew').css('background-image', 'url(' + '<?php echo base_url() . "upload/imgs/"; ?>' + resp.namefile + ')');
                         $('#descriptionNew').html(resp.description);
+                        $('#docsNew').html(resp.docs);
 
                     }
                 }
@@ -245,6 +249,8 @@
                 var resp = $.parseJSON(data);//convertir data de json
                 $("#project_list").empty();
                 $("#project_list").append(resp.html);
+                
+                 $('.asRange').asRange({scale: false,namespace: 'asRange',}); 
             }
         });
 

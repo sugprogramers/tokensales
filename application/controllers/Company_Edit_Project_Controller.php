@@ -52,16 +52,7 @@ class Company_Edit_Project_Controller extends CI_Controller {
 
     public function save($c_project_id = null) {
         try {
-            /* $documents = $this->CProjectdocumenttypeModel->getAllByAdmin();
-              foreach ($documents as $filesadmin) {
-              if( isset($_FILES[$filesadmin['c_projectdocumenttype_id']]['name']) ) {
-              throw new SDException("Existe ".$filesadmin['c_projectdocumenttype_id']);
-              }
-              else{
-              throw new SDException("No existe ".$filesadmin['c_projectdocumenttype_id']);
-              }
-              } */
-
+           
             $idfilephoto = $this->upload_Image();
             $obj = $this->saveValidate($c_project_id, $idfilephoto);
             $this->CProjectModel->save($obj, $this->session->id);

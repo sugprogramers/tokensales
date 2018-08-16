@@ -95,6 +95,11 @@
 <!-- subir archivos -->
 <script src="<?php echo base_url() . "themes/default/remark"; ?>/global/js/Plugin/input-group-file.min599c.js?v4.0.2"></script>
 
+<!-- asrange -->
+<script src="<?php echo base_url() . "themes/default/remark"; ?>/global/vendor/asrange/jquery-asRange.min599c.js?v4.0.2"></script>
+<!--<script src="<?php echo base_url() . "themes/default/remark"; ?>/global/js/Plugin/asrange.min599c.js?v4.0.2"></script>
+<script src="<?php echo base_url() . "themes/default/remark/topbar"; ?>/assets/examples/js/forms/advanced.min599c.js?v4.0.2"></script>-->
+
 <script>
      (function (document, window, $) {
          'use strict';
