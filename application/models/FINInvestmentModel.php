@@ -105,6 +105,37 @@ class FINInvestmentModel extends CI_Model
         return "uknowkn";
     }
     
+    
+    
+    public function getSumAmountByProject($c_project_id){
+        
+         $this->db->select("COALESCE(sum(amount),0) as amount ");
+         $this->db->from('fin_investment');
+         $this->db->where('c_project_id', $c_project_id);
+         $this->db->or_where( array( 'status'=> 'ACT' , 'status'=> 'FIN' ));
+         $query =  $this->db->get();
+         $queryresult = $query->result();
+         if (!$queryresult)
+            return "0";
+        
+         return $queryresult[0]->amount;
+    }
+    
+     public function getCountInvestorsByProject($c_project_id){
+        
+         $this->db->select("count(c_investor_id) as countinvestors ");
+         $this->db->from('fin_investment');
+         $this->db->where('c_project_id', $c_project_id);
+         $this->db->or_where( array( 'status'=> 'ACT' , 'status'=> 'FIN' ));
+         $this->db->distinct();
+         $query =  $this->db->get();
+         $queryresult = $query->result();
+         if (!$queryresult)
+            return "0";
+        
+         return $queryresult[0]->countinvestors;
+    }
+    
 }
 
 ?>

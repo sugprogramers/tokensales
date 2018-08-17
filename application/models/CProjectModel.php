@@ -99,11 +99,12 @@ class CProjectModel extends CI_Model {
         return $list;
     }
     
-    
+    //projecto unico by id  COMPANY
     function getById($id) {
         
-        $this->db->select('c_project.* , c_file.name as namefile'); 
+        $this->db->select('c_project.* , c_currency.cursymbol , c_file.name as namefile'); 
         $this->db->from('c_project');
+        $this->db->join('c_currency', 'c_project.c_currency_id = c_currency.c_currency_id');
         $this->db->join('c_file', 'c_file.c_file_id = c_project.homeimage_id' ,'left');
         $this->db->where("c_project.c_project_id", $id);   
         $resultados = $this->db->get();
@@ -113,6 +114,8 @@ class CProjectModel extends CI_Model {
             return false;
         }
     }
+    
+    //todos projectos del usuario  COMPANY
     function getAllByCompany($id) {
         $this->db->select('c_project.*, c_projectmanager.* , c_currency.cursymbol , c_file.name as namefile');         
         $this->db->from('c_project');
@@ -122,6 +125,31 @@ class CProjectModel extends CI_Model {
         $this->db->where('c_projectmanager.c_user_id',$id);
         return  $this->db->get();        
     }
+    
+    //para el administrador cambiar
+     function getAllByAdmin() {
+        $this->db->select('c_project.*, c_projectmanager.* , c_currency.cursymbol , c_file.name as namefile');         
+        $this->db->from('c_project');
+        $this->db->join('c_projectmanager', 'c_project.c_projectmanager_id = c_projectmanager.c_projectmanager_id');
+        $this->db->join('c_currency', 'c_project.c_currency_id = c_currency.c_currency_id');
+        $this->db->join('c_file', 'c_file.c_file_id = c_project.homeimage_id' ,'left');
+        //$this->db->where('c_projectmanager.c_user_id',$id);
+        return  $this->db->get();        
+    }
+    
+     //para el Investor cambiar
+     function getAllByInvestor() {
+        $this->db->select('c_project.*, c_projectmanager.* , c_currency.cursymbol , c_file.name as namefile');         
+        $this->db->from('c_project');
+        $this->db->join('c_projectmanager', 'c_project.c_projectmanager_id = c_projectmanager.c_projectmanager_id');
+        $this->db->join('c_currency', 'c_project.c_currency_id = c_currency.c_currency_id');
+        $this->db->join('c_file', 'c_file.c_file_id = c_project.homeimage_id' ,'left');
+        //$this->db->where('c_projectmanager.c_user_id',$id);
+        return  $this->db->get();        
+    }
+    
+    
+    
     
     function delete($id){
         $this->db->where('c_project_id', $id);

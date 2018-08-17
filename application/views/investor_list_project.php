@@ -270,7 +270,7 @@
         $(document).on('slidePanel::afterLoad', function (e) {
 
             $.ajax({
-                url: "<?php echo base_url('Company_List_Project_Controller/get_project/'); ?>" + c_project_id,
+                url: "<?php echo base_url('Investor_List_Project_Controller/get_project/'); ?>" + c_project_id,
                 type: "POST",
                 async: false,
                 success: function (data) {
@@ -321,7 +321,7 @@
 
     function Listar() {
         $.ajax({
-            url: "<?php echo base_url('Company_List_Project_Controller/get_project_list'); ?>",
+            url: "<?php echo base_url('Investor_List_Project_Controller/get_project_list'); ?>",
             type: "POST",
             success: function (data) {
                 var resp = $.parseJSON(data);//convertir data de json
@@ -366,7 +366,7 @@
                 if (result) {
 
                     $.ajax({
-                        url: "<?php echo base_url('Company_List_Project_Controller/delete_project'); ?>/" + id,
+                        url: "<?php echo base_url('Investor_List_Project_Controller/delete_project'); ?>/" + id,
                         type: "POST",
                         success: function (data) {
                             var resp = $.parseJSON(data);//convertir data de json

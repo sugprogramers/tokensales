@@ -2,8 +2,10 @@
 <link rel="stylesheet" href="<?php echo base_url() . "themes/default/remark"; ?>/global/vendor/dropify/dropify.min599c.css?v4.0.2">
 <link rel="stylesheet" href="<?php echo base_url() . "themes/default/remark"; ?>/global/vendor/bootstrap-touchspin/bootstrap-touchspin.min599c.css?v4.0.2">
 
+
 <link rel="stylesheet" href="<?php echo base_url() . "themes/default/remark"; ?>/global/vendor/summernote/summernote.min599c.css?v4.0.2">
 <link rel="stylesheet" href="<?php echo base_url() . "themes/default/remark"; ?>/global/vendor/summernote/summernote/css/summernote-libreicon-theme.css">
+
 <div class="page">
     <div class="page-header">
         <h1 class="page-title"><?php if ($action == 'edit') echo 'Edit';if ($action == 'new') echo 'New'; ?> Project </h1>

@@ -634,7 +634,7 @@
                                                         </li>
 
                                                         <li class="site-menu-item">
-                                                            <a href="#">
+                                                            <a href="<?php echo base_url(); ?>admin_project">
                                                                 <span class="site-menu-title">Validate Projects</span>
                                                             </a>
                                                         </li>
@@ -810,7 +810,7 @@
                                 </li>
                                 
                                 <li class="dropdown site-menu-item has-sub" >
-                                    <a data-toggle="dropdown" href="#" data-dropdown-toggle="false">
+                                    <a data-toggle="dropdown" href="<?php echo base_url(); ?>investor_project" data-dropdown-toggle="false">
                                         <i class="site-menu-icon wb-search" aria-hidden="true"></i>
                                         <span class="site-menu-title">Opportunities</span>                                   
                                     </a>

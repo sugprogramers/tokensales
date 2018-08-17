@@ -20,6 +20,20 @@
     -webkit-font-smoothing:antialiased;
     -moz-osx-font-smoothing:grayscale
 }
+
+/*agregado */
+[class*=" note-icon-"]:before,[class^=note-icon-]:before{
+     display:inline-block;
+    font:normal normal normal 14px/1;
+    width:14px;
+    height:14px;
+    vertical-align:-15%;
+    text-rendering:auto;
+    fill:currentColor;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale
+}
+
 .note-icon-align:before{content:url(../svg/libre-align-justify.svg)}
 .note-icon-align-center:before{content:url(../svg/libre-align-center.svg)}
 .note-icon-align-indent:before{content:url(../svg/libre-indent.svg)}

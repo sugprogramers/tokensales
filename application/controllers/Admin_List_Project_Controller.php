@@ -2,7 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 include 'application/libraries/SDException.php';
 
-class Company_List_Project_Controller extends CI_Controller {
+class Admin_List_Project_Controller extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
@@ -13,19 +13,19 @@ class Company_List_Project_Controller extends CI_Controller {
         
         
         
-        if ($this->session->usertype !== "COMPMAN") {
+        if ($this->session->usertype !== "ADM") {
             redirect(base_url() . 'login');
         }
     }
 
     public function index() {
         $this->load->view('header/header_admin');
-        $this->load->view('company_list_project');
+        $this->load->view('admin_list_project');
         $this->load->view('footer/footer_admin');
     }
 
     public function get_project_list() {
-        $query = $this->CProjectModel->getAllByCompany($this->session->id);
+        $query = $this->CProjectModel->getAllByAdmin();
         $html = '';
         foreach ($query->result() as $r) {
              
@@ -35,7 +35,7 @@ class Company_List_Project_Controller extends CI_Controller {
                     $r->totalyieldperc , $r->loanterm , $r->datelimit , $r->startdate);
             //print_r($r); break;
         }
-        $html .= $this->get_htm_item_new();
+        //$html .= $this->get_htm_item_new();
         $response = array('html' => $html);
         echo json_encode($response);
     }
@@ -155,9 +155,7 @@ return
                 <span class="icon wb-settings" data-toggle="dropdown" aria-expanded="false" role="button"
                       data-animations="fadeInDown fadeInLeft fadeInUp fadeInRight"  ></span>
                 <div class="dropdown-menu dropdown-menu-right" role="menu">
-                    <a class="dropdown-item" href="javascript:void(0)" onclick="Editar(\''.$c_project_id.'\')"><i class="icon wb-pencil" aria-hidden="true"></i>Edit</a>
-                    <a class="dropdown-item" href="javascript:void(0)" onclick="Eliminar(\''.$c_project_id.'\')"><i class="icon wb-trash" aria-hidden="true" ></i>Delete</a>
-                    <a class="dropdown-item" href="javascript:void(0)" onclick="Ubicacion(\''.$latitude.'\' , \''.$longitude.'\')"><i class="icon wb-map" aria-hidden="true" ></i>Location</a>
+                     <a class="dropdown-item" href="javascript:void(0)" onclick="Ubicacion(\''.$latitude.'\' , \''.$longitude.'\')"><i class="icon wb-map" aria-hidden="true" ></i>Location</a>
                     
            </div>
             </div> 
@@ -219,21 +217,13 @@ return
 </div>
 
 <div class="h-minificha__button-bar">
-          <button  type="submit" class="btn btn-primary btn-block"  data-toggle="slidePanel" data-url="' . base_url() . 'themes/default/tpl/company_panel.tpl"  onclick="Mostrar(\''.$c_project_id.'\');">Project detail</button>
+          <button  type="submit" class="btn btn-success btn-block"  data-toggle="slidePanel" data-url="' . base_url() . 'themes/default/tpl/company_panel.tpl"  onclick="Mostrar(\''.$c_project_id.'\');">Validate Project</button>
 </div>
 
 
             </div>    
             <div class="media-item-actions btn-group" >
-                <button class="btn btn-icon btn-pure btn-default" data-original-title="Edit" data-toggle="tooltip"
-                        data-container="body" data-placement="top" data-trigger="hover"
-                        type="button"  onclick="Editar(\''.$c_project_id.'\')">
-                    <i class="icon wb-pencil" aria-hidden="true"></i>
-                </button>
-                <button class="btn btn-icon btn-pure btn-default" data-original-title="Delete"
-                        data-toggle="tooltip" data-container="body" data-placement="top"
-                        data-trigger="hover" type="button" onclick="Eliminar(\''.$c_project_id.'\')">
-                    <i class="icon wb-trash" aria-hidden="true"></i>
+                
                  <button class="btn btn-icon btn-pure btn-default" data-original-title="Delete"
                         data-toggle="tooltip" data-container="body" data-placement="top"
                         data-trigger="hover" type="button" onclick="Ubicacion(\''.$latitude.'\' , \''.$longitude.'\')">
