@@ -148,18 +148,30 @@ class CProjectModel extends CI_Model {
         return  $this->db->get();        
     }
     
-    
-    
-    
     function delete($id){
         $this->db->where('c_project_id', $id);
         return $this->db->delete('c_project');
     }
+    
+    function change_status($status , $c_project_id){
+        $this->db->where('c_project_id', $c_project_id);
+        $this->db->update('c_project', array( 'projectstatus'=> $status)); 
+        if ($this->db->affected_rows() > 0) {
+			return true;
+		}
+		else{
+			return false;
+		}
+    }
+    
+   
+    
 
     public function getProjectStatusName($status){
         log_message("ERROR","ESTADO :". $status);
         switch ($status) {
             case "PEND": return "Pending Evaluation";
+            case "ERRDATA": return "Incomplete data";
             case "COFU": return "Funding Complete";
             case "NCOFU": return "Funding did not Complete";
             case "VO": return "Voided";
@@ -169,6 +181,7 @@ class CProjectModel extends CI_Model {
         }
         return "uknowkn";
     }
+    
     
 }
 

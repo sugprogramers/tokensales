@@ -1,4 +1,5 @@
 <?php
+
 defined('BASEPATH') OR exit('No direct script access allowed');
 include 'application/libraries/SDException.php';
 
@@ -10,9 +11,9 @@ class Company_List_Project_Controller extends CI_Controller {
         $this->load->model("CProjectModel");
         $this->load->model("CProjectdocumenttypeModel");
         $this->load->model("FINInvestmentModel");
-        
-        
-        
+
+
+
         if ($this->session->usertype !== "COMPMAN") {
             redirect(base_url() . 'login');
         }
@@ -28,11 +29,11 @@ class Company_List_Project_Controller extends CI_Controller {
         $query = $this->CProjectModel->getAllByCompany($this->session->id);
         $html = '';
         foreach ($query->result() as $r) {
-             
-          
-            $html .= $this->get_htm_item($r->c_project_id, $r->name, $r->description, $r->companyname, 
-                    $r->targetamt, $r->cursymbol, $r->namefile , $r->latitude ,$r->longitude , 
-                    $r->totalyieldperc , $r->loanterm , $r->datelimit , $r->startdate);
+
+
+            $html .= $this->get_htm_item($r->c_project_id, $r->name, $r->description, $r->companyname, $r->targetamt, $r->cursymbol, 
+                    $r->namefile, $r->latitude, $r->longitude, $r->totalyieldperc, $r->loanterm, 
+                    $r->datelimit, $r->startdate, $r->projectstatus);
             //print_r($r); break;
         }
         $html .= $this->get_htm_item_new();
@@ -53,63 +54,62 @@ class Company_List_Project_Controller extends CI_Controller {
 
     public function get_project($id) {
         try {
-            
+
             $all = $this->CProjectModel->getById($id);
-            if($all){
-             
-             $response = array('redirect' => '', 'status' => 'success');
-             
-             $findate =  DateTime::createFromFormat('Y-m-d H:i:s', $all[0]['datelimit']); $nowdate = new DateTime('now');  
-             $diasrestantes = $findate->diff($nowdate)->days; 
-             $sumamount = $this->FINInvestmentModel->getSumAmountByProject($id);
-             $countinvesment = $this->FINInvestmentModel->getCountInvestorsByProject($id);        
-             $percent = $this->get_percentage($all[0]['targetamt'], $sumamount);
-             
-             $all[0]['datelimit'] = DateTime::createFromFormat('Y-m-d H:i:s', $all[0]['datelimit'])->format('Y-m-d');
-             $all[0]['startdate'] = DateTime::createFromFormat('Y-m-d H:i:s', $all[0]['startdate'])->format('Y-m-d');
-             
-             $response = $response + $all[0] + array('daysremaining' =>$diasrestantes ,    'sumamount' => $sumamount ,'countinvesment' => $countinvesment,'percent' => $percent );
-             
-             $documents = $this->CProjectdocumenttypeModel->getAllByAdminByProjectId($id);
-             $response = $response + array('docs' => $this->get_htm_docs($documents));
-             
-            
-             
-              echo json_encode($response);
+            if ($all) {
+
+                $response = array('redirect' => '', 'status' => 'success');
+
+                $findate = DateTime::createFromFormat('Y-m-d H:i:s', $all[0]['datelimit']);
+                $nowdate = new DateTime('now');
+                $diasrestantes = $findate->diff($nowdate)->days;
+                $sumamount = $this->FINInvestmentModel->getSumAmountByProject($id);
+                $countinvesment = $this->FINInvestmentModel->getCountInvestorsByProject($id);
+                $percent = $this->get_percentage($all[0]['targetamt'], $sumamount);
+
+                $all[0]['datelimit'] = DateTime::createFromFormat('Y-m-d H:i:s', $all[0]['datelimit'])->format('Y-m-d');
+                $all[0]['startdate'] = DateTime::createFromFormat('Y-m-d H:i:s', $all[0]['startdate'])->format('Y-m-d');
+
+                $response = $response + $all[0] + array('daysremaining' => $diasrestantes, 'sumamount' => $sumamount, 'countinvesment' => $countinvesment, 'percent' => $percent);
+
+                $documents = $this->CProjectdocumenttypeModel->getAllByAdminByProjectId($id);
+                $response = $response + array('docs' => $this->get_htm_docs($documents));
+
+
+
+                echo json_encode($response);
+            } else {
+                $response = array('redirect' => '', 'status' => 'error', 'msg' => 'invalid project');
+
+                echo json_encode($response);
             }
-            else{
-             $response = array('redirect' => '', 'status' => 'error', 'msg' => 'invalid project');
-              
-             echo json_encode($response);
-            }
-            
         } catch (Exception $e) {
             $response = array('redirect' => '', 'status' => 'error', 'msg' => $e->getMessage());
             echo json_encode($response);
         }
     }
-    
-    private function get_htm_docs($documents){
-         $html = '';
-         foreach ($documents as $entry) {   
-            if(isset($entry['namefile'])){
-               $html .=   '<h5><i class="icon fa-file-pdf-o" aria-hidden="true"></i> '.ucfirst($entry['name']).'</h5><label class="control-label" ><a target="_blank" href="'. base_url().'upload/docs/'.$entry['namefile'].'">Preview Doc </a></label>';
+
+    private function get_htm_docs($documents) {
+        $html = '';
+        foreach ($documents as $entry) {
+            if (isset($entry['namefile'])) {
+                $html .= '<h5><i class="icon fa-file-pdf-o" aria-hidden="true"></i> ' . ucfirst($entry['name']) . '</h5><label class="control-label" ><a target="_blank" href="' . base_url() . 'upload/docs/' . $entry['namefile'] . '">Preview Doc </a></label>';
             }
-         }
-         if(trim($html)=='') $html='<h5>There are no documents</h5>';
-         return $html;
+        }
+        if (trim($html) == '')
+            $html = '<h5>There are no documents</h5>';
+        return $html;
     }
-    
-    private function get_percentage($total, $number)
-    {
-      if ( $total > 0 ) {
-       return round($number / ($total / 100),2);
-      } else {
-        return 0;
-      }
+
+    private function get_percentage($total, $number) {
+        if ($total > 0) {
+            return round($number / ($total / 100), 2);
+        } else {
+            return 0;
+        }
     }
-    
-    private function get_htm_item($c_project_id, $name, $description, $companyname, $targetamt, $cursymbol, $namefile ,$latitude , $longitude , $totalyieldperc , $loanterm , $datelimit , $startdate) {
+
+    private function get_htm_item($c_project_id, $name, $description, $companyname, $targetamt, $cursymbol, $namefile, $latitude, $longitude, $totalyieldperc, $loanterm, $datelimit, $startdate , $projectstatus) {
 
         $items = array('overlay-slide-left', 'overlay-slide-top', 'overlay-slide-right', 'overlay-slide-bottom');
         $class_animation = $items[array_rand($items)];
@@ -117,33 +117,33 @@ class Company_List_Project_Controller extends CI_Controller {
         if (isset($namefile) && trim($namefile) != '' && file_exists("upload/imgs/$namefile")) {
             $homeimage = base_url() . 'upload/imgs/' . $namefile;
         } else {
-            $homeimage =  base_url() . 'themes/default/remark/topbar/assets/images/nophoto2.jpg';
+            $homeimage = base_url() . 'themes/default/remark/topbar/assets/images/nophoto2.jpg';
         }
-        
-        $findate =  DateTime::createFromFormat('Y-m-d H:i:s', $datelimit);
-        $nowdate = new DateTime('now');  
-        
-        $diastotales = $findate->diff($nowdate)->days;         
-        
-        $sumamount = $this->FINInvestmentModel->getSumAmountByProject($c_project_id);
-        $countinvesment = $this->FINInvestmentModel->getCountInvestorsByProject($c_project_id);        
-        $percent = $this->get_percentage($targetamt, $sumamount);
-       
-       
 
-return
-'  
+        $findate = DateTime::createFromFormat('Y-m-d H:i:s', $datelimit);
+        $nowdate = new DateTime('now');
+
+        $diastotales = $findate->diff($nowdate)->days;
+
+        $sumamount = $this->FINInvestmentModel->getSumAmountByProject($c_project_id);
+        $countinvesment = $this->FINInvestmentModel->getCountInvestorsByProject($c_project_id);
+        $percent = $this->get_percentage($targetamt, $sumamount);
+
+        $statushtml = $this->getHtmlProjectStatusName($projectstatus) ;   
+
+        return
+                '  
 <li>
     <div class="media-item" >
 
-        <div class="image-wrap"  data-toggle="slidePanel" data-url="' . base_url() . 'themes/default/tpl/company_panel.tpl"  onclick="Mostrar(\''.$c_project_id.'\');">
+        <div class="image-wrap"  data-toggle="slidePanel" data-url="' . base_url() . 'themes/default/tpl/company_panel.tpl"  onclick="Mostrar(\'' . $c_project_id . '\');">
             <figure class="overlay overlay-hover">
                 <img class="overlay-figure" src="' . $homeimage . '" alt="...">
-                <figcaption class="overlay-panel overlay-background '.$class_animation.' ">
+                <figcaption class="overlay-panel overlay-background ' . $class_animation . ' ">
 
                     <div class="img-text-hover">
                         <h4>' . $this->truncate($name, 30) . '</h4>
-                        <p>' . $this->truncate( htmlspecialchars(str_replace("&nbsp;", ' ',trim(strip_tags($description)))), 380) . '</p>
+                        <p>' . $this->truncate(htmlspecialchars(str_replace("&nbsp;", ' ', trim(strip_tags($description)))), 380) . '</p>
 
                     </div>
 
@@ -155,14 +155,14 @@ return
                 <span class="icon wb-settings" data-toggle="dropdown" aria-expanded="false" role="button"
                       data-animations="fadeInDown fadeInLeft fadeInUp fadeInRight"  ></span>
                 <div class="dropdown-menu dropdown-menu-right" role="menu">
-                    <a class="dropdown-item" href="javascript:void(0)" onclick="Editar(\''.$c_project_id.'\')"><i class="icon wb-pencil" aria-hidden="true"></i>Edit</a>
-                    <a class="dropdown-item" href="javascript:void(0)" onclick="Eliminar(\''.$c_project_id.'\')"><i class="icon wb-trash" aria-hidden="true" ></i>Delete</a>
-                    <a class="dropdown-item" href="javascript:void(0)" onclick="Ubicacion(\''.$latitude.'\' , \''.$longitude.'\')"><i class="icon wb-map" aria-hidden="true" ></i>Location</a>
+                    <a class="dropdown-item" href="javascript:void(0)" onclick="Editar(\'' . $c_project_id . '\')"><i class="icon wb-pencil" aria-hidden="true"></i>Edit</a>
+                    <a class="dropdown-item" href="javascript:void(0)" onclick="Eliminar(\'' . $c_project_id . '\')"><i class="icon wb-trash" aria-hidden="true" ></i>Delete</a>
+                    <a class="dropdown-item" href="javascript:void(0)" onclick="Ubicacion(\'' . $latitude . '\' , \'' . $longitude . '\')"><i class="icon wb-map" aria-hidden="true" ></i>Location</a>
                     
            </div>
             </div> 
-            <div class="title" style="color:#566573;">'.ucfirst($companyname).'</div>
-            <div class="sub-description-list">'. $this->truncate( htmlspecialchars(str_replace("&nbsp;", ' ',trim(strip_tags($description)))), 150) .'</div>
+            <div class="title" style="color:#566573;">' . ucfirst($companyname) . '</div>
+            <div class="sub-description-list">' . $this->truncate(htmlspecialchars(str_replace("&nbsp;", ' ', trim(strip_tags($description)))), 150) . '</div>
 
 
 <div class="sub-detalle-property">
@@ -170,35 +170,39 @@ return
 
     <div class="row">
               <div class="col-sm-6">
-              <b style="color:#566573;">'.$cursymbol.$sumamount.' (%'.$percent.')</b>
+              <b style="color:#566573;">' . $cursymbol . $sumamount . ' (%' . $percent . ')</b>
               </div>
               <div class="col-sm-6 text-right">
-              <b style="color:#566573;">'.$cursymbol.$targetamt.'</b>
+              <b style="color:#566573;">' . $cursymbol . $targetamt . '</b>
               </div>
     </div>   
 
             
                
 <div class="example" style="margin-top: 10px;margin-bottom: 10px;">
-       <div class="asRange" data-plugin="asRange" data-namespace="rangeUi" style="width: 100%;margin: 0;" data-min="1" data-max="100" data-value="'.$percent.'"></div>
+       <div class="asRange" data-plugin="asRange" data-namespace="rangeUi" style="width: 100%;margin: 0;" data-min="1" data-max="100" data-value="' . $percent . '"></div>
  </div>
    
 
     <div class="row" style="color:#566573;">
             <div class="col-sm-6">
-            <b>'.$countinvesment.'</b> Investors
+            <b>' . $countinvesment . '</b> Investors
             </div>
             <div class="col-sm-6 text-right">
-            '.$diastotales.'  days remaining
+            ' . $diastotales . '  days remaining
              </div>  
      </div>   
+
+<div class="h-minificha__tir" style="padding: 5px 0;">
+<center>'.$statushtml.'</center>
+</div>
 
 <div class="row  h-minificha__data__row" style="margin-top: 10px;">
 
     <div class="col-xs-6">
         <div class="h-minificha__data__value">
             <span class="h-minificha__data__value--number h-minificha--color-primary">
-                '.$totalyieldperc.'<span class="">%</span>
+                ' . $totalyieldperc . '<span class="">%</span>
             </span>
             <p class="h-minificha__data__value--description h-minificha--color-secondary">Total Return</p>
         </div>
@@ -206,7 +210,7 @@ return
     <div class="h-minificha__data__values__separator--line"></div>
     <div class="col-xs-6">
         <div class="h-minificha__data__value">
-            <span class="h-minificha__data__value--number h-minificha--color-primary"> '.$loanterm.'<span class=""> months</span>
+            <span class="h-minificha__data__value--number h-minificha--color-primary"> ' . $loanterm . '<span class=""> months</span>
             </span>
             <p class="h-minificha__data__value--description h-minificha--color-secondary">Term</p>
         </div>
@@ -217,9 +221,8 @@ return
 <div class="h-minificha__tir" style="padding: 5px 0;">
 
 </div>
-
 <div class="h-minificha__button-bar">
-          <button  type="submit" class="btn btn-primary btn-block"  data-toggle="slidePanel" data-url="' . base_url() . 'themes/default/tpl/company_panel.tpl"  onclick="Mostrar(\''.$c_project_id.'\');">Project detail</button>
+          <button  type="submit" class="btn btn-primary btn-block"  data-toggle="slidePanel" data-url="' . base_url() . 'themes/default/tpl/company_panel.tpl"  onclick="Mostrar(\'' . $c_project_id . '\');">Project detail</button>
 </div>
 
 
@@ -227,16 +230,16 @@ return
             <div class="media-item-actions btn-group" >
                 <button class="btn btn-icon btn-pure btn-default" data-original-title="Edit" data-toggle="tooltip"
                         data-container="body" data-placement="top" data-trigger="hover"
-                        type="button"  onclick="Editar(\''.$c_project_id.'\')">
+                        type="button"  onclick="Editar(\'' . $c_project_id . '\')">
                     <i class="icon wb-pencil" aria-hidden="true"></i>
                 </button>
                 <button class="btn btn-icon btn-pure btn-default" data-original-title="Delete"
                         data-toggle="tooltip" data-container="body" data-placement="top"
-                        data-trigger="hover" type="button" onclick="Eliminar(\''.$c_project_id.'\')">
+                        data-trigger="hover" type="button" onclick="Eliminar(\'' . $c_project_id . '\')">
                     <i class="icon wb-trash" aria-hidden="true"></i>
                  <button class="btn btn-icon btn-pure btn-default" data-original-title="Delete"
                         data-toggle="tooltip" data-container="body" data-placement="top"
-                        data-trigger="hover" type="button" onclick="Ubicacion(\''.$latitude.'\' , \''.$longitude.'\')">
+                        data-trigger="hover" type="button" onclick="Ubicacion(\'' . $latitude . '\' , \'' . $longitude . '\')">
                     <i class="icon wb-map" aria-hidden="true"></i>
                 </button>
             </div>
@@ -244,13 +247,13 @@ return
     </div>
 </li>
 '
-;
-}
+        ;
+    }
 
-private function get_htm_item_new() {
-return
-' 
-<li onclick="window.location.href = \''.base_url().'company_edit_project\';">
+    private function get_htm_item_new() {
+        return
+                ' 
+<li onclick="window.location.href = \'' . base_url() . 'company_edit_project\';">
     <div class="media-item" >
         <div class="image-wrap" style="background: #e4eaec;" >
             <img class="overlay-figure" src="' . base_url() . 'themes/default/remark/topbar/assets/images/new-project.png" alt="...">
@@ -262,10 +265,25 @@ return
     </div>
 </li>   
 ';
-}
+    }
 
-private function truncate($string, $length, $dots = "...") {
-return (strlen($string) > $length) ? substr($string, 0, $length - strlen($dots)) . $dots : $string;
-}
+    private function truncate($string, $length, $dots = "...") {
+        return (strlen($string) > $length) ? substr($string, 0, $length - strlen($dots)) . $dots : $string;
+    }
+
+    private function getHtmlProjectStatusName($status) {
+        switch ($status) {
+            case "PEND": return '<span class="badge badge-outline badge-warning">Pending Evaluation</span>';
+            case "ERRDATA": return '<span class="badge badge-outline badge-danger">Incomplete Data</span>';                
+            case "FU": return '<span class="badge badge-outline badge-success">Funding</span>';    
+            case "COFU": return '<span class="badge badge-outline badge-default">Funding Complete</span>';
+            case "NCOFU": return '<span class="badge badge-outline badge-dark">Funding did not Complete</span>';
+            case "VO": return '<span class="badge badge-outline badge-danger">Voided</span>';
+            case "ACT": return '<span class="badge badge-outline badge-success">Active</span>';
+            case "FI": return '<span class="badge badge-outline badge-primary">Finished</span>';
+            default: break;
+        }
+        return "uknowkn";
+    }
 
 }

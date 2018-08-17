@@ -387,5 +387,37 @@
     function Editar(id) {
         window.location.href = "<?php echo base_url(); ?>company_edit_project/" + id;
     }
+    
+    
+    
+    function Estado(estado) {
+        bootbox.confirm({
+            title: "Confirm Status", message: "Are you sure you want to change status this item?",
+            buttons: {
+                cancel: {label: '<i class="fa fa-times"></i> Cancel', className: 'btn-danger'},
+                confirm: {label: '<i class="fa fa-check"></i> Confirm', className: 'btn-primary'}
+            },
+            callback: function (result) {
+                if (result) {
+
+                    $.ajax({
+                        url: "<?php echo base_url('Admin_List_Project_Controller/status_project'); ?>/" + estado+"/"+c_project_id,
+                        type: "POST",
+                        success: function (data) {
+                            var resp = $.parseJSON(data);//convertir data de json
+                            if (resp.status === "error") {
+                                showError('Error');
+                            }
+                            if (resp.status === "success") {
+                                Listar();
+                                showSuccess('Success');
+                            }
+                        }
+                    });
+
+                }
+            }
+        });
+    }
 
 </script>

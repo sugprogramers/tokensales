@@ -32,7 +32,7 @@ class Admin_List_Project_Controller extends CI_Controller {
           
             $html .= $this->get_htm_item($r->c_project_id, $r->name, $r->description, $r->companyname, 
                     $r->targetamt, $r->cursymbol, $r->namefile , $r->latitude ,$r->longitude , 
-                    $r->totalyieldperc , $r->loanterm , $r->datelimit , $r->startdate);
+                    $r->totalyieldperc , $r->loanterm , $r->datelimit , $r->startdate , $r->projectstatus);
             //print_r($r); break;
         }
         //$html .= $this->get_htm_item_new();
@@ -43,6 +43,17 @@ class Admin_List_Project_Controller extends CI_Controller {
     public function delete_project($id) {
         try {
             $this->CProjectModel->delete($id);
+            $response = array('redirect' => '', 'status' => 'success');
+            echo json_encode($response);
+        } catch (Exception $e) {
+            $response = array('redirect' => '', 'status' => 'error', 'msg' => $e->getMessage());
+            echo json_encode($response);
+        }
+    }
+    
+    public function status_project($status , $c_project_id) {
+        try {
+            $this->CProjectModel->change_status($status ,$c_project_id);
             $response = array('redirect' => '', 'status' => 'success');
             echo json_encode($response);
         } catch (Exception $e) {
@@ -109,7 +120,7 @@ class Admin_List_Project_Controller extends CI_Controller {
       }
     }
     
-    private function get_htm_item($c_project_id, $name, $description, $companyname, $targetamt, $cursymbol, $namefile ,$latitude , $longitude , $totalyieldperc , $loanterm , $datelimit , $startdate) {
+    private function get_htm_item($c_project_id, $name, $description, $companyname, $targetamt, $cursymbol, $namefile ,$latitude , $longitude , $totalyieldperc , $loanterm , $datelimit , $startdate , $projectstatus) {
 
         $items = array('overlay-slide-left', 'overlay-slide-top', 'overlay-slide-right', 'overlay-slide-bottom');
         $class_animation = $items[array_rand($items)];
@@ -129,14 +140,14 @@ class Admin_List_Project_Controller extends CI_Controller {
         $countinvesment = $this->FINInvestmentModel->getCountInvestorsByProject($c_project_id);        
         $percent = $this->get_percentage($targetamt, $sumamount);
        
-       
+       $statushtml = $this->getHtmlProjectStatusName($projectstatus) ;   
 
 return
 '  
 <li>
     <div class="media-item" >
 
-        <div class="image-wrap"  data-toggle="slidePanel" data-url="' . base_url() . 'themes/default/tpl/company_panel.tpl"  onclick="Mostrar(\''.$c_project_id.'\');">
+        <div class="image-wrap"  data-toggle="slidePanel" data-url="' . base_url() . 'themes/default/tpl/admin_panel.tpl"  onclick="Mostrar(\''.$c_project_id.'\');">
             <figure class="overlay overlay-hover">
                 <img class="overlay-figure" src="' . $homeimage . '" alt="...">
                 <figcaption class="overlay-panel overlay-background '.$class_animation.' ">
@@ -190,6 +201,10 @@ return
             '.$diastotales.'  days remaining
              </div>  
      </div>   
+     
+<div class="h-minificha__tir" style="padding: 5px 0;">
+<center>'.$statushtml.'</center>
+</div>
 
 <div class="row  h-minificha__data__row" style="margin-top: 10px;">
 
@@ -217,7 +232,7 @@ return
 </div>
 
 <div class="h-minificha__button-bar">
-          <button  type="submit" class="btn btn-success btn-block"  data-toggle="slidePanel" data-url="' . base_url() . 'themes/default/tpl/company_panel.tpl"  onclick="Mostrar(\''.$c_project_id.'\');">Validate Project</button>
+          <button  type="submit" class="btn btn-success btn-block"  data-toggle="slidePanel" data-url="' . base_url() . 'themes/default/tpl/admin_panel.tpl"  onclick="Mostrar(\''.$c_project_id.'\');">Validate Project</button>
 </div>
 
 
@@ -257,5 +272,21 @@ return
 private function truncate($string, $length, $dots = "...") {
 return (strlen($string) > $length) ? substr($string, 0, $length - strlen($dots)) . $dots : $string;
 }
+
+  private function getHtmlProjectStatusName($status) {
+        switch ($status) {
+            case "PEND": return '<span class="badge badge-outline badge-warning">Pending Evaluation</span>';
+            case "ERRDATA": return '<span class="badge badge-outline badge-danger">Incomplete Data</span>';                
+            case "FU": return '<span class="badge badge-outline badge-success">Funding</span>';    
+            case "COFU": return '<span class="badge badge-outline badge-default">Funding Complete</span>';
+            case "NCOFU": return '<span class="badge badge-outline badge-dark">Funding did not Complete</span>';
+            case "VO": return '<span class="badge badge-outline badge-danger">Voided</span>';
+            case "ACT": return '<span class="badge badge-outline badge-success">Active</span>';
+            case "FI": return '<span class="badge badge-outline badge-primary">Finished</span>';
+            default: break;
+        }
+        return "uknowkn";
+    }
+
 
 }

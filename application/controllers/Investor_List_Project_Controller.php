@@ -257,4 +257,21 @@ private function truncate($string, $length, $dots = "...") {
 return (strlen($string) > $length) ? substr($string, 0, $length - strlen($dots)) . $dots : $string;
 }
 
+
+ private function getHtmlProjectStatusName($status) {
+        switch ($status) {
+            case "PEND": return '<span class="badge badge-outline badge-warning">Pending Evaluation</span>';
+            case "ERRDATA": return '<span class="badge badge-outline badge-danger">Incomplete Data</span>';                
+            case "FU": return '<span class="badge badge-outline badge-success">Funding</span>';    
+            case "COFU": return '<span class="badge badge-outline badge-default">Funding Complete</span>';
+            case "NCOFU": return '<span class="badge badge-outline badge-dark">Funding did not Complete</span>';
+            case "VO": return '<span class="badge badge-outline badge-danger">Voided</span>';
+            case "ACT": return '<span class="badge badge-outline badge-success">Active</span>';
+            case "FI": return '<span class="badge badge-outline badge-primary">Finished</span>';
+            default: break;
+        }
+        return "uknowkn";
+    }
+
+
 }
