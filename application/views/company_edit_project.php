@@ -231,7 +231,7 @@
 
                                 <div class="form-group ">
                                     <label class="control-label" for="months">Term in months *</label>
-                                    <input type="text" class="form-control" id="months" name="months" data-plugin="TouchSpin" value="0" required />
+                                    <input type="text" class="form-control" id="months" name="months" data-plugin="TouchSpin" value="12" required />
                                 </div>
 
                             </div>
@@ -254,7 +254,7 @@
                                     <label class="control-label" for="financial">Financial goal *</label>
                                     <input type="text" class="form-control" id="financial" name="financial" data-plugin="TouchSpin"
                                            data-min="0" data-max="1000000000" data-stepinterval="50"  
-                                           data-maxboostedstep="10000000" data-prefix="$" value="0"  required />
+                                           data-maxboostedstep="10000000" data-prefix="$" value="1000"  required />
 
                                 </div>
 
