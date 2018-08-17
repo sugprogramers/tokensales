@@ -11,6 +11,7 @@ class IPN_Investor_DepositPaymentHistory_Controller extends CI_Controller {
         $this->load->model("FINPaymentHistoryModel");
         $this->load->model("CInvestorModel");
         $this->load->model("CUserModel");
+        $this->load->model("CAdminModel");
     }
 
     public function index($investorId, $payinAmount) {
@@ -23,17 +24,19 @@ class IPN_Investor_DepositPaymentHistory_Controller extends CI_Controller {
             if (!$investor) {
                 throw new SDException("investor information not found");
             }
-
+            
+            $admin = $this->CAdminModel->loadByUserId(CUserModel::$CUSER_ADMIN_ID);
+            
             $cUserFrom = $investor->c_user_id;
             $cUserTo = CUserModel::$CUSER_ADMIN_ID;
-
+            
             //THESE WILL NEED TO BE RETREIVED VIA POST
             $now = date("Y-m-d H:i:s");
             $c_currency_id = "100";
             $amount = $payinAmount;
             $fromaccount = "fromaccount@gmail.com";
-            $toaccount = "toaccount@gmail.com";
-            $description = "description payin of investor to increment payin-balance:" . $investor->c_investor_id;
+            $toaccount = $admin->paypalusername; // "toaccount@gmail.com";
+            $description = "Description payin of $" . $amount . " to increment payin-balance of investor ID:" . $investor->c_investor_id;
 
 
             $finPaymentHistory = new FINPaymentHistory();
