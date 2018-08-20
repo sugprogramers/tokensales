@@ -161,7 +161,7 @@ class FINInvestmentModel extends CI_Model {
 
                 $val = $this->save($fin, $c_user_id);
                 if ($val) {
-                    $objProject->targetamt = $objProject->targetamt - $monto;
+                    $objProject->payinbalance = $objProject->payinbalance - $monto;
                     $this->CProjectModel->save($objProject, $c_user_id);
                     return true;
                 } else {
