@@ -33,7 +33,8 @@ class Company_Edit_Project_Controller extends CI_Controller {
 
             $all[0]['datelimit'] = DateTime::createFromFormat('Y-m-d H:i:s', $all[0]['datelimit'])->format('Y-m-d');
             $all[0]['startdate'] = DateTime::createFromFormat('Y-m-d H:i:s', $all[0]['startdate'])->format('Y-m-d');
-            $all[0]['description'] = str_replace("'", "\'", $all[0]['description']);
+            $all[0]['description'] = preg_replace( "/\r|\n/", " ",str_replace("'", "\'", $all[0]['description']) );
+            
             $data = array('action' => 'edit') + $all[0];
             $documents = $this->CProjectdocumenttypeModel->getAllByAdminByProjectId($c_project_id);
             $data = $data + array('docs' => $documents);
