@@ -199,6 +199,7 @@ class Company_Edit_Project_Controller extends CI_Controller {
 
         $documents = $this->CProjectdocumenttypeModel->getAllByAdmin();
 
+        if(is_array($documents)) {
         foreach ($documents as $filesadmin) {
             try {
                 $doc = $this->CProjectdocumentModel->getByProjectAndDocuemnt($c_project_id, $filesadmin['c_projectdocumenttype_id']);
@@ -233,7 +234,10 @@ class Company_Edit_Project_Controller extends CI_Controller {
                 
             }
         }
-    }
+   
+         }
+        
+            }
 
     public function get_country_list() {
         $countryId = "100"; // ee.uu.
