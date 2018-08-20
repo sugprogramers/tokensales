@@ -164,7 +164,6 @@ class CProjectModel extends CI_Model {
 		}
     }
     
-   
     
 
     public function getProjectStatusName($status){

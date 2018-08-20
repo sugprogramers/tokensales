@@ -23,6 +23,28 @@ class Investor_List_Project_Controller extends CI_Controller {
         $this->load->view('investor_list_project');
         $this->load->view('footer/footer_admin');
     }
+    
+   
+    
+     public function invesment_project($monto , $c_project_id){
+        try {
+            
+            $val = $this->FINInvestmentModel->invesment($monto ,$c_project_id , $this->session->id);            
+           if($val){
+               $response = array('redirect' => '', 'status' => 'success');
+               echo json_encode($response); 
+           }
+           else{
+               $response = array('redirect' => '', 'status' => 'error', 'msg' => 'error');
+                 echo json_encode($response);
+           }
+            
+           
+        } catch (Exception $e) {
+            $response = array('redirect' => '', 'status' => 'error', 'msg' => $e->getMessage());
+            echo json_encode($response);
+        }
+    }
 
     public function get_project_list() {
         $query = $this->CProjectModel->getAllByInvestor();
@@ -136,7 +158,7 @@ return
 <li>
     <div class="media-item" >
 
-        <div class="image-wrap"  data-toggle="slidePanel" data-url="' . base_url() . 'themes/default/tpl/company_panel.tpl"  onclick="Mostrar(\''.$c_project_id.'\');">
+        <div class="image-wrap"  data-toggle="slidePanel" data-url="' . base_url() . 'themes/default/tpl/investor_panel.tpl"  onclick="Mostrar(\''.$c_project_id.'\');">
             <figure class="overlay overlay-hover">
                 <img class="overlay-figure" src="' . $homeimage . '" alt="...">
                 <figcaption class="overlay-panel overlay-background '.$class_animation.' ">
@@ -217,7 +239,7 @@ return
 </div>
 
 <div class="h-minificha__button-bar">
-          <button  type="submit" class="btn btn-primary btn-outline btn-block"  data-toggle="slidePanel" data-url="' . base_url() . 'themes/default/tpl/company_panel.tpl"  onclick="Mostrar(\''.$c_project_id.'\');">Invest</button>
+          <button  type="submit" class="btn btn-primary  btn-block"  data-toggle="slidePanel" data-url="' . base_url() . 'themes/default/tpl/investor_panel.tpl"  onclick="Mostrar(\''.$c_project_id.'\');">To Invest</button>
 </div>
 
 

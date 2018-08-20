@@ -300,7 +300,7 @@
                                 
                                 <?php 
                                 
-                                if ($action == 'new' || $action == 'edit'){
+                                if (($action == 'new' || $action == 'edit') && is_array($docs)){
                                     foreach ($docs as $entry) {                                         
                                       
                                  ?>

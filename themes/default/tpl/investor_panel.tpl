@@ -31,6 +31,10 @@
                             <a class="nav-link" data-toggle="tab" href="#exampleTabsLineTopThree"   aria-controls="exampleTabsLineTopTwo" role="tab" onclick='$("#panelgeneral").resize();
                                     $("#panelgeneral").resize();'>Documentation</a>
                         </li>
+                         <li class="nav-item" role="presentation">
+                            <a class="nav-link" data-toggle="tab" href="#exampleTabsLineTopFour"   aria-controls="exampleTabsLineTopTwo" role="tab" onclick='$("#panelgeneral").resize();
+                                    $("#panelgeneral").resize();'>To Invesment</a>
+                        </li>
                     </ul>
                     <div class="tab-content pt-10">
 
@@ -145,6 +149,38 @@
                             </div>
 
                         </div>
+                        
+                        
+                        
+                        
+                         <div class="tab-pane"  id="exampleTabsLineTopFour" role="tabpanel" >
+                            <div class="row" >
+                                <div class="col-md-12">
+
+                                    <div class="col-md-6" style="margin: 10px 0;">
+                                       <div class="form-group ">
+                                            <label class="control-label" for="months">I want to invest *</label>
+                                            <input type="text" class="form-control" id="amountinvest" data-decimals="2" name="amountinvest" data-plugin="TouchSpin" value="12" required />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6"></div>
+                                    
+                                    <div class="col-md-6">
+                                        <button type="button" class="btn btn-block btn-success" onclick="Invertir();"> 
+                                            <i class="icon wb-check" aria-hidden="true"></i>Invest now
+                                        </button>
+                                    </div>
+                                   
+                                  
+                                  
+
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                        
 
 
 

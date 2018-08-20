@@ -222,7 +222,7 @@ class Company_List_Project_Controller extends CI_Controller {
 
 </div>
 <div class="h-minificha__button-bar">
-          <button  type="submit" class="btn btn-primary btn-block"  data-toggle="slidePanel" data-url="' . base_url() . 'themes/default/tpl/company_panel.tpl"  onclick="Mostrar(\'' . $c_project_id . '\');">Project detail</button>
+          <button  type="submit" class="btn btn-dark btn-block"  data-toggle="slidePanel" data-url="' . base_url() . 'themes/default/tpl/company_panel.tpl"  onclick="Mostrar(\'' . $c_project_id . '\');">Project Detail</button>
 </div>
 
 
