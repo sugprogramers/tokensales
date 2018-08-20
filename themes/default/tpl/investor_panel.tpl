@@ -160,7 +160,7 @@
                                     <div class="col-md-6" style="margin: 10px 0;">
                                        <div class="form-group ">
                                             <label class="control-label" for="months">I want to invest *</label>
-                                            <input type="text" class="form-control" id="amountinvest" data-decimals="2" name="amountinvest" data-plugin="TouchSpin" value="12" required />
+                                            <input type="text" class="form-control" id="amountinvest" data-decimals="2" name="amountinvest" data-plugin="TouchSpin" value="12" data-max="100000"  required />
                                         </div>
                                     </div>
                                     <div class="col-md-6"></div>
