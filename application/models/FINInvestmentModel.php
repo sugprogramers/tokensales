@@ -146,7 +146,7 @@ class FINInvestmentModel extends CI_Model {
 
         if ($objProject && $objProject->projectstatus == 'FU') {
 
-            if ($objInvestor && ($objProject->targetamt - $sumatotal) >= $monto && $objInvestor->payinbalance >= $monto) {
+            if ($objInvestor && (($objProject->targetamt - $sumatotal) >= $monto) && ($objInvestor->payinbalance >= $monto) ) {
 
 
                 $now = (new DateTime())->format('Y-m-d H:i:s');
