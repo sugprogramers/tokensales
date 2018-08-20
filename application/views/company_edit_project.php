@@ -519,7 +519,6 @@
             $('#city').val("<?php if (isset($city)) echo $city; ?>");
             $('#cprojecttype').val("<?php if (isset($c_projecttype_id)) echo $c_projecttype_id; ?>");
             $('#cprojectmanager').val("<?php if (isset($c_projectmanager_id)) echo $c_projectmanager_id; ?>");            
-            //$('#description').val("<?php if (isset($description)) echo $description; ?>");
             $('#description').summernote('code', '<?php if (isset($description)) echo $description; ?>');
 
             $('#idcfilephoto').val("<?php if (isset($homeimage_id)) echo $homeimage_id; ?>");
