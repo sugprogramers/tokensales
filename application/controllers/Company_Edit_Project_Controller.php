@@ -130,6 +130,9 @@ class Company_Edit_Project_Controller extends CI_Controller {
             $new->projectstatus = "PEND";
             $new->homeimage_id = $idphoto;
         }
+        
+        if($new->projectstatus=='ERRDATA')
+        {$new->projectstatus = "PEND";}
 
         return $new;
     }

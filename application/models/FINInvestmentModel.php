@@ -144,30 +144,34 @@ class FINInvestmentModel extends CI_Model {
         $objInvestor = $this->CInvestorModel->getByUserId($c_user_id);
         $objProject = $this->CProjectModel->get($c_project_id);
 
-        if ($objInvestor && ($objProject->targetamt - $sumatotal) >= $monto && $objInvestor->payinbalance >= $monto) {
+        if ($objProject && $objProject->projectstatus == 'FU') {
+
+            if ($objInvestor && ($objProject->targetamt - $sumatotal) >= $monto && $objInvestor->payinbalance >= $monto) {
 
 
-            $now = (new DateTime())->format('Y-m-d H:i:s');
+                $now = (new DateTime())->format('Y-m-d H:i:s');
 
-            $fin = new FINInvestment();
-            $fin->amount = $monto;
-            $fin->c_investor_id = $objInvestor->c_investor_id;
-            $fin->c_project_id = $c_project_id;
-            $fin->isactive = 'Y';
-            $fin->status = 'PEND';
-            $fin->startdate = $now;
+                $fin = new FINInvestment();
+                $fin->amount = $monto;
+                $fin->c_investor_id = $objInvestor->c_investor_id;
+                $fin->c_project_id = $c_project_id;
+                $fin->isactive = 'Y';
+                $fin->status = 'PEND';
+                $fin->startdate = $now;
 
-            $val = $this->save($fin, $c_user_id);
-            if ($val) {
-                $objProject->targetamt = $objProject->targetamt - $monto;
-                $this->CProjectModel->save($objProject, $c_user_id);
-                return true;
-            }else {
+                $val = $this->save($fin, $c_user_id);
+                if ($val) {
+                    $objProject->targetamt = $objProject->targetamt - $monto;
+                    $this->CProjectModel->save($objProject, $c_user_id);
+                    return true;
+                } else {
+                    return false;
+                }
+            } else {
                 return false;
             }
-        } else {
-            return false;
         }
+        else {return false;}
     }
 
 }

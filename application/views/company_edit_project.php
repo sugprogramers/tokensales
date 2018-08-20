@@ -339,7 +339,11 @@
                         <div class="col-sm-12">
                             <div class="col-sm-12">
 
-                                <button  type="submit" class="btn btn-primary">Save Project </button>
+                                <button  type="submit" class="btn btn-primary" <?php 
+                                if($projectstatus != 'PEND' && $projectstatus != 'ERRDATA' ){ 
+                                    echo 'style="display:none;"';
+                                }
+?> >Save Project </button>
                             </div>
                         </div>
 

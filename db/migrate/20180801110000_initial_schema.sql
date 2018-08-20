@@ -337,6 +337,7 @@ CREATE TABLE c_project
   c_projecttype_id character varying(32),
 
   --PEND: pending evaluation
+  --ERRDATA : error data admin
   --FU:funding
   --COFU: funding completed
   --NCOFU: funding did not complete

@@ -40,13 +40,13 @@ class Login_Controller extends CI_Controller {
 
             $this->session->set_userdata($data);
             if ($resp->usertype === "ADM") {
-                $response = array('redirect' => base_url() . 'admin_dashboard', 'status' => 'success');
+                $response = array('redirect' => base_url() . 'admin_project', 'status' => 'success');
             }
             if ($resp->usertype === "INV") {
-                $response = array('redirect' => base_url() . 'investor_dashboard', 'status' => 'success');
+                $response = array('redirect' => base_url() . 'investor_project', 'status' => 'success');
             }
             if ($resp->usertype === "COMPMAN") {
-                $response = array('redirect' => base_url() . 'company_dashboard', 'status' => 'success');
+                $response = array('redirect' => base_url() . 'company_project', 'status' => 'success');
             }
 
             echo json_encode($response);
