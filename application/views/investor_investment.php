@@ -132,8 +132,8 @@ window.onload = function () {
      bounds  = new google.maps.LatLngBounds();
      
      for(i=0;  i< table.rows().data().length;i++){
-       var latitude = table.rows().data()[i][8]; // Column 7 Latitude
-       var longitude = table.rows().data()[i][7]; // Column 8 Longitude
+       var latitude = table.rows().data()[i][8]; // Column 8 Latitude
+       var longitude = table.rows().data()[i][7]; // Column 7 Longitude
        var projectName = table.rows().data()[i][0]; // Column 0 ProjectName
        var index = table.rows().data()[i][9]; // Column 9 Index Order RowData
        

@@ -178,6 +178,7 @@ class CProjectModel extends CI_Model {
             case "VO": return "Voided";
             case "ACT": return "Active";
             case "FI": return "Finished";
+            case "FU": return "funding";
             default: break;
         }
         return "uknowkn";
