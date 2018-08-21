@@ -841,6 +841,8 @@ $BODY$ DECLARE
   v_monthindex NUMERIC;
   v_monthlyinterest NUMERIC;
   v_pmt NUMERIC;
+  v_payedpmt NUMERIC;
+  v_invpmt NUMERIC;
   BEGIN
   
   FOR CUR_Project IN (SELECT p.* FROM C_Project p INNER JOIN C_Projecttype pt ON p.c_projecttype_id = pt.c_projecttype_id WHERE p.projectstatus='ACT' AND pt.name='Development Loan')
@@ -850,6 +852,7 @@ $BODY$ DECLARE
     v_monthlyinterest := ROUND(CUR_Project.totalyieldperc/CUR_Project.loanterm,5);
     v_pmt := UDF_PMT(v_monthlyinterest, CAST(CUR_Project.loanterm AS integer), CUR_Project.targetamt, 0, 0);
 
+    v_payedpmt := 0;
     WHILE (v_startdate <= TRUNC(NOW()) AND v_monthindex <= CUR_Project.loanterm)
     LOOP
 		FOR CUR_Investment IN (SELECT * FROM FIN_Investment WHERE C_Project_ID = CUR_Project.c_project_id)
@@ -862,16 +865,21 @@ $BODY$ DECLARE
 		  AND TRUNC(scheduleddate) = TRUNC(v_startdate);
 
 		  IF(v_Aux = 0) THEN
-            
+            v_invpmt := ROUND((CUR_Investment.amount*v_pmt)/CUR_Project.targetamt,2);
+            IF(v_payedpmt + v_invpmt > v_pmt) THEN
+              v_invpmt := v_pmt - v_payedpmt;
+            END IF;
+
 			INSERT INTO fin_payment_order(
 				    fin_payment_order_id, isactive, created, createdby, updated, 
 				    updatedby, status, scheduleddate, amount, ordertype, c_project_id, 
 				    c_investor_id, fin_investment_id, paymentdate)
 			VALUES (
                     get_uuid(), 'Y', DATE(NOW()), '100', DATE(NOW()), 
-				    '100', 'PEND', v_startdate, v_pmt, 'RETIPAYIN', NULL, 
+				    '100', 'PEND', v_startdate, v_invpmt, 'RETIPAYIN', NULL, 
 				    NULL, CUR_Investment.fin_investment_id, NULL
             );
+            v_payedpmt := v_payedpmt + v_invpmt;
 		  END IF;
 
 		END LOOP;
