@@ -2,7 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 include 'application/libraries/SDException.php';
 
-class Investor_List_Project_Controller extends CI_Controller {
+class Public_List_Project_Controller extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
@@ -12,16 +12,23 @@ class Investor_List_Project_Controller extends CI_Controller {
         $this->load->model("FINInvestmentModel");
         
         
-        
-        if ($this->session->usertype !== "INV") {
-            redirect(base_url() . 'login');
-        }
     }
 
     public function index() {
-        $this->load->view('header/header_admin');
-        $this->load->view('investor_list_project');
-        $this->load->view('footer/footer_admin');
+        
+        if ($this->session->usertype === "ADM") {
+            redirect(base_url() . 'admin_dashboard');
+        }
+        if ($this->session->usertype === "INV") {
+            redirect(base_url() . 'investor_dashboard');
+        }
+        if ($this->session->usertype === "COMPMAN") {
+            redirect(base_url() . 'company_dashboard');
+        }
+        
+        $this->load->view('header/header_public');
+        $this->load->view('public_list_project');
+        $this->load->view('footer/footer_public');
     }
     
    
@@ -113,13 +120,13 @@ class Investor_List_Project_Controller extends CI_Controller {
     
     private function get_htm_docs($documents){
          $html = '';
-          if(is_array($html)){
+         if(is_array($html)){
          foreach ($documents as $entry) {   
             if(isset($entry['namefile'])){
                $html .=   '<h5><i class="icon fa-file-pdf-o" aria-hidden="true"></i> '.ucfirst($entry['name']).'</h5><label class="control-label" ><a target="_blank" href="'. base_url().'upload/docs/'.$entry['namefile'].'">Preview Doc </a></label>';
             }
          }
-          }
+         }
          if(trim($html)=='') $html='<h5>There are no documents</h5>';
          return $html;
     }

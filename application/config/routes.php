@@ -50,16 +50,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 
-$route['default_controller'] = 'Login_Controller';
+$route['default_controller'] = 'Public_List_Project_Controller';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
 //routes de paginas empieza en controller
 
-//routes externo
+//routes public externo
 $route['login'] = "Login_Controller";
 $route['logout'] = "Login_Controller/logout_user";
 $route['register'] = "Register_Controller";
+$route['opportunities'] = "Public_List_Project_Controller";
 
 //routes admin
 $route['admin_dashboard'] = "Admin_Dashboard_Controller";

@@ -32,9 +32,11 @@
         </form>
         <!-- <p>Still no account? Please go to <a href="register.html">Register</a></p> -->
 
-        <p>Forgot your password?</p> 
+        <!-- <p>Forgot your password?</p>  -->
         <p>Don't have an account yet?</p>
         <p> Register to <a href="register">Start Investing or to Get Financing</a>  now.</p>
+        
+        <p >  <a href="opportunities" style="font-size: 18px;"> [ OPPORTUNITIES ]</a></p>
 
 
         <!--
