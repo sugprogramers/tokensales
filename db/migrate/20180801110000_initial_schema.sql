@@ -740,6 +740,11 @@ END ; $BODY$
 ALTER FUNCTION fin_investor_processpayout(character varying)
   OWNER TO smart;
 
+
+-- Function: fin_projectinvestment_processpayout(character varying)
+
+-- DROP FUNCTION fin_projectinvestment_processpayout(character varying);
+
 CREATE OR REPLACE FUNCTION fin_projectinvestment_processpayout(p_fin_payment_order_id character varying)
   RETURNS void AS
 $BODY$ DECLARE 
@@ -778,7 +783,7 @@ $BODY$ DECLARE
   INNER JOIN FIN_Investment iv ON po.fin_investment_id = iv.fin_investment_id
   WHERE CUR_PaymentOrder.ordertype = 'RETIPAYIN'
   AND po.status='CO'
-  AND vi.fin_investment_id = CUR_Investment.fin_investment_id;
+  AND iv.fin_investment_id = CUR_Investment.fin_investment_id;
 
   IF(v_Aux >= CUR_Project.loanterm) THEN
     --Investment have been completely paid
@@ -788,9 +793,9 @@ $BODY$ DECLARE
   SELECT count(*) INTO v_Aux
   FROM FIN_Investment iv
   WHERE iv.status <> 'FIN'
-  AND vi.c_project_id = CUR_Project.c_project_id;
+  AND iv.c_project_id = CUR_Project.c_project_id;
 
-  IF(v_Aux == 0) THEN
+  IF(v_Aux = 0) THEN
     --All investment have been completely paid for this project
     UPDATE C_Project SET projectstatus='FIN' WHERE c_project_id = CUR_Project.c_project_id;
   END IF;
