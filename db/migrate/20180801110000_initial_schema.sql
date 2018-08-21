@@ -826,6 +826,11 @@ AS $$
         END, 2)
 $$ LANGUAGE SQL;
 
+
+-- Function: fin_project_returninvestment_schedule()
+
+-- DROP FUNCTION fin_project_returninvestment_schedule();
+
 CREATE OR REPLACE FUNCTION fin_project_returninvestment_schedule()
   RETURNS void AS
 $BODY$ DECLARE 
@@ -843,7 +848,7 @@ $BODY$ DECLARE
     v_startdate := TRUNC(CUR_Project.startdate) + interval '30' day;
     v_monthindex := 1;
     v_monthlyinterest := ROUND(CUR_Project.totalyieldperc/CUR_Project.loanterm,5);
-    v_pmt := UDF_PMT(v_monthlyinterest, CUR_Project.loanterm, CUR_Project.amount, 0, 0);
+    v_pmt := UDF_PMT(v_monthlyinterest, CAST(CUR_Project.loanterm AS integer), CUR_Project.targetamt, 0, 0);
 
     WHILE (v_startdate <= TRUNC(NOW()) AND v_monthindex <= CUR_Project.loanterm)
     LOOP
@@ -856,7 +861,7 @@ $BODY$ DECLARE
 		  AND fin_investment_id = CUR_Investment.fin_investment_id
 		  AND TRUNC(scheduleddate) = TRUNC(v_startdate);
 
-		  IF(v_Aux == 0) THEN
+		  IF(v_Aux = 0) THEN
             
 			INSERT INTO fin_payment_order(
 				    fin_payment_order_id, isactive, created, createdby, updated, 
