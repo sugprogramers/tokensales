@@ -71,7 +71,7 @@
 </style>
 <div class="page">
     <div class="page-header">
-        <h1 class="page-title">Projects</h1>
+        <h1 class="page-title">Projects </h1>
         <div class="page-header-actions">
             <!-- <ol class="breadcrumb breadcrumb-arrow">
                  <li class="breadcrumb-item"><a class="icon fa-cubes" href="#">Projects</a></li>
