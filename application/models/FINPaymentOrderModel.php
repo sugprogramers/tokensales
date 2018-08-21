@@ -165,6 +165,7 @@ class FINPaymentOrderModel extends CI_Model
         $this->db->join('c_investor as i', 'iv.c_investor_id = i.c_investor_id ');
         $this->db->join('c_user as u', 'i.c_user_id = u.c_user_id ');
         $this->db->join('c_currency as curr', "p.c_currency_id = curr.c_currency_id");
+        $this->db->where('po.fin_payment_order_id', $finPaymentOrderId);
         $this->db->where('po.ordertype', 'RETIPAYIN');
         $this->db->where('po.status', 'PEND');
         return $this->db->get();
