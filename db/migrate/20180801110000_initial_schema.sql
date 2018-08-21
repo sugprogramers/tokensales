@@ -884,6 +884,11 @@ $BODY$ DECLARE
 				    '100', 'PEND', v_startdate, v_invpmt, 'RETIPAYIN', NULL, 
 				    NULL, CUR_Investment.fin_investment_id, NULL
             );
+            
+            UPDATE c_investor
+               set pendingbalance = pendingbalance + v_invpmt
+             where c_investor_id = CUR_Investment.c_investor_id;
+
             v_payedpmt := v_payedpmt + v_invpmt;
 		  END IF;
 
