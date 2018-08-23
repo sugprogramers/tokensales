@@ -33,7 +33,7 @@
                         </li>
                          <li class="nav-item" role="presentation">
                             <a class="nav-link" data-toggle="tab" href="#exampleTabsLineTopFour"   aria-controls="exampleTabsLineTopTwo" role="tab" onclick='$("#panelgeneral").resize();
-                                    $("#panelgeneral").resize();'>To Invesment</a>
+                                    $("#panelgeneral").resize();'>Add Founds</a>
                         </li>
                     </ul>
                     <div class="tab-content pt-10">
@@ -62,7 +62,7 @@
 
                                     <div class="row" style="margin-top: 10px">
                                         <div class="col-sm-12">
-                                            <a href="#"><i class="icon wb-map" aria-hidden="true"></i> Location  </a> : <font id="addressNow"> Mi locacion</font>
+                                            <i class="icon wb-map" aria-hidden="true"></i>  <font id="addressNow"> Mi locacion</font>
                                         </div>
 
                                     </div>    
@@ -74,7 +74,7 @@
                                                 <div style="margin: 14px 0;">
                                                     <p>
                                                         <span class="ahorro-box-text">
-                                                            TOTAL RETURN
+                                                            PROJECTED RETURN
                                                         </span>
                                                     </p>
                                                     <span class="number-wrapper">
@@ -101,30 +101,32 @@
 
 
 
+                                   
                                     <div class="row" style="margin-top: 20px">
                                         <div class="col-sm-6">
-                                            <b style="color:#566573;"><font id="sumamountNow"> $556 </font> (%<font id="percentNow"> 100 </font>)</b> 
+                                            <b style="color:#566573;"><font id="sumamountNow"> $556 </font> <br>(%<font id="percentNow"> 100 </font>) Raised</b> 
                                         </div>
                                         <div class="col-sm-6 text-right">
-                                            <b style="color:#566573;"><font id="targetamtNow"> $556 </font></b>
+                                            <b style="color:#566573;"><font id="targetamtNow"> $556 </font><br>Funding Goal</b>
                                         </div>
                                     </div>   
 
 
 
-                                    <div class="example" style="margin-top: 10px;margin-bottom: 10px;">
+                                    <div class="example" style="margin-top: 5px;margin-bottom: 5px;">
                                         <div class="asRange" id="rangeNew" data-plugin="asRange" data-namespace="rangeUi" style="width: 100%;margin: 0;" data-min="1" data-max="100" ></div>
                                     </div>
 
 
                                     <div class="row" style="color:#566573;">
                                         <div class="col-sm-6">
-                                            <b><font id="investorsNow"> 100 </font></b> Investors
+                                            <b><font id="investorsNow"> 100 </font> Investors</b> 
                                         </div>
                                         <div class="col-sm-6 text-right">
-                                            <font id="daysNow">31 </font>  days remaining
+                                            <b><font id="daysNow">31 </font>  days remaining</b>
                                         </div>  
                                     </div>   
+
 
 
 
@@ -159,8 +161,12 @@
 
                                     <div class="col-md-6" style="margin: 10px 0;">
                                        <div class="form-group ">
-                                            <label class="control-label" for="months">I want to invest *</label>
-                                            <input type="text" class="form-control" id="amountinvest" data-decimals="2" name="amountinvest" data-plugin="TouchSpin" value="12" data-max="100000"  required />
+                                            <label class="control-label" for="months">Amount *</label>
+                                              <div class="input-group">
+                                                <span class="input-group-addon" id="cursymbolNew"> $ </span>
+                                                <input type="text" class="form-control" placeholder="" id="amountinvest" name="amountinvest" required >
+                                              </div>
+                                            <!-- <input type="text" class="form-control"  data-decimals="2"  data-plugin="TouchSpin" value="12" data-max="100000"  required /> -->
                                         </div>
                                     </div>
                                     <div class="col-md-6"></div>

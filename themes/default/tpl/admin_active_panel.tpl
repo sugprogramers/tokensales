@@ -31,6 +31,10 @@
                             <a class="nav-link" data-toggle="tab" href="#exampleTabsLineTopThree"   aria-controls="exampleTabsLineTopTwo" role="tab" onclick='$("#panelgeneral").resize();
                                     $("#panelgeneral").resize();'>Documentation</a>
                         </li>
+                        <!-- <li class="nav-item" role="presentation">
+                            <a class="nav-link" data-toggle="tab" href="#exampleTabsLineTopFour"   aria-controls="exampleTabsLineTopTwo" role="tab" onclick='$("#panelgeneral").resize();
+                                    $("#panelgeneral").resize();'>Validate</a>
+                        </li> -->
                     </ul>
                     <div class="tab-content pt-10">
 
@@ -58,10 +62,10 @@
 
                                     <div class="row" style="margin-top: 10px">
                                         <div class="col-sm-12">
-                                            <i class="icon wb-map" aria-hidden="true"></i>  <font id="addressNow"> Mi locacion</font>
+                                            <i class="icon wb-map" aria-hidden="true"></i> <font id="addressNow"> Mi locacion</font>
                                         </div>
 
-                                    </div>     
+                                    </div>    
 
                                     <div class="flip-container__wrapper" style="margin-top: 10px;">                               
 
@@ -127,6 +131,7 @@
 
 
 
+
                                 </div>
                             </div>
 
@@ -146,7 +151,41 @@
 
                         </div>
 
+                        <!--
+                         <div class="tab-pane"  id="exampleTabsLineTopFour" role="tabpanel" >
+                            <div class="row" >
+                                <div class="col-md-12">
 
+                                    <div class="col-md-12" style="margin: 10px 0;">
+                                        Choose this option if you think the data is correct
+                                    </div>
+                                    <div class="col-md-6">
+                                        <button type="button" class="btn btn-block btn-success" onclick="Estado('FU');"> <i class="icon wb-check" aria-hidden="true"></i>Validate</button>
+                                    </div>
+                                    <div class="col-md-6">
+                                        
+                                    </div>
+                                    
+                                    <div class="col-md-12" style="margin: 10px 0;">
+                                        Choose this option if you consider that some data or file is incorrect
+                                    </div>
+                                    <div class="col-md-6">
+                                        <button type="button" class="btn btn-block btn-danger" onclick="Estado('ERRDATA');"><i class="icon wb-close" aria-hidden="true"></i>Error Data</button>
+                                    </div>
+                                    <div class="col-md-6">
+                                        
+                                    </div>
+                                  
+                                  
+
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                        
+                        -->
 
                     </div>
                 </div>

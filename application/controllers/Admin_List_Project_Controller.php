@@ -32,7 +32,7 @@ class Admin_List_Project_Controller extends CI_Controller {
           
             $html .= $this->get_htm_item($r->c_project_id, $r->name, $r->description, $r->companyname, 
                     $r->targetamt, $r->cursymbol, $r->namefile , $r->latitude ,$r->longitude , 
-                    $r->totalyieldperc , $r->loanterm , $r->datelimit , $r->startdate , $r->projectstatus);
+                    $r->totalyieldperc , $r->loanterm , $r->datelimit , $r->startdate , $r->projectstatus , $r->address1);
             //print_r($r); break;
         }
         //$html .= $this->get_htm_item_new();
@@ -122,7 +122,7 @@ class Admin_List_Project_Controller extends CI_Controller {
       }
     }
     
-    private function get_htm_item($c_project_id, $name, $description, $companyname, $targetamt, $cursymbol, $namefile ,$latitude , $longitude , $totalyieldperc , $loanterm , $datelimit , $startdate , $projectstatus) {
+    private function get_htm_item($c_project_id, $name, $description, $companyname, $targetamt, $cursymbol, $namefile ,$latitude , $longitude , $totalyieldperc , $loanterm , $datelimit , $startdate , $projectstatus, $address1) {
 
         $items = array('overlay-slide-left', 'overlay-slide-top', 'overlay-slide-right', 'overlay-slide-bottom');
         $class_animation = $items[array_rand($items)];
@@ -171,38 +171,43 @@ return
                      <a class="dropdown-item" href="javascript:void(0)" onclick="Ubicacion(\''.$latitude.'\' , \''.$longitude.'\')"><i class="icon wb-map" aria-hidden="true" ></i>Location</a>
                     
            </div>
-            </div> 
-            <div class="title" style="color:#566573;">'.ucfirst($companyname).'</div>
+        </div> 
+            
+
+            <div class="title" style="color:#566573;"> <b>'.ucfirst($name) .'</b><br>'.ucfirst($companyname).'</div>
+                
             <div class="sub-description-list">'. $this->truncate( htmlspecialchars(str_replace("&nbsp;", ' ',trim(strip_tags($description)))), 150) .'</div>
 
 
 <div class="sub-detalle-property">
 
+    <div  style="margin-top: 5px;margin-bottom: 5px;">
+     '.$address1.'
+    </div>
 
     <div class="row">
               <div class="col-sm-6">
-              <b style="color:#566573;">'.$cursymbol.$sumamount.' (%'.$percent.')</b>
+              <b style="color:#566573;">'.$cursymbol.$sumamount.' <br>%'.$percent.' Raised </b>
               </div>
               <div class="col-sm-6 text-right">
-              <b style="color:#566573;">'.$cursymbol.$targetamt.'</b>
+              <b style="color:#566573;">'.$cursymbol.$targetamt.' <br>Funding Goal </b>
               </div>
     </div>   
 
-            
-               
-<div class="example" style="margin-top: 10px;margin-bottom: 10px;">
+    <div class="example" style="margin-top: 1px;margin-bottom: 1px;">
        <div class="asRange" data-plugin="asRange" data-namespace="rangeUi" style="width: 100%;margin: 0;" data-min="1" data-max="100" data-value="'.$percent.'"></div>
- </div>
+    </div>
    
-
     <div class="row" style="color:#566573;">
             <div class="col-sm-6">
-            <b>'.$countinvesment.'</b> Investors
+            <b>'.$countinvesment.' Investors </b>
             </div>
             <div class="col-sm-6 text-right">
-            '.$diastotales.'  days remaining
+            <b>'.$diastotales.'  days remaining</b>
              </div>  
-     </div>   
+     </div>  
+     
+
      
 <div class="h-minificha__tir" style="padding: 5px 0;">
 <center>'.$statushtml.'</center>
@@ -215,7 +220,7 @@ return
             <span class="h-minificha__data__value--number h-minificha--color-primary">
                 '.$totalyieldperc.'<span class="">%</span>
             </span>
-            <p class="h-minificha__data__value--description h-minificha--color-secondary">Total Return</p>
+            <p class="h-minificha__data__value--description h-minificha--color-secondary">Projected Return</p>
         </div>
     </div>
     <div class="h-minificha__data__values__separator--line"></div>
@@ -234,7 +239,7 @@ return
 </div>
 
 <div class="h-minificha__button-bar">
-          <button  type="submit" class="btn btn-success btn-block"  data-toggle="slidePanel" data-url="' . base_url() . 'themes/default/tpl/admin_panel.tpl"  onclick="Mostrar(\''.$c_project_id.'\');">Validate Project</button>
+          <button  type="submit" class="btn btn-success btn-block"  data-toggle="slidePanel" data-url="' . base_url() . 'themes/default/tpl/admin_panel.tpl"  onclick="Mostrar(\''.$c_project_id.'\');">VALIDATE PROJECT</button>
 </div>
 
 

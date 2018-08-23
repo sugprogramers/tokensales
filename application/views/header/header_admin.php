@@ -635,7 +635,13 @@
 
                                                         <li class="site-menu-item">
                                                             <a href="<?php echo base_url(); ?>admin_project">
-                                                                <span class="site-menu-title">Validate Projects</span>
+                                                                <span class="site-menu-title">Pending Projects</span>
+                                                            </a>
+                                                        </li>
+                                                        
+                                                        <li class="site-menu-item">
+                                                            <a href="<?php echo base_url(); ?>admin_project_active">
+                                                                <span class="site-menu-title">Active Investments</span>
                                                             </a>
                                                         </li>
 

@@ -2,7 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 include 'application/libraries/SDException.php';
 
-class Public_List_Project_Controller extends CI_Controller {
+class Admin_List_Project_Active_Controller extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
@@ -12,56 +12,27 @@ class Public_List_Project_Controller extends CI_Controller {
         $this->load->model("FINInvestmentModel");
         
         
+        
+        if ($this->session->usertype !== "ADM") {
+            redirect(base_url() . 'login');
+        }
     }
 
     public function index() {
-        
-        if ($this->session->usertype === "ADM") {
-            redirect(base_url() . 'admin_dashboard');
-        }
-        if ($this->session->usertype === "INV") {
-            redirect(base_url() . 'investor_dashboard');
-        }
-        if ($this->session->usertype === "COMPMAN") {
-            redirect(base_url() . 'company_dashboard');
-        }
-        
-        $this->load->view('header/header_public');
-        $this->load->view('public_list_project');
-        $this->load->view('footer/footer_public');
-    }
-    
-   
-    
-     public function invesment_project($monto , $c_project_id){
-        try {
-            
-            $val = $this->FINInvestmentModel->invesment($monto ,$c_project_id , $this->session->id);            
-           if($val){
-               $response = array('redirect' => '', 'status' => 'success');
-               echo json_encode($response); 
-           }
-           else{
-               $response = array('redirect' => '', 'status' => 'error', 'msg' => 'error');
-                 echo json_encode($response);
-           }
-            
-           
-        } catch (Exception $e) {
-            $response = array('redirect' => '', 'status' => 'error', 'msg' => $e->getMessage());
-            echo json_encode($response);
-        }
+        $this->load->view('header/header_admin');
+        $this->load->view('admin_list_project_active');
+        $this->load->view('footer/footer_admin');
     }
 
     public function get_project_list() {
-        $query = $this->CProjectModel->getAllByPublic();
+        $query = $this->CProjectModel->getAllByAdminActive();
         $html = '';
         foreach ($query->result() as $r) {
              
           
             $html .= $this->get_htm_item($r->c_project_id, $r->name, $r->description, $r->companyname, 
                     $r->targetamt, $r->cursymbol, $r->namefile , $r->latitude ,$r->longitude , 
-                    $r->totalyieldperc , $r->loanterm , $r->datelimit , $r->startdate, $r->projectstatus, $r->address1);
+                    $r->totalyieldperc , $r->loanterm , $r->datelimit , $r->startdate , $r->projectstatus , $r->address1);
             //print_r($r); break;
         }
         //$html .= $this->get_htm_item_new();
@@ -72,6 +43,17 @@ class Public_List_Project_Controller extends CI_Controller {
     public function delete_project($id) {
         try {
             $this->CProjectModel->delete($id);
+            $response = array('redirect' => '', 'status' => 'success');
+            echo json_encode($response);
+        } catch (Exception $e) {
+            $response = array('redirect' => '', 'status' => 'error', 'msg' => $e->getMessage());
+            echo json_encode($response);
+        }
+    }
+    
+    public function status_project($status , $c_project_id) {
+        try {
+            $this->CProjectModel->change_status($status ,$c_project_id);
             $response = array('redirect' => '', 'status' => 'success');
             echo json_encode($response);
         } catch (Exception $e) {
@@ -120,13 +102,13 @@ class Public_List_Project_Controller extends CI_Controller {
     
     private function get_htm_docs($documents){
          $html = '';
-         if(is_array($html)){
+          if(is_array($html)){
          foreach ($documents as $entry) {   
             if(isset($entry['namefile'])){
                $html .=   '<h5><i class="icon fa-file-pdf-o" aria-hidden="true"></i> '.ucfirst($entry['name']).'</h5><label class="control-label" ><a target="_blank" href="'. base_url().'upload/docs/'.$entry['namefile'].'">Preview Doc </a></label>';
             }
          }
-         }
+          }
          if(trim($html)=='') $html='<h5>There are no documents</h5>';
          return $html;
     }
@@ -140,7 +122,7 @@ class Public_List_Project_Controller extends CI_Controller {
       }
     }
     
-    private function get_htm_item($c_project_id, $name, $description, $companyname, $targetamt, $cursymbol, $namefile ,$latitude , $longitude , $totalyieldperc , $loanterm , $datelimit , $startdate , $projectstatus , $address1) {
+    private function get_htm_item($c_project_id, $name, $description, $companyname, $targetamt, $cursymbol, $namefile ,$latitude , $longitude , $totalyieldperc , $loanterm , $datelimit , $startdate , $projectstatus, $address1) {
 
         $items = array('overlay-slide-left', 'overlay-slide-top', 'overlay-slide-right', 'overlay-slide-bottom');
         $class_animation = $items[array_rand($items)];
@@ -160,14 +142,14 @@ class Public_List_Project_Controller extends CI_Controller {
         $countinvesment = $this->FINInvestmentModel->getCountInvestorsByProject($c_project_id);        
         $percent = $this->get_percentage($targetamt, $sumamount);
        
-       $statushtml = $this->getHtmlProjectStatusName($projectstatus) ;  
+       $statushtml = $this->getHtmlProjectStatusName($projectstatus) ;   
 
 return
 '  
 <li>
     <div class="media-item" >
 
-        <div class="image-wrap"  data-toggle="slidePanel" data-url="' . base_url() . 'themes/default/tpl/public_panel.tpl"  onclick="Mostrar(\''.$c_project_id.'\');">
+        <div class="image-wrap"  data-toggle="slidePanel" data-url="' . base_url() . 'themes/default/tpl/admin_active_panel.tpl"  onclick="Mostrar(\''.$c_project_id.'\');">
             <figure class="overlay overlay-hover">
                 <img class="overlay-figure" src="' . $homeimage . '" alt="...">
                 <figcaption class="overlay-panel overlay-background '.$class_animation.' ">
@@ -186,18 +168,21 @@ return
                 <span class="icon wb-settings" data-toggle="dropdown" aria-expanded="false" role="button"
                       data-animations="fadeInDown fadeInLeft fadeInUp fadeInRight"  ></span>
                 <div class="dropdown-menu dropdown-menu-right" role="menu">
-                   <a class="dropdown-item" href="javascript:void(0)" onclick="Ubicacion(\''.$latitude.'\' , \''.$longitude.'\')"><i class="icon wb-map" aria-hidden="true" ></i>Location</a>
+                     <a class="dropdown-item" href="javascript:void(0)" onclick="Ubicacion(\''.$latitude.'\' , \''.$longitude.'\')"><i class="icon wb-map" aria-hidden="true" ></i>Location</a>
                     
            </div>
-            </div> 
+        </div> 
+            
+
             <div class="title" style="color:#566573;"> <b>'.ucfirst($name) .'</b><br>'.ucfirst($companyname).'</div>
+                
             <div class="sub-description-list">'. $this->truncate( htmlspecialchars(str_replace("&nbsp;", ' ',trim(strip_tags($description)))), 150) .'</div>
 
 
 <div class="sub-detalle-property">
 
-<div  style="margin-top: 5px;margin-bottom: 5px;">
-    '.$address1.'
+    <div  style="margin-top: 5px;margin-bottom: 5px;">
+     '.$address1.'
     </div>
 
     <div class="row">
@@ -223,10 +208,10 @@ return
      </div>  
      
 
-  <div class="h-minificha__tir" style="padding: 5px 0;">
+     
+<div class="h-minificha__tir" style="padding: 5px 0;">
 <center>'.$statushtml.'</center>
 </div>
-   
 
 <div class="row  h-minificha__data__row" style="margin-top: 10px;">
 
@@ -235,7 +220,7 @@ return
             <span class="h-minificha__data__value--number h-minificha--color-primary">
                 '.$totalyieldperc.'<span class="">%</span>
             </span>
-            <p class="h-minificha__data__value--description h-minificha--color-secondary">Total Return</p>
+            <p class="h-minificha__data__value--description h-minificha--color-secondary">Projected Return</p>
         </div>
     </div>
     <div class="h-minificha__data__values__separator--line"></div>
@@ -254,12 +239,13 @@ return
 </div>
 
 <div class="h-minificha__button-bar">
-          <button  type="submit" class="btn btn-primary  btn-block"  data-toggle="slidePanel" data-url="' . base_url() . 'themes/default/tpl/public_panel.tpl"  onclick="Mostrar(\''.$c_project_id.'\');">ADD FUNDS</button>
+          <button  type="submit" class="btn btn-primary btn-block"  data-toggle="slidePanel" data-url="' . base_url() . 'themes/default/tpl/admin_Active_panel.tpl"  onclick="Mostrar(\''.$c_project_id.'\');">PROJECT PREVIEW</button>
 </div>
 
 
             </div>    
             <div class="media-item-actions btn-group" >
+                
                  <button class="btn btn-icon btn-pure btn-default" data-original-title="Delete"
                         data-toggle="tooltip" data-container="body" data-placement="top"
                         data-trigger="hover" type="button" onclick="Ubicacion(\''.$latitude.'\' , \''.$longitude.'\')">
@@ -294,8 +280,7 @@ private function truncate($string, $length, $dots = "...") {
 return (strlen($string) > $length) ? substr($string, 0, $length - strlen($dots)) . $dots : $string;
 }
 
-
- private function getHtmlProjectStatusName($status) {
+  private function getHtmlProjectStatusName($status) {
         switch ($status) {
             case "PEND": return '<span class="badge badge-outline badge-warning">Pending Evaluation</span>';
             case "ERRDATA": return '<span class="badge badge-outline badge-danger">Incomplete Data</span>';                

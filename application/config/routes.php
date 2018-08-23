@@ -65,6 +65,7 @@ $route['opportunities'] = "Public_List_Project_Controller";
 //routes admin
 $route['admin_dashboard'] = "Admin_Dashboard_Controller";
 $route['admin_project'] = "Admin_List_Project_Controller";
+$route['admin_project_active'] = "Admin_List_Project_Active_Controller";
 $route['admin_list_investor'] = "Admin_List_Investor_Controller";
 $route['admin_list_company'] = "Admin_List_Company_Controller";
 $route['listalldocument'] = "Admin_List_DocumentType_Controller/listDataGrid";

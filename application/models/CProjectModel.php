@@ -138,8 +138,32 @@ class CProjectModel extends CI_Model {
         return  $this->db->get();        
     }
     
+    //para el administrador activos cambiar
+     function getAllByAdminActive() {
+        $this->db->select('c_project.*, c_projectmanager.* , c_currency.cursymbol , c_file.name as namefile');         
+        $this->db->from('c_project');
+        $this->db->join('c_projectmanager', 'c_project.c_projectmanager_id = c_projectmanager.c_projectmanager_id');
+        $this->db->join('c_currency', 'c_project.c_currency_id = c_currency.c_currency_id');
+        $this->db->join('c_file', 'c_file.c_file_id = c_project.homeimage_id' ,'left');
+        $this->db->where('c_project.projectstatus !=' , 'PEND');
+        $this->db->where('c_project.projectstatus !=' , 'ERRDATA');
+        return  $this->db->get();        
+    }
+    
      //para el Investor cambiar
      function getAllByInvestor() {
+        $this->db->select('c_project.*, c_projectmanager.* , c_currency.cursymbol , c_file.name as namefile');         
+        $this->db->from('c_project');
+        $this->db->join('c_projectmanager', 'c_project.c_projectmanager_id = c_projectmanager.c_projectmanager_id');
+        $this->db->join('c_currency', 'c_project.c_currency_id = c_currency.c_currency_id');
+        $this->db->join('c_file', 'c_file.c_file_id = c_project.homeimage_id' ,'left');
+        $this->db->where('c_project.projectstatus !=' , 'PEND');
+        $this->db->where('c_project.projectstatus !=' , 'ERRDATA');
+        return  $this->db->get();        
+    }
+    
+      //para el Investor cambiar
+     function getAllByPublic() {
         $this->db->select('c_project.*, c_projectmanager.* , c_currency.cursymbol , c_file.name as namefile');         
         $this->db->from('c_project');
         $this->db->join('c_projectmanager', 'c_project.c_projectmanager_id = c_projectmanager.c_projectmanager_id');

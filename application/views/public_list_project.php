@@ -297,6 +297,8 @@
                         $('#sumamountNow').html(resp.cursymbol + resp.sumamount);
                         $('#percentNow').html(resp.percent);
                         $('#investorsNow').html(resp.countinvesment);
+                        $('#cursymbolNew').html(resp.cursymbol);
+                       
                           
                          
                          $('#rangeNew').asRange({scale: false,namespace: 'asRange',tip: false,value: resp.percent,}); 

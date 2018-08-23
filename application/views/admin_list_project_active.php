@@ -270,7 +270,7 @@
         $(document).on('slidePanel::afterLoad', function (e) {
 
             $.ajax({
-                url: "<?php echo base_url('Investor_List_Project_Controller/get_project/'); ?>" + c_project_id,
+                url: "<?php echo base_url('Admin_List_Project_Active_Controller/get_project/'); ?>" + c_project_id,
                 type: "POST",
                 async: false,
                 success: function (data) {
@@ -297,8 +297,6 @@
                         $('#sumamountNow').html(resp.cursymbol + resp.sumamount);
                         $('#percentNow').html(resp.percent);
                         $('#investorsNow').html(resp.countinvesment);
-                        $('#cursymbolNow').html(resp.cursymbol);
-                        
                           
                          
                          $('#rangeNew').asRange({scale: false,namespace: 'asRange',tip: false,value: resp.percent,}); 
@@ -323,7 +321,7 @@
 
     function Listar() {
         $.ajax({
-            url: "<?php echo base_url('Investor_List_Project_Controller/get_project_list'); ?>",
+            url: "<?php echo base_url('Admin_List_Project_Active_Controller/get_project_list'); ?>",
             type: "POST",
             success: function (data) {
                 var resp = $.parseJSON(data);//convertir data de json
@@ -368,7 +366,7 @@
                 if (result) {
 
                     $.ajax({
-                        url: "<?php echo base_url('Investor_List_Project_Controller/delete_project'); ?>/" + id,
+                        url: "<?php echo base_url('Admin_List_Project_Active_Controller/delete_project'); ?>/" + id,
                         type: "POST",
                         success: function (data) {
                             var resp = $.parseJSON(data);//convertir data de json
@@ -391,28 +389,24 @@
     }
     
     
-    function Invertir() {
-        
-        var monto = $('#amountinvest').val();
-        
+    
+    function Estado(estado) {
         bootbox.confirm({
-            title: "Confirm Invesment", message: "Are you sure you want to invest "+monto+"?",
+            title: "Confirm Status", message: "Are you sure you want to change status this item?",
             buttons: {
                 cancel: {label: '<i class="fa fa-times"></i> Cancel', className: 'btn-danger'},
                 confirm: {label: '<i class="fa fa-check"></i> Confirm', className: 'btn-primary'}
             },
             callback: function (result) {
                 if (result) {
-                    
-                    //alert (monto + c_project_id) ;
-                    
+
                     $.ajax({
-                        url: "<?php echo base_url('Investor_List_Project_Controller/invesment_project'); ?>/" + monto+"/"+c_project_id,
+                        url: "<?php echo base_url('Admin_List_Project_Active_Controller/status_project'); ?>/" + estado+"/"+c_project_id,
                         type: "POST",
                         success: function (data) {
                             var resp = $.parseJSON(data);//convertir data de json
                             if (resp.status === "error") {
-                                showError(resp.msg);
+                                showError('Error');
                             }
                             if (resp.status === "success") {
                                 Listar();

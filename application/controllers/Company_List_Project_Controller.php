@@ -33,7 +33,7 @@ class Company_List_Project_Controller extends CI_Controller {
 
             $html .= $this->get_htm_item($r->c_project_id, $r->name, $r->description, $r->companyname, $r->targetamt, $r->cursymbol, 
                     $r->namefile, $r->latitude, $r->longitude, $r->totalyieldperc, $r->loanterm, 
-                    $r->datelimit, $r->startdate, $r->projectstatus);
+                    $r->datelimit, $r->startdate, $r->projectstatus, $r->address1);
             //print_r($r); break;
         }
         $html .= $this->get_htm_item_new();
@@ -111,7 +111,7 @@ class Company_List_Project_Controller extends CI_Controller {
         }
     }
 
-    private function get_htm_item($c_project_id, $name, $description, $companyname, $targetamt, $cursymbol, $namefile, $latitude, $longitude, $totalyieldperc, $loanterm, $datelimit, $startdate , $projectstatus) {
+    private function get_htm_item($c_project_id, $name, $description, $companyname, $targetamt, $cursymbol, $namefile, $latitude, $longitude, $totalyieldperc, $loanterm, $datelimit, $startdate , $projectstatus, $address1) {
 
         $items = array('overlay-slide-left', 'overlay-slide-top', 'overlay-slide-right', 'overlay-slide-bottom');
         $class_animation = $items[array_rand($items)];
@@ -163,37 +163,37 @@ class Company_List_Project_Controller extends CI_Controller {
                     
            </div>
             </div> 
-            <div class="title" style="color:#566573;">' . ucfirst($companyname) . '</div>
+             <div class="title" style="color:#566573;"> <b>'.ucfirst($name) .'</b><br>'.ucfirst($companyname).'</div>
             <div class="sub-description-list">' . $this->truncate(htmlspecialchars(str_replace("&nbsp;", ' ', trim(strip_tags($description)))), 150) . '</div>
 
 
 <div class="sub-detalle-property">
-
+<div  style="margin-top: 5px;margin-bottom: 5px;">
+    '.$address1.'
+    </div>
 
     <div class="row">
               <div class="col-sm-6">
-              <b style="color:#566573;">' . $cursymbol . $sumamount . ' (%' . $percent . ')</b>
+              <b style="color:#566573;">'.$cursymbol.$sumamount.' <br>%'.$percent.' Raised </b>
               </div>
               <div class="col-sm-6 text-right">
-              <b style="color:#566573;">' . $cursymbol . $targetamt . '</b>
+              <b style="color:#566573;">'.$cursymbol.$targetamt.' <br>Funding Goal </b>
               </div>
     </div>   
 
-            
-               
-<div class="example" style="margin-top: 10px;margin-bottom: 10px;">
-       <div class="asRange" data-plugin="asRange" data-namespace="rangeUi" style="width: 100%;margin: 0;" data-min="1" data-max="100" data-value="' . $percent . '"></div>
- </div>
+    <div class="example" style="margin-top: 1px;margin-bottom: 1px;">
+       <div class="asRange" data-plugin="asRange" data-namespace="rangeUi" style="width: 100%;margin: 0;" data-min="1" data-max="100" data-value="'.$percent.'"></div>
+    </div>
    
-
     <div class="row" style="color:#566573;">
             <div class="col-sm-6">
-            <b>' . $countinvesment . '</b> Investors
+            <b>'.$countinvesment.' Investors </b>
             </div>
             <div class="col-sm-6 text-right">
-            ' . $diastotales . '  days remaining
+            <b>'.$diastotales.'  days remaining</b>
              </div>  
-     </div>   
+     </div>  
+     
 
 <div class="h-minificha__tir" style="padding: 5px 0;">
 <center>'.$statushtml.'</center>
@@ -224,9 +224,11 @@ class Company_List_Project_Controller extends CI_Controller {
 
 </div>
 <div class="h-minificha__button-bar">
-          <button  type="submit" class="btn btn-dark btn-block"  data-toggle="slidePanel" data-url="' . base_url() . 'themes/default/tpl/company_panel.tpl"  onclick="Mostrar(\'' . $c_project_id . '\');">Project Detail</button>
+          <button  type="submit" class="btn btn-dark btn-block"  data-toggle="slidePanel" data-url="' . base_url() . 'themes/default/tpl/company_panel.tpl"  onclick="Mostrar(\'' . $c_project_id . '\');">PROJECT PREVIEW</button>
 </div>
-
+<div class="h-minificha__button-bar" style="margin-top:4px;">
+          <button  type="submit" class="btn btn-primary btn-block"  onclick="Editar(\'' . $c_project_id . '\')">PROJECT EDIT</button>
+</div>
 
             </div>    
             <div class="media-item-actions btn-group" >

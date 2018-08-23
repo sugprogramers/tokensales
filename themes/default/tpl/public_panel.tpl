@@ -31,6 +31,10 @@
                             <a class="nav-link" data-toggle="tab" href="#exampleTabsLineTopThree"   aria-controls="exampleTabsLineTopTwo" role="tab" onclick='$("#panelgeneral").resize();
                                     $("#panelgeneral").resize();'>Documentation</a>
                         </li>
+                         <li class="nav-item" role="presentation">
+                            <a class="nav-link" data-toggle="tab" href="#exampleTabsLineTopFour"   aria-controls="exampleTabsLineTopTwo" role="tab" onclick='$("#panelgeneral").resize();
+                                    $("#panelgeneral").resize();'>Add Founds</a>
+                        </li>
                     </ul>
                     <div class="tab-content pt-10">
 
@@ -58,10 +62,10 @@
 
                                     <div class="row" style="margin-top: 10px">
                                         <div class="col-sm-12">
-                                            <i class="icon wb-map" aria-hidden="true"></i>  <font id="addressNow"> Mi locacion</font>
+                                            <i class="icon wb-map" aria-hidden="true"></i> <font id="addressNow"> Mi locacion</font>
                                         </div>
 
-                                    </div>     
+                                    </div>    
 
                                     <div class="flip-container__wrapper" style="margin-top: 10px;">                               
 
@@ -145,6 +149,42 @@
                             </div>
 
                         </div>
+                        
+                        
+                        
+                        
+                         <div class="tab-pane"  id="exampleTabsLineTopFour" role="tabpanel" >
+                            <div class="row" >
+                                <div class="col-md-12">
+
+                                    <div class="col-md-6" style="margin: 10px 0;">
+                                       <div class="form-group ">
+                                            <label class="control-label" for="months">Amount *</label>
+                                              <div class="input-group">
+                                                <span class="input-group-addon" id="cursymbolNew"> $ </span>
+                                                <input type="text" class="form-control" placeholder="" id="amountinvest" name="amountinvest" required >
+                                              </div>
+                                            <!-- <input type="text" class="form-control"  data-decimals="2"  data-plugin="TouchSpin" value="12" data-max="100000"  required /> -->
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6"></div>
+                                    
+                                    <div class="col-md-6">
+                                        <button type="button" class="btn btn-block btn-success" onclick="Invertir();"> 
+                                            <i class="icon wb-check" aria-hidden="true"></i>Invest now
+                                        </button>
+                                    </div>
+                                   
+                                  
+                                  
+
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                        
 
 
 
