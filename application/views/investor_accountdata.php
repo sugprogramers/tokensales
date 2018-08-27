@@ -277,14 +277,19 @@
                                                     </div>
                                              </div>
                                         </div>
+                                        
+                                        <!-- 
                                         <div class="col-sm-4">
                                             <div class="form-group ">
                                                     <label class="control-label" for="userTaxFiscalNumber">Fiscal Number *</label>
                                                     <input type="text" required class="form-control" id="inputTaxFiscalNumber" name="taxfiscalnumber" placeholder="Fiscal Number" style="font-size: 14px; border-radius:0;">
                                             </div>
                                         </div>
+                                        -->
+                                        
                                     </div>
                                     
+                                    <!-- 
                                     <div class="row">
                                         <div class="col-sm-4">
                                        <div class="checkbox-custom checkbox-default">
@@ -299,12 +304,12 @@
                                             </div>
                                         </div>
                                     </div>
-                                    
+                                    -->
                                     
                                     <div class="row">
                                         <div class="col-sm-12">
                                             <div class="form-group ">
-                                                    <label class="control-label" for="userTaxAddress">Residential Address*</label>
+                                                    <label class="control-label" for="userTaxAddress">Address*</label>
                                                     <input type="text" required class="form-control" id="inputTaxAddress" name="taxaddress" placeholder="Residential Address" style="font-size: 14px; border-radius:0;">
                                             </div>
 
@@ -315,7 +320,7 @@
                                         <div class="col-sm-3">
 
                                             <div class="form-group ">
-                                                <label class="control-label" for="userTaxPostalCode">Postal Code *</label>
+                                                <label class="control-label" for="userTaxPostalCode">Zip Code *</label>
                                                 <input type="text" required class="form-control" id="inputTaxPostal" name="taxpostal" placeholder="Postal Code" style="font-size: 14px; border-radius:0;">
 
                                             </div>
@@ -543,13 +548,14 @@
         $("#inputTaxPostal").val("<?php echo $taxpostal ?>");
         $("#inputTaxCity").val("<?php echo $taxcity ?>");
            
+       /*
         $('#userisuscitizen')[0].checked = false;
         
         $("#inputTaxUstin").prop('disabled', true);
         if("<?php echo $taxisuscitizen ?>" === "Y"){
          $('#userisuscitizen')[0].checked = true;
          $("#inputTaxUstin").prop('disabled', false);
-        }
+        }*/
         
         $("#inputPaypalAcct").val("<?php echo $paypalacct ?>");
         

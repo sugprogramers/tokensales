@@ -192,9 +192,9 @@ class Investor_Data_Controller extends CI_Controller {
         
         try {      
             log_message("ERROR", 'FISCAL NUMBER: ' . $fiscalNumber);
-            if(!isset($fiscalNumber) || trim($fiscalNumber) == '' ) {
+            /*if(!isset($fiscalNumber) || trim($fiscalNumber) == '' ) {
                 throw new SDException("Fiscal Number is not set");
-            }            
+            } */           
            
             if(!isset($countryId) || trim($countryId) == '') {
                 throw new SDException("Select Country");

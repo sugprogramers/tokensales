@@ -222,17 +222,19 @@
                                         <label id="lblInvestorTaxcountry" class="control-label" ></label>
                                     </div>
                                     
-                                     <div class="col-sm-3">
-                                        <p><b>Fiscal Number</b></p>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <label id="lblInvestorTaxFiscalNumber" class="control-label" ></label>
-                                    </div>
+                                    <!-- 
+                                        <div class="col-sm-3">
+                                            <p><b>Fiscal Number</b></p>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <label id="lblInvestorTaxFiscalNumber" class="control-label" ></label>
+                                        </div>
+                                    -->
                                 </div>
                                 
                                 <div class="row">
                                     <div class="col-sm-4">
-                                       <p><b>Residential Address</b></p>
+                                       <p><b>Address</b></p>
                                     </div>
                                     <div class="col-sm-8">
                                         <label id="lblInvestorTaxAddress" class="control-label" ></label>
@@ -241,7 +243,7 @@
                                 
                                 <div class="row">
                                     <div class="col-sm-3">
-                                        <p><b>Postal Code</b></p>
+                                        <p><b>Zip Code</b></p>
                                     </div>
                                     <div class="col-sm-3">
                                         <label id="lblInvestorTaxPostalCode" class="control-label" ></label>
@@ -255,15 +257,16 @@
                                     </div>
                                 </div>
                                 
-                                 <div class="row">
-                                    <div class="col-sm-3">
-                                       <p><b>US TIN</b></p>
+                                <!-- 
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                           <p><b>US TIN</b></p>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <label id="lblInvestorTaxTIN" class="control-label" ></label>
+                                        </div>
                                     </div>
-                                    <div class="col-sm-8">
-                                        <label id="lblInvestorTaxTIN" class="control-label" ></label>
-                                    </div>
-                                </div>
-                                
+                                -->
                                 
                                 
                             </div>
