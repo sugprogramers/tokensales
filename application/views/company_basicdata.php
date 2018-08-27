@@ -14,11 +14,11 @@
 
 <div class="page">
     <div class="page-header">
-        <h1 class="page-title">Basic Data</h1>
+        <h1 class="page-title">Articles and Manuals</h1>
         <div class="page-header-actions">
             <ol class="breadcrumb breadcrumb-arrow">
                 <li class="breadcrumb-item"><a class="icon wb-info-circle" href="#">Information</a></li>
-                <li class="breadcrumb-item">Basic Data</li>
+                <li class="breadcrumb-item">Articles and Manuals</li>
             </ol> 
         </div>        
     </div>

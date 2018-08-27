@@ -3,7 +3,7 @@
         <h1 class="page-title">Paypal Account</h1>
         <div class="page-header-actions">
             <ol class="breadcrumb breadcrumb-arrow">
-                <li class="breadcrumb-item"><a class="icon fa-bank" href="#">Bank Data</a></li>
+                <li class="breadcrumb-item"><a class="icon fa-bank" href="#">Payment Info</a></li>
                 <li class="breadcrumb-item">Paypal Account</li>
             </ol> 
         </div>         

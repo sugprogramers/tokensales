@@ -1,10 +1,10 @@
 <div class="page">
     <div class="page-header">
-        <h1 class="page-title">Deposit Funds</h1>
+        <h1 class="page-title">Add Funds to invest</h1>
         <div class="page-header-actions">
             <ol class="breadcrumb breadcrumb-arrow">
-                <li class="breadcrumb-item"><a class="icon fa-bank" href="#">Bank Data</a></li>
-                <li class="breadcrumb-item">Deposit Funds</li>
+                <li class="breadcrumb-item"><a class="icon fa-bank" href="#">Payment Info</a></li>
+                <li class="breadcrumb-item">Add Funds</li>
             </ol> 
         </div> 
     </div>    
@@ -31,14 +31,14 @@
                                             <form id="depositFunds-form">
                                                 <div class="row">
                                                     <div class="col-sm-6">
-                                                        <p>This is your current available balance.</p>
+                                                        <p>This is your current balance.</p>
                                                     </div>
                                                     <div class="col-sm-6"></div>  
                                                 </div>
 
                                                 <div class="row">
                                                     <div class="col-sm-6">
-                                                        <p>Pay-In Balance: <span style="color: #17b3a3" id="idCurrentPayinBalance"></span></p>                            
+                                                        <p>Available funds: <span style="color: #17b3a3" id="idCurrentPayinBalance"></span></p>                            
                                                     </div>
                                                     <div class="col-sm-6"></div>  
                                                 </div>     

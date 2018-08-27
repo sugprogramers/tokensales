@@ -589,7 +589,7 @@
                                 <li class="dropdown site-menu-item has-sub">
                                     <a data-toggle="dropdown" href="javascript:void(0)" data-dropdown-toggle="false">
                                         <i class="site-menu-icon wb-folder" aria-hidden="true"></i>
-                                        <span class="site-menu-title">My Data</span>
+                                        <span class="site-menu-title">My Account</span>
                                         <span class="site-menu-icon wb-chevron-down-mini" ></span><!--<span class="site-menu-arrow"></span>-->
                                     </a>
                                     <div class="dropdown-menu">
@@ -599,7 +599,7 @@
                                                     <ul class="site-menu-sub site-menu-normal-list">
                                                         <li class="site-menu-item">
                                                             <a href="<?php echo base_url(); ?>admin_accountdata">
-                                                                <span class="site-menu-title">Account Data</span>
+                                                                <span class="site-menu-title">User Details</span>
                                                             </a>
                                                         </li>
 
@@ -703,7 +703,7 @@
                                 <li class="dropdown site-menu-item has-sub" id="idAdminBankData">
                                     <a data-toggle="dropdown" href="javascript:void(0)" data-dropdown-toggle="false">
                                         <i class="site-menu-icon fa-bank" aria-hidden="true"></i>
-                                        <span class="site-menu-title">Bank Data</span>
+                                        <span class="site-menu-title">Payment Info</span>
                                         <span class="site-menu-icon wb-chevron-down-mini" ></span>
                                     </a>
                                     <div class="dropdown-menu">
@@ -762,7 +762,7 @@
                                  <li class="dropdown site-menu-item has-sub">
                                     <a data-toggle="dropdown" href="javascript:void(0)" data-dropdown-toggle="false">
                                         <i class="site-menu-icon wb-folder" aria-hidden="true"></i>
-                                        <span class="site-menu-title">My Data</span>
+                                        <span class="site-menu-title">My Account</span>
                                         <span class="site-menu-icon wb-chevron-down-mini" ></span>
                                     </a>
                                     <div class="dropdown-menu">
@@ -772,7 +772,7 @@
                                                     <ul class="site-menu-sub site-menu-normal-list">
                                                         <li class="site-menu-item">
                                                             <a href="<?php echo base_url(); ?>investor_data">
-                                                                <span class="site-menu-title">Account Data</span>
+                                                                <span class="site-menu-title">User Details</span>
                                                             </a>
                                                         </li>
 
@@ -826,7 +826,7 @@
                                 <li class="dropdown site-menu-item has-sub" id="idInvestorBankData">
                                     <a data-toggle="dropdown" href="javascript:void(0)" data-dropdown-toggle="false">
                                         <i class="site-menu-icon fa-bank" aria-hidden="true"></i>
-                                        <span class="site-menu-title">Bank Data</span>
+                                        <span class="site-menu-title">Payment Info</span>
                                         <span class="site-menu-icon wb-chevron-down-mini" ></span>
                                     </a>
                                     <div class="dropdown-menu">
@@ -842,7 +842,7 @@
 
                                                         <li class="site-menu-item" id="idInvestorDepositFunds">
                                                             <a href="<?php echo base_url(); ?>investor_depositfunds">
-                                                                <span class="site-menu-title">Deposit Funds</span>
+                                                                <span class="site-menu-title">Add Funds</span>
                                                             </a>
                                                         </li>
                                                          <li class="site-menu-item" id="idInvestorWithdrawFunds">
@@ -879,7 +879,7 @@
                                                     <ul class="site-menu-sub site-menu-normal-list">
                                                         <li class="site-menu-item" id="idInvestorBasicData">
                                                             <a href="<?php echo base_url(); ?>investor_basicdata">
-                                                                <span class="site-menu-title">Basic Data</span>
+                                                                <span class="site-menu-title">Articles and Manuals</span>
                                                             </a>
                                                         </li>                                                        
                                                     </ul>
@@ -923,7 +923,7 @@
                                  <li class="dropdown site-menu-item has-sub">
                                     <a data-toggle="dropdown" href="javascript:void(0)" data-dropdown-toggle="false">
                                         <i class="site-menu-icon wb-folder" aria-hidden="true"></i>
-                                        <span class="site-menu-title">My Data</span>
+                                        <span class="site-menu-title">My Account</span>
                                         <span class="site-menu-icon wb-chevron-down-mini" ></span>
                                     </a>
                                     <div class="dropdown-menu">
@@ -933,7 +933,7 @@
                                                     <ul class="site-menu-sub site-menu-normal-list">
                                                         <li class="site-menu-item">
                                                             <a href="<?php echo base_url(); ?>company_accountdata">
-                                                                <span class="site-menu-title">Account Data</span>
+                                                                <span class="site-menu-title">User Details</span>
                                                             </a>
                                                         </li>
 
@@ -984,7 +984,7 @@
                                 <li class="dropdown site-menu-item has-sub" id="idCompanyBankData">
                                     <a data-toggle="dropdown" href="javascript:void(0)" data-dropdown-toggle="false">
                                         <i class="site-menu-icon fa-bank" aria-hidden="true"></i>
-                                        <span class="site-menu-title">Bank Data</span>
+                                        <span class="site-menu-title">Payment Info</span>
                                         <span class="site-menu-icon wb-chevron-down-mini" ></span>
                                     </a>
                                     <div class="dropdown-menu">
@@ -1025,7 +1025,7 @@
                                                     <ul class="site-menu-sub site-menu-normal-list">
                                                         <li class="site-menu-item" id="idCompanyBasicData">
                                                             <a href="<?php echo base_url(); ?>company_basicdata">
-                                                                <span class="site-menu-title">Basic Data</span>
+                                                                <span class="site-menu-title">Articles and Manuals</span>
                                                             </a>
                                                         </li>                                                        
                                                     </ul>
