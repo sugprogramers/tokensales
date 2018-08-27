@@ -104,7 +104,8 @@
         ]);
 
         var options = {
-          title: ''
+          title: '',
+          is3D: true,
         };
 
         var chart1 = new google.visualization.PieChart(document.getElementById('piechart1'));
