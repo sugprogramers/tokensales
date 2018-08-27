@@ -113,6 +113,25 @@ class CUserModel extends CI_Model
          $this->db->where("usertype", "COMPMAN");
         return $this->db->get("c_user");
     } 
+    
+    
+    public function get_count_investor_per_day(){
+       
+        $this->db->select("count(*) as suma,  to_char( created, 'YYYY-MM-DD') as fecha"); 
+        $this->db->from('c_user');       
+        $this->db->where("usertype", "INV");
+        $this->db->group_by("2");
+        return $this->db->get();
+    } 
+    
+     public function get_count_company_per_day(){
+       
+        $this->db->select("count(*) as suma,  to_char( created, 'YYYY-MM-DD') as fecha"); 
+        $this->db->from('c_user');       
+        $this->db->where("usertype", "COMPMAN");
+        $this->db->group_by("2");
+        return $this->db->get();
+    } 
 
 }
 

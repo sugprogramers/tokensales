@@ -1,3 +1,4 @@
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <div class="page">
     <div class="page-header">
         <h1 class="page-title">Dashboard Company</h1>
@@ -53,10 +54,10 @@
                 
             
 <div class="row row-lg">
-		<div class="col-lg-6">
+		<div class="col-lg-12">
 		 
 		  <div class="example-wrap m-md-0">
-			<h4 class="example-title">Active Investments</h4>
+			<h4 class="example-title">Status Projects</h4>
 			<!-- <p>Use function: <code>Morris.Line(options)</code> to generate chart.</p -->
 			<div class="example" style="margin: 0;">
                             
@@ -66,17 +67,6 @@
 		  </div>              
 		</div>
 
-		<div class="col-lg-6">
-		  <div class="example-wrap">
-			<h4 class="example-title">Pending Projects</h4>
-			<!-- <p>Use function: <code>Morris.Line(options)</code> to generate chart.</p -->
-			<div class="example" style="margin: 0;">
-                            
-                            <div id="piechart2" style="width: 100%; height: 400px;"></div>
-			 
-			</div>
-		  </div>
-		</div>
 </div>                
                 
 
@@ -111,8 +101,7 @@
         var chart1 = new google.visualization.PieChart(document.getElementById('piechart1'));
         chart1.draw(data, options);
         
-        var chart2 = new google.visualization.PieChart(document.getElementById('piechart2'));
-        chart2.draw(data, options);
+     
       }
 </script>
 
