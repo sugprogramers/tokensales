@@ -17,7 +17,7 @@
                         <div id="alertMessage">
                             <blockquote class="blockquote custom-blockquote blockquote-success">
                                 <p class="mb-0">SUCCESS</p>
-                                <footer class="blockquote-footer">Return of investment payment to investor: <?php if(isset($investorName )) echo $investorName  ?>
+                                <footer class="blockquote-footer">Return of investment payment to investor: <?php if(isset($investorId )) echo $investorId ?> <!--<?php /*if(isset($investorName )) echo $investorName*/  ?>-->
                                     from project: <?php if(isset($projectName )) echo $projectName  ?> executed successfully. Pending order status will be updated in a few minutes.
                                 </footer>
                             </blockquote>

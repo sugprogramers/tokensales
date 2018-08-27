@@ -44,8 +44,9 @@ class Project_List_Investment_IPayout_Controller extends CI_Controller {
                 '<input class="dg_check_item" type="checkbox" name="dg_payment_order_'.$r->fin_payment_order_id.'" value="'.$r->fin_payment_order_id.'" onclick="toggle_payment_order_checkbox(this)" />',
                 $r->projectName,
                 $r->companyName,
-                $r->investorname,
-                $r->investorEmail,
+                $r->c_investor_id,
+                // $r->investorname,
+                // $r->investorEmail,
                 $r->amount,
                 $r->iso_code,
                 DateTime::createFromFormat('Y-m-d H:i:s', $r->scheduleddate)->format('Y-m-d')

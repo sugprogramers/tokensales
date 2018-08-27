@@ -27,8 +27,9 @@
                             <th></th>
                             <th>Project Name</th>
                             <th>Company</th>
-                            <th>Investor Name</th>
-                            <th>Investor Email</th>
+                            <th>Investor ID</th>
+                            <!--<th>Investor Name</th>-->
+                            <!--<th>Investor Email</th>-->
                             <th>Payment Amount</th>
                             <th>Currency</th>
                             <th>Scheduled Date</th>

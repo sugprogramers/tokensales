@@ -122,17 +122,18 @@ class IPN_ProjectInvestmentPaymentOrder_Controller extends CI_Controller {
                 "status" => 'success',
                 "msg" => '',
                 "projectName" => $result->projectName,
-                "investorName" => $result->investorname." (".$result->investorEmail.")",
+                "investorId" => $result->c_investor_id
+                //"investorName" => $result->investorname." (".$result->investorEmail.")",
                 
             );
 
-
             return $result;
-        }catch(SDException $e){
+            
+        } catch(SDException $e){
             $result = array('status' => 'error', 'msg' => $e->getMessage());
             return $result;
-        }        
-        catch(Exception $e){
+            
+        } catch(Exception $e){
             $result = array('status' => 'error', 'msg' => 'Error Retreiving Payment Order Information.');
             return $result;
         }

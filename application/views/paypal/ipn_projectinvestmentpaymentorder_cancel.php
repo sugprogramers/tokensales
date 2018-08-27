@@ -17,7 +17,7 @@
                         <div id="alertMessage">
                             <blockquote class="blockquote custom-blockquote blockquote-danger">
                                 <p class="mb-0">OPERATION CANCELLED</p>
-                                <footer class="blockquote-footer">Return of investment payment to investor: <?php if(isset($investorName )) echo $investorName  ?>
+                                <footer class="blockquote-footer">Return of investment payment to investor: <?php if(isset($investorId )) echo $investorId ?> <!--<?php /*if(isset($investorName )) echo $investorName*/  ?>-->
                                     from project: <?php if(isset($projectName )) echo $projectName  ?> was cancelled. Please try again.
                                 </footer>
                             </blockquote>

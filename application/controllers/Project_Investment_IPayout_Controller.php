@@ -45,7 +45,8 @@ class Project_Investment_IPayout_Controller extends CI_Controller {
             
             $html = '<tr>';
             $html .= '<td class="text-center">1</td>';
-            $html .= '<td class="text-left">Return of investment payment to investor: '.$result->investorname." (".$result->investorEmail.")".' for project: '.$result->projectName.'</td>';
+            $html .= '<td class="text-left">Return of investment payment to investor: '.$result->c_investor_id.' for project: '.$result->projectName.'</td>';
+            //$html .= '<td class="text-left">Return of investment payment to investor: '.$result->investorname." (".$result->investorEmail.")".' for project: '.$result->projectName.'</td>';
             $html .= '<td>1</td>';
             $html .= '<td>'.$result->amountformatted.'</td>';
             $html .= '<td>'.$result->amountformatted.'</td>';
