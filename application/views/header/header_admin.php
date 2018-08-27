@@ -695,7 +695,7 @@
                                 <li class="dropdown site-menu-item has-sub" id="idListCompanyAdmin">
                                     <a data-toggle="dropdown" href="<?php echo base_url(); ?>admin_list_company" data-dropdown-toggle="false">
                                         <i class="site-menu-icon fa-users" aria-hidden="true"></i>
-                                        <span class="site-menu-title">Companys</span>                                   
+                                        <span class="site-menu-title">Companies</span>                                   
                                     </a>
 
                                 </li>
