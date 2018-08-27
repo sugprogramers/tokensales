@@ -17,12 +17,12 @@
                 <table id="idTableListInvestor" class="table table-hover dataTable table-striped" role="grid" style="width:100%" >
                     <thead>
                         <tr>
-                            <th>ID</th>
+                            
                             <th>Email</th>
                             <th>Password</th>
-                            <th>FirstName</th>
-                            <th>LastName</th>
-                            <th>Actions</th>
+                            <th>Company</th>
+                            
+                            <th>More Info</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -38,12 +38,13 @@
 <script type="text/javascript">
     window.onload = function () {
         $('#idListCompanyAdmin').addClass('active');
+        
         var table = $('#idTableListInvestor').DataTable({
             responsive: true,
             fixedHeader:{header:!0},
             "order": [[ 0, "desc" ]],
             "columnDefs": [{
-                    "targets": [5],
+                    "targets": [3],
                     "orderable": false
                 }],
             "processing": false, //mostrar waiting

@@ -31,13 +31,10 @@ class Admin_List_Company_Controller extends CI_Controller {
         $data = [];
         foreach ($query->result() as $r) {
             $data[] = array(
-                $r->c_user_id,
                 $r->email,
                 $r->password,
                 $r->firstname,
-                $r->lastname,
-                '<a class="btn btn-sm btn-icon btn-pure btn-default on-default edit-row" href="javascript:void(0)" title="Edit" onclick="edit_document('."'".$r->c_user_id."'".')"><i class="icon wb-edit"></i></a>
-		 <a class="btn btn-sm btn-icon btn-pure btn-default on-default edit-row" href="javascript:void(0)" title="Remove" onclick="delete_document('."'".$r->c_user_id."'".')"><i class="icon wb-trash"></i></a>'
+                '<a class="btn btn-sm btn-icon btn-pure btn-default on-default edit-row" href="javascript:void(0)" title="more info" onclick="view_document('."'".$r->c_user_id."'".')"><i class="icon wb-search"></i></a>'
             );
         }
 
