@@ -9,23 +9,37 @@ class Admin_Dashboard_Controller extends CI_Controller {
         $this->load->helper('url');
         $this->load->model("CProjectModel");
         $this->load->model("CUserModel");
-        
+        $this->load->model("FINInvestmentModel");
         
         if($this->session->usertype !== "ADM"){
             redirect(base_url() . 'login');
         }
     }
 
-    public function index() {   
-        
+    public function index() {         
+        $pie = $this->get_status_projects();        
+        $data = array('pie' => $pie) ;        
+        $line2 = $this->get_register_user();
+        $data = $data + array('line2' => $line2);    
+        $line1 = $this->get_investments();
+        $data = $data + array('line1' => $line1); 
+       
+        $this->load->view('header/header_admin');
+        $this->load->view('admin_dashboard',$data);
+        $this->load->view('footer/footer_admin'); 
+    }
+    
+     public function get_status_projects() {
         $countpending = $this->CProjectModel->getCountPendingProject();
         $countactive = $this->CProjectModel->getCountActiveProject();
         $countfinish = $this->CProjectModel->getCountFinishProject();
         
         $pie = "['Pending', $countpending],['Active', $countactive],['Fnish', $countfinish]," ;
-        $data = array('pie' => $pie) ;
         
-        
+        return $pie;
+     }   
+     
+     public function get_register_user() {
         $arrayAllDias[] = array(); 
         $fechaInicio =  strtotime('today -30 days');
         $fechaFin = strtotime('today');
@@ -53,14 +67,38 @@ class Admin_Dashboard_Controller extends CI_Controller {
              $line2.= "['{$value['date']}',  {$value['sumai']},  {$value['sumap']}],";            
         }
        
+        return $line2;
+     }
+     
+     
+     public function get_investments() {
+        $arrayAllDias[] = array(); 
+        $fechaInicio =  strtotime('today -30 days');
+        $fechaFin = strtotime('today');
+        for ($i = $fechaInicio; $i < $fechaFin +86400; $i+=86400) {
+                    $newstring = intval(date("Y", $i)).'-'.date("m", $i).'-'.date("d",$i);
+                    if(!isset($arrayAllDias[$newstring. ''])){
+                        $arrayAllDias[$newstring.''] = array('date' =>$newstring, 'suma' => 0 );
+                     }
+        }
         
         
-       $data = $data + array('line2' => $line2) ;
+        $query = $this->FINInvestmentModel->getSumAmountPerDay();    
+        foreach ($query->result() as $r) {
+            if(isset($arrayAllDias[$r->fecha.''])){
+            $arrayAllDias[$r->fecha.'']['suma'] = $r->suma;
+            }
+        }
         
        
-        $this->load->view('header/header_admin');
-        $this->load->view('admin_dashboard',$data);
-        $this->load->view('footer/footer_admin');  
-    }
+       
+        $line1 ='';
+        foreach ($arrayAllDias as $value) {
+             if(count($value)==2)
+             $line1.= "['{$value['date']}',  {$value['suma']}],";            
+        }
+       
+        return $line1;
+     }
    
 }

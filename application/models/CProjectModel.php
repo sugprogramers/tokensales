@@ -174,11 +174,14 @@ class CProjectModel extends CI_Model {
         return $this->db->get();
     }
     
-    //DASHBOARD ADMIN
-     public function getCountPendingProject() {
+    //DASHBOARD ADMIN COMPANY
+     public function getCountPendingProject($id=null) {
 
         $this->db->select("count(*) as countpending ");
         $this->db->from('c_project');
+         $this->db->join('c_projectmanager', 'c_project.c_projectmanager_id = c_projectmanager.c_projectmanager_id');   
+        if($id!=null)
+            {$this->db->where('c_projectmanager.c_user_id', $id);}
         $this->db->where("projectstatus", "PEND");
         $this->db->or_where("projectstatus", "ERRDATA");
         $query = $this->db->get();
@@ -188,11 +191,15 @@ class CProjectModel extends CI_Model {
 
         return $queryresult[0]->countpending;
     }
-    
-    public function getCountActiveProject() {
+    //DASHBOARD ADMIN COMPANY
+    public function getCountActiveProject($id=null) {
 
         $this->db->select("count(c_project_id) as countactive ");
         $this->db->from('c_project');
+        $this->db->join('c_projectmanager', 'c_project.c_projectmanager_id = c_projectmanager.c_projectmanager_id');   
+        if($id!=null)
+            {$this->db->where('c_projectmanager.c_user_id', $id);}
+        
         $this->db->where("projectstatus", "FU");
         $this->db->or_where("projectstatus", "ACT");
         $this->db->or_where("projectstatus", "COFU");
@@ -204,11 +211,14 @@ class CProjectModel extends CI_Model {
 
         return $queryresult[0]->countactive;
     }
-    
-     public function getCountFinishProject() {
+    //DASHBOARD ADMIN COMPANY
+     public function getCountFinishProject($id=null) {
 
         $this->db->select("count(c_project_id) as countfinish ");
         $this->db->from('c_project');
+         $this->db->join('c_projectmanager', 'c_project.c_projectmanager_id = c_projectmanager.c_projectmanager_id');   
+        if($id!=null)
+            {$this->db->where('c_projectmanager.c_user_id', $id);}
          $this->db->where("projectstatus", "VO");
         $this->db->or_where("projectstatus", "FIN");
         $query = $this->db->get();

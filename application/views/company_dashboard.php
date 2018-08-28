@@ -34,22 +34,7 @@
 		</div>
 </div>                          
                 
-                
-                
-<div class="row row-lg">
-		<div class="col-lg-12">
-		 
-		  <div class="example-wrap m-md-0">
-			<h4 class="example-title">Active Investments</h4>
-			<!-- <p>Use function: <code>Morris.Line(options)</code> to generate chart.</p -->
-			<div class="example" style="margin: 0;">
-                          
-                           <div id="chart_div1" style="width: 100%; height: 500px;"></div>
-                           
-			</div>
-		  </div>              
-		</div>
-</div>
+             
           
                 
             
@@ -85,12 +70,8 @@
       function drawChart() {
 
         var data = google.visualization.arrayToDataTable([
-          ['Task', 'Hours per Day'],
-          ['Work',     11],
-          ['Eat',      2],
-          ['Commute',  2],
-          ['Watch TV', 2],
-          ['Sleep',    7]
+            ['Status', 'Number of projects'],
+             <?php echo $pie; ?>
         ]);
 
         var options = {
@@ -106,56 +87,6 @@
 </script>
 
 
-<script>
-google.charts.load('current', {packages: ['corechart', 'line']});
-google.charts.setOnLoadCallback(drawBasic);
-
-function drawBasic() {
-
-     
-      var data = google.visualization.arrayToDataTable([
-          ['Days', 'Investors', 'Companys'],
-          ['2004',  1000,      400],
-          ['2005',  1170,      460],
-          ['2006',  660,       1120],
-          ['2007',  1030,      540],
-          ['2004',  1000,      400],
-          ['2005',  1170,      460],
-          ['2006',  660,       1120],
-          ['2007',  1030,      540],
-          ['2004',  1000,      400],
-          ['2005',  1170,      460],
-          ['2006',  660,       1120],
-          ['2007',  1030,      540],
-          ['2004',  1000,      400],
-          ['2005',  1170,      460],
-          ['2006',  660,       1120],
-          ['2007',  1030,      540],
-        ]);
-
-      var options = {
-           //colors: ['#a52714', '#097138'],
-           pointSize: 4,
-           legend: { position: 'bottom' },
-        hAxis: {
-          title: 'Day',
-          //gridlines: { count: 5 },
-          
-        },
-        vAxis: {
-          title: 'Register',
-          gridlines: { count: 10 },
-        }
-      };
-
-      var chart3 = new google.visualization.LineChart(document.getElementById('chart_div1'));
-      chart3.draw(data, options);
-    
-    }
-</script>
-
-
-
 
 <script>
 google.charts.load('current', {packages: ['corechart', 'line']});
@@ -165,23 +96,8 @@ function drawBasic1() {
 
      
       var data = google.visualization.arrayToDataTable([
-          ['Year', 'Sales'],
-          ['2004',  1000],
-          ['2005',  1170],
-          ['2006',  660],
-          ['2007',  1030],
-          ['2004',  1000],
-          ['2005',  1170],
-          ['2006',  660],
-          ['2007',  1030],
-          ['2004',  1000],
-          ['2005',  1170],
-          ['2006',  660],
-          ['2007',  1030],
-          ['2004',  1000],
-          ['2005',  1170],
-          ['2006',  660],
-          ['2007',  1030],
+          ['Day', 'Invesments'],
+           <?php echo $line1; ?>
         ]);
 
       var options = {
