@@ -12,9 +12,9 @@ class Admin_List_Investor_Controller extends CI_Controller {
         $this->load->model("CInvestorModel");
         $this->load->model("FINInvestmentModel");
        
-        if($this->session->usertype !== "ADM"){
+        if (!$this->session->has_userdata("session_admin")) {
             redirect(base_url() . 'login');
-        }
+        } 
     }
 
     public function index() {
@@ -41,7 +41,7 @@ class Admin_List_Investor_Controller extends CI_Controller {
             $notes = $objInvestor->validationnotes;
             $investamt = $this->FINInvestmentModel->getTotalInvestedByInvestor($objInvestor->c_investor_id);
             $data[] = array(
-                '<a class="btn btn-sm btn-icon btn-pure btn-default on-default edit-row" href="javascript:void(0)" title="Log In" onclick="login('."'".$objInvestor->c_investor_id."'".')"><i class="icon fa-sign-in" ></i></a>',
+                '<a class="btn btn-sm btn-icon btn-pure btn-default on-default edit-row" href="javascript:void(0)" title="Log In" onclick="loginInvestor('."'".$r->c_user_id."'".')"><i class="icon fa-sign-in" ></i></a>',
                 $r->email,
                 $r->firstname . " " .$r->lastname,
                 $investamt,
@@ -145,7 +145,7 @@ class Admin_List_Investor_Controller extends CI_Controller {
             $investor->validationnotes = $description;
             $investor->status = $status;
             $investor->validateddate = $now;
-            $this->CInvestorModel->save($investor, $this->session->id);
+            $this->CInvestorModel->save($investor, $this->session->session_admin['id']);
             $response = array('redirect' => '', 'status' => 'success');
             echo json_encode($response);
             

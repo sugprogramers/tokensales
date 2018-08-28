@@ -11,7 +11,7 @@ class Company_Dashboard_Controller extends CI_Controller {
         $this->load->model("CUserModel");
         $this->load->model("FINInvestmentModel");
         
-        if($this->session->usertype !== "COMPMAN"){
+        if (!$this->session->has_userdata("session_company")) {
             redirect(base_url() . 'login');
         }
     }
@@ -28,9 +28,9 @@ class Company_Dashboard_Controller extends CI_Controller {
     }
     
       public function get_status_projects() {
-        $countpending = $this->CProjectModel->getCountPendingProject($this->session->id);
-        $countactive = $this->CProjectModel->getCountActiveProject($this->session->id);
-        $countfinish = $this->CProjectModel->getCountFinishProject($this->session->id);
+        $countpending = $this->CProjectModel->getCountPendingProject($this->session->session_company['id']);
+        $countactive = $this->CProjectModel->getCountActiveProject($this->session->session_company['id']);
+        $countfinish = $this->CProjectModel->getCountFinishProject($this->session->session_company['id']);
         
         $pie = "['Pending', $countpending],['Active', $countactive],['Fnish', $countfinish]," ;
         
@@ -49,7 +49,7 @@ class Company_Dashboard_Controller extends CI_Controller {
         }
         
         
-        $query = $this->FINInvestmentModel->getSumAmountPerDay($this->session->id);    
+        $query = $this->FINInvestmentModel->getSumAmountPerDay($this->session->session_company['id']);    
         foreach ($query->result() as $r) {
             if(isset($arrayAllDias[$r->fecha.''])){
             $arrayAllDias[$r->fecha.'']['suma'] = $r->suma;

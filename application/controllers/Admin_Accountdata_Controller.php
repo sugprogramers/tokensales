@@ -9,16 +9,14 @@ class Admin_Accountdata_Controller extends CI_Controller {
         parent::__construct();
         $this->load->helper('url');
         $this->load->model("CUserModel");
-        
-        
-        if($this->session->usertype !== "ADM"){
+                
+        if (!$this->session->has_userdata("session_admin")) {
             redirect(base_url() . 'login');
-        }
+        }        
     }
 
     public function index() {
-        
-        $cUser = $this->CUserModel->get($this->session->id);
+        $cUser = $this->CUserModel->get($this->session->session_admin['id']);
         $birthday = DateTime::createFromFormat('Y-m-d H:i:s', $cUser->birthday)->format('Y-m-d');
         $data = array(
                 'phone' => $cUser->phone,
@@ -76,7 +74,7 @@ class Admin_Accountdata_Controller extends CI_Controller {
             $birthday_date = (new DateTime($birthday))->format('Y-m-d H:i:s');
 
             /* @var $user CUser */
-            $cUser = $this->CUserModel->get($this->session->id);            
+            $cUser = $this->CUserModel->get($this->session->session_admin['id']);            
             $cUser->firstname = $firstname;
             $cUser->lastname = $lastname;
             $cUser->birthday = $birthday_date;
@@ -88,7 +86,7 @@ class Admin_Accountdata_Controller extends CI_Controller {
             $cUser->address1 = $address1;
             $cUser->address2 = $address2;
             
-            $this->CUserModel->save($cUser, $this->session->id);
+            $this->CUserModel->save($cUser, $this->session->session_admin['id']);
  
             $response = array('redirect' => '', 'status' => 'success'); 
             echo json_encode($response);

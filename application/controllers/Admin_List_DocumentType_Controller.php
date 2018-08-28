@@ -9,10 +9,9 @@ class Admin_List_DocumentType_Controller extends CI_Controller {
         $this->load->helper('url');
         $this->load->model("CProjectdocumenttypeModel");
         
-        
-        if($this->session->usertype !== "ADM"){
+        if (!$this->session->has_userdata("session_admin")) {
             redirect(base_url() . 'login');
-        }
+        } 
     }
 
     public function index() {
@@ -116,7 +115,7 @@ class Admin_List_DocumentType_Controller extends CI_Controller {
             $objDoc->description = $description;
             $objDoc->ismandatory = $isMandatory;
             $objDoc->isactive = "Y";
-            $this->CProjectdocumenttypeModel->save($objDoc, $this->session->id);
+            $this->CProjectdocumenttypeModel->save($objDoc, $this->session->session_admin['id']);
             $response = array('redirect' => '', 'status' => 'success');
             echo json_encode($response);
             

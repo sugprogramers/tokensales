@@ -12,9 +12,7 @@ class Company_List_Project_Controller extends CI_Controller {
         $this->load->model("CProjectdocumenttypeModel");
         $this->load->model("FINInvestmentModel");
 
-
-
-        if ($this->session->usertype !== "COMPMAN") {
+        if (!$this->session->has_userdata("session_company")) {
             redirect(base_url() . 'login');
         }
     }
@@ -26,7 +24,7 @@ class Company_List_Project_Controller extends CI_Controller {
     }
 
     public function get_project_list() {
-        $query = $this->CProjectModel->getAllByCompany($this->session->id);
+        $query = $this->CProjectModel->getAllByCompany($this->session->session_company['id']);
         $html = '';
         foreach ($query->result() as $r) {
 

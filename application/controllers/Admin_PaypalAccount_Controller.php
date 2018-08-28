@@ -11,15 +11,14 @@ class Admin_PaypalAccount_Controller extends CI_Controller {
         $this->load->model("CUserModel");
         $this->load->model("CAdminModel");
 
-
-        if ($this->session->usertype !== "ADM") {
+        if (!$this->session->has_userdata("session_admin")) {
             redirect(base_url() . 'login');
-        }
+        } 
     }
 
     public function index() {
         /* @var $admin CAdmin */
-        $admin = $this->CAdminModel->loadByUserId($this->session->id);
+        $admin = $this->CAdminModel->loadByUserId($this->session->session_admin['id']);
         $paypalacct = "";
         if($admin) {
             $paypalacct = $admin->paypalusername;
@@ -40,10 +39,10 @@ class Admin_PaypalAccount_Controller extends CI_Controller {
             }
 
             /* @var $admin CAdmin */
-            $admin = $this->CAdminModel->loadByUserId($this->session->id);
+            $admin = $this->CAdminModel->loadByUserId($this->session->session_admin['id']);
             if (!$admin) {
                 $admin = new CAdmin();
-                $admin->c_user_id = $this->session->id;
+                $admin->c_user_id = $this->session->session_admin['id'];
                 $admin->isactive = 'Y';
                 $admin->paypalusername = $paypalacct;
                 
@@ -51,7 +50,7 @@ class Admin_PaypalAccount_Controller extends CI_Controller {
                 $admin->paypalusername = $paypalacct;
             }
 
-            $this->CAdminModel->save($admin, $this->session->id);
+            $this->CAdminModel->save($admin, $this->session->session_admin['id']);
 
 
             $response = array('status' => 'success', 'msg' => 'Success');

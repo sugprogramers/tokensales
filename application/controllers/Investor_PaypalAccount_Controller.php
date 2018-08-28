@@ -11,15 +11,14 @@ class Investor_PaypalAccount_Controller extends CI_Controller {
         $this->load->model("CUserModel");
         $this->load->model("CInvestorModel");
 
-
-        if ($this->session->usertype !== "INV") {
+        if (!$this->session->has_userdata("session_investor")) {
             redirect(base_url() . 'login');
         }
     }
 
     public function index() {
         /* @var $investor CInvestorModel */
-        $investor = $this->CInvestorModel->getByUserId($this->session->id);
+        $investor = $this->CInvestorModel->getByUserId($this->session->session_investor['id']);
         $paypalacct = "";
         if ($investor) {
             $paypalacct = $investor->payin_paypalusername;
@@ -40,10 +39,10 @@ class Investor_PaypalAccount_Controller extends CI_Controller {
             }
 
             /* @var $investor CInvestorModel */
-            $investor = $this->CInvestorModel->getByUserId($this->session->id);
+            $investor = $this->CInvestorModel->getByUserId($this->session->session_investor['id']);
             if (!$investor) {
                 $investor = new CInvestor();
-                $investor->c_user_id = $this->session->id;
+                $investor->c_user_id = $this->session->session_investor['id'];
                 $investor->isactive = 'Y';
                 $investor->tax_isuscitizen = 'Y'; // default
                 $investor->documenttype = 'PASS'; // default
@@ -57,7 +56,7 @@ class Investor_PaypalAccount_Controller extends CI_Controller {
                 $investor->payin_paypalusername = $paypalacct;
             }
 
-            $this->CInvestorModel->save($investor, $this->session->id);
+            $this->CInvestorModel->save($investor, $this->session->session_investor['id']);
 
 
             $response = array('status' => 'success', 'msg' => 'Success');

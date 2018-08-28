@@ -13,13 +13,13 @@ class Investor_WithdrawFunds_Controller extends CI_Controller {
         $this->load->model("FINPaymentHistoryModel");     
         $this->load->model("CCurrencyModel");     
         
-        if ($this->session->usertype !== "INV") {
+        if (!$this->session->has_userdata("session_investor")) {
             redirect(base_url() . 'login');
         }
     }
 
     public function index() {
-        $data = $this->get_paymentOrderInfo($this->session->id);
+        $data = $this->get_paymentOrderInfo($this->session->session_investor['id']);
 
         $this->load->view('header/header_admin');
         $this->load->view('investor_withdrawfunds', $data);
@@ -89,7 +89,7 @@ class Investor_WithdrawFunds_Controller extends CI_Controller {
 
         try {
             /* @var $investor CInvestor */
-            $investor = $this->CInvestorModel->getByUserId($this->session->id);
+            $investor = $this->CInvestorModel->getByUserId($this->session->session_investor['id']);
             if (!$investor) {
                 throw new SDException("Investor not found.");
             }            
@@ -115,7 +115,7 @@ class Investor_WithdrawFunds_Controller extends CI_Controller {
             $paymentOrder->amount = $withrawalAmount;
             $paymentOrder->c_investor_id = $investor->c_investor_id;
 
-            $this->FINPaymentOrderModel->save($paymentOrder, $this->session->id);
+            $this->FINPaymentOrderModel->save($paymentOrder, $this->session->session_investor['id']);
 
             $response = array(
                 'status' => 'success',
@@ -145,7 +145,7 @@ class Investor_WithdrawFunds_Controller extends CI_Controller {
 
         $data = array();
         try {
-            $query = $this->FINPaymentHistoryModel->get_payOutPaymentHistoryByUserId($this->session->id);   
+            $query = $this->FINPaymentHistoryModel->get_payOutPaymentHistoryByUserId($this->session->session_investor['id']);   
         
             foreach ($query->result() as $payhist) {
                 $curr = $this->CCurrencyModel->get($payhist->c_currency_id);

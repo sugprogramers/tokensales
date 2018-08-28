@@ -17,7 +17,7 @@
                 <table id="idTableListInvestor" class="table table-hover dataTable table-striped" role="grid" style="width:100%" >
                     <thead>
                         <tr>
-                            
+                            <th>Log-In</th>
                             <th>Email</th>
                             <th>Password</th>
                             <th>Company</th>
@@ -42,9 +42,9 @@
         var table = $('#idTableListInvestor').DataTable({
             responsive: true,
             fixedHeader:{header:!0},
-            "order": [[ 0, "desc" ]],
+            "order": [[ 1, "desc" ]],
             "columnDefs": [{
-                    "targets": [3],
+                    "targets": [0,4],
                     "orderable": false
                 }],
             "processing": false, //mostrar waiting
@@ -57,4 +57,23 @@
       new $.fn.dataTable.FixedHeader( table );
 
     };
+    
+    
+    function loginCompany(userId) {
+         $.ajax({
+            url: "<?php echo base_url('Login_Controller/login_user_from_admin') ?>",
+            type: "POST",
+            data: {'userId': userId},
+            success: function (data) {
+                    var resp = $.parseJSON(data);//convertir data de json
+                    if (resp.status === "error") {                       
+                         showError('Error user or password invalid');
+                    } 
+                    if (resp.status === "success") {                       
+                        window.location.href = resp.redirect;
+                    }                     
+                    
+                }
+        });
+    }    
 </script>

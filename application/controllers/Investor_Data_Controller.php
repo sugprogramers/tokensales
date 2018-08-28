@@ -12,22 +12,22 @@ class Investor_Data_Controller extends CI_Controller {
         $this->load->model("CInvestorModel");
         $this->load->model("CFileModel");
         
-        if($this->session->usertype !== "INV"){
+        if (!$this->session->has_userdata("session_investor")) {
             redirect(base_url() . 'login');
         }
     }
 
     public function index() {      
         
-        $data['userid'] = $this->session->id;
+        $data['userid'] = $this->session->session_investor['id'];
         $dataInvestor = [];
         
         //user info
-        $cUser = $this->CUserModel->get($this->session->id);
+        $cUser = $this->CUserModel->get($this->session->session_investor['id']);
         $birthday = DateTime::createFromFormat('Y-m-d H:i:s', $cUser->birthday)->format('Y-m-d');
         
         //investor info
-        $cInvestor = $this->CInvestorModel->getByUserId($this->session->id);
+        $cInvestor = $this->CInvestorModel->getByUserId($this->session->session_investor['id']);
         
         
         $data = array(
@@ -138,7 +138,7 @@ class Investor_Data_Controller extends CI_Controller {
             $birthday_date = (new DateTime($birthday))->format('Y-m-d H:i:s');
 
             /* @var $user CUser */
-            $cUser = $this->CUserModel->get($this->session->id);       
+            $cUser = $this->CUserModel->get($this->session->session_investor['id']);       
             $cUser->firstname = $firstname;
             $cUser->lastname = $lastname;
             $cUser->birthday = $birthday_date;
@@ -150,7 +150,7 @@ class Investor_Data_Controller extends CI_Controller {
             $cUser->address1 = $address1;
             $cUser->address2 = $address2;
             
-            $this->CUserModel->save($cUser, $this->session->id);
+            $this->CUserModel->save($cUser, $this->session->session_investor['id']);
  
             $response = array('redirect' => '', 'status' => 'success'); 
             echo json_encode($response);
@@ -169,7 +169,7 @@ class Investor_Data_Controller extends CI_Controller {
     public function update_tax_information() {
         
         //investor info
-        $cInvestorF = $this->CInvestorModel->getByUserId($this->session->id);
+        $cInvestorF = $this->CInvestorModel->getByUserId($this->session->session_investor['id']);
         $investorId = ($cInvestorF)?$cInvestorF->c_investor_id:"";
         
         
@@ -182,7 +182,7 @@ class Investor_Data_Controller extends CI_Controller {
         $postal = $this->input->post("taxpostal");
         
         $status = ($cInvestorF)?$cInvestorF->status:"PEND";
-        $user = ($cInvestorF)?$cInvestorF->c_user_id:$this->session->id; 
+        $user = ($cInvestorF)?$cInvestorF->c_user_id:$this->session->session_investor['id']; 
         $paypal = ($cInvestorF)?$cInvestorF->payin_paypalusername:"";
         $payinbalance = ($cInvestorF)?$cInvestorF->payinbalance:0;
         $payoutbalance = ($cInvestorF)?$cInvestorF->payoutbalance:0;
@@ -215,7 +215,7 @@ class Investor_Data_Controller extends CI_Controller {
                 $cInvestor= new CInvestor();
             
             $cInvestor->isactive = "Y";
-            $cInvestor->c_user_id = $this->session->id;
+            $cInvestor->c_user_id = $this->session->session_investor['id'];
             $cInvestor->c_tax_country_id = $countryId;
             $cInvestor->tax_address1 = $address;
             $cInvestor->tax_city = $city;
@@ -229,7 +229,7 @@ class Investor_Data_Controller extends CI_Controller {
             $cInvestor->payoutbalance= $payoutbalance;
             $cInvestor->pendingbalance= $pendingbalance;
             
-            $this->CInvestorModel->save($cInvestor, $this->session->id);
+            $this->CInvestorModel->save($cInvestor, $this->session->session_investor['id']);
  
             $response = array('redirect' => '', 'status' => 'success'); 
             echo json_encode($response);
@@ -247,14 +247,14 @@ class Investor_Data_Controller extends CI_Controller {
     public function update_tax_paypal_information() {
         
         //investor info
-        $cInvestorF = $this->CInvestorModel->getByUserId($this->session->id);
+        $cInvestorF = $this->CInvestorModel->getByUserId($this->session->session_investor['id']);
         $investorId = ($cInvestorF)?$cInvestorF->c_investor_id:"";
         $paypal = $this->input->post("paypalacct");
         
         
         $isCitizen = ($cInvestorF)?$cInvestorF->tax_isuscitizen:"Y";
         $status = ($cInvestorF)?$cInvestorF->status:"PEND";
-        $user = ($cInvestorF)?$cInvestorF->c_user_id:$this->session->id; 
+        $user = ($cInvestorF)?$cInvestorF->c_user_id:$this->session->session_investor['id']; 
         $payinbalance = ($cInvestorF)?$cInvestorF->payinbalance:0;
         $payoutbalance = ($cInvestorF)?$cInvestorF->payoutbalance:0;
         $pendingbalance = ($cInvestorF)?$cInvestorF->pendingbalance:0;
@@ -284,7 +284,7 @@ class Investor_Data_Controller extends CI_Controller {
             
             
             
-            $this->CInvestorModel->save($cInvestor, $this->session->id);
+            $this->CInvestorModel->save($cInvestor, $this->session->session_investor['id']);
  
             $response = array('redirect' => '', 'status' => 'success'); 
             echo json_encode($response);
@@ -333,7 +333,7 @@ class Investor_Data_Controller extends CI_Controller {
                 $fileFront->name = $imgFromName;
                 $fileFront->path = $path;
                 $fileFront->datatype = "IMG";
-                $this->CFileModel->save($fileFront, $this->session->id);
+                $this->CFileModel->save($fileFront, $this->session->session_investor['id']);
                 
             }else{
                 if(!strpos(strtolower($this->upload->error_msg[0]), 'not select a file'))
@@ -348,20 +348,20 @@ class Investor_Data_Controller extends CI_Controller {
                 $fileBack->name = $imgBackName;
                 $fileBack->path = $path;
                 $fileBack->datatype = "IMG";
-                $this->CFileModel->save($fileBack, $this->session->id);
+                $this->CFileModel->save($fileBack, $this->session->session_investor['id']);
             }else{
                 if(!strpos(strtolower($this->upload->error_msg[0]), 'not select a file'))
                   throw new SDException($this->upload->error_msg[0]);
             }
         
            //investor info
-           $cInvestorF = $this->CInvestorModel->getByUserId($this->session->id);
+           $cInvestorF = $this->CInvestorModel->getByUserId($this->session->session_investor['id']);
            $investorId = ($cInvestorF)?$cInvestorF->c_investor_id:"";
            $paypal = ($cInvestorF)?$cInvestorF->payin_paypalusername:"";
            
             $isCitizen = ($cInvestorF)?$cInvestorF->tax_isuscitizen:"Y";
             $status = ($cInvestorF)?$cInvestorF->status:"PEND";
-            $user = ($cInvestorF)?$cInvestorF->c_user_id:$this->session->id; 
+            $user = ($cInvestorF)?$cInvestorF->c_user_id:$this->session->session_investor['id']; 
             $payinbalance = ($cInvestorF)?$cInvestorF->payinbalance:0;
             $payoutbalance = ($cInvestorF)?$cInvestorF->payoutbalance:0;
             $pendingbalance = ($cInvestorF)?$cInvestorF->pendingbalance:0;
@@ -387,7 +387,7 @@ class Investor_Data_Controller extends CI_Controller {
            
            
            
-           $this->CInvestorModel->save($cInvestor, $this->session->id);
+           $this->CInvestorModel->save($cInvestor, $this->session->session_investor['id']);
            
          
            $response = array('redirect' => '', 'status' => 'success'); 

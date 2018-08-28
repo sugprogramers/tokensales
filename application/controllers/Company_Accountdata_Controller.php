@@ -10,15 +10,14 @@ class Company_Accountdata_Controller extends CI_Controller {
         $this->load->helper('url');
         $this->load->model("CUserModel");
         
-        
-        if($this->session->usertype !== "COMPMAN"){
+        if (!$this->session->has_userdata("session_company")) {
             redirect(base_url() . 'login');
-        }
+        } 
     }
 
     public function index() {
         
-        $cUser = $this->CUserModel->get($this->session->id);
+        $cUser = $this->CUserModel->get($this->session->session_company['id']);
         $birthday = DateTime::createFromFormat('Y-m-d H:i:s', $cUser->birthday)->format('Y-m-d');
         $data = array(
                 'phone' => $cUser->phone,
@@ -74,7 +73,7 @@ class Company_Accountdata_Controller extends CI_Controller {
             $birthday_date = (new DateTime($birthday))->format('Y-m-d H:i:s');
 
             /* @var $user CUser */
-            $cUser = $this->CUserModel->get($this->session->id);            
+            $cUser = $this->CUserModel->get($this->session->session_company['id']);            
             $cUser->firstname = $firstname;
             $cUser->birthday = $birthday_date;
             $cUser->phone = $phone;
@@ -85,7 +84,7 @@ class Company_Accountdata_Controller extends CI_Controller {
             $cUser->address1 = $address1;
             $cUser->address2 = $address2;
             
-            $this->CUserModel->save($cUser, $this->session->id);
+            $this->CUserModel->save($cUser, $this->session->session_company['id']);
  
             $response = array('redirect' => '', 'status' => 'success'); 
             echo json_encode($response);

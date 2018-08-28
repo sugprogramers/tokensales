@@ -14,8 +14,7 @@ class Project_List_Investment_IPayout_Controller extends CI_Controller {
         $this->load->model("CAdminModel");
         $this->load->model("CProjectmanagerModel");
         
-       
-        if($this->session->usertype !== "COMPMAN"){
+        if (!$this->session->has_userdata("session_company")) {
             redirect(base_url() . 'login');
         }
     }
@@ -31,7 +30,7 @@ class Project_List_Investment_IPayout_Controller extends CI_Controller {
         $start = intval($this->input->get("start"));
         $length = intval($this->input->get("length"));
 
-        $cUser = $this->session->id;
+        $cUser = $this->session->session_company['id'];
         
         $cProjectManager = $this->CProjectmanagerModel->loadByUserId($cUser);
         $cProjectManagerId = ($cProjectManager)?$cProjectManager->c_projectmanager_id:"";

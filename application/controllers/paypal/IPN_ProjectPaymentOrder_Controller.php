@@ -89,7 +89,7 @@ class IPN_ProjectPaymentOrder_Controller extends CI_Controller {
     }
     
     public function success($finPaymentOrderId) { 
-        if($this->session->usertype !== "ADM"){
+        if(!$this->session->has_userdata("session_admin")){
             redirect(base_url() . 'login');
         }
         $data = $this->get_projectInfoByOrderPaymentId($finPaymentOrderId);
@@ -100,7 +100,7 @@ class IPN_ProjectPaymentOrder_Controller extends CI_Controller {
     }
     
     public function cancel($finPaymentOrderId) {   
-        if($this->session->usertype !== "ADM"){
+        if(!$this->session->has_userdata("session_admin")){
             redirect(base_url() . 'login');
         }
         $data = $this->get_projectInfoByOrderPaymentId($finPaymentOrderId);

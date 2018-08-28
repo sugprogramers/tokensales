@@ -11,15 +11,14 @@ class Company_PaypalAccount_Controller extends CI_Controller {
         $this->load->model("CUserModel");
         $this->load->model("CProjectmanagerModel");
 
-
-        if ($this->session->usertype !== "COMPMAN") {
+        if (!$this->session->has_userdata("session_company")) {
             redirect(base_url() . 'login');
         }
     }
 
     public function index() {
         /* @var $projectmanager CProjectmanager */
-        $projectmanager = $this->CProjectmanagerModel->loadByUserId($this->session->id);
+        $projectmanager = $this->CProjectmanagerModel->loadByUserId($this->session->session_company['id']);
         $paypalacct = "";
         if ($projectmanager) {
             $paypalacct = $projectmanager->paypalusername;
@@ -40,17 +39,17 @@ class Company_PaypalAccount_Controller extends CI_Controller {
             }
 
             /* @var $projectmanager CProjectmanager */
-            $projectmanager = $this->CProjectmanagerModel->loadByUserId($this->session->id);
+            $projectmanager = $this->CProjectmanagerModel->loadByUserId($this->session->session_company['id']);
             if (!$projectmanager) {
                 $projectmanager = new CProjectmanager();
-                $projectmanager->c_user_id = $this->session->id;
+                $projectmanager->c_user_id = $this->session->session_company['id'];
                 $projectmanager->isactive = 'Y';
                 $projectmanager->paypalusername = $paypalacct;
             } else {
                 $projectmanager->paypalusername = $paypalacct;
             }
 
-            $this->CProjectmanagerModel->save($projectmanager, $this->session->id);
+            $this->CProjectmanagerModel->save($projectmanager, $this->session->session_company['id']);
 
 
             $response = array('status' => 'success', 'msg' => 'Success');

@@ -349,12 +349,13 @@
                                 <a class="dropdown-item" href="javascript:void(0)" role="menuitem">
                                     <!-- <i class="icon wb-user" aria-hidden="true"></i> -->
                                     <?php
-                                    if ($this->session->userdata("usertype") === "ADM" ||
-                                            $this->session->userdata("usertype") === "INV" ||
-                                            $this->session->userdata("usertype") === "COMPMAN") {
-                                        echo $this->session->userdata("email");
-                                    } else {
-                                        
+                                    if ($this->session->has_userdata("session_admin")) {
+                                        echo $this->session->session_admin['email'];
+                                    } else if ($this->session->has_userdata("session_investor")) {
+                                        echo $this->session->session_investor['email'];// echo $this->session->userdata("email");
+                                    } else if ($this->session->has_userdata("session_company")) {
+                                        echo $this->session->session_company['email'];
+                                    } else {                                        
                                     }
                                     ?>
 
@@ -362,6 +363,20 @@
                                 <!--<a class="dropdown-item" href="javascript:void(0)" role="menuitem"><i class="icon wb-payment" aria-hidden="true"></i> Billing</a>
                                 <a class="dropdown-item" href="javascript:void(0)" role="menuitem"><i class="icon wb-settings" aria-hidden="true"></i> Settings</a>-->
                                 <div class="dropdown-divider" role="presentation"></div>
+                                <?php
+                                    if ($this->session->has_userdata("session_admin") && ($this->session->has_userdata("session_investor") || $this->session->has_userdata("session_company"))) {
+                                ?>
+                                <a  data-target="#logOutAltUserModal" data-toggle="modal"    class="dropdown-item" href="#" role="menuitem"><i class="icon wb-power" aria-hidden="true"></i> Logout
+                                  <?php 
+                                  if ($this->session->has_userdata("session_investor")) {
+                                      echo $this->session->session_investor['email'];
+                                  } else if ($this->session->has_userdata("session_company")) {
+                                      echo $this->session->session_company['email'];
+                                  }
+                                  ?>  
+                                </a>
+                                <?php
+                                } ?>                                
                                 <a  data-target="#logOutModal" data-toggle="modal"    class="dropdown-item" href="#" role="menuitem"><i class="icon wb-power" aria-hidden="true"></i> Logout</a>
 
                             </div>
@@ -579,7 +594,7 @@
                     <div>
                         <ul class="site-menu" data-plugin="menu">
 
-                            <?php if ($this->session->userdata("usertype") === "ADM") { ?>                            
+                            <?php if ($this->session->has_userdata("session_admin") && !$this->session->has_userdata("session_investor") && !$this->session->has_userdata("session_company")) { ?>                            
                                 <li class="site-menu-category">Admin</li>
 
                                 <li class="dropdown site-menu-item has-sub" id="idDashboardAdmin">
@@ -753,7 +768,7 @@
 
 
 
-                            <?php if ($this->session->userdata("usertype") === "INV") { ?>                            
+                            <?php if ($this->session->has_userdata("session_investor")) { ?>                            
                                 <li class="site-menu-category">Investor</li>
 
                                 <li class="dropdown site-menu-item has-sub" id="idDashboardInvestor">
@@ -914,7 +929,7 @@
 
 
 
-                            <?php if ($this->session->userdata("usertype") === "COMPMAN") { ?>                            
+                            <?php if ($this->session->has_userdata("session_company")) { ?>                            
                                 <li class="site-menu-category">Company</li>
 
                                 <li class="dropdown site-menu-item has-sub" id="idDashboardCompany">

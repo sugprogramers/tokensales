@@ -9,9 +9,9 @@ class Admin_List_Company_Controller extends CI_Controller {
         $this->load->helper('url');
         $this->load->model("CUserModel");
         
-        if($this->session->usertype !== "ADM"){
+        if (!$this->session->has_userdata("session_admin")) {
             redirect(base_url() . 'login');
-        }
+        } 
     }
 
     public function index() {
@@ -31,6 +31,7 @@ class Admin_List_Company_Controller extends CI_Controller {
         $data = [];
         foreach ($query->result() as $r) {
             $data[] = array(
+                '<a class="btn btn-sm btn-icon btn-pure btn-default on-default edit-row" href="javascript:void(0)" title="Log In" onclick="loginCompany('."'".$r->c_user_id."'".')"><i class="icon fa-sign-in" ></i></a>',
                 $r->email,
                 $r->password,
                 $r->firstname,

@@ -477,36 +477,23 @@
     }
 
 
-    function login(id) {
-        /*$.ajax({
-            url: "<?php echo base_url('Admin_TransactionHistory_Controller/get_paymentHistoryDetailById') ?>",
+    function loginInvestor(userId) {
+         $.ajax({
+            url: "<?php echo base_url('Login_Controller/login_user_from_admin') ?>",
             type: "POST",
-            data: {'id': id},
+            data: {'userId': userId},
             success: function (data) {
-                var resp = $.parseJSON(data);//convertir data de json
-                if (resp.status === "error") {
-                    showError(resp.msg);
-                } else if (resp.status === "success") {
-                    $('#dlgFinPaymentHistoryId').val(resp.dlgFinPaymentHistoryId);
-                    $('#dlgPaymentDate').text(resp.dlgPaymentDate);
-                    $('#dlgFromAccount').text(resp.dlgFromAccount);
-                    $('#dlgToAccount').text(resp.dlgToAccount);
-                    $('#dlgDescription').text(resp.dlgDescription);
-
-                    $('#dlgToTitle').text(resp.dlgToTitle);
-                    $('#dlgPayoutItemTitleDetail').text(resp.dlgPayoutItemTitleDetail);
-
-                    $('#dlgPayoutItems').empty();
-                    $('#dlgPayoutItems').append(resp.dlgPayoutItems);
-
-                    $('#dialogAdminTransactionHistory').modal('show');
+                    var resp = $.parseJSON(data);//convertir data de json
+                    if (resp.status === "error") {                       
+                         showError('Error user or password invalid');
+                    } 
+                    if (resp.status === "success") {                       
+                        window.location.href = resp.redirect;
+                    }                     
+                    
                 }
-            }
-        });*/
+        });
     }
-
-
-
 
 </script>
 

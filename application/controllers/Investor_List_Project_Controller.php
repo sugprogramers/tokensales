@@ -11,9 +11,7 @@ class Investor_List_Project_Controller extends CI_Controller {
         $this->load->model("CProjectdocumenttypeModel");
         $this->load->model("FINInvestmentModel");
         
-        
-        
-        if ($this->session->usertype !== "INV") {
+        if (!$this->session->has_userdata("session_investor")) {
             redirect(base_url() . 'login');
         }
     }
@@ -29,7 +27,7 @@ class Investor_List_Project_Controller extends CI_Controller {
      public function invesment_project($monto , $c_project_id){
         try {
             
-            $val = $this->FINInvestmentModel->invesment($monto ,$c_project_id , $this->session->id);            
+            $val = $this->FINInvestmentModel->invesment($monto ,$c_project_id , $this->session->session_investor['id']);            
            if($val){
                $response = array('redirect' => '', 'status' => 'success');
                echo json_encode($response); 

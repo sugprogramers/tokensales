@@ -8,9 +8,9 @@ class Company_BasicData_Controller extends CI_Controller {
         parent::__construct();
         $this->load->helper('url');
 
-        if ($this->session->usertype !== "COMPMAN") {
+        if (!$this->session->has_userdata("session_company")) {
             redirect(base_url() . 'login');
-        }
+        } 
     }
 
     public function index() {

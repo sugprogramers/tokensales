@@ -14,8 +14,7 @@ class Investor_ProcessDepositFunds_Controller extends CI_Controller {
         $this->load->model("CAdminModel");        
         $this->load->model("CUserModel");
         
-       
-        if($this->session->usertype !== "INV"){
+        if (!$this->session->has_userdata("session_investor")) {
             redirect(base_url() . 'login');
         }
     }

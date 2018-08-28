@@ -10,14 +10,14 @@ class Investor_Investment_Controller extends CI_Controller {
         $this->load->model("FINInvestmentModel");
         $this->load->model("CProjectModel");
         
-        if($this->session->usertype !== "INV"){
+        if (!$this->session->has_userdata("session_investor")) {
             redirect(base_url() . 'login');
         }
     }
 
     public function index() {      
         
-        $data['userid'] = $this->session->id;
+        $data['userid'] = $this->session->session_investor['id'];
         $this->load->view('header/header_admin');
         $this->load->view('investor_investment',$data);
         $this->load->view('footer/footer_admin');        

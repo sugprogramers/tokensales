@@ -8,7 +8,7 @@ class Investor_Dashboard_Controller extends CI_Controller {
         parent::__construct();
         $this->load->helper('url');
         
-        if($this->session->usertype !== "INV"){
+        if (!$this->session->has_userdata("session_investor")) {
             redirect(base_url() . 'login');
         }
     }

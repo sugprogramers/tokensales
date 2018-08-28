@@ -12,7 +12,7 @@ class Company_TransactionHistory_Controller extends CI_Controller {
         $this->load->model("CCurrencyModel");
         $this->load->model("CUserModel");
 
-        if ($this->session->usertype !== "COMPMAN") {
+        if (!$this->session->has_userdata("session_company")) {
             redirect(base_url() . 'login');
         }
     }
@@ -31,7 +31,7 @@ class Company_TransactionHistory_Controller extends CI_Controller {
         $data = array();
         try {
 
-            $query = $this->FINPaymentHistoryModel->loadByUser($this->session->id);            
+            $query = $this->FINPaymentHistoryModel->loadByUser($this->session->session_company['id']);            
                         
             foreach ($query->result() as $payhist) {
                 $curr = $this->CCurrencyModel->get($payhist->c_currency_id);

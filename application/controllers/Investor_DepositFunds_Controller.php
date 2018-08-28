@@ -12,14 +12,14 @@ class Investor_DepositFunds_Controller extends CI_Controller {
         $this->load->model("FINPaymentHistoryModel");     
         $this->load->model("CCurrencyModel");  
 
-        if ($this->session->usertype !== "INV") {
+        if (!$this->session->has_userdata("session_investor")) {
             redirect(base_url() . 'login');
         }
     }
 
     public function index() {
         /* @var $investor CInvestor */
-        $investor = $this->CInvestorModel->getByUserId($this->session->id);
+        $investor = $this->CInvestorModel->getByUserId($this->session->session_investor['id']);
         
         $investorId = '';
         $payinbalance = 0;        
@@ -42,7 +42,7 @@ class Investor_DepositFunds_Controller extends CI_Controller {
 
         $data = array();
         try {
-            $query = $this->FINPaymentHistoryModel->get_payInPaymentHistoryByUserId($this->session->id);   
+            $query = $this->FINPaymentHistoryModel->get_payInPaymentHistoryByUserId($this->session->session_investor['id']);   
         
             foreach ($query->result() as $payhist) {
                 $curr = $this->CCurrencyModel->get($payhist->c_currency_id);

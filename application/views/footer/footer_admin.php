@@ -192,10 +192,31 @@
     }
 
     function logOut() {
-        window.location.replace("<?php echo base_url(); ?>Login_Controller/logout_user");
+        var res = logOutAltUser();
+        if (!res) {
+            window.location.replace("<?php echo base_url(); ?>Login_Controller/logout_user");
+        }
     }
 
-
+    function logOutAltUser() {
+        <?php 
+        if ($this->session->has_userdata("session_admin")) {
+            if ($this->session->has_userdata("session_investor")) {
+        ?>        
+                window.location.replace("<?php echo base_url(); ?>Login_Controller/logout_investor_from_admin");
+                return true;
+        <?php 
+            } 
+            if ($this->session->has_userdata("session_company")) {
+        ?>        
+                window.location.replace("<?php echo base_url(); ?>Login_Controller/logout_company_from_admin");                
+                return true;
+        <?php        
+            }                                                   
+        }        
+        ?> 
+         return false;
+    }
 
 </script>
 
@@ -219,6 +240,33 @@
             <div class="modal-footer">
 
                 <button type="button" class="btn btn-raised btn-primary btn-block" onclick="logOut();"><i class="icon fa-check" aria-hidden="true"></i> YES</button>
+                <button type="button" class="btn btn-raised btn-danger btn-block" data-dismiss="modal"><i class="icon fa-close" aria-hidden="true"></i> No</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Modal -->
+
+<!-- Modal-2 -->
+<!--<div class="modal fade" id="logOutAltUserModal" aria-hidden="true" aria-labelledby="examplePositionCenter"
+     role="dialog" tabindex="-1"> -->
+<div class="modal fade" id="logOutAltUserModal" aria-hidden="true" aria-labelledby="examplePositionSidebar"
+     role="dialog" tabindex="-1">    
+    <!--<div class="modal-dialog modal-center">-->
+    <div class="modal-dialog modal-simple modal-sidebar modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title">Close session</h4>
+            </div>
+            <div class="modal-body">
+                <h4>Do you want to close the investor/company session?</h4>
+            </div>
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-raised btn-primary btn-block" onclick="logOutAltUser();"><i class="icon fa-check" aria-hidden="true"></i> YES</button>
                 <button type="button" class="btn btn-raised btn-danger btn-block" data-dismiss="modal"><i class="icon fa-close" aria-hidden="true"></i> No</button>
             </div>
         </div>

@@ -19,9 +19,7 @@ class Company_Edit_Project_Controller extends CI_Controller {
         $this->load->model("CProjectdocumenttypeModel");
         $this->load->model("CProjectdocumentModel");
 
-
-
-        if ($this->session->usertype !== "COMPMAN") {
+        if (!$this->session->has_userdata("session_company")) {
             redirect(base_url() . 'login');
         }
     }
@@ -56,7 +54,7 @@ class Company_Edit_Project_Controller extends CI_Controller {
            
             $idfilephoto = $this->upload_Image();
             $obj = $this->saveValidate($c_project_id, $idfilephoto);
-            $this->CProjectModel->save($obj, $this->session->id);
+            $this->CProjectModel->save($obj, $this->session->session_company['id']);
 
             $this->upload_Docs($obj->c_project_id);
 
@@ -167,7 +165,7 @@ class Company_Edit_Project_Controller extends CI_Controller {
                 $photo->name = $imgFromName;
                 $photo->path = $path;
                 $photo->datatype = "IMG";
-                $this->CFileModel->save($photo, $this->session->id);
+                $this->CFileModel->save($photo, $this->session->session_company['id']);
 
                 $configr['image_library'] = 'gd2';
                 $configr['source_image'] = $path . $imgFromName;
@@ -222,13 +220,13 @@ class Company_Edit_Project_Controller extends CI_Controller {
                     $filedoc->name = $imgFromName;
                     $filedoc->path = $path;
                     $filedoc->datatype = "PDF";
-                    $this->CFileModel->save($filedoc, $this->session->id);
+                    $this->CFileModel->save($filedoc, $this->session->session_company['id']);
 
                     $doc->c_file_id = $filedoc->c_file_id;
                     $doc->c_project_id = $c_project_id;
                     $doc->c_projectdocumenttype_id = $filesadmin['c_projectdocumenttype_id'];
                     $doc->isactive = "Y";
-                    $this->CProjectdocumentModel->save($doc, $this->session->id);
+                    $this->CProjectdocumentModel->save($doc, $this->session->session_company['id']);
                 }
             } catch (Exception $e) {
                 

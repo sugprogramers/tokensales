@@ -12,9 +12,9 @@ class Admin_TransactionHistory_Controller extends CI_Controller {
         $this->load->model("CCurrencyModel");
         $this->load->model("CUserModel");
 
-        if ($this->session->usertype !== "ADM") {
+        if (!$this->session->has_userdata("session_admin")) {
             redirect(base_url() . 'login');
-        }
+        } 
     }
 
     public function index() {

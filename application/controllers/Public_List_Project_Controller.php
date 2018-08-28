@@ -3,26 +3,25 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 include 'application/libraries/SDException.php';
 
 class Public_List_Project_Controller extends CI_Controller {
-
+    
     public function __construct() {
         parent::__construct();
         $this->load->helper('url');
         $this->load->model("CProjectModel");
         $this->load->model("CProjectdocumenttypeModel");
         $this->load->model("FINInvestmentModel");
-        
-        
+             
     }
 
     public function index() {
         
-        if ($this->session->usertype === "ADM") {
+        if ($this->session->has_userdata("session_admin")) {
             redirect(base_url() . 'admin_dashboard');
         }
-        if ($this->session->usertype === "INV") {
+        if ($this->session->has_userdata("session_investor")) {
             redirect(base_url() . 'investor_dashboard');
         }
-        if ($this->session->usertype === "COMPMAN") {
+        if ($this->session->has_userdata("session_company")) {
             redirect(base_url() . 'company_dashboard');
         }
         
@@ -33,20 +32,24 @@ class Public_List_Project_Controller extends CI_Controller {
     
    
     
-     public function invesment_project($monto , $c_project_id){
+     public function invesment_project($monto, $c_project_id) {
         try {
-            
-            $val = $this->FINInvestmentModel->invesment($monto ,$c_project_id , $this->session->id);            
-           if($val){
-               $response = array('redirect' => '', 'status' => 'success');
-               echo json_encode($response); 
-           }
-           else{
-               $response = array('redirect' => '', 'status' => 'error', 'msg' => 'error');
-                 echo json_encode($response);
-           }
-            
-           
+            if ($this->session->has_userdata("session_admin")) {
+                $id = $this->session->session_admin['id'];
+            } else if ($this->session->has_userdata("session_investor")) {
+                $id = $this->session->session_investor['id'];
+            } else if ($this->session->has_userdata("session_company")) {
+                $id = $this->session->session_company['id'];
+            }
+
+            $val = $this->FINInvestmentModel->invesment($monto, $c_project_id, $id);
+            if ($val) {
+                $response = array('redirect' => '', 'status' => 'success');
+                echo json_encode($response);
+            } else {
+                $response = array('redirect' => '', 'status' => 'error', 'msg' => 'error');
+                echo json_encode($response);
+            }
         } catch (Exception $e) {
             $response = array('redirect' => '', 'status' => 'error', 'msg' => $e->getMessage());
             echo json_encode($response);

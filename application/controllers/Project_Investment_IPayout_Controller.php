@@ -14,8 +14,7 @@ class Project_Investment_IPayout_Controller extends CI_Controller {
         $this->load->model("CAdminModel");
         $this->load->model("CUserModel");
         
-       
-        if($this->session->usertype !== "COMPMAN"){
+        if (!$this->session->has_userdata("session_company")) {
             redirect(base_url() . 'login');
         }
     }

@@ -86,7 +86,7 @@ class IPN_InvestorPaymentOrder_Controller extends CI_Controller {
     }
     
     public function success($finPaymentOrderId) { 
-        if($this->session->usertype !== "ADM"){
+        if(!$this->session->has_userdata("session_admin")){
             redirect(base_url() . 'login');
         }
         $data = $this->get_investorInfoByOrderPaymentId($finPaymentOrderId);
@@ -97,7 +97,7 @@ class IPN_InvestorPaymentOrder_Controller extends CI_Controller {
     }
     
     public function cancel($finPaymentOrderId) {   
-        if($this->session->usertype !== "ADM"){
+        if(!$this->session->has_userdata("session_admin")){
             redirect(base_url() . 'login');
         }
         $data = $this->get_investorInfoByOrderPaymentId($finPaymentOrderId);

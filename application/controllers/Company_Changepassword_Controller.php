@@ -11,7 +11,7 @@ class Company_Changepassword_Controller extends CI_Controller {
         $this->load->helper('url');
         $this->load->model("CUserModel");
         
-        if($this->session->usertype !== "COMPMAN"){
+        if (!$this->session->has_userdata("session_company")) {
             redirect(base_url() . 'login');
         }
     }
@@ -39,13 +39,13 @@ class Company_Changepassword_Controller extends CI_Controller {
             }
                         
             /* @var $user CUser */
-            $user = $this->CUserModel->get($this->session->id);
+            $user = $this->CUserModel->get($this->session->session_company['id']);
             if(!$user){
                 throw new SDException('User does not exists');
             }
             
             $user->password = $password;
-            $this->CUserModel->save($user, $this->session->id);
+            $this->CUserModel->save($user, $this->session->session_company['id']);
            
 
 
