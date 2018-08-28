@@ -63,7 +63,13 @@
 <script src="<?php echo base_url() . "themes/default/remark"; ?>/global/vendor/datatables.net-responsive/dataTables.responsive.min599c.js?v4.0.2"></script>
 <script src="<?php echo base_url() . "themes/default/remark"; ?>/global/vendor/bootbox/bootbox.min599c.js?v4.0.2"></script>
 
+<!-- CHARTS -->
 
+<script src="<?php echo base_url() . "themes/default/remark"; ?>/global/vendor/aspieprogress/jquery-asPieProgress.min599c.js?v4.0.2"></script>
+<script src="<?php echo base_url() . "themes/default/remark"; ?>/global/vendor/matchheight/jquery.matchHeight-min599c.js?v4.0.2"></script>
+
+
+<script src="<?php echo base_url() . "themes/default/remark"; ?>/global/vendor/matchheight/jquery.matchHeight-min599c.js?v4.0.2"></script>
 
 
 <!-- ALERt confirmation -->
@@ -97,6 +103,12 @@
 
 <!-- asrange -->
 <script src="<?php echo base_url() . "themes/default/remark"; ?>/global/vendor/asrange/jquery-asRange.min599c.js?v4.0.2"></script>
+
+<!-- charts -->
+<script src="<?php echo base_url() . "themes/default/remark"; ?>/global/js/Plugin/aspieprogress.min599c.js?v4.0.2"></script>
+
+<!-- matchheight -->
+<script src="<?php echo base_url() . "themes/default/remark"; ?>/global/js/Plugin/matchheight.min599c.js?v4.0.2"></script>
 
 <script>
      (function (document, window, $) {

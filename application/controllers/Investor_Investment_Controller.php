@@ -40,11 +40,12 @@ class Investor_Investment_Controller extends CI_Controller {
            $data[] = array(
                 $obj->name,
                 $obj->amount . " " . $obj->cursymbol,               
-                $obj->companyname,
+                $obj->companyname . " " . '<a class="btn btn-sm btn-icon btn-pure btn-default on-default edit-row" href="javascript:void(0)" title="more info" onclick="moreinfo_investment('."'".$obj->fin_investment_id."'".')"><i class="icon wb-info-circle"></i></a>',
                 $this->CProjectModel->getProjectStatusName($obj->projectstatus),
                 $obj->investmentdate,
                 $this->FINInvestmentModel->getInvestmentStatusName($obj->investmentstatus), 
-                "--",
+                $obj->percent,
+                $obj->earning,
                 $obj->longitude,
                 $obj->latitude,
                $count

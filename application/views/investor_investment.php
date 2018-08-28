@@ -46,6 +46,7 @@
                                                 <th class="none" >Project Status</th>
                                                 <th class="none" >Investment Date</th>
                                                 <th class="none" >Investment Status</th>
+                                                <th class="none" >Investment %</th>
                                                 <th class="none" >Earnings</th>
                                                 
                                                 <th class="none" >Latitude</th>
@@ -89,6 +90,126 @@
         </div> 
     </div> 
 </div> 
+    
+    
+    
+    
+    
+    
+    
+    
+<!-- Modal -->
+   <div class="modal fade" id="examplePositionCenter" aria-hidden="true" aria-labelledby="examplePositionCenter"
+        role="dialog" tabindex="-1">
+     <div class="modal-dialog modal-simple modal-center">
+       <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+          <h4 class="modal-title">Project Name</h4>
+       </div>
+       <div class="modal-body">
+         <div class="tab-content">
+             
+             <div class="row">
+              
+                                                 
+                                        
+                    <div class="col-lg-12">
+
+                      <div class="card card-shadow card-completed-options">
+                      <div class="card-block p-30">
+                        <div class="row">
+                          <div class="col-6">
+                            <div class="counter text-center blue-grey-700">
+                              <div class="counter-label mt-10">Investment
+                              </div>
+                              <div class="counter-number font-size-40 mt-10">
+                                1,234
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-6">
+                            <div class="pie-progress pie-progress-sm" data-plugin="pieProgress" data-valuemax="100"
+                              data-barcolor="#57c7d4" data-size="100" data-barsize="10"
+                              data-goal="10" aria-valuenow="20" role="progressbar">
+                              <span class="pie-progress-number blue-grey-700 font-size-20">
+                                10%
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                                        
+                           
+             </div>                
+                             
+            <div class="row">
+                <div class="col-sm-3">
+                   <p><b>Target</b></p>
+                </div>
+                <div class="col-sm-3">
+                    <label id="lblProjectTarget" class="control-label" >sdfsdf</label>
+                </div>
+                
+                
+                <div class="col-sm-3">
+                   <p><b>Investment Date</b></p>
+                </div>
+                <div class="col-sm-3">
+                    <label id="lblProjectTarget" class="control-label" >sdfsdf</label>
+                </div>
+                
+                
+            </div>
+             
+             <div class="row">
+                <div class="col-sm-3">
+                   <p><b>Start Date</b></p>
+                </div>
+                <div class="col-sm-3">
+                    <label id="lblProjectTarget" class="control-label" >sdfsdf</label>
+                </div>
+                 
+                <div class="col-sm-3">
+                   <p><b>Earns</b></p>
+                </div>
+                <div class="col-sm-3">
+                    <label id="lblProjectTarget" class="control-label" >sdfsdf</label>
+                </div>
+            </div>
+             
+             <div class="row">
+                <div class="col-sm-3">
+                   <p><b>Yield %</b></p>
+                </div>
+                <div class="col-sm-8">
+                    <label id="lblProjectTarget" class="control-label" >sdfsdf</label>
+                </div>
+                 
+                
+            </div>
+             
+                   
+                   
+         
+          </div>
+           
+           
+        </div> 
+       </div>   
+           
+      </div>
+    </div>
+
+<!-- End Modal -->    
+    
+    
+    
 
 
 <script type="text/javascript">
@@ -120,9 +241,9 @@ window.onload = function () {
 	      className: 'control',
 	      orderable: false,
 	      targets: -1
-		    }, {"targets": [ 7 ], "visible": false},
-                       {"targets": [ 8 ], "visible": false},
-                       {"targets": [ 9 ], "visible": false}
+		    }, {"targets": [ 8 ], "visible": false},
+                       {"targets": [ 9 ], "visible": false},
+                       {"targets": [ 10 ], "visible": false}
                 ]
      });
      
@@ -132,10 +253,10 @@ window.onload = function () {
      bounds  = new google.maps.LatLngBounds();
      
      for(i=0;  i< table.rows().data().length;i++){
-       var latitude = table.rows().data()[i][8]; // Column 8 Latitude
-       var longitude = table.rows().data()[i][7]; // Column 7 Longitude
+       var latitude = table.rows().data()[i][9]; // Column 8 Latitude
+       var longitude = table.rows().data()[i][8]; // Column 7 Longitude
        var projectName = table.rows().data()[i][0]; // Column 0 ProjectName
-       var index = table.rows().data()[i][9]; // Column 9 Index Order RowData
+       var index = table.rows().data()[i][10]; // Column 9 Index Order RowData
        
        if(latitude == "" || longitude == "")
          continue;
@@ -165,6 +286,17 @@ window.onload = function () {
       
      
 };
+
+
+function moreinfo_investment(investmentId){
+   $('#examplePositionCenter').modal('show');
+  
+  
+  
+  
+  
+}
+
 </script>
 
 

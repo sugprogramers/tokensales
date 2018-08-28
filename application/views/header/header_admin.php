@@ -13,7 +13,8 @@
 
         <link rel="apple-touch-icon" href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/assets/images/apple-touch-icon.png">
         <link rel="shortcut icon" href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/assets/images/favicon.ico">
-
+        <link rel="stylesheet" href="<?php echo base_url() . "themes/default/remark/topbar"; ?>/assets/examples/css/dashboard/team.min599c.css?v4.0.2">
+       
         <!-- Stylesheets -->
         <link rel="stylesheet" href="<?php echo base_url() . "themes/default/remark"; ?>/global/css/bootstrap.min599c.css?v4.0.2">
         <link rel="stylesheet" href="<?php echo base_url() . "themes/default/remark"; ?>/global/css/bootstrap-extend.min599c.css?v4.0.2">
@@ -53,7 +54,10 @@
         <link rel="stylesheet" href="<?php echo base_url() . "themes/default/remark"; ?>/global/vendor/datatables.net-responsive-bs4/dataTables.responsive.bootstrap4.min599c.css?v4.0.2">
         <link rel="stylesheet" href="<?php echo base_url() . "themes/default/remark"; ?>/global/vendor/datatables.net-buttons-bs4/dataTables.buttons.bootstrap4.min599c.css?v4.0.2">
 
-        
+        <!-- Charts -->
+        <link rel="stylesheet" href="<?php echo base_url() . "themes/default/remark"; ?>/global/vendor/chartist/chartist.min599c.css?v4.0.2">
+        <link rel="stylesheet" href="<?php echo base_url() . "themes/default/remark"; ?>/global/vendor/chartist-plugin-tooltip/chartist-plugin-tooltip.min599c.css?v4.0.2">
+        <link rel="stylesheet" href="<?php echo base_url() . "themes/default/remark"; ?>/global/vendor/aspieprogress/asPieProgress.min599c.css?v4.0.2">
         
         <!-- Images -->
         <link rel="stylesheet" href="<?php echo base_url() . "themes/default/remark"; ?>/global/vendor/blueimp-file-upload/jquery.fileupload.min599c.css?v4.0.2">
