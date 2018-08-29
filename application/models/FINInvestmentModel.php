@@ -73,11 +73,7 @@ class FINInvestmentModel extends CI_Model {
     public function get_investment_project_list($userId) {
        $this->db->select("fin.fin_investment_id, "
                 . " COALESCE(( select  sum(amount) from fin_payment_order where ordertype = 'RETIPAYIN' and fin_investment_id = fin.fin_investment_id),0) as earning, "
-                
-                
                 . " COALESCE(ROUND(fin.amount*100/pr.targetamt,2),0) as percent, "
-                
-                
                 . "fin.status as investmentstatus, fin.amount , date(fin.created) as investmentdate, cur.cursymbol, pr.c_project_id , pr.name,pr.companyname ,pr.projectstatus, COALESCE(pr.longitude,'') as longitude, COALESCE(pr.latitude,'') as latitude ");
         
         
@@ -91,6 +87,24 @@ class FINInvestmentModel extends CI_Model {
 
         $query = $this->db->get();
         return $query->result();
+    }
+    
+    
+     public function get_investment_detail($investmentId) {
+         
+       $this->db->select("fin.fin_investment_id, trunc(fin.startdate) as invdate, COALESCE(fin.amount,0) as invamount,"
+                . " COALESCE(( select  sum(amount) from fin_payment_order where ordertype = 'RETIPAYIN' and fin_investment_id = fin.fin_investment_id),0) as invearns, "
+                . " COALESCE(ROUND(CASE WHEN pr.targetamt = 0 THEN 0 ELSE (fin.amount*100/pr.targetamt) END ,2),0) as invpercent, "
+                . " COALESCE(ROUND(CASE WHEN pr.targetamt = 0 THEN 0 ELSE (fin.amount*100/pr.targetamt) END ,0),0) as invpercentround, "
+                . " COALESCE(pr.targetamt,0) as targetamt, trunc(pr.startdate) as startdate, pr.totalyieldperc as totalyieldperc , cur.cursymbol " );
+               
+        $this->db->from('fin_investment as fin');
+        $this->db->join('c_project as pr', 'fin.c_project_id = pr.c_project_id ');
+        $this->db->join('c_currency cur', 'pr.c_currency_id =cur.c_currency_id ');
+        $this->db->where('fin.fin_investment_id', $investmentId);
+
+        $query = $this->db->get();
+        return $query->result()[0];
     }
 
     public function getTotalInvestedByInvestor($investorId) {

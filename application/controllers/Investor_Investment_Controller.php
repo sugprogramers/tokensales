@@ -69,6 +69,40 @@ class Investor_Investment_Controller extends CI_Controller {
    }
    
    
+   public function get_investmentdetail_list(){
+       
+      $investmentId = $this->input->post("id");
+      
+      try{ 
+        $query = $this->FINInvestmentModel->get_investment_detail($investmentId);
+       
+       $data = [];
+       if($query){
+         $data[] = array("invpercent" => $query->invpercent,
+                         "invamount" => $query->invamount, 
+                         "invdate" => $query->invdate,
+                         "invearns" => $query->invearns,
+                         "prjtarget" => $query->targetamt,
+                         "prjstartdate" => $query->startdate,
+                         "prjyield" => $query->totalyieldperc,
+                         "invpercentround"  =>  $query->invpercentround);
+         
+           //log_message('error', $cProjectDocId . " -- "  . $cProjectDoc->name  . " -- ". $cProjectDoc->ismandatory);
+              
+         $response = array('redirect' => '', 'status' => 'success', 'data' => $data);
+         echo json_encode($response);
+       }else{
+           $response = array('redirect' => '', 'status' => 'error', 'msg' => 'Data not Found !!');
+            echo json_encode($response);
+       }
+            
+       } catch (Exception $e) {
+            $response = array('redirect' => '', 'status' => 'error', 'msg' => $e->getMessage());
+            echo json_encode($response);
+       }
+   }
+   
+   
    //deprecated
    public function get_locator() {
        

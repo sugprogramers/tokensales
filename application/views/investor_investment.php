@@ -123,23 +123,32 @@
                         <div class="row">
                           <div class="col-6">
                             <div class="counter text-center blue-grey-700">
-                              <div class="counter-label mt-10">Investment
+                              <div class="counter-label mt-10"> <p><b>Your Invest</b></p>
                               </div>
                               <div class="counter-number font-size-40 mt-10">
-                                1,234
+                                <label id="lblInvestmentAmount" class="control-label" ></label>
                               </div>
                             </div>
                           </div>
                           <div class="col-6">
-                            <div class="pie-progress pie-progress-sm" data-plugin="pieProgress" data-valuemax="100"
+                              
+                              <!--  <div id="theprogressbar">
+                                  
+                              </div>
+                              
+                              -->
+                              
+                             <div  id="theprogressbar" class="pie-progress pie-progress-sm"  data-valuemax="100"
                               data-barcolor="#57c7d4" data-size="100" data-barsize="10"
-                              data-goal="10" aria-valuenow="20" role="progressbar">
+                              data-goal="10" aria-valuenow="0" role="progressbar" data-plugin="pieProgress">
                               <span class="pie-progress-number blue-grey-700 font-size-20">
-                                10%
+                                 <label id="lblInvestmentPercent" class="control-label" ></label>
                               </span>
                             </div>
+                           
                           </div>
                         </div>
+                      
                       </div>
                     </div>
 
@@ -153,7 +162,7 @@
                    <p><b>Target</b></p>
                 </div>
                 <div class="col-sm-3">
-                    <label id="lblProjectTarget" class="control-label" >sdfsdf</label>
+                    <label id="lblProjectTarget" class="control-label" ></label>
                 </div>
                 
                 
@@ -161,7 +170,7 @@
                    <p><b>Investment Date</b></p>
                 </div>
                 <div class="col-sm-3">
-                    <label id="lblProjectTarget" class="control-label" >sdfsdf</label>
+                    <label id="lblInvestmentDate" class="control-label" ></label>
                 </div>
                 
                 
@@ -172,14 +181,14 @@
                    <p><b>Start Date</b></p>
                 </div>
                 <div class="col-sm-3">
-                    <label id="lblProjectTarget" class="control-label" >sdfsdf</label>
+                    <label id="lblProjectstartDate" class="control-label" ></label>
                 </div>
                  
                 <div class="col-sm-3">
                    <p><b>Earns</b></p>
                 </div>
                 <div class="col-sm-3">
-                    <label id="lblProjectTarget" class="control-label" >sdfsdf</label>
+                    <label id="lblInvestmentEarns" class="control-label" ></label>
                 </div>
             </div>
              
@@ -188,7 +197,7 @@
                    <p><b>Yield %</b></p>
                 </div>
                 <div class="col-sm-8">
-                    <label id="lblProjectTarget" class="control-label" >sdfsdf</label>
+                    <label id="lblProjectYiel" class="control-label" ></label>
                 </div>
                  
                 
@@ -218,6 +227,8 @@ var map;
 var markers = [];
 
 window.onload = function () {
+    
+        
     
     $('#exampleAddRow').addClass('active');
     table = $('#exampleAddRow').DataTable({
@@ -289,11 +300,70 @@ window.onload = function () {
 
 
 function moreinfo_investment(investmentId){
-   $('#examplePositionCenter').modal('show');
   
-  
-  
-  
+    //Set progress to 0
+    $('#theprogressbar').asPieProgress({
+        min: 0,
+        max: 400,
+        goal: 400,
+
+    namespace: 'pie_progress',
+    barsize: '2',
+    trackcolor: '#ececea',
+    barcolor: '#e6675f'
+});
+    
+    $('#examplePositionCenter').modal('show');
+     //$('#theprogressbar').asPieProgress('reset');
+     
+ 
+     
+      $.ajax({
+                url: "<?php echo base_url('Investor_Investment_Controller/get_investmentdetail_list')?>",
+                type: "POST",
+                data: {'id': investmentId},
+                async: false,
+                                    
+                success: function (data) {
+                    var resp = $.parseJSON(data);//convertir data de json
+                    console.log(resp);
+                    if (resp.status === "error") {                       
+                         showError('Error Get Data - Please Try Again');
+                    } 
+                    if (resp.status === "success") {
+                        
+                        
+                        $('#lblProjectTarget').text(resp.data[0]['prjtarget']);
+                        $('#lblInvestmentDate').text(resp.data[0]['invdate']);
+                        $('#lblProjectstartDate').text(resp.data[0]['prjstartdate']);
+                        $('#lblInvestmentEarns').text(resp.data[0]['invearns']);
+                        $('#lblProjectYiel').text(resp.data[0]['prjyield']);
+                        
+                        
+                        $('#lblInvestmentAmount').text(resp.data[0]['invamount']);
+                        $('#lblInvestmentPercent').text(resp.data[0]['invpercent'] + ' %');
+
+                        
+            
+                     // $('#theprogressbar').asPieProgress("go", "'"+ resp.data[0]['invpercentround'] + "%'");
+                     $('#theprogressbar').asPieProgress("go",resp.data[0]['invpercent']);
+                     
+                     //  $('#theprogressbar').attr('aria-valuenow',);
+                     //  $('#theprogressbar').asPieProgress('start');
+                       
+                       
+
+              
+                       
+                        //$('#theprogressbar').attr('aria-valuenow', resp.data[0]['invpercent'].toString());
+                        //$('#theprogressbar').attr('role', "progressbar");
+                        
+                      //  $('#theprogressbar').attr('disabled', false);
+                        
+                       
+                    }                     
+              }
+          }); 
   
 }
 
