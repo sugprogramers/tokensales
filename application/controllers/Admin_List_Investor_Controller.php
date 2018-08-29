@@ -47,8 +47,7 @@ class Admin_List_Investor_Controller extends CI_Controller {
                 $investamt,
                 $notes,
                 $status,
-                '<a class="btn btn-sm btn-icon btn-pure btn-default on-default edit-row" href="javascript:void(0)" title="Edit Notes" onclick="edit_document('."'".$objInvestor->c_investor_id."'".')"><i class="icon wb-edit"></i></a>
-		 <a class="btn btn-sm btn-icon btn-pure btn-default on-default edit-row" href="javascript:void(0)" title="View Info" onclick="investor_viewinfo('."'".$objInvestor->c_investor_id."'".')"><i class="icon wb-search"></i></a>'                
+                '<a class="btn btn-sm btn-icon btn-pure btn-default on-default edit-row" href="javascript:void(0)" title="View Info" onclick="investor_viewinfo('."'".$objInvestor->c_investor_id."'".')"><i class="icon wb-search"></i></a>'                
             );
         }
 
