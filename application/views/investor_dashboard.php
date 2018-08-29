@@ -18,7 +18,7 @@
             <div class="card-watermark darker font-size-80 m-15"><i class="icon fa-money" aria-hidden="true"></i></div>
             <div class="counter counter-md counter-inverse text-left">
               <div class="counter-number-group">
-                <span class="counter-number">$25.000</span>
+                <span class="counter-number"><?php echo  $curr_symbol.$payinbalance ; ?></span>
                 <span class="counter-number-related text-capitalize"></span>
               </div>
               <div class="counter-label text-capitalize">this is your current balance.</div>
@@ -33,7 +33,7 @@
             <div class="card-watermark darker font-size-80 m-15"><i class="icon wb-clipboard" aria-hidden="true"></i></div>
             <div class="counter counter-md counter-inverse text-left">
               <div class="counter-number-group">
-                <span class="counter-number">25</span>
+                <span class="counter-number"><?php echo  $countactive ; ?></span>
                 <span class="counter-number-related text-capitalize">projects</span>
               </div>
               <div class="counter-label text-capitalize">they are active</div>

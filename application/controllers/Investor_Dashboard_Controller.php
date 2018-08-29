@@ -21,6 +21,12 @@ class Investor_Dashboard_Controller extends CI_Controller {
         $line1 = $this->get_investments();
         $data = array('line1' => $line1); 
         
+        $balance = $this->get_balance();
+        $data = $data + $balance; 
+        
+        $countactive = $this->CProjectModel->getCountActiveProject();
+        $data = $data + array('countactive' => $countactive); 
+        
         $this->load->view('header/header_admin');
         $this->load->view('investor_dashboard',$data);
         $this->load->view('footer/footer_admin');        
@@ -55,6 +61,22 @@ class Investor_Dashboard_Controller extends CI_Controller {
        
         return $line1;
      }
-    
+     
+     
+     public function get_balance() {
+     
+      $investor = $this->CInvestorModel->getByUserId($this->session->session_investor['id']);
+        
+        $investorId = '';
+        $payinbalance = 0;        
+        if ($investor) {
+            $investorId = $investor->c_investor_id;
+            $payinbalance = $investor->payinbalance;
+        }
+       
+        $data = array('investorId' => $investorId, 'payinbalance' => $payinbalance, 'curr_symbol' => '$');
+        
+        return $data;
+    }
    
 }
