@@ -34,6 +34,103 @@
         </div> 
     </div> 
 </div>    
+<input type="submit" value="" />
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="examplePositionCenter" aria-hidden="true" aria-labelledby="examplePositionCenter"
+        role="dialog" tabindex="-1">
+     <div class="modal-dialog modal-simple modal-center">
+       <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+            <h4 class="modal-title">
+                 Aditional Info:  <label id="lblCompanyName" class="control-label" ></label>
+            </h4>
+       </div>
+       <div class="modal-body">
+         <div class="tab-content">
+             
+            <div class="row">
+                <div class="col-sm-3">
+                   <p><b>Country</b></p>
+                </div>
+                <div class="col-sm-3">
+                    <label id="lblCompanyCountry" class="control-label" ></label>
+                </div>
+                
+                
+                <div class="col-sm-3">
+                   <p><b>Region</b></p>
+                </div>
+                <div class="col-sm-3">
+                    <label id="lblCompanyRegion" class="control-label" ></label>
+                </div>
+                
+                
+            </div>
+             
+             <div class="row">
+                 
+                <div class="col-sm-3">
+                   <p><b>Phone</b></p>
+                </div>
+                <div class="col-sm-8">
+                    <label id="lblCompanyPhone" class="control-label" ></label>
+                </div>
+                 
+                 
+                 
+                <div class="col-sm-3">
+                   <p><b>Postal Code</b></p>
+                </div>
+                <div class="col-sm-3">
+                    <label id="lblCompanyPostalCode" class="control-label" ></label>
+                </div>
+            </div>
+             
+             <div class="row">
+                 <div class="col-sm-3">
+                   <p><b>Address</b></p>
+                </div>
+                <div class="col-sm-3">
+                    <label id="lblCompanyAddress" class="control-label" ></label>
+                </div>
+            </div>
+             
+             <div class="row">
+                <div class="col-sm-3">
+                   <p><b>Paypal</b></p>
+                </div>
+                <div class="col-sm-3">
+                    <label id="lblCompanyPaypal" class="control-label" ></label>
+                </div>
+            </div>
+             
+             
+          </div>
+        </div> 
+       </div>   
+           
+      </div>
+    </div>
+
+<!-- End Modal -->  
+
+
+
+
+
+
+
+
+
+
+
+
 
 <script type="text/javascript">
     window.onload = function () {
@@ -76,4 +173,45 @@
                 }
         });
     }    
+    
+    
+    function view_document(userId){
+  
+    
+    $('#examplePositionCenter').modal('show');
+     //$('#theprogressbar').asPieProgress('reset');
+      $.ajax({
+                url: "<?php echo base_url('Admin_List_Company_Controller/get_company_detail')?>",
+                type: "POST",
+                data: {'id': userId},
+                async: false,
+                                    
+                success: function (data) {
+                    var resp = $.parseJSON(data);//convertir data de json
+                    console.log(resp);
+                    if (resp.status === "error") {                       
+                         showError('Error Get Data - Please Try Again');
+                    } 
+                    if (resp.status === "success") {
+                        
+                        
+                        $('#lblCompanyCountry').text(resp.data[0]['cmpcountry']);
+                        $('#lblCompanyRegion').text(resp.data[0]['cmpregion']);
+                        $('#lblCompanyAddress').text(resp.data[0]['cmpaddress']);
+                        $('#lblCompanyPostalCode').text(resp.data[0]['cmppostalcode']);
+                        $('#lblCompanyPhone').text(resp.data[0]['cmpphone']);
+                        $('#lblCompanyName').text(resp.data[0]['cmpname']);
+                        $('#lblCompanyPaypal').text(resp.data[0]['cmppaypal']);
+                        
+                        
+
+                    }                     
+              }
+          }); 
+  
+}
+    
+    
+    
+    
 </script>

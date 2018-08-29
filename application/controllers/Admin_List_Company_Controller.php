@@ -8,6 +8,7 @@ class Admin_List_Company_Controller extends CI_Controller {
         parent::__construct();
         $this->load->helper('url');
         $this->load->model("CUserModel");
+        $this->load->model("CProjectmanagerModel");
         
         if (!$this->session->has_userdata("session_admin")) {
             redirect(base_url() . 'login');
@@ -50,6 +51,39 @@ class Admin_List_Company_Controller extends CI_Controller {
         echo json_encode($result);
         exit();
     }
+    
+    
+    public function get_company_detail(){
+       
+      $userId = $this->input->post("id");
+      
+      try{ 
+          
+        $query = $this->CProjectmanagerModel->get_manager_infoByUserId($userId);
+        
+       $data = [];
+       if($query){
+         $data[] = array("cmpcountry" => $query->countryname,
+                         "cmpregion" => $query->regionname, 
+                         "cmpaddress" => $query->address,
+                         "cmppostalcode" => $query->postal,
+                         "cmpphone" => $query->phone,
+                         "cmpname" => $query->companyname,
+                         "cmppaypal" => $query->companypaypal,
+                         );
+              
+         $response = array('redirect' => '', 'status' => 'success', 'data' => $data);
+         echo json_encode($response);
+       }else{
+           $response = array('redirect' => '', 'status' => 'error', 'msg' => 'Data not Found !!');
+            echo json_encode($response);
+       }
+            
+       } catch (Exception $e) {
+            $response = array('redirect' => '', 'status' => 'error', 'msg' => $e->getMessage());
+            echo json_encode($response);
+       }
+   }
 
 
 }

@@ -70,7 +70,26 @@ class CProjectmanagerModel extends CI_Model {
             $list[] = CProjectmanager::build($cProjectmanager);
         }
         return $list;
-    }    
+    } 
+    
+    
+    public function get_manager_infoByUserId($userId) {
+       $this->db->select("pm.c_projectmanager_id, usr.firstname as companyname,  COALESCE(pm.paypalusername,'-') as companypaypal,"
+                . "usr.address1 as address, usr.phone , usr.postal, con.name as countryname, reg.description as regionname ");
+        
+        $this->db->from('c_projectmanager as pm');
+        $this->db->join('c_user as usr', 'pm.c_user_id = usr.c_user_id ');
+        $this->db->join('c_country con', 'usr.c_country_id =con.c_country_id ');
+        $this->db->join('c_region as reg', 'usr.c_region_id = reg.c_region_id ');
+        $this->db->where('pm.c_user_id', $userId);
+
+        $query = $this->db->get();
+        return $query->result()[0];
+    }
+    
+    
+    
+    
     
 }
 
