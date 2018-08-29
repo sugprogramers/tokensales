@@ -107,7 +107,9 @@
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">×</span>
           </button>
-          <h4 class="modal-title">Project Name</h4>
+            <h4 class="modal-title">
+                  <label id="lblProjectName" class="control-label" ></label>
+            </h4>
        </div>
        <div class="modal-body">
          <div class="tab-content">
@@ -338,7 +340,7 @@ function moreinfo_investment(investmentId){
                         $('#lblProjectstartDate').text(resp.data[0]['prjstartdate']);
                         $('#lblInvestmentEarns').text(resp.data[0]['invearns']);
                         $('#lblProjectYiel').text(resp.data[0]['prjyield']);
-                        
+                        $('#lblProjectName').text(resp.data[0]['prjname']);
                         
                         $('#lblInvestmentAmount').text(resp.data[0]['invamount']);
                         $('#lblInvestmentPercent').text(resp.data[0]['invpercent'] + ' %');

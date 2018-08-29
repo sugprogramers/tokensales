@@ -85,7 +85,8 @@ class Investor_Investment_Controller extends CI_Controller {
                          "prjtarget" => $query->targetamt,
                          "prjstartdate" => $query->startdate,
                          "prjyield" => $query->totalyieldperc,
-                         "invpercentround"  =>  $query->invpercentround);
+                         "invpercentround"  =>  $query->invpercentround,
+                         "prjname"  =>  $query->projectname);
          
            //log_message('error', $cProjectDocId . " -- "  . $cProjectDoc->name  . " -- ". $cProjectDoc->ismandatory);
               

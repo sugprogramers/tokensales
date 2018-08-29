@@ -96,7 +96,7 @@ class FINInvestmentModel extends CI_Model {
                 . " COALESCE(( select  sum(amount) from fin_payment_order where ordertype = 'RETIPAYIN' and fin_investment_id = fin.fin_investment_id),0) as invearns, "
                 . " COALESCE(ROUND(CASE WHEN pr.targetamt = 0 THEN 0 ELSE (fin.amount*100/pr.targetamt) END ,2),0) as invpercent, "
                 . " COALESCE(ROUND(CASE WHEN pr.targetamt = 0 THEN 0 ELSE (fin.amount*100/pr.targetamt) END ,0),0) as invpercentround, "
-                . " COALESCE(pr.targetamt,0) as targetamt, trunc(pr.startdate) as startdate, pr.totalyieldperc as totalyieldperc , cur.cursymbol " );
+                . " COALESCE(pr.targetamt,0) as targetamt, trunc(pr.startdate) as startdate, pr.name as projectname, pr.totalyieldperc as totalyieldperc , cur.cursymbol " );
                
         $this->db->from('fin_investment as fin');
         $this->db->join('c_project as pr', 'fin.c_project_id = pr.c_project_id ');
