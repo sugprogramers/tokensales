@@ -10,25 +10,61 @@
             </ol> -->
         </div>
     </div>
-
-    <div class="page-content container-fluid">
+    
+    <div class="row row-lg" style="padding: 0px 30px;"> 
+    <div class="col-lg-6" >
+          <!-- Card -->
+          <div class="card card-block p-30 bg-green-600">
+            <div class="card-watermark darker font-size-80 m-15"><i class="icon fa-money" aria-hidden="true"></i></div>
+            <div class="counter counter-md counter-inverse text-left">
+              <div class="counter-number-group">
+                <span class="counter-number">$25.000</span>
+                <span class="counter-number-related text-capitalize"></span>
+              </div>
+              <div class="counter-label text-capitalize">this is your current balance.</div>
+            </div>
+          </div>
+          <!-- End Card -->
+     </div>
+    
+     <div class="col-lg-6" >
+          <!-- Card -->
+          <div class="card card-block p-30 bg-blue-600">
+            <div class="card-watermark darker font-size-80 m-15"><i class="icon wb-clipboard" aria-hidden="true"></i></div>
+            <div class="counter counter-md counter-inverse text-left">
+              <div class="counter-number-group">
+                <span class="counter-number">25</span>
+                <span class="counter-number-related text-capitalize">projects</span>
+              </div>
+              <div class="counter-label text-capitalize">they are active</div>
+            </div>
+          </div>
+          <!-- End Card -->
+        </div>
+    </div>
+        
+        
+    <div class="page-content container-fluid"  style="padding-top: 0px;">
         <div class="panel">
             <div class="panel-body">
                 
+       
 <div class="row row-lg">
 		<div class="col-lg-12">
 		 
 		  <div class="example-wrap m-md-0">
-			<h4 class="example-title">Return on investment in the last 30 days.</h4>
+			<h4 class="example-title">My Investments in the last 30 days</h4>
 			<!-- <p>Use function: <code>Morris.Line(options)</code> to generate chart.</p -->
 			<div class="example" style="margin: 0;">
                           
-                           <div id="chart_div1" style="width: 100%; height: 500px;"></div>
+                           <div id="chart_div2" style="width: 100%; height: 500px;"></div>
                            
 			</div>
 		  </div>              
 		</div>
-</div>
+</div>                          
+                
+             
                           
 
             </div> 
@@ -41,29 +77,14 @@
 
 <script>
 google.charts.load('current', {packages: ['corechart', 'line']});
-google.charts.setOnLoadCallback(drawBasic);
+google.charts.setOnLoadCallback(drawBasic1);
 
-function drawBasic() {
+function drawBasic1() {
 
      
       var data = google.visualization.arrayToDataTable([
-          ['Days', 'Investors', 'Companys'],
-          ['2004',  1000,      400],
-          ['2005',  1170,      460],
-          ['2006',  660,       1120],
-          ['2007',  1030,      540],
-          ['2004',  1000,      400],
-          ['2005',  1170,      460],
-          ['2006',  660,       1120],
-          ['2007',  1030,      540],
-          ['2004',  1000,      400],
-          ['2005',  1170,      460],
-          ['2006',  660,       1120],
-          ['2007',  1030,      540],
-          ['2004',  1000,      400],
-          ['2005',  1170,      460],
-          ['2006',  660,       1120],
-          ['2007',  1030,      540],
+          ['Day', 'Invesments'],
+           <?php echo $line1; ?>
         ]);
 
       var options = {
@@ -76,16 +97,17 @@ function drawBasic() {
           
         },
         vAxis: {
-          title: 'Return',
+          title: 'Invest',
           gridlines: { count: 10 },
         }
       };
 
-      var chart3 = new google.visualization.LineChart(document.getElementById('chart_div1'));
-      chart3.draw(data, options);
     
+      var chart4 = new google.visualization.LineChart(document.getElementById('chart_div2'));
+      chart4.draw(data, options);
     }
 </script>
+
 
 
 

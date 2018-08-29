@@ -10,6 +10,10 @@
             </ol> -->
         </div>
     </div>
+    
+    
+    
+   
 
     <div class="page-content container-fluid">
         <div class="panel">
@@ -21,7 +25,7 @@
 <div class="row row-lg">
 		<div class="col-lg-12">
 		 
-		  <div class="example-wrap m-md-0">
+                    <div class="example-wrap m-md-0" >
 			<h4 class="example-title">Investments in the last 30 days</h4>
 			<!-- <p>Use function: <code>Morris.Line(options)</code> to generate chart.</p -->
 			<div class="example" style="margin: 0;">
@@ -111,6 +115,7 @@ function drawBasic() {
       var options = {
            //colors: ['#a52714', '#097138'],
            pointSize: 4,
+          // backgroundColor: '#FBFCFC',
            legend: { position: 'bottom' },
         hAxis: {
           title: 'Day',
