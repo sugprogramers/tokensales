@@ -1,4 +1,5 @@
-  <style>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<style>
       /* Set the size of the div element that contains the map */
       #map {
         height: 300px;  /* The height is 400 pixels */
@@ -70,10 +71,103 @@
                               
                               </div>
                           </div>
-                          <div class="tab-pane" id="exampleTabsLineTopTwo" role="tabpanel">
-                              <div class="row">
+                          <div class="tab-pane" id="exampleTabsLineTopTwo" role="tabpanel" style="width: 100%;">
+                              <div class="row" >
                                   
+                                    <div class="col-lg-5">
+                                          <div class="example-wrap">
+                                               
+                                                <!-- <p>Use function: <code>Morris.Line(options)</code> to generate chart.</p -->
+                                                <div class="example" style="margin: 0;">
+
+                                                    <div id="piechart1" style="width: 100%; height: 400px;"></div>
+
+                                                </div>
+                                          </div>
+                                    </div>
+                                  
+                                  <div class="col-lg-7">
+                                      <div class="row" >
+                                               <div class="col-lg-6 align-items-center">
+                                                        <div class="card p-30 flex-row justify-content-between">
+                                                            <div class="white">
+                                                              <i class="icon icon-circle icon-2x wb-clipboard bg-blue-grey-300" aria-hidden="true"></i>
+                                                            </div>
+                                                            <div class="counter counter-md counter text-right">
+                                                              <div class="counter-number-group">
+                                                                <span class="counter-number">
+                                                                      <label id="lblSummaryNumProject" class="control-label" ></label>
+                                                                </span>
+                                                                <span class="counter-number-related text-capitalize">Projects</span>
+                                                              </div>
+                                                              <div class="counter-label text-capitalize font-size-16">Invested</div>
+                                                            </div>
+                                                          </div>
+                                                 </div>          
+
+
+                                                  <div class="col-lg-6 center-block">
+                                                        <div class="card p-30 flex-row justify-content-between">
+                                                            <div class="white">
+                                                              <i class="icon icon-circle icon-2x wb-graph-up bg-blue-grey-300" aria-hidden="true"></i>
+                                                            </div>
+                                                            <div class="counter counter-md counter text-right">
+                                                              <div class="counter-number-group">
+                                                                  <span class="counter-number">
+                                                                      <label id="lblSummaryAmtInvested" class="control-label" ></label>
+                                                                  </span>
+                                                                <span class="counter-number-related text-capitalize">Total</span>
+                                                              </div>
+                                                              <div class="counter-label text-capitalize font-size-16">Invested</div>
+                                                            </div>
+                                                          </div>
+                                                 </div> 
+                                      </div>
+                                      <div class="row" >
+                                                  <div class="col-lg-6 center-block">
+                                                        <div class="card p-30 flex-row justify-content-between">
+                                                            <div class="white">
+                                                              <i class="icon icon-circle icon-2x wb-graph-up bg-blue-grey-300" aria-hidden="true"></i>
+                                                            </div>
+                                                            <div class="counter counter-md counter text-right">
+                                                              <div class="counter-number-group">
+                                                                  <span class="counter-number">
+                                                                      <label id="lblSummaryBalToInv" class="control-label" ></label>
+                                                                  </span>
+                                                                <span class="counter-number-related text-capitalize">Available</span>
+                                                              </div>
+                                                              <div class="counter-label text-capitalize font-size-16">for invest</div>
+                                                            </div>
+                                                          </div>
+                                                 </div>   
+
+                                                  <div class="col-lg-6 center-block">
+                                                        <div class="card p-30 flex-row justify-content-between">
+                                                            <div class="white">
+                                                              <i class="icon icon-circle icon-2x wb-graph-up bg-blue-grey-300" aria-hidden="true"></i>
+                                                            </div>
+                                                            <div class="counter counter-md counter text-right">
+                                                              <div class="counter-number-group">
+                                                                <span class="counter-number">
+                                                                    <label id="lblSummaryBalEar" class="control-label" ></label>
+                                                                </span>
+                                                                <span class="counter-number-related text-capitalize">Total</span>
+                                                              </div>
+                                                              <div class="counter-label text-capitalize font-size-16">earning</div>
+                                                            </div>
+                                                          </div>
+                                                 </div> 
+                                      </div>
+                                      
+                                  </div>
+                                      
+                                  
+                                  
+                                  
+                                   
                               </div>
+                              
+                              
                             
                           </div>
                         </div>
@@ -134,11 +228,6 @@
                           </div>
                           <div class="col-6">
                               
-                              <!--  <div id="theprogressbar">
-                                  
-                              </div>
-                              
-                              -->
                               
                              <div  id="theprogressbar" class="pie-progress pie-progress-sm"  data-valuemax="100"
                               data-barcolor="#57c7d4" data-size="100" data-barsize="10"
@@ -295,6 +384,10 @@ window.onload = function () {
        console.log('value ' + value);
      });*/
 
+     $('#lblSummaryAmtInvested').text("<?php echo $totalinvested; ?>");
+     $('#lblSummaryNumProject').text("<?php echo $totalproject; ?>");
+     $('#lblSummaryBalToInv').text("<?php echo $totalbaltoinv; ?>");
+     $('#lblSummaryBalEar').text("<?php echo $totalearning; ?>");
      
       
      
@@ -371,7 +464,33 @@ function moreinfo_investment(investmentId){
 
 </script>
 
+<script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
 
+      function drawChart() {
+          
+          console.log("<?php echo $pie; ?>");
+
+       var data = google.visualization.arrayToDataTable([
+           ['Language', 'Speakers (in millions)'],
+          <?php echo $pie; ?>
+        ]);
+
+
+        var options = {
+          title: '',
+          
+          width:500,
+          height:400,
+          pieHole: 0.4,
+        };
+
+        var chart1 = new google.visualization.PieChart(document.getElementById('piechart1'));
+        chart1.draw(data, options);
+        
+      }
+</script>
 
 <script>
      function initMap() {
