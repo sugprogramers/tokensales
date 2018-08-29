@@ -233,7 +233,7 @@
                         </div>
 
                         <div class="row">
-                            <div class="col-sm-4">
+                            <div class="col-sm-3">
                                 <p><b>Address</b></p>
                             </div>
                             <div class="col-sm-8">
