@@ -74,13 +74,13 @@ class CProjectmanagerModel extends CI_Model {
     
     
     public function get_manager_infoByUserId($userId) {
-       $this->db->select("pm.c_projectmanager_id, usr.firstname as companyname,  COALESCE(pm.paypalusername,'-') as companypaypal,"
-                . "usr.address1 as address, usr.phone , usr.postal, con.name as countryname, reg.description as regionname ");
+       $this->db->select("pm.c_projectmanager_id, COALESCE(usr.firstname,'-') as companyname,  COALESCE(pm.paypalusername,'-') as companypaypal,"
+                . "COALESCE(usr.address1,'-') as address, COALESCE(usr.phone,'-') as phone , COALESCE(usr.postal,'-') as postal, COALESCE(con.name,'-') as countryname, COALESCE(reg.description,'-') as regionname ");
         
         $this->db->from('c_projectmanager as pm');
-        $this->db->join('c_user as usr', 'pm.c_user_id = usr.c_user_id ');
-        $this->db->join('c_country con', 'usr.c_country_id =con.c_country_id ');
-        $this->db->join('c_region as reg', 'usr.c_region_id = reg.c_region_id ');
+        $this->db->join('c_user as usr', 'pm.c_user_id = usr.c_user_id ',"left");
+        $this->db->join('c_country con', 'usr.c_country_id =con.c_country_id ',"left");
+        $this->db->join('c_region as reg', 'usr.c_region_id = reg.c_region_id ',"left");
         $this->db->where('pm.c_user_id', $userId);
 
         $query = $this->db->get();
