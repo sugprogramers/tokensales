@@ -192,10 +192,7 @@
     }
 
     function logOut() {
-        var res = logOutAltUser();
-        if (!res) {
-            window.location.replace("<?php echo base_url(); ?>Login_Controller/logout_user");
-        }
+        window.location.replace("<?php echo base_url(); ?>Login_Controller/logout_user");
     }
 
     function logOutAltUser() {
@@ -204,18 +201,18 @@
             if ($this->session->has_userdata("session_investor")) {
         ?>        
                 window.location.replace("<?php echo base_url(); ?>Login_Controller/logout_investor_from_admin");
-                return true;
+                return;
         <?php 
             } 
             if ($this->session->has_userdata("session_company")) {
         ?>        
                 window.location.replace("<?php echo base_url(); ?>Login_Controller/logout_company_from_admin");                
-                return true;
+                return;
         <?php        
             }                                                   
         }        
         ?> 
-         return false;
+         window.location.replace("<?php echo base_url(); ?>Login_Controller/logout_user");
     }
 
 </script>
@@ -262,7 +259,7 @@
                 <h4 class="modal-title">Close session</h4>
             </div>
             <div class="modal-body">
-                <h4>Do you want to close the investor/company session?</h4>
+                <h4>Do you want to close the session?</h4>
             </div>
             <div class="modal-footer">
 

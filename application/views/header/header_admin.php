@@ -911,7 +911,7 @@
                                 
 
                                 <li class="dropdown site-menu-item has-sub">
-                                    <a data-toggle="dropdown" href="#" data-dropdown-toggle="false" onclick="$('#logOutModal').modal('show');">
+                                    <a data-toggle="dropdown" href="#" data-dropdown-toggle="false" onclick="$('#logOutAltUserModal').modal('show');">
                                         <i class="site-menu-icon wb-power" aria-hidden="true"></i>
                                         <span class="site-menu-title">Logout</span>                                   
                                     </a>                               
@@ -1055,7 +1055,7 @@
                                 </li>
 
                                 <li class="dropdown site-menu-item has-sub">
-                                    <a data-toggle="dropdown" href="#" data-dropdown-toggle="false" onclick="$('#logOutModal').modal('show');">
+                                    <a data-toggle="dropdown" href="#" data-dropdown-toggle="false" onclick="$('#logOutAltUserModal').modal('show');">
                                         <i class="site-menu-icon wb-power" aria-hidden="true"></i>
                                         <span class="site-menu-title">Logout</span>                                   
                                     </a>                               
