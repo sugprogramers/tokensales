@@ -22,7 +22,16 @@ class Admin_Dashboard_Controller extends CI_Controller {
         $line2 = $this->get_register_user();
         $data = $data + array('line2' => $line2);    
         $line1 = $this->get_investments();
-        $data = $data + array('line1' => $line1); 
+        $data = $data + array('line1' => $line1);
+        
+        
+        $queryUserInvestor = $this->CUserModel->get_all_investor();
+        
+        
+        $numProjects = $this->CProjectModel->getAll();
+        
+        $data = $data + array('totalusersinvestor' => count($queryUserInvestor->result()));
+        $data = $data + array('totalprojects' => count($numProjects));
        
         $this->load->view('header/header_admin');
         $this->load->view('admin_dashboard',$data);

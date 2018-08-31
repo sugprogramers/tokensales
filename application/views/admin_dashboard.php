@@ -20,56 +20,121 @@
             <div class="panel-body">
                 
                 
+                <div class="row" >
+                       <div class="col-lg-6 align-items-center">
+                           
+                           
+                           
+                                <div class="card p-15 flex-row justify-content-between bg-blue-600">
+                                    <div class="white">
+                                      <i class="icon icon-circle icon-3x wb-users bg-blue-300" aria-hidden="true"></i>
+                                    </div>
+                                    <div class="counter counter-md counter counter-inverse  text-right">
+                                      <div class="counter-number-group">
+                                        <span class="counter-number">
+                                              <label id="lblDashboardNumUsers" class="control-label" ></label>
+                                        </span>
+                                        <span class="counter-sm -number-related text-capitalize">Users</span>
+                                      </div>
+                                      <div class="counter-label text-capitalize font-size-16">Investor</div>
+                                    </div>
+                                  </div>
+                         </div>          
+
+
+                          <div class="col-lg-6 center-block">
+                                <div class="card p-15 flex-row justify-content-between bg-green-600">
+                                    <div class="white">
+                                      <i class="icon icon-circle icon-3x wb-pluse bg-green-300" aria-hidden="true"></i>
+                                    </div>
+                                    <div class="counter counter-md counter counter-inverse  text-right">
+                                      <div class="counter-number-group">
+                                          <span class="counter-number">
+                                              <label id="lblDashboardNumProjects" class="control-label" ></label>
+                                          </span>
+                                        <span class="counter-number-related text-capitalize">Projects</span>
+                                      </div>
+                                      <div class="counter-label text-capitalize font-size-16">Fundings</div>
+                                    </div>
+                                  </div>
+                         </div> 
+               </div>
+                
+                <div class="row" >
+                    <div class="col-lg-6 align-items-center">
+                        <div class="row row-lg">
+                            <div class="col-lg-12">
+
+                                <div class="example-wrap m-md-0" >
+                                    <h4 class="example-title">Investments in the last 30 days</h4>
+                                    <!-- <p>Use function: <code>Morris.Line(options)</code> to generate chart.</p -->
+                                    <div class="example" style="margin: 0;">
+
+                                       <div id="chart_div2" style="width: 100%; height: 250px;"></div>
+
+                                    </div>
+                              </div>              
+                            </div>
+                        </div> 
+                    </div>
+                    
+                    
+                    <div class="col-lg-6 align-items-center">
+                        <div class="row row-lg">		
+                            <div class="col-lg-12">
+                              <div class="example-wrap">
+                                    <h4 class="example-title">Status Projects</h4>
+                                    <!-- <p>Use function: <code>Morris.Line(options)</code> to generate chart.</p -->
+                                    <div class="example" style="margin: 0;">
+
+                                        <div id="piechart1" style="width: 100%; height: 250px;"></div>
+
+                                    </div>
+                              </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                    
+                    
+                </div>
+                
+                <div class="row" >
+                    
+                    
+                    
+                    <div class="col-lg-6 align-items-center">
+                        <div class="row row-lg">
+                            <div class="col-lg-12">
+                               
+                                <div class="example-wrap m-md-0">
+                                    <h4 class="example-title">Active Investments</h4>
+                                    <!-- <p>Use function: <code>Morris.Line(options)</code> to generate chart.</p -->
+                                    <div class="example" style="margin: 0;">
+
+                                       <div id="chart_div1" style="width: 100%; height: 250px;"></div>
+
+                                    </div>
+                                </div> 
+                               
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                
     
        
-<div class="row row-lg">
-		<div class="col-lg-12">
-		 
-                    <div class="example-wrap m-md-0" >
-			<h4 class="example-title">Investments in the last 30 days</h4>
-			<!-- <p>Use function: <code>Morris.Line(options)</code> to generate chart.</p -->
-			<div class="example" style="margin: 0;">
-                          
-                           <div id="chart_div2" style="width: 100%; height: 500px;"></div>
-                           
-			</div>
-		  </div>              
-		</div>
-</div>                          
+                         
                 
                 
                 
-<div class="row row-lg">
-		<div class="col-lg-12">
-		 
-		  <div class="example-wrap m-md-0">
-			<h4 class="example-title">Active Investments</h4>
-			<!-- <p>Use function: <code>Morris.Line(options)</code> to generate chart.</p -->
-			<div class="example" style="margin: 0;">
-                          
-                           <div id="chart_div1" style="width: 100%; height: 500px;"></div>
-                           
-			</div>
-		  </div>              
-		</div>
-</div>
+
           
                 
             
-<div class="row row-lg">		
-
-		<div class="col-lg-12">
-		  <div class="example-wrap">
-			<h4 class="example-title">Status Projects</h4>
-			<!-- <p>Use function: <code>Morris.Line(options)</code> to generate chart.</p -->
-			<div class="example" style="margin: 0;">
-                            
-                            <div id="piechart1" style="width: 100%; height: 400px;"></div>
-			 
-			</div>
-		  </div>
-		</div>
-</div>                
+                
 
             </div> 
         </div> 
@@ -91,6 +156,7 @@
         var options = {
           title: '',
           is3D: true,
+          backgroundColor: '#F2F2F2',
         };
 
         var chart1 = new google.visualization.PieChart(document.getElementById('piechart1'));
@@ -125,7 +191,7 @@ function drawBasic() {
         vAxis: {
           title: 'Register',
           gridlines: { count: 10 },
-        }
+        }, backgroundColor: '#F2F2F2',
       };
 
       var chart3 = new google.visualization.LineChart(document.getElementById('chart_div1'));
@@ -161,7 +227,7 @@ function drawBasic1() {
         vAxis: {
           title: 'Invest',
           gridlines: { count: 10 },
-        }
+        }, backgroundColor: '#F2F2F2',
       };
 
     
@@ -174,6 +240,10 @@ function drawBasic1() {
 
 <script type="text/javascript">
     window.onload = function () {
-       $('#idDashboardAdmin').addClass('active');       
+       $('#idDashboardAdmin').addClass('active');  
+       
+        $('#lblDashboardNumUsers').text("<?php echo $totalusersinvestor; ?>");
+        $('#lblDashboardNumProjects').text("<?php echo $totalprojects; ?>");
+       
     };
 </script>
