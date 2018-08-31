@@ -46,13 +46,17 @@ class Investor_List_Project_Controller extends CI_Controller {
 
     public function get_project_list() {
         $query = $this->CProjectModel->getAllByInvestor();
+        
+        $userId = $this->session->session_investor['id'];
+        
+                
         $html = '';
         foreach ($query->result() as $r) {
              
           
             $html .= $this->get_htm_item($r->c_project_id, $r->name, $r->description, $r->companyname, 
                     $r->targetamt, $r->cursymbol, $r->namefile , $r->latitude ,$r->longitude , 
-                    $r->totalyieldperc , $r->loanterm , $r->datelimit , $r->startdate, $r->projectstatus, $r->address1);
+                    $r->totalyieldperc , $r->loanterm , $r->datelimit , $r->startdate, $r->projectstatus, $r->address1, $userId);
             //print_r($r); break;
         }
         //$html .= $this->get_htm_item_new();
@@ -131,7 +135,7 @@ class Investor_List_Project_Controller extends CI_Controller {
       }
     }
     
-    private function get_htm_item($c_project_id, $name, $description, $companyname, $targetamt, $cursymbol, $namefile ,$latitude , $longitude , $totalyieldperc , $loanterm , $datelimit , $startdate , $projectstatus , $address1) {
+    private function get_htm_item($c_project_id, $name, $description, $companyname, $targetamt, $cursymbol, $namefile ,$latitude , $longitude , $totalyieldperc , $loanterm , $datelimit , $startdate , $projectstatus , $address1, $userId) {
 
         $items = array('overlay-slide-left', 'overlay-slide-top', 'overlay-slide-right', 'overlay-slide-bottom');
         $class_animation = $items[array_rand($items)];
@@ -151,7 +155,29 @@ class Investor_List_Project_Controller extends CI_Controller {
         $countinvesment = $this->FINInvestmentModel->getCountInvestorsByProject($c_project_id);        
         $percent = $this->get_percentage($targetamt, $sumamount);
        
-       $statushtml = $this->getHtmlProjectStatusName($projectstatus) ;  
+        $statushtml = $this->getHtmlProjectStatusName($projectstatus) ;  
+        
+        $intestedAmt = $this->FINInvestmentModel->getAmountInvestedByInvestorProject($userId, $c_project_id);
+        
+        
+        $aditional = '<div class="h-minificha__tir" style="padding: 5px 0;">
+                    <div class="col-sm-6" style="text-align: right">
+                    <b>&nbsp</b>
+                    </div>
+             </div> ';
+        
+        
+
+        
+        if($intestedAmt > 0){
+                $aditional = '<div class="h-minificha__tir" style="padding: 5px 0;">
+                    
+                    <div class="col-sm-" style="text-align: center">
+                    <i class="icon icon-circle  wb-info-circle"></i>
+                    <b>  Your Investment: '. $cursymbol . $intestedAmt.' </b>
+                    </div>
+             </div> ';
+        }
 
 return
 '  
@@ -216,8 +242,7 @@ return
 
 <div class="h-minificha__tir" style="padding: 5px 0;">
 <center>'.$statushtml.'</center>
-</div>
-
+</div> 
 <div class="row  h-minificha__data__row" style="margin-top: 10px;">
 
     <div class="col-xs-6">
@@ -235,9 +260,9 @@ return
             </span>
             <p class="h-minificha__data__value--description h-minificha--color-secondary">Term</p>
         </div>
-    </div>
+    </div> 
 
-</div>
+</div> '.$aditional.'
 
 <div class="h-minificha__tir" style="padding: 5px 0;">
 

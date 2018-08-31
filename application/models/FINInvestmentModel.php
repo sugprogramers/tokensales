@@ -148,6 +148,21 @@ class FINInvestmentModel extends CI_Model {
 
         return $queryresult[0]->amount;
     }
+    
+    public function getAmountInvestedByInvestorProject($userId, $c_project_id) {
+
+        $this->db->select("COALESCE(sum(fin.amount),0) as amount ");
+        $this->db->from('fin_investment as fin');
+        $this->db->join('c_investor as inv', 'fin.c_investor_id = inv.c_investor_id ');
+        $this->db->where('fin.c_project_id', $c_project_id);
+        $this->db->where('inv.c_user_id',$userId);
+                $query = $this->db->get();
+        $queryresult = $query->result();
+        if (!$queryresult)
+            return "0";
+
+        return $queryresult[0]->amount;
+    }
 
     public function getCountInvestorsByProject($c_project_id) {
 
