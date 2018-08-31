@@ -21,7 +21,7 @@
                                 <li class="nav-item" role="presentation"><a class="nav-link active" data-toggle="tab" href="#exampleTabsLineTopOne"
                                                                             aria-controls="exampleTabsLineTopOne" role="tab">Deposit</a></li>
                                 <li class="nav-item" role="presentation"><a class="nav-link" data-toggle="tab" href="#exampleTabsLineTopTwo"
-                                                                            aria-controls="exampleTabsLineTopTwo" role="tab" id="linkTab2">History</a></li>
+                                                                            aria-controls="exampleTabsLineTopTwo" role="tab" id="linkTab2">Transaction History</a></li>
                             </ul>
                             <div class="tab-content pt-20">
                                 <div class="tab-pane active" id="exampleTabsLineTopOne" role="tabpanel">
