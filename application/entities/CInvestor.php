@@ -13,7 +13,9 @@ class CInvestor{
     // TAX INFORMATION
     public $c_tax_country_id;
     public $tax_address1;   
+    public $tax_address2;   
     public $tax_city;   
+    public $tax_province;   
     public $tax_postal;   
     public $tax_fiscalnumber;   
     public $tax_isuscitizen;   

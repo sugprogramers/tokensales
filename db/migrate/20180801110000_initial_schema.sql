@@ -217,7 +217,9 @@ CREATE TABLE c_investor
   --TAX INFORMATION
   c_tax_country_id character varying(32),
   tax_address1 character varying(150),
+  tax_address2 character varying(150),
   tax_city character varying(60),
+  tax_province character varying(60),
   tax_postal character varying(10),
   tax_fiscalnumber character varying(60),
   tax_isuscitizen character(1) NOT NULL DEFAULT 'Y'::bpchar,

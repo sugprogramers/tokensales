@@ -44,7 +44,9 @@ class CInvestorModel extends CI_Model {
                 'c_user_id' => $cInvestor->c_user_id,
                 'c_tax_country_id' => $cInvestor->c_tax_country_id,
                 'tax_address1' => $cInvestor->tax_address1,
+                'tax_address2' => $cInvestor->tax_address2,
                 'tax_city' => $cInvestor->tax_city,
+                'tax_province' => $cInvestor->tax_province,
                 'tax_postal' => $cInvestor->tax_postal,
                 'tax_fiscalnumber' => $cInvestor->tax_fiscalnumber,
                 'tax_isuscitizen' => $cInvestor->tax_isuscitizen,
@@ -71,7 +73,9 @@ class CInvestorModel extends CI_Model {
                 'c_user_id' => $cInvestor->c_user_id,
                 'c_tax_country_id' => $cInvestor->c_tax_country_id,
                 'tax_address1' => $cInvestor->tax_address1,
+                'tax_address2' => $cInvestor->tax_address2,
                 'tax_city' => $cInvestor->tax_city,
+                'tax_province' => $cInvestor->tax_province,
                 'tax_postal' => $cInvestor->tax_postal,
                 'tax_fiscalnumber' => $cInvestor->tax_fiscalnumber,
                 'tax_isuscitizen' => $cInvestor->tax_isuscitizen,
@@ -108,7 +112,7 @@ class CInvestorModel extends CI_Model {
     public function getInvestorCustomDataById($investorId){
        
        $this->db->select("usr.firstname, usr.lastname, usr.email, usr.phone, (date(usr.birthday))::CHARACTER(11) as birthday, co.name as usercountry, re.description as userregion," 
-                         ."txc.name as taxcountry, inv.tax_fiscalnumber  , inv.tax_address1, inv.tax_postal, inv.tax_city, inv.tax_ustin, "
+                         ."txc.name as taxcountry, inv.tax_fiscalnumber  , inv.tax_address1,inv.tax_address2, inv.tax_postal, inv.tax_city, inv.tax_ustin,  inv.tax_province, "
                          ."inv.documenttype, inv.documentnumber, ff.path as filefrontpath ,ff.name as filefrontname , bf.path as filebackpath ,bf.name as filebackname, "
                          . " inv.validationnotes, inv.status as investorstatus ");
        $this->db->from('c_investor inv');

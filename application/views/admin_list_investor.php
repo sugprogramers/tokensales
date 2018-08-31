@@ -142,7 +142,7 @@
 
                         <div class="row">
                             <div class="col-sm-3">
-                                <p><b>Investor</b></p>
+                                <p><b>Name</b></p>
                             </div>
                             <div class="col-sm-8">
                                 <label id="lblInvestorName" class="control-label" ></label>
@@ -168,7 +168,7 @@
                             </div>
 
                             <div class="col-sm-3">
-                                <p><b>Birthday</b></p>
+                                <p><b>Date of Birth</b></p>
                             </div>
                             <div class="col-sm-3">
                                 <label id="lblInvestorBorn" class="control-label" ></label>
@@ -213,7 +213,57 @@
                                 </div>
                             </div>
                         </div>
+                        
+                        
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p><b>Address Line 1</b></p>
+                            </div>
+                            <div class="col-sm-8">
+                                <label id="lblInvestorTaxAddress" class="control-label" ></label>
+                            </div>
+                        </div>
 
+                        
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p><b>Address Line 2</b></p>
+                            </div>
+                            <div class="col-sm-8">
+                                <label id="lblInvestorTaxAddress2" class="control-label" ></label>
+                            </div>
+                        </div>
+                        
+                         <div class="row">
+                             <div class="col-sm-3">
+                                <p><b>City</b></p>
+                            </div>
+                            <div class="col-sm-3">
+                                <label id="lblInvestorTaxCity" class="control-label" ></label>
+                            </div>
+                        </div>
+                        
+                        
+                         <div class="row">
+                             <div class="col-sm-3">
+                                <p><b>State/Province/Region</b></p>
+                            </div>
+                            <div class="col-sm-3">
+                                <label id="lblInvestorTaxProvince" class="control-label" ></label>
+                            </div>
+                        </div>
+                        
+                         <div class="row">
+                            <div class="col-sm-3">
+                                <p><b>Zip /Postal Code</b></p>
+                            </div>
+                            <div class="col-sm-3">
+                                <label id="lblInvestorTaxPostalCode" class="control-label" ></label>
+                            </div>
+                        </div>
+
+                        
+                        
                         <div class="row">
                             <div class="col-sm-3">
                                 <p><b>Country</b></p>
@@ -221,42 +271,11 @@
                             <div class="col-sm-3">
                                 <label id="lblInvestorTaxcountry" class="control-label" ></label>
                             </div>
-
-                            <!-- 
-                                <div class="col-sm-3">
-                                    <p><b>Fiscal Number</b></p>
-                                </div>
-                                <div class="col-sm-3">
-                                    <label id="lblInvestorTaxFiscalNumber" class="control-label" ></label>
-                                </div>
-                            -->
                         </div>
 
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <p><b>Address</b></p>
-                            </div>
-                            <div class="col-sm-8">
-                                <label id="lblInvestorTaxAddress" class="control-label" ></label>
-                            </div>
-                        </div>
+                        
 
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <p><b>Zip Code</b></p>
-                            </div>
-                            <div class="col-sm-3">
-                                <label id="lblInvestorTaxPostalCode" class="control-label" ></label>
-                            </div>
-
-                            <div class="col-sm-3">
-                                <p><b>City</b></p>
-                            </div>
-                            <div class="col-sm-3">
-                                <label id="lblInvestorTaxCity" class="control-label" ></label>
-                            </div>
-                        </div>
-
+                       
                         <!-- 
                             <div class="row">
                                 <div class="col-sm-3">
@@ -412,6 +431,8 @@
                     $('#lblInvestorTaxcountry').text(resp.data['investortaxcountry']);
                     $('#lblInvestorTaxFiscalNumber').text(resp.data['investortaxfiscalnumber']);
                     $('#lblInvestorTaxAddress').text(resp.data['investortaxaddress']);
+                    $('#lblInvestorTaxAddress2').text(resp.data['investortaxaddresssec']);
+                    $('#lblInvestorTaxProvince').text(resp.data['investortaxprovince']);
                     $('#lblInvestorTaxPostalCode').text(resp.data['investortaxpostal']);
                     $('#lblInvestorTaxCity').text(resp.data['investortaxcity']);
                     $('#lblInvestorTaxTIN').text(resp.data['investortin']);
