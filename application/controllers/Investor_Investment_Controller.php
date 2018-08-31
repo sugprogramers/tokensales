@@ -43,7 +43,7 @@ class Investor_Investment_Controller extends CI_Controller {
       
         
         $userId = $this->session->session_investor['id'];
-        $query = $this->FINInvestmentModel->get_investment_project_list($userId);
+        $query = $this->FINInvestmentModel->get_investment_total_by_project_list($userId);
         $objInvestor = $this->CInvestorModel->getByUserId($userId);
          
         $data;
@@ -53,6 +53,7 @@ class Investor_Investment_Controller extends CI_Controller {
         $count=0;
         $balancetoInv = 0;
         $totalEarning = 0;
+        
         
         if($objInvestor){
               $balancetoInv = $objInvestor->payinbalance;

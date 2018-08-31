@@ -89,6 +89,20 @@ class FINInvestmentModel extends CI_Model {
         return $query->result();
     }
     
+    public function get_investment_total_by_project_list($userId) {
+       $this->db->select("sum(fin.amount) as amount , pr.c_project_id , pr.name,pr.companyname, cur.c_currency_id");
+
+       $this->db->from('fin_investment as fin');
+       $this->db->join('c_project as pr', 'fin.c_project_id = pr.c_project_id ');
+       $this->db->join('c_currency cur', 'pr.c_currency_id =cur.c_currency_id ', 'left');
+       $this->db->join('c_investor as inv', 'fin.c_investor_id = inv.c_investor_id ');
+       $this->db->where('inv.c_user_id', $userId);
+         $this->db->group_by('pr.c_project_id, pr.name,pr.companyname, cur.c_currency_id'); 
+
+        $query = $this->db->get();
+        return $query->result();
+    }
+    
     
      public function get_investment_detail($investmentId) {
          
