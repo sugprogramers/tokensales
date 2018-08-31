@@ -345,9 +345,9 @@
                                     <i></i>
                                 </span>
                             </a>
+                            
                             <div class="dropdown-menu" role="menu">
                                 <a class="dropdown-item" href="javascript:void(0)" role="menuitem">
-                                    <!-- <i class="icon wb-user" aria-hidden="true"></i> -->
                                     <?php
                                     if ($this->session->has_userdata("session_admin")) {
                                         echo $this->session->session_admin['email'];
@@ -355,14 +355,36 @@
                                         echo $this->session->session_investor['email'];// echo $this->session->userdata("email");
                                     } else if ($this->session->has_userdata("session_company")) {
                                         echo $this->session->session_company['email'];
-                                    } else {                                        
-                                    }
+                                    } else { }
                                     ?>
-
                                 </a>
-                                <!--<a class="dropdown-item" href="javascript:void(0)" role="menuitem"><i class="icon wb-payment" aria-hidden="true"></i> Billing</a>
-                                <a class="dropdown-item" href="javascript:void(0)" role="menuitem"><i class="icon wb-settings" aria-hidden="true"></i> Settings</a>-->
-                                <div class="dropdown-divider" role="presentation"></div>
+                                
+                                <div class="dropdown-divider" role="presentation"></div>                                
+                                <?php
+                                    if ($this->session->has_userdata("session_admin")) {
+                                        $href_acctdata = base_url()."admin_accountdata"; 
+                                        $href_chgpass = base_url()."admin_changepassword"; 
+                                    } else if ($this->session->has_userdata("session_investor")) {
+                                        $href_acctdata = base_url()."investor_data";
+                                        $href_chgpass = base_url()."investor_changepassword"; 
+                                    } else if ($this->session->has_userdata("session_company")) {
+                                        $href_acctdata = base_url()."company_accountdata";
+                                        $href_chgpass = base_url()."company_changepassword"; 
+                                    } else {
+                                        $href_acctdata = "javascript:void(0)";
+                                        $href_chgpass = "javascript:void(0)";
+                                    }
+                                ?>   
+                                <a class="dropdown-item" href="<?php echo $href_acctdata; ?>" role="menuitem">
+                                    <i class="icon wb-user" aria-hidden="true"></i><span class="site-menu-title">My Account</span>
+                                </a>
+                                <a class="dropdown-item" href="<?php echo $href_chgpass; ?>" role="menuitem">
+                                    <i class="icon wb-folder" aria-hidden="true"></i><span class="site-menu-title">Change Password</span>
+                                </a>                                                            
+                                
+                                <div class="dropdown-divider" role="presentation"></div>                            
+                                <a  data-target="#logOutModal" data-toggle="modal"    class="dropdown-item" href="#" role="menuitem"><i class="icon wb-power" aria-hidden="true"></i> Logout</a>
+                                
                                 <?php
                                     if ($this->session->has_userdata("session_admin") && ($this->session->has_userdata("session_investor") || $this->session->has_userdata("session_company"))) {
                                 ?>
@@ -376,10 +398,10 @@
                                   ?>  
                                 </a>
                                 <?php
-                                } ?>                                
-                                <a  data-target="#logOutModal" data-toggle="modal"    class="dropdown-item" href="#" role="menuitem"><i class="icon wb-power" aria-hidden="true"></i> Logout</a>
-
+                                } ?>    
+                                
                             </div>
+                            
                         </li>
                         <!--
                         <li class="nav-item dropdown">
@@ -608,36 +630,6 @@
                                 <li class="dropdown site-menu-item has-sub">
                                     <a data-toggle="dropdown" href="javascript:void(0)" data-dropdown-toggle="false">
                                         <i class="site-menu-icon wb-folder" aria-hidden="true"></i>
-                                        <span class="site-menu-title">My Account</span>
-                                        <span class="site-menu-icon wb-chevron-down-mini" ></span><!--<span class="site-menu-arrow"></span>-->
-                                    </a>
-                                    <div class="dropdown-menu">
-                                        <div class="site-menu-scroll-wrap is-list">
-                                            <div>
-                                                <div>
-                                                    <ul class="site-menu-sub site-menu-normal-list">
-                                                        <li class="site-menu-item">
-                                                            <a href="<?php echo base_url(); ?>admin_accountdata">
-                                                                <span class="site-menu-title">User Details</span>
-                                                            </a>
-                                                        </li>
-
-                                                        <li class="site-menu-item">
-                                                            <a href="<?php echo base_url(); ?>admin_changepassword">
-                                                                <span class="site-menu-title">Change Password</span>
-                                                            </a>
-                                                        </li>
-
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-
-                                <li class="dropdown site-menu-item has-sub">
-                                    <a data-toggle="dropdown" href="javascript:void(0)" data-dropdown-toggle="false">
-                                        <i class="site-menu-icon wb-folder" aria-hidden="true"></i>
                                         <span class="site-menu-title">Projects</span>
                                         <span class="site-menu-icon wb-chevron-down-mini" ></span><!--<span class="site-menu-arrow"></span>-->
                                     </a>
@@ -777,37 +769,7 @@
                                         <span class="site-menu-title">Dashboard</span>                                   
                                     </a>
                                 </li>
-                                
-                                 <li class="dropdown site-menu-item has-sub">
-                                    <a data-toggle="dropdown" href="javascript:void(0)" data-dropdown-toggle="false">
-                                        <i class="site-menu-icon wb-folder" aria-hidden="true"></i>
-                                        <span class="site-menu-title">My Account</span>
-                                        <span class="site-menu-icon wb-chevron-down-mini" ></span>
-                                    </a>
-                                    <div class="dropdown-menu">
-                                        <div class="site-menu-scroll-wrap is-list">
-                                            <div>
-                                                <div>
-                                                    <ul class="site-menu-sub site-menu-normal-list">
-                                                        <li class="site-menu-item">
-                                                            <a href="<?php echo base_url(); ?>investor_data">
-                                                                <span class="site-menu-title">User Details</span>
-                                                            </a>
-                                                        </li>
-
-                                                        <li class="site-menu-item">
-                                                            <a href="<?php echo base_url(); ?>investor_changepassword">
-                                                                <span class="site-menu-title">Change Password</span>
-                                                            </a>
-                                                        </li>
-
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-
+                               
                                 
                                  <li class="dropdown site-menu-item has-sub">
                                     <a data-toggle="dropdown" href="javascript:void(0)" data-dropdown-toggle="false">
@@ -937,36 +899,6 @@
                                         <i class="site-menu-icon wb-dashboard" aria-hidden="true"></i>
                                         <span class="site-menu-title">Dashboard</span>                                   
                                     </a>
-                                </li>
-                                
-                                 <li class="dropdown site-menu-item has-sub">
-                                    <a data-toggle="dropdown" href="javascript:void(0)" data-dropdown-toggle="false">
-                                        <i class="site-menu-icon wb-folder" aria-hidden="true"></i>
-                                        <span class="site-menu-title">My Account</span>
-                                        <span class="site-menu-icon wb-chevron-down-mini" ></span>
-                                    </a>
-                                    <div class="dropdown-menu">
-                                        <div class="site-menu-scroll-wrap is-list">
-                                            <div>
-                                                <div>
-                                                    <ul class="site-menu-sub site-menu-normal-list">
-                                                        <li class="site-menu-item">
-                                                            <a href="<?php echo base_url(); ?>company_accountdata">
-                                                                <span class="site-menu-title">User Details</span>
-                                                            </a>
-                                                        </li>
-
-                                                        <li class="site-menu-item">
-                                                            <a href="<?php echo base_url(); ?>company_changepassword">
-                                                                <span class="site-menu-title">Change Password</span>
-                                                            </a>
-                                                        </li>
-
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </li>
 
                                  <li class="dropdown site-menu-item has-sub" id="idCompanyProjects" >
