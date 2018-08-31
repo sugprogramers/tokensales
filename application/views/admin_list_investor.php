@@ -255,7 +255,7 @@
                         
                          <div class="row">
                             <div class="col-sm-3">
-                                <p><b>Zip /Postal Code</b></p>
+                                <p><b>ZIP/Postal Code</b></p>
                             </div>
                             <div class="col-sm-3">
                                 <label id="lblInvestorTaxPostalCode" class="control-label" ></label>

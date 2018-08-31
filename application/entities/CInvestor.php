@@ -51,7 +51,9 @@ class CInvestor{
         $cInvestor->c_user_id = $result->c_user_id;
         $cInvestor->c_tax_country_id = $result->c_tax_country_id;
         $cInvestor->tax_address1 = $result->tax_address1; 
+        $cInvestor->tax_address2 = $result->tax_address2; 
         $cInvestor->tax_city = $result->tax_city;
+        $cInvestor->tax_province = $result->tax_province;
         $cInvestor->tax_postal = $result->tax_postal;
         $cInvestor->tax_fiscalnumber = $result->tax_fiscalnumber;
         $cInvestor->tax_isuscitizen = $result->tax_isuscitizen;

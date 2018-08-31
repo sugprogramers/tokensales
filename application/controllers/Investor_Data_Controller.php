@@ -55,7 +55,9 @@ class Investor_Data_Controller extends CI_Controller {
                 'taxfiscalnumber' => ($cInvestor)?$cInvestor->tax_fiscalnumber:"",
                 'taxtin' => ($cInvestor)?$cInvestor->tax_ustin:"",
                 'taxaddress' => ($cInvestor)?$cInvestor->tax_address1:"",
+                'taxaddresssec' => ($cInvestor)?$cInvestor->tax_address2:"",
                 'taxcity' => ($cInvestor)?$cInvestor->tax_city:"",
+                'taxprovince' => ($cInvestor)?$cInvestor->tax_province:"",
                 'taxpostal' => ($cInvestor)?$cInvestor->tax_postal:"",
                 'taxisuscitizen' => ($cInvestor)?(($cInvestor->tax_isuscitizen=="Y")?"Y":"N"):"N",
                 'paypalacct' => ($cInvestor)?$cInvestor->payin_paypalusername:"",
@@ -178,7 +180,9 @@ class Investor_Data_Controller extends CI_Controller {
         $tin = $this->input->post("taxtin");       
         $countryId = $this->input->post("taxcountry");
         $address = $this->input->post("taxaddress");
+        $addressSec = $this->input->post("taxaddresssec");
         $city = $this->input->post("taxcity");
+        $province = $this->input->post("taxprovince");
         $postal = $this->input->post("taxpostal");
         
         $status = ($cInvestorF)?$cInvestorF->status:"PEND";
@@ -218,7 +222,9 @@ class Investor_Data_Controller extends CI_Controller {
             $cInvestor->c_user_id = $this->session->session_investor['id'];
             $cInvestor->c_tax_country_id = $countryId;
             $cInvestor->tax_address1 = $address;
+            $cInvestor->tax_address2 = $addressSec;
             $cInvestor->tax_city = $city;
+            $cInvestor->tax_province = $province;
             $cInvestor->tax_postal = $postal;
             $cInvestor->status = $status;
             $cInvestor->tax_fiscalnumber = $fiscalNumber;

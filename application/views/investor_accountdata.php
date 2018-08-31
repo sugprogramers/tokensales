@@ -267,6 +267,56 @@
                                         </div>
                                     </div>
                                     <input id="investorId" type="hidden" name="investorid">
+                                    
+                                    
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="form-group ">
+                                                    <label class="control-label" for="userTaxAddress">Address Line 1*</label>
+                                                    <input type="text" required class="form-control" id="inputTaxAddress" name="taxaddress" placeholder="Residential Address" style="font-size: 14px; border-radius:0;">
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="form-group ">
+                                                    <label class="control-label" for="userTaxAddress">Address Line 2</label>
+                                                    <input type="text" class="form-control" id="inputTaxAddressSec" name="taxaddresssec" placeholder="Residential Address (optional)" style="font-size: 14px; border-radius:0;">
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row">
+                                         <div class="col-sm-5">
+                                            <div class="form-group ">
+                                                <label class="control-label" for="userTaxCity">City *</label>
+                                                <input type="text" required class="form-control" id="inputTaxCity" name="taxcity" placeholder="City" style="font-size: 14px; border-radius:0;">
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <div class="form-group ">
+                                                <label class="control-label" for="userTaxCity">State/Province/Region</label>
+                                                <input type="text" class="form-control" id="inputTaxProvince" name="taxprovince" placeholder="State/Province/Region" style="font-size: 14px; border-radius:0;">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-5">
+                                            <div class="form-group ">
+                                                <label class="control-label" for="userTaxPostalCode">ZIP/Postal Code *</label>
+                                                <input type="text" required class="form-control" id="inputTaxPostal" name="taxpostal" placeholder="Postal Code" style="font-size: 14px; border-radius:0;">
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    
                                     <div class="row">
                                         <div class="col-sm-4">
                                              <div class="form-group">
@@ -278,62 +328,6 @@
                                              </div>
                                         </div>
                                         
-                                        <!-- 
-                                        <div class="col-sm-4">
-                                            <div class="form-group ">
-                                                    <label class="control-label" for="userTaxFiscalNumber">Fiscal Number *</label>
-                                                    <input type="text" required class="form-control" id="inputTaxFiscalNumber" name="taxfiscalnumber" placeholder="Fiscal Number" style="font-size: 14px; border-radius:0;">
-                                            </div>
-                                        </div>
-                                        -->
-                                        
-                                    </div>
-                                    
-                                    <!-- 
-                                    <div class="row">
-                                        <div class="col-sm-4">
-                                       <div class="checkbox-custom checkbox-default">
-                                         <input type="checkbox" id="userisuscitizen" name="isuscitizen"  checked autocomplete="on"/>
-                                         <label for="inputBasicRemember">Are you a person related to the US (US Person)?</label>
-                                       </div>
-                                            </div>
-                                        <div id="divTaxUs" class="col-sm-4">
-                                            <div class="form-group ">
-                                                    <label class="control-label" for="userTaxUsTin">US TIN</label>
-                                                    <input type="text" required class="form-control" id="inputTaxUstin" name="taxtin" placeholder="US TIN" style="font-size: 14px; border-radius:0;">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    -->
-                                    
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <div class="form-group ">
-                                                    <label class="control-label" for="userTaxAddress">Address*</label>
-                                                    <input type="text" required class="form-control" id="inputTaxAddress" name="taxaddress" placeholder="Residential Address" style="font-size: 14px; border-radius:0;">
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="row">
-                                        <div class="col-sm-3">
-
-                                            <div class="form-group ">
-                                                <label class="control-label" for="userTaxPostalCode">Zip Code *</label>
-                                                <input type="text" required class="form-control" id="inputTaxPostal" name="taxpostal" placeholder="Postal Code" style="font-size: 14px; border-radius:0;">
-
-                                            </div>
-
-                                        </div>
-
-                                        <div class="col-sm-5">
-                                            <div class="form-group ">
-                                                <label class="control-label" for="userTaxCity">City *</label>
-                                                <input type="text" required class="form-control" id="inputTaxCity" name="taxcity" placeholder="City" style="font-size: 14px; border-radius:0;">
-                                            </div>
-
-                                        </div>
                                     </div>
 
                                      <div class="form-group text-right">
@@ -545,7 +539,9 @@
         $("#inputTaxFiscalNumber").val("<?php echo $taxfiscalnumber ?>");
         $("#inputTaxUstin").val("<?php echo $taxtin ?>");
         $("#inputTaxAddress").val("<?php echo $taxaddress ?>");
+        $("#inputTaxAddressSec").val("<?php echo $taxaddresssec ?>");
         $("#inputTaxPostal").val("<?php echo $taxpostal ?>");
+        $("#inputTaxProvince").val("<?php echo $taxprovince ?>");
         $("#inputTaxCity").val("<?php echo $taxcity ?>");
            
        /*
