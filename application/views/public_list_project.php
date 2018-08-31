@@ -261,6 +261,7 @@
 <script type="text/javascript">
 
     var c_project_id = '0';
+     var tab_active = 1;
     var g_latitude = '0';
     var g_longitude = '0';
 
@@ -303,6 +304,13 @@
                          
                          $('#rangeNew').asRange({scale: false,namespace: 'asRange',tip: false,value: resp.percent,}); 
                          $('#rangeNew').asRange('disable');
+                         
+                         if(tab_active == 1)
+                         $('.nav-tabs a[href="#exampleTabsLineTopOne"]').tab('show');
+                         if(tab_active == 4)
+                         $('.nav-tabs a[href="#exampleTabsLineTopFour"]').tab('show');
+                         
+                         tab_active = 1;
                          
 
                     }
@@ -354,15 +362,21 @@
              
     }
     
+      
+    function Pagar(id) {
+        c_project_id = id;
+        tab_active = 4;
+    }
     function Mostrar(id) {
         c_project_id = id;
+         tab_active = 1;
     }
     function Eliminar(id) {
         bootbox.confirm({
             title: "Confirm Delete", message: "Are you sure you want to delete this item?",
             buttons: {
-                cancel: {label: '<i class="fa fa-times"></i> Cancel', className: 'btn-danger'},
-                confirm: {label: '<i class="fa fa-check"></i> Confirm', className: 'btn-primary'}
+                cancel: {label: '<i class="fa fa-times"></i> No', className: 'btn-danger'},
+                confirm: {label: '<i class="fa fa-check"></i> Yes', className: 'btn-success'}
             },
             callback: function (result) {
                 if (result) {
@@ -398,8 +412,8 @@
         bootbox.confirm({
             title: "Confirm Invesment", message: "To invest you must login, want to login?",
             buttons: {
-                cancel: {label: '<i class="fa fa-times"></i> Cancel', className: 'btn-danger'},
-                confirm: {label: '<i class="fa fa-check"></i> Confirm', className: 'btn-primary'}
+                cancel: {label: '<i class="fa fa-times"></i> No', className: 'btn-danger'},
+                confirm: {label: '<i class="fa fa-check"></i> Yes', className: 'btn-success'}
             },
             callback: function (result) {
                 if (result) {

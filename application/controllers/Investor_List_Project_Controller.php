@@ -178,6 +178,10 @@ class Investor_List_Project_Controller extends CI_Controller {
                     </div>
              </div> ';
         }
+                
+                
+       $sumamount = $this->formato_numero($sumamount);
+       $targetamt = $this->formato_numero($targetamt);
 
 return
 '  
@@ -217,12 +221,12 @@ return
     '.$address1.'
     </div>
 
-    <div class="row">
-              <div class="col-sm-6">
-              <b style="color:#566573;">'.$cursymbol.$sumamount.' <br>%'.$percent.' Raised </b>
+     <div class="row">
+              <div class="col-sm-12 text-right">
+              <b style="color:#566573;">'.$cursymbol.$sumamount.'   |   '.$percent.'% Parked </b>
               </div>
-              <div class="col-sm-6 text-right">
-              <b style="color:#566573;">'.$cursymbol.$targetamt.' <br>Funding Goal </b>
+              <div class="col-sm-12 text-right">
+              <b style="color:#566573;">'.$cursymbol.$targetamt.' is The Funding Goal </b>
               </div>
     </div>   
 
@@ -269,7 +273,11 @@ return
 </div>
 
 <div class="h-minificha__button-bar">
-          <button  type="submit" class="btn btn-primary  btn-block"  data-toggle="slidePanel" data-url="' . base_url() . 'themes/default/tpl/investor_panel.tpl"  onclick="Mostrar(\''.$c_project_id.'\');">ADD FUNDS</button>
+          <button  type="submit" class="btn btn-primary  btn-block"  data-toggle="slidePanel" data-url="' . base_url() . 'themes/default/tpl/investor_panel.tpl"  onclick="Pagar(\''.$c_project_id.'\');">ADD FUNDS</button>
+</div>
+
+<div class="h-minificha__button-bar" style="margin-top:4px;">
+          <button  type="submit" class="btn btn-warning  btn-block"  data-toggle="slidePanel" data-url="' . base_url() . 'themes/default/tpl/investor_panel.tpl"  onclick="Mostrar(\''.$c_project_id.'\');">LEARN MORE</button>
 </div>
 
 
@@ -307,6 +315,12 @@ return
 
 private function truncate($string, $length, $dots = "...") {
 return (strlen($string) > $length) ? substr($string, 0, $length - strlen($dots)) . $dots : $string;
+}
+private function formato_numero($numero , $decimales=0){
+    //if($redondea)
+    //$numero = floor($numero); //redondea hacia abajo    
+    $numero = number_format($numero, $decimales, '.', ',');    
+    return $numero;
 }
 
 

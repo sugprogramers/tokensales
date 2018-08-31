@@ -99,10 +99,10 @@
 
                                     <div class="row" style="margin-top: 20px">
                                         <div class="col-sm-6">
-                                            <b style="color:#566573;"><font id="sumamountNow"> $556 </font> <br>(%<font id="percentNow"> 100 </font>) Raised</b> 
+                                            <b style="color:#566573;"><font id="sumamountNow"> $556 </font> | <font id="percentNow"> 100 </font>% Parked</b> 
                                         </div>
                                         <div class="col-sm-6 text-right">
-                                            <b style="color:#566573;"><font id="targetamtNow"> $556 </font><br>Funding Goal</b>
+                                            <b style="color:#566573;"><font id="targetamtNow"> $556 </font> is The Funding Goal</b>
                                         </div>
                                     </div>   
 

@@ -129,7 +129,11 @@ class Company_List_Project_Controller extends CI_Controller {
         $countinvesment = $this->FINInvestmentModel->getCountInvestorsByProject($c_project_id);
         $percent = $this->get_percentage($targetamt, $sumamount);
 
-        $statushtml = $this->getHtmlProjectStatusName($projectstatus) ;   
+        $statushtml = $this->getHtmlProjectStatusName($projectstatus) ;  
+        
+        
+       $sumamount = $this->formato_numero($sumamount);
+       $targetamt = $this->formato_numero($targetamt);
 
         return
                 '  
@@ -170,12 +174,12 @@ class Company_List_Project_Controller extends CI_Controller {
     '.$address1.'
     </div>
 
-    <div class="row">
-              <div class="col-sm-6">
-              <b style="color:#566573;">'.$cursymbol.$sumamount.' <br>%'.$percent.' Raised </b>
+     <div class="row">
+              <div class="col-sm-12 text-right">
+              <b style="color:#566573;">'.$cursymbol.$sumamount.'   |   '.$percent.'% Parked </b>
               </div>
-              <div class="col-sm-6 text-right">
-              <b style="color:#566573;">'.$cursymbol.$targetamt.' <br>Funding Goal </b>
+              <div class="col-sm-12 text-right">
+              <b style="color:#566573;">'.$cursymbol.$targetamt.' is The Funding Goal </b>
               </div>
     </div>   
 
@@ -272,6 +276,12 @@ class Company_List_Project_Controller extends CI_Controller {
     private function truncate($string, $length, $dots = "...") {
         return (strlen($string) > $length) ? substr($string, 0, $length - strlen($dots)) . $dots : $string;
     }
+private function formato_numero($numero , $decimales=0){
+    //if($redondea)
+    //$numero = floor($numero); //redondea hacia abajo    
+    $numero = number_format($numero, $decimales, '.', ',');    
+    return $numero;
+}
 
     private function getHtmlProjectStatusName($status) {
         switch ($status) {
