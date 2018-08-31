@@ -87,6 +87,7 @@ $route['investor_transactionhistory'] = "Investor_TransactionHistory_Controller"
 $route['investor_basicdata'] = "Investor_BasicData_Controller";
 
 $route['investor_depositfunds'] = "Investor_DepositFunds_Controller";
+$route['investor_depositfunds/(:any)'] = "Investor_DepositFunds_Controller/index/$1";
 $route['investor_processdepositfunds/(:any)/(:any)'] = "Investor_ProcessDepositFunds_Controller/index/$1/$2";
 $route['paypal/ipn_investor_depositpaymenthistory/(:any)/(:any)'] = "paypal/IPN_Investor_DepositPaymentHistory_Controller/index/$1/$2";
 $route['paypal/ipn_investor_depositpaymenthistory_success/(:any)/(:any)'] = "paypal/IPN_Investor_DepositPaymentHistory_Controller/success/$1/$2";

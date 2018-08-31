@@ -17,7 +17,9 @@ class Investor_DepositFunds_Controller extends CI_Controller {
         }
     }
 
-    public function index() {
+    public function index($defaultTab = 1) {
+        log_message('error', 'acaaa');
+        log_message('error', $defaultTab);
         /* @var $investor CInvestor */
         $investor = $this->CInvestorModel->getByUserId($this->session->session_investor['id']);
         
@@ -28,7 +30,7 @@ class Investor_DepositFunds_Controller extends CI_Controller {
             $payinbalance = $investor->payinbalance;
         }
         // temporary curr_symbol
-        $data = array('investorId' => $investorId, 'payinbalance' => $payinbalance, 'curr_symbol' => '$');
+        $data = array('investorId' => $investorId, 'payinbalance' => $payinbalance, 'curr_symbol' => '$', 'default_tab' => $defaultTab);
 
         $this->load->view('header/header_admin');
         $this->load->view('investor_depositfunds', $data);

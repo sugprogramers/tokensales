@@ -204,7 +204,7 @@ class Company_List_Project_Controller extends CI_Controller {
             <span class="h-minificha__data__value--number h-minificha--color-primary">
                 ' . $totalyieldperc . '<span class="">%</span>
             </span>
-            <p class="h-minificha__data__value--description h-minificha--color-secondary">Total Return</p>
+            <p class="h-minificha__data__value--description h-minificha--color-secondary">Projected Return</p>
         </div>
     </div>
     <div class="h-minificha__data__values__separator--line"></div>

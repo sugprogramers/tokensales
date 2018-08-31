@@ -693,7 +693,7 @@
                                                     <ul class="site-menu-sub site-menu-normal-list">
                                                         <li class="site-menu-item">
                                                             <a href="<?php echo base_url(); ?>admin_list_investor">
-                                                                <span class="site-menu-title">Validate Investor</span>
+                                                                <span class="site-menu-title">View all Investors</span>
                                                             </a>
                                                         </li>
 
