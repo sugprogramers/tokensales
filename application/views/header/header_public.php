@@ -80,6 +80,19 @@
         
     </head>
     <body class="animsition site-navbar-small " style="padding-top: 50px;">
+        <!-- override loading page background color in cyan.css -->
+        <style>
+            .loader-overlay {
+                background:#FFFFFF /*#232D4B*/
+            }    
+            .loader-index > div {
+                background:#87909C/*#FFFFFF*/
+            }    
+            body {
+                background-color:#FFFFFF/*#232D4B*/
+            }
+        </style>
+    
         <!--[if lt IE 8]>
               <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
           <![endif]-->
