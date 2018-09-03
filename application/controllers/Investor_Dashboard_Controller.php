@@ -32,32 +32,49 @@ class Investor_Dashboard_Controller extends CI_Controller {
     }
 
     public function get_investments() {
+        $line1 = '';
+        $investor = $this->CInvestorModel->getByUserId($this->session->session_investor['id']);
+        if (!$investor) {
+            return $line1;
+        }
+        
         $arrayAllDias[] = array();
         $fechaInicio = strtotime('today -30 days');
         $fechaFin = strtotime('today');
         for ($i = $fechaInicio; $i < $fechaFin + 86400; $i += 86400) {
             $newstring = intval(date("Y", $i)) . '-' . date("m", $i) . '-' . date("d", $i);
             if (!isset($arrayAllDias[$newstring . ''])) {
-                $arrayAllDias[$newstring . ''] = array('date' => $newstring, 'suma' => 0);
+                $arrayAllDias[$newstring . ''] = array('date' => $newstring, 'drivingamt' => 0, 'parkedamt' => 0);
             }
         }
 
-
-        $query = $this->FINInvestmentModel->getSumAmountPerDay(null, $this->session->session_investor['id']);
+        /* $query = $this->FINInvestmentModel->getSumAmountPerDay(null, $this->session->session_investor['id']);
+          foreach ($query->result() as $r) {
+          if (isset($arrayAllDias[$r->fecha . ''])) {
+          $arrayAllDias[$r->fecha . '']['suma'] = $r->suma;
+          }
+          } */                
+        $query = $this->FINInvestmentModel->get_driving_investments_per_day($investor->c_investor_id);
+        log_message('error','DRIVINGGG');
+        log_message('error', print_r($query->result(),true));
         foreach ($query->result() as $r) {
             if (isset($arrayAllDias[$r->fecha . ''])) {
-                $arrayAllDias[$r->fecha . '']['suma'] = $r->suma;
+                $arrayAllDias[$r->fecha . '']['drivingamt'] = $r->amount;
+            }
+        }
+        $query = $this->FINInvestmentModel->get_parked_investments_per_day($investor->c_investor_id);
+        log_message('error','PARKEDD');
+        log_message('error', print_r($query->result(),true));
+        foreach ($query->result() as $r) {
+            if (isset($arrayAllDias[$r->fecha . ''])) {
+                $arrayAllDias[$r->fecha . '']['parkedamt'] = $r->amount;
             }
         }
 
-
-
-        $line1 = '';
         foreach ($arrayAllDias as $value) {
-            if (count($value) == 2)
-                $line1 .= "['{$value['date']}',  {$value['suma']}],";
+            if (count($value) == 3)
+                $line1 .= "['{$value['date']}',  {$value['drivingamt']},  {$value['parkedamt']}],";
         }
-
         return $line1;
     }
 

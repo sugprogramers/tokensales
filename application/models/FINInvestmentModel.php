@@ -344,6 +344,30 @@ class FINInvestmentModel extends CI_Model {
         return $queryresult[0]->count;   
     }     
 
+    public function get_driving_investments_per_day($investorId) {
+        log_message('error', $investorId);
+        $this->db->select("coalesce(sum(fin.amount),0) as amount, to_char(fin.created,'YYYY-MM-DD') as fecha ");
+        $this->db->from('fin_investment fin');
+        $this->db->join('c_project pr', 'pr.c_project_id = fin.c_project_id');   
+        $this->db->where('pr.projectstatus', 'ACT');
+        $this->db->where('fin.c_investor_id', $investorId);
+
+        $this->db->group_by("2");
+        ///log_message('error', print_r($this->db->get(),true));
+        return $this->db->get();        
+    }
+
+    public function get_parked_investments_per_day($investorId) {
+        $this->db->select("coalesce(sum(fin.amount),0) as amount, to_char(fin.created,'YYYY-MM-DD') as fecha ");
+        $this->db->from('fin_investment fin');
+        $this->db->join('c_project pr', 'pr.c_project_id = fin.c_project_id');   
+        $this->db->where_in('pr.projectstatus', array('FU','COFU'));
+        $this->db->where('fin.c_investor_id', $investorId);
+
+        $this->db->group_by("2");
+        return $this->db->get();        
+    }    
+    
 }
 
 ?>

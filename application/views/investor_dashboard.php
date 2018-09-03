@@ -19,9 +19,9 @@
                     <div class="col-md-3" >
                         <div style="cursor: pointer;" onclick="window.location = 'investor_depositfunds/2';">            
                             <!-- Card -->
-                            <div class="card p-15 flex-row justify-content-between bg-green-700">
+                            <div class="card p-15 flex-row justify-content-between bg-orange-600">
                                 <div class="white">
-                                    <i class="icon icon-circle icon-3x wb-graph-up bg-green-500" aria-hidden="true"></i>
+                                    <i class="icon icon-circle icon-3x wb-graph-up bg-orange-400" aria-hidden="true"></i>
                                 </div>
                                 <div class="counter counter-md counter counter-inverse  text-right">                                    
                                     <div class="counter-number-group">
@@ -57,9 +57,9 @@
                     <div class="col-md-3" >
                         <div style="cursor: pointer;" onclick="window.location = 'investor_depositfunds/2';">            
                             <!-- Card -->
-                            <div class="card p-15 flex-row justify-content-between bg-red-600">
+                            <div class="card p-15 flex-row justify-content-between bg-green-700">
                                 <div class="white">
-                                    <i class="icon icon-circle icon-3x wb-graph-up bg-red-400" aria-hidden="true"></i>
+                                    <i class="icon icon-circle icon-3x wb-graph-up bg-green-500" aria-hidden="true"></i>
                                 </div>
                                 <div class="counter counter-md counter counter-inverse  text-right">
                                     <div class="counter-number-group">
@@ -131,8 +131,7 @@
                     </div>    
                 </div>                
 
-                
-                <br>
+
                 <br>                                   
                 <div class="row row-lg">
                     <div class="col-lg-12">
@@ -158,33 +157,29 @@
 </div> 
 
 
-
-
 <script>
     google.charts.load('current', {packages: ['corechart', 'line']});
     google.charts.setOnLoadCallback(drawBasic1);
 
     function drawBasic1() {
-
-
         var data = google.visualization.arrayToDataTable([
-            ['Day', 'Invesments'],
-<?php echo $line1; ?>
+            ['Date', 'Driving Projects', 'Parked Projects'],
+            <?php echo $line1; ?>
         ]);
 
         var options = {
-            //colors: ['#a52714', '#097138'],
+            colors: ['#009757', '#555753'],
             pointSize: 4,
             legend: {position: 'bottom'},
             hAxis: {
-                title: 'Day',
+                title: 'Date'
                 //gridlines: { count: 5 },
-
             },
             vAxis: {
-                title: 'Invest',
+                title: 'Investment ($)',
                 gridlines: {count: 10},
-            }
+            },
+            backgroundColor: '#F2F2F2'
         };
 
 
