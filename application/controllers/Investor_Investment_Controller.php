@@ -141,7 +141,7 @@ class Investor_Investment_Controller extends CI_Controller {
       foreach ($query as $obj) {
            
            $data[] = array(
-                $obj->status,
+                //$obj->status,
                 $obj->projectname,       
                 $obj->paymentdate, 
                 $obj->amount,

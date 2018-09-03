@@ -310,7 +310,7 @@
                     data-filtering="true" style="width:100%">
                     <thead>
                       <tr>
-                        <th data-name="status">status</th>
+                         <!-- <th data-name="status">status</th> -->
                         <th data-name="projectName">Project</th>
                         <th data-name="paymentDate">Payment Date</th>
                         <th data-name="Amount">Amount</th>
@@ -481,7 +481,7 @@ function moreinfo_earning(investmentId){
             responsive: true,
             "order": [[ 0, "desc" ]],
             "columnDefs": [{
-                    "targets": [3],
+                    "targets": [2],
                     "orderable": false
                 }],
             "processing": true,  //mostrar waiting
