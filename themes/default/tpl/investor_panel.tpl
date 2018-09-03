@@ -162,8 +162,20 @@
                                        <div class="form-group ">
                                             <label class="control-label" for="months">Amount *</label>
                                               <div class="input-group">
-                                                <span class="input-group-addon" id="cursymbolNew"> $ </span>
+                                                <span class="input-group-addon"  id="cursymbolNew"> $ </span>
                                                 <input type="text" class="form-control" placeholder="" id="amountinvest" name="amountinvest" required >
+                                                
+                                                <script>                                                    
+                                                    $("#amountinvest").on("keyup", function(){
+                                                        var valid = /^\d{0,10}(\.\d{0,2})?$/.test(this.value),
+                                                            val = this.value;
+
+                                                        if(!valid){
+                                                            console.log("Invalid input!");
+                                                            this.value = val.substring(0, val.length - 1);
+                                                        }
+                                                    });
+                                                </script>
                                               </div>
                                             <!-- <input type="text" class="form-control"  data-decimals="2"  data-plugin="TouchSpin" value="12" data-max="100000"  required /> -->
                                         </div>

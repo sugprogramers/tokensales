@@ -299,7 +299,7 @@
                         $('#percentNow').html(resp.percent);
                         $('#investorsNow').html(resp.countinvesment);
                         $('#cursymbolNow').html(resp.cursymbol);
-                        
+                        alert(resp.cursymbol);
                           
                          
                          $('#rangeNew').asRange({scale: false,namespace: 'asRange',tip: false,value: resp.percent,}); 
@@ -408,6 +408,10 @@
     function Invertir() {
         
         var monto = $('#amountinvest').val();
+       
+        if($.trim(monto)===''){            
+            MostrarAlerta('The amount entered is invalid.');
+        }else
         
         bootbox.confirm({
             title: "Confirm Invesment", message: "Are you sure you want to invest "+monto+"?",
@@ -426,7 +430,7 @@
                         success: function (data) {
                             var resp = $.parseJSON(data);//convertir data de json
                             if (resp.status === "error") {
-                                showError(resp.msg);
+                                MostrarAlerta(resp.msg);
                             }
                             if (resp.status === "success") {
                                 Listar();
@@ -439,6 +443,33 @@
             }
         });
     }
+
+
+function MostrarAlerta(texto){
+
+ var dialog = bootbox.dialog({
+                message: '<div style="font-size:36px;color:red;float:left"><i class="icon wb-warning" aria-hidden="true"></i></div> <div style="float:left;height:60px;padding:20px 15px;color:red;font-weight:bold;">'+texto+'</div>',
+                closeButton: true,
+            });
+         /*
+           'font-weight' : 'bold',
+            'color': '#F00',
+            'font-size': '2em',
+          */
+dialog.find('.modal-content').css({
+'background-color': '#F5B7B1',            
+'margin-top': function (){
+    var w = $( window ).height();
+    var b = $(".modal-dialog").height();
+    // should not be (w-h)/2
+    var h = (w-b)/2;
+    return h+"px";
+}
+});
+
+dialog.modal('show');
+
+}
 
 </script>
 
