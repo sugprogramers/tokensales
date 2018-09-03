@@ -25,8 +25,8 @@ class Company_Dashboard_Controller extends CI_Controller {
         $data = $data + array('line1' => $line1); 
         
         //BarGraph
-      //  $bar = $this->get_barGraphData();
-       // $data = $data + array('bar' => $bar); 
+        $bar = $this->get_barGraphData();
+        $data = $data + array('bargraph' => $bar); 
         
         $this->load->view('header/header_admin');
         $this->load->view('company_dashboard',$data);
@@ -34,8 +34,31 @@ class Company_Dashboard_Controller extends CI_Controller {
     }
     
     public function get_barGraphData(){
-        //$userId = $this->session->session_company['id'];
-        //$query = $this->CProjectModel->get_investment_total_by_project_list($userId);
+        $userId = $this->session->session_company['id'];
+        $query = $this->CProjectModel->getAllByCompany($userId);
+        $barData = "";
+        
+        $header = "['Project', 'Funding Goal', 'Parked']";
+        foreach ($query->result() as $r) {
+            
+           // if(!in_array($r->projectstatus, array('FU', 'COFU','ACT')))
+           //         continue;
+            
+            $sumamount = $this->FINInvestmentModel->getSumAmountByProject($r->c_project_id);
+            
+                $aux = ",";
+                if(strlen($barData)==0)
+                    $aux = "";
+                $barData = $barData .$aux . "['" . $r->name ."',". $r->targetamt .",". $sumamount."]";
+               
+        
+            
+        }
+        
+        
+         return $barData;  
+        
+        
         
     }
     

@@ -152,6 +152,7 @@ function drawBasic2() {
            //colors: ['#a52714', '#097138'],
            pointSize: 4,
            legend: { position: 'bottom' },
+           backgroundColor: '#F2F2F2',
         hAxis: {
           title: 'Day',
           //gridlines: { count: 5 },
@@ -208,13 +209,16 @@ function drawBasic3() {
       google.charts.load('current', {'packages':['bar']});
       google.charts.setOnLoadCallback(drawChart);
 
+console.log("<?php echo $bargraph; ?>");
+
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
-          ['Year', 'Sales', 'Expenses', 'Profit'],
-          ['2020', 1000, 400, 200],
+          ['Project', 'Funding Goal', 'Parked'],
+          <?php echo $bargraph; ?>
+          /*['2020', 1000, 400, 200],
           ['2015', 1170, 460, 250],
           ['2016', 660, 1120, 300],
-          ['2017', 1030, 540, 350]
+          ['2017', 1030, 540, 350]*/
         ]);
 
         var options = {
@@ -223,8 +227,10 @@ function drawBasic3() {
           //  subtitle: 'Sales, Expenses, and Profit: 2014-2017',
           },
           bars: 'horizontal', // Required for Material Bar Charts.
-          colors: ['#2E5C87'],
+          colors: ['#0083A6','#0099C2'],
+         // colors: ['#6B1365','#3442A7','#A20094','#0099C2'],
           backgroundColor: '#F2F2F2',
+        // bar: {groupWidth: "95%"},
         };
 
         var chart = new google.charts.Bar(document.getElementById('barchart_material'));
