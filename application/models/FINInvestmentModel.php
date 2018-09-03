@@ -281,6 +281,68 @@ class FINInvestmentModel extends CI_Model {
         }
         return "uknowkn";
     }
+    
+    public function get_driving_balance_by_investor($investorId) {
+        $this->db->select("coalesce(sum(fin.amount),0.00) as amount");
+        $this->db->from('fin_investment as fin');
+        $this->db->join('c_project as pr', 'fin.c_project_id = pr.c_project_id ');
+        $this->db->where('pr.projectstatus', 'ACT');
+        $this->db->where('fin.c_investor_id', $investorId);
+
+        $query = $this->db->get();
+        $queryresult = $query->result();  
+        if (!$queryresult) {
+            return "0";
+        }          
+        return $queryresult[0]->amount;        
+    }
+
+    public function get_parked_balance_by_investor($investorId) {
+        $this->db->select("coalesce(sum(fin.amount),0.00) as amount");
+        $this->db->from('fin_investment as fin');
+        $this->db->join('c_project as pr', 'fin.c_project_id = pr.c_project_id ');
+        $this->db->where_in('pr.projectstatus', array('FU','COFU'));
+        $this->db->where('fin.c_investor_id', $investorId);
+
+        $query = $this->db->get();
+        $queryresult = $query->result();
+        if (!$queryresult) {
+            return "0";
+        }          
+        return $queryresult[0]->amount;
+    } 
+    
+    public function count_driving_projects_by_investor($investorId) {
+        $this->db->select("coalesce(count(distinct pr.c_project_id),0) as count");
+        $this->db->from('fin_investment as fin');
+        $this->db->join('c_project as pr', 'fin.c_project_id = pr.c_project_id ');
+        $this->db->where('pr.projectstatus', 'ACT');
+        $this->db->where('fin.c_investor_id', $investorId);
+        $this->db->group_by('pr.c_project_id');
+
+        $query = $this->db->get();
+        $queryresult = $query->result();   
+        if (!$queryresult) {
+            return "0";
+        }    
+        return $queryresult[0]->count;        
+    }
+
+    public function count_parked_projects_by_investor($investorId) {
+        $this->db->select("coalesce(count(distinct pr.c_project_id),0) as count");
+        $this->db->from('fin_investment as fin');
+        $this->db->join('c_project as pr', 'fin.c_project_id = pr.c_project_id ');
+        $this->db->where_in('pr.projectstatus', array('FU','COFU'));
+        $this->db->where('fin.c_investor_id', $investorId);
+        $this->db->group_by('pr.c_project_id');
+
+        $query = $this->db->get();
+        $queryresult = $query->result();  
+        if (!$queryresult) {
+            return "0";
+        }          
+        return $queryresult[0]->count;   
+    }     
 
 }
 
