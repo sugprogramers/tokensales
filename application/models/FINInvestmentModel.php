@@ -13,6 +13,7 @@ class FINInvestmentModel extends CI_Model {
         $this->load->model("FINInvestmentModel");
         $this->load->model("CProjectModel");
         $this->load->model("CInvestorModel");
+        $this->load->model("FINPaymentOrderModel");
     }
 
     public function get($id) {
@@ -232,6 +233,21 @@ class FINInvestmentModel extends CI_Model {
                             if($sumanueva >= $objProject->targetamt){
                                 $objProject->projectstatus = 'COFU';
                                 $this->CProjectModel->save($objProject, $c_user_id);
+                                
+                                $now = (new DateTime())->format('Y-m-d H:i:s');
+                                $newfinpaymentorder =  new FINPaymentOrder();
+                                $newfinpaymentorder->c_project_id = $c_project_id;
+                                $newfinpaymentorder->c_investor_id = $objInvestor->c_investor_id;
+                                $newfinpaymentorder->isactive = 'Y';
+                                $newfinpaymentorder->fin_investment_id = $fin->fin_investment_id;
+                                $newfinpaymentorder->ordertype = 'PROMPAYOUT';
+                                $newfinpaymentorder->status = 'PEND';
+                                $newfinpaymentorder->scheduleddate = $now;
+                                $newfinpaymentorder->paymentdate = $now;
+                                $newfinpaymentorder->amount = $objProject->targetamt;
+                                
+                                $this->FINPaymentOrderModel->save($newfinpaymentorder, $c_user_id);
+                                
                             }
                             
                             return 'true';
