@@ -98,9 +98,12 @@ class Investor_Investment_Controller extends CI_Controller {
                 $obj->amount . " " . $obj->cursymbol,       
                 $this->FINInvestmentModel->getStatusOfInvestmentFromProject($obj->projectstatus), 
                 $obj->companyname . " " . '<a class="btn btn-sm btn-icon btn-pure btn-default on-default edit-row" href="javascript:void(0)" title="more info" onclick="moreinfo_investment('."'".$obj->fin_investment_id."'".')"><i class="icon wb-info-circle"></i></a>',
-                $this->CProjectModel->getProjectStatusName($obj->projectstatus),
-                $obj->investmentdate,
                 
+                $this->renderProjectStatus($obj->projectstatus),
+               
+               
+                $obj->investmentdate,
+                 
                 $obj->percent,
                 $obj->earning . " " . '<a class="btn btn-sm btn-icon btn-pure btn-default on-default edit-row" href="javascript:void(0)" title="more info" onclick="moreinfo_earning('."'".$obj->fin_investment_id."'".')"><i class="icon wb-info-circle"></i></a>',
                 $obj->longitude,
@@ -244,6 +247,16 @@ class Investor_Investment_Controller extends CI_Controller {
             echo json_encode($response);
        }
     }
+    
+    public function renderProjectStatus($status ) {
+        $name = $this->CProjectModel->getProjectStatusName($status);
+        if ($status === 'ACT') {
+            return '<span class="badge badge-info">'.$name.'</span>';
+        } else if ($status === 'FU') {
+            return '<span class="badge badge-warning">'.$name.'</span>';
+        } 
+        return '<span class="badge badge-default">'.$name.'</span>';        
+    }  
     
    
 }
