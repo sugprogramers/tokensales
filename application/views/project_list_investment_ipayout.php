@@ -2,7 +2,11 @@
     <div class="page-header">
         <h1 class="page-title">Pending Return of Investment Payouts</h1>
         <div class="page-header-actions">
-        </div>
+            <ol class="breadcrumb breadcrumb-arrow">
+                <li class="breadcrumb-item"><a class="icon fa-bank" href="#">Payment Info</a></li>
+                <li class="breadcrumb-item">Pending Payouts</li>
+            </ol> 
+        </div>   
     </div>
 
     <div class="page-content container-fluid">

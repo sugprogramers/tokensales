@@ -895,37 +895,13 @@
                                         <span class="site-menu-title">Dashboard</span>                                   
                                     </a>
                                 </li>
-
-                                 <li class="dropdown site-menu-item has-sub" id="idCompanyProjects" >
-                                    <a data-toggle="dropdown" href="javascript:void(0)" data-dropdown-toggle="false">
-                                        <i class="site-menu-icon fa-cubes" aria-hidden="true"></i>
-                                        <span class="site-menu-title">Projects</span>
-                                        <span class="site-menu-icon wb-chevron-down-mini " ></span>
-                                    </a>
-                                    <div class="dropdown-menu">
-                                        <div class="site-menu-scroll-wrap is-list">
-                                            <div>
-                                                <div>
-                                                    <ul class="site-menu-sub site-menu-normal-list">
-                                                        <li class="site-menu-item"  id="idCompanyListProject">
-                                                            <a href="<?php echo base_url(); ?>company_project">
-                                                                <span class="site-menu-title">My Projects</span>
-                                                            </a>
-                                                        </li>
-
-                                                        <li class="site-menu-item">
-                                                            <a href="<?php echo base_url(); ?>project_list_investment_ipayout">
-                                                                <span class="site-menu-title">Pending Payouts</span>
-                                                            </a>
-                                                        </li>
-
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
                                 
+                                <li class="dropdown site-menu-item has-sub" id="idCompanyProjects">
+                                    <a data-toggle="dropdown" href="<?php echo base_url(); ?>company_project" data-dropdown-toggle="false">
+                                        <i class="site-menu-icon fa-cubes" aria-hidden="true"></i>
+                                        <span class="site-menu-title">Projects</span>                                   
+                                    </a>
+                                </li>                                                                
                                 
                                 <li class="dropdown site-menu-item has-sub" id="idCompanyBankData">
                                     <a data-toggle="dropdown" href="javascript:void(0)" data-dropdown-toggle="false">
@@ -943,6 +919,12 @@
                                                                 <span class="site-menu-title">Paypal Account</span>
                                                             </a>
                                                         </li>
+                                                        
+                                                        <li class="site-menu-item">
+                                                            <a href="<?php echo base_url(); ?>project_list_investment_ipayout">
+                                                                <span class="site-menu-title">Pending Payouts</span>
+                                                            </a>
+                                                        </li>                                                        
 
                                                         <li class="site-menu-item" id="idCompanyTransactionHistory">
                                                             <a href="<?php echo base_url(); ?>company_transactionhistory">

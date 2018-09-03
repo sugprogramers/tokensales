@@ -107,9 +107,9 @@
                                             <input type="text" class="form-control" name="" placeholder="Search...">
                                             <span class="input-group-btn">
                                                 <button type="submit" class="btn btn-primary"><i class="icon wb-search" aria-hidden="true"></i></button>
-                                            </span>
-                                        </div>
-                                    </div>
+                                            </span>                                                                                              
+                                        </div>                                                    
+                                    </div>                                    
                                 </div>
 
                             </div>
