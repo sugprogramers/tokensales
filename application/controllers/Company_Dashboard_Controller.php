@@ -19,12 +19,24 @@ class Company_Dashboard_Controller extends CI_Controller {
     public function index() {  
         $pie = $this->get_status_projects();        
         $data = array('pie' => $pie) ;   
+        
+               
         $line1 = $this->get_investments();
         $data = $data + array('line1' => $line1); 
+        
+        //BarGraph
+      //  $bar = $this->get_barGraphData();
+       // $data = $data + array('bar' => $bar); 
         
         $this->load->view('header/header_admin');
         $this->load->view('company_dashboard',$data);
         $this->load->view('footer/footer_admin');        
+    }
+    
+    public function get_barGraphData(){
+        //$userId = $this->session->session_company['id'];
+        //$query = $this->CProjectModel->get_investment_total_by_project_list($userId);
+        
     }
     
       public function get_status_projects() {
