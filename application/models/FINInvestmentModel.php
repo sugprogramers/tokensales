@@ -205,40 +205,52 @@ class FINInvestmentModel extends CI_Model {
         $objInvestor = $this->CInvestorModel->getByUserId($c_user_id);
         $objProject = $this->CProjectModel->get($c_project_id);
 
-        if ($objProject && $objProject->projectstatus == 'FU') {
+        if ($objProject) {
+            if ($objProject->projectstatus == 'FU') {
 
-            if ($objInvestor && (($objProject->targetamt - $sumatotal) >= $monto) && ($objInvestor->payinbalance >= $monto) ) {
+                if ($objInvestor && ($objInvestor->payinbalance >= $monto) ) {
+                    
+                        if (($objProject->targetamt - $sumatotal) < $monto)  {
+                              $monto =  $objProject->targetamt - $sumatotal ;
+                        }
+                        
+                        $now = (new DateTime())->format('Y-m-d H:i:s');
+                        $fin = new FINInvestment();
+                        $fin->amount = $monto;
+                        $fin->c_investor_id = $objInvestor->c_investor_id;
+                        $fin->c_project_id = $c_project_id;
+                        $fin->isactive = 'Y';
+                        $fin->status = 'PEND';
+                        $fin->startdate = $now;
 
-
-                $now = (new DateTime())->format('Y-m-d H:i:s');
-
-                $fin = new FINInvestment();
-                $fin->amount = $monto;
-                $fin->c_investor_id = $objInvestor->c_investor_id;
-                $fin->c_project_id = $c_project_id;
-                $fin->isactive = 'Y';
-                $fin->status = 'PEND';
-                $fin->startdate = $now;
-
-                $val = $this->save($fin, $c_user_id);
-                if ($val) {
-                    $objInvestor->payinbalance =  $objInvestor->payinbalance - $monto;
-                    $this->CInvestorModel->save( $objInvestor, $c_user_id);
-                    return true;
+                        $val = $this->save($fin, $c_user_id);
+                        if($val) {
+                            $objInvestor->payinbalance = $objInvestor->payinbalance - $monto;
+                            $this->CInvestorModel->save($objInvestor, $c_user_id);
+                            
+                            $sumanueva = $this->getSumAmountByProject($c_project_id);
+                            if($sumanueva >= $objProject->targetamt){
+                                $objProject->projectstatus = 'COFU';
+                                $this->CProjectModel->save($objProject, $c_user_id);
+                            }
+                            
+                            return 'true';
+                        } else {
+                            return 'The investment could not be created.';
+                        }
+                   
                 } else {
-                    return false;
+                    return 'You do not have enough balance for the investment.';
                 }
             } else {
-                return false;
+                return 'The project has a different status to "funding".';
             }
+        } else {
+            return 'The project does not exist or is invalid.';
         }
-        else {return false;}
     }
-    
-    
-   
 
- public function getSumAmountPerDay($idcompany=null, $idinvestor=null) {
+    public function getSumAmountPerDay($idcompany=null, $idinvestor=null) {
 
         $this->db->select("COALESCE(sum(fin_investment.amount),0) as suma,  to_char( fin_investment.created, 'YYYY-MM-DD') as fecha ");
         $this->db->from('fin_investment');

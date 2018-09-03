@@ -27,13 +27,13 @@ class Investor_List_Project_Controller extends CI_Controller {
      public function invesment_project($monto , $c_project_id){
         try {
             
-            $val = $this->FINInvestmentModel->invesment($monto ,$c_project_id , $this->session->session_investor['id']);            
-           if($val){
+           $val = $this->FINInvestmentModel->invesment($monto ,$c_project_id , $this->session->session_investor['id']);            
+           if($val=='true'){
                $response = array('redirect' => '', 'status' => 'success');
                echo json_encode($response); 
            }
            else{
-               $response = array('redirect' => '', 'status' => 'error', 'msg' => 'error');
+               $response = array('redirect' => '', 'status' => 'error', 'msg' => $val);
                  echo json_encode($response);
            }
             
