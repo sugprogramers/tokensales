@@ -8,71 +8,7 @@
     </style>
     
     
-<style> 
-    .site-navbar-small .slidePanel-left, .site-navbar-small .slidePanel-right {
-        top: 0;
-        /*z-index:2000;*/
-            z-index: 1699;
-    }
-    
-    
-    
-    .h-minificha__data__row {
-    margin: 0;
-    border-top: 1px solid #ccc;
-    border-bottom: 1px solid #ccc;
-    position: relative;
-    height: 90px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-
-.h-minificha__data__value {
-    font-weight: 400;
-    font-size: 10px;
-    text-align: center;
-    margin: 14px 0;
-}
-.h-minificha__data__value--description {
-    font-size: 1.2em;
-}
-.h-minificha--color-secondary {
-    color: #666;
-}
-.h-minificha__data__value--number {
-    font-size: 2em;
-}
-
-.h-minificha--color-primary {
-    color: #333;
-}
-.col-xs-6 {
-    width: 49%;
-}
-.col-xs-12 {
-    width: 100%;
-}
-.h-minificha__tir__value {
-    font-size: 1em;
-    font-weight: 600;
-}
-.h-minificha__tir {
-    padding: 15px 0;
-}
-.flip-container__wrapper {
-    border: 1px solid #b8b8b8;
-}
-.number-wrapper {
-    color: #463d3e;
-    font-size: 1.5em;
-}
-.ahorro-box-text {
-    font-weight: 400;
-    font-size: 12px;
-}
-</style>    
+   
     
     
     
@@ -185,11 +121,12 @@
                                               <tr>
                                                 <th class="all">Project</th>
                                                 <th class="all">Invested Capital</th>
+                                                <th class="all" >Investment Status</th>
                                                 <th class="none" >Company</th>
                                                 <th class="none" >Project Status</th>
                                                 <th class="none" >Investment Date</th>
-                                                <th class="none" >Investment Status</th>
-                                                <th class="none" >Investment %</th>
+                                                
+                                                <th class="none" >investment of Project %</th>
                                                 <th class="none" >Earnings</th>
                                                 
                                                 <th class="none" >Latitude</th>
@@ -318,7 +255,7 @@
                 </div>
                  
                 <div class="col-sm-3">
-                   <p><b>Earns</b></p>
+                   <p><b>Earnings</b></p>
                 </div>
                 <div class="col-sm-3">
                     <label id="lblInvestmentEarns" class="control-label" ></label>
@@ -348,7 +285,52 @@
       </div>
     </div>
 
-<!-- End Modal -->    
+<!-- End Modal --> 
+
+
+
+
+<!-- Modal -->
+   <div class="modal fade" id="exampleDialog" aria-hidden="true" aria-labelledby="exampleDialog"
+        role="dialog" tabindex="-1">
+     <div class="modal-dialog modal-simple modal-center">
+       <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+            <h4 class="modal-title">
+                  Earnings
+            </h4>
+       </div>
+       <div class="modal-body">
+         <div class="tab-content">
+            
+             <table id="exampleEarning" class="table table-hover" data-paging="true" data-sorting="true"
+                    data-filtering="true" style="width:100%">
+                    <thead>
+                      <tr>
+                         <!-- <th data-name="status">status</th> -->
+                        <th data-name="projectName">Project</th>
+                        <th data-name="paymentDate">Payment Date</th>
+                        <th data-name="Amount">Amount</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+              </table>
+         
+          </div>
+        </div> 
+       </div>   
+           
+      </div>
+    </div>
+
+<!-- End Modal -->
+
+
+
     
     
     
@@ -376,7 +358,7 @@ window.onload = function () {
             
             "ajax": {
                 async: false,
-                url : "<?php echo base_url('Investor_Investment_Controller/get_investment_list/?id='.$userid)?>",
+                url : "<?php echo base_url('Investor_Investment_Controller/get_investment_list/?id/='.$userid)?>",
                 type : 'GET'
             },
             
@@ -481,28 +463,38 @@ function moreinfo_investment(investmentId){
                         $('#lblInvestmentPercent').text(resp.data[0]['invpercent'] + ' %');
 
                         
-            
-                     // $('#theprogressbar').asPieProgress("go", "'"+ resp.data[0]['invpercentround'] + "%'");
-                     $('#theprogressbar').asPieProgress("go",resp.data[0]['invpercent']);
-                     
-                     //  $('#theprogressbar').attr('aria-valuenow',);
-                     //  $('#theprogressbar').asPieProgress('start');
-                       
-                       
-
-              
-                       
-                        //$('#theprogressbar').attr('aria-valuenow', resp.data[0]['invpercent'].toString());
-                        //$('#theprogressbar').attr('role', "progressbar");
-                        
-                      //  $('#theprogressbar').attr('disabled', false);
-                        
+                        $('#theprogressbar').asPieProgress("go",resp.data[0]['invpercent']);
+                      
                        
                     }                     
               }
           }); 
   
 }
+
+function moreinfo_earning(investmentId){
+  
+    $('#exampleDialog').modal('show');
+     
+     
+     table = $('#exampleEarning').DataTable({
+            responsive: true,
+            "order": [[ 0, "desc" ]],
+            "columnDefs": [{
+                    "targets": [2],
+                    "orderable": false
+                }],
+            "processing": true,  //mostrar waiting
+            "serverSide": false, //consultar servidor ordenar , filtrar
+            "ajax": {
+                url : "<?php echo base_url('Investor_Investment_Controller/get_investment_earnings/?id=')?>"+investmentId,
+                type : 'GET'
+            },
+     });
+ 
+    table.destroy();
+}
+
 
 </script>
 
