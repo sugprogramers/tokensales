@@ -8,6 +8,7 @@ class Investor_Investment_Controller extends CI_Controller {
         parent::__construct();
         $this->load->helper('url');
         $this->load->model("FINInvestmentModel");
+        $this->load->model("FINPaymentOrderModel");
         $this->load->model("CProjectModel");
         $this->load->model("CInvestorModel");
         
@@ -76,7 +77,7 @@ class Investor_Investment_Controller extends CI_Controller {
        // $pie = "['German', 5.85],['French', 1.66]" ;
         return $data;
      } 
-    
+     
     
     public function get_investment_list(){
       
@@ -86,6 +87,7 @@ class Investor_Investment_Controller extends CI_Controller {
       $userId =$this->input->get("id");
   
       $query = $this->FINInvestmentModel->get_investment_project_list($userId);
+      
       $data = [];
         
       $count = 0;
@@ -93,13 +95,14 @@ class Investor_Investment_Controller extends CI_Controller {
            
            $data[] = array(
                 $obj->name,
-                $obj->amount . " " . $obj->cursymbol,               
+                $obj->amount . " " . $obj->cursymbol,       
+                $this->FINInvestmentModel->getStatusOfInvestmentFromProject($obj->projectstatus), 
                 $obj->companyname . " " . '<a class="btn btn-sm btn-icon btn-pure btn-default on-default edit-row" href="javascript:void(0)" title="more info" onclick="moreinfo_investment('."'".$obj->fin_investment_id."'".')"><i class="icon wb-info-circle"></i></a>',
                 $this->CProjectModel->getProjectStatusName($obj->projectstatus),
                 $obj->investmentdate,
-                $this->FINInvestmentModel->getInvestmentStatusName($obj->investmentstatus), 
+                
                 $obj->percent,
-                $obj->earning,
+                $obj->earning . " " . '<a class="btn btn-sm btn-icon btn-pure btn-default on-default edit-row" href="javascript:void(0)" title="more info" onclick="moreinfo_earning('."'".$obj->fin_investment_id."'".')"><i class="icon wb-info-circle"></i></a>',
                 $obj->longitude,
                 $obj->latitude,
                $count
@@ -121,6 +124,47 @@ class Investor_Investment_Controller extends CI_Controller {
       
       exit();
    }
+   
+   public function get_investment_earnings(){
+       
+       
+      $draw = intval($this->input->get("draw"));
+      $start = intval($this->input->get("start"));
+      $length = intval($this->input->get("length"));
+      $investmentId =$this->input->get("id");
+  
+      $query = $this->FINPaymentOrderModel->get_paymentorder_investmentid($investmentId);
+      
+      $data = [];
+        
+      $count = 0;
+      foreach ($query as $obj) {
+           
+           $data[] = array(
+                $obj->status,
+                $obj->projectname,       
+                $obj->paymentdate, 
+                $obj->amount,
+           );
+          
+       }
+      
+      $result = array(
+                 "draw" => $draw,
+                 "recordsTotal" => count($data),
+                 "recordsFiltered" => count($data),
+                 "data" => $data
+            );
+
+      echo json_encode($result);
+     
+      
+      exit();
+       
+       
+       
+   }
+   
    
    
    public function get_investmentdetail_list(){

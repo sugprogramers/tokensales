@@ -156,6 +156,21 @@ class FINPaymentOrderModel extends CI_Model
         return $this->db->get();
     }
     
+    public function get_paymentorder_investmentid($finInvestmentId){
+        
+        $this->db->select("po.status, p.name as projectname,  po.amount, trunc(po.paymentdate) as paymentdate");
+        $this->db->from('fin_payment_order as po');
+        $this->db->join('fin_investment  as iv', 'po.fin_investment_id = iv.fin_investment_id ');
+        $this->db->join('c_project as p', 'iv.c_project_id = p.c_project_id ');
+        $this->db->where('po.ordertype', 'RETIPAYIN');
+        $this->db->where('po.fin_investment_id', $finInvestmentId);
+        
+        $query = $this->db->get();
+
+        return $query->result();
+    }
+    
+    
     public function get_projectInvestmentPaymentOrderInfoById($finPaymentOrderId){
         
         $this->db->select("po.fin_payment_order_id, p.name as projectName, p.name as companyName, i.c_investor_id, u.email as investorEmail, (u.firstname || ' ' || u.lastname) as investorname, po.amount , (curr.cursymbol || po.amount) as amountformatted, curr.cursymbol, curr.iso_code");

@@ -73,17 +73,23 @@ class FINInvestmentModel extends CI_Model {
     public function get_investment_project_list($userId) {
        $this->db->select("fin.fin_investment_id, "
                 . " COALESCE(( select  sum(amount) from fin_payment_order where ordertype = 'RETIPAYIN' and fin_investment_id = fin.fin_investment_id),0) as earning, "
-                . " COALESCE(ROUND(fin.amount*100/pr.targetamt,2),0) as percent, "
+                . " COALESCE(ROUND(fin.amount*100/pr.targetamt,2),0) as percent,  case when  pr.projectstatus = 'ACT' THEN 0 ELSE 1 END as sorte, "
                 . "fin.status as investmentstatus, fin.amount , date(fin.created) as investmentdate, cur.cursymbol, pr.c_project_id , pr.name,pr.companyname ,pr.projectstatus, COALESCE(pr.longitude,'') as longitude, COALESCE(pr.latitude,'') as latitude ");
-        
-        
-        
         
         $this->db->from('fin_investment as fin');
         $this->db->join('c_project as pr', 'fin.c_project_id = pr.c_project_id ');
         $this->db->join('c_currency cur', 'pr.c_currency_id =cur.c_currency_id ');
         $this->db->join('c_investor as inv', 'fin.c_investor_id = inv.c_investor_id ');
         $this->db->where('inv.c_user_id', $userId);
+        $this->db->or_where('pr.projectstatus' , 'FU');
+        $this->db->or_where('pr.projectstatus' , 'COFU');
+        $this->db->or_where('pr.projectstatus' , 'NCOFU');
+        $this->db->or_where('pr.projectstatus' , 'FIN');
+        $this->db->or_where('pr.projectstatus' , 'ACT');
+        
+        $this->db->order_by("sorte");
+        
+        
 
         $query = $this->db->get();
         return $query->result();
@@ -248,6 +254,20 @@ class FINInvestmentModel extends CI_Model {
         $this->db->group_by("2");
         return $this->db->get();
         
+    }
+    
+    public function getStatusOfInvestmentFromProject($status) {
+        
+        switch ($status) {
+            case "COFU": return "Parked";
+            case "NCOFU": return "Funding did not Complete";
+            case "VO": return "Voided";
+            case "ACT": return "Driving";
+            case "FI": return "Finished";
+            case "FU": return "Parked";
+            default: break;
+        }
+        return "uknowkn";
     }
 
 }
