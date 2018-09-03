@@ -338,6 +338,7 @@ CREATE TABLE c_project
 
   c_projecttype_id character varying(32),
 
+  --DRAFT: borrador
   --PEND: pending evaluation
   --ERRDATA : error data admin
   --FU:funding

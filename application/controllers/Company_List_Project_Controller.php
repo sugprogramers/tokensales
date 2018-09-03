@@ -285,6 +285,7 @@ private function formato_numero($numero , $decimales=0){
 
     private function getHtmlProjectStatusName($status) {
         switch ($status) {
+            case "DRAFT": return '<span class="badge badge-outline badge-primary">Draft</span>';
             case "PEND": return '<span class="badge badge-outline badge-warning">Pending Evaluation</span>';
             case "ERRDATA": return '<span class="badge badge-outline badge-danger">Incomplete Data</span>';                
             case "FU": return '<span class="badge badge-outline badge-success">Funding</span>';    

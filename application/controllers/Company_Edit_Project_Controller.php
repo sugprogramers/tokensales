@@ -87,6 +87,8 @@ class Company_Edit_Project_Controller extends CI_Controller {
         $start = $this->input->post("start");
         $currency = $this->input->post("currency");
         $qtyproperty = $this->input->post("qtyproperty");
+        
+        $tiposubmit = $this->input->post("tiposubmit");
 
 
         //throw new SDException($cprojectmanager);
@@ -120,18 +122,16 @@ class Company_Edit_Project_Controller extends CI_Controller {
             $all = $this->CProjectModel->getById($c_project_id);
             $new->c_project_id = $c_project_id;
             $new->isactive = $all[0]['isactive'];
-            $new->projectstatus = $all[0]['projectstatus'];
+            $new->projectstatus = $tiposubmit;
             $new->homeimage_id = $idphoto;
         } else {
             $new->c_project_id = null;
             $new->isactive = "Y";
-            $new->projectstatus = "PEND";
+            $new->projectstatus = $tiposubmit;
             $new->homeimage_id = $idphoto;
         }
         
-        if($new->projectstatus=='ERRDATA')
-        {$new->projectstatus = "PEND";}
-
+       
         return $new;
     }
 

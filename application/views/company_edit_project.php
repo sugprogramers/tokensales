@@ -335,16 +335,32 @@
 
 
                         </div>
-
+                        
+                     
                         <div class="col-sm-12">
-                            <div class="col-sm-12">
-
-                                <button  type="submit" class="btn btn-primary" <?php 
-                                if(isset($projectstatus) && $projectstatus != 'PEND' && $projectstatus != 'ERRDATA' ){ 
+                            
+                                    
+                                <button id="one" value="one"  type="submit" class="btn btn-primary " <?php 
+                                if(isset($projectstatus) &&  $projectstatus != 'DRAFT'&& $projectstatus != 'ERRDATA' ){ 
                                     echo 'style="display:none;"';
-                                }
-?> >Save Project </button>
-                            </div>
+                                } ?> >Save Project </button>
+                                
+                          </div> 
+                         <div class=" col-sm-12" style="margin-top: 10px;">  
+                                 <button id="two" value="two"  type="submit" class="btn btn-success " <?php 
+                                if(isset($projectstatus) &&( $projectstatus == 'DRAFT' ||  $projectstatus == 'ERRDATA') ){ 
+                                    echo 'style="display:block;"';
+                                }else{
+                                    if(!isset($projectstatus))
+                                        echo 'style="display:block;"';
+                                    else
+                                        echo 'style="display:none;"';
+                                    
+                                } ?> >Save & Send for Evaluation </button>
+                              
+                                
+                            
+                             
                         </div>
 
 
@@ -542,13 +558,26 @@
 
 
         var url_base = "<?php echo base_url('Company_Edit_Project_Controller/save'); ?>/" + c_project_id;
+        var tiposubmit = 'DRAFT';
+        $("#project_form button").click(function (event) {
+            event.preventDefault();
+            if ($(this).attr("value") == "one") {                 
+                  tiposubmit = 'DRAFT';
+            }
+            if ($(this).attr("value") == "two") {                 
+                  tiposubmit = 'PEND';
+            }
+             $("#project_form").submit();
+         });   
         //save 
         $("#project_form").submit(function (event) {
             event.preventDefault();
+            formData = new FormData(this);          
+            formData.append('tiposubmit', tiposubmit);                       
             $.ajax({
                 url: url_base,
                 type: "POST",
-                data: new FormData(this),
+                data: formData,
                 processData: false,
                 contentType: false,
                 cache: false,
@@ -560,6 +589,11 @@
                     }
                     if (resp.status === "success") {
                         url_base = "<?php echo base_url('Company_Edit_Project_Controller/save'); ?>/" + resp.c_project_id;
+                        if(tiposubmit=='PEND')
+                        {
+                             $("#one").hide();
+                             $("#two").hide();
+                        }
                         showSuccess("Success Save");
                         //window.location.href = resp.redirect;
                     }
