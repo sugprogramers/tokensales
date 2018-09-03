@@ -131,7 +131,6 @@
                     </div>    
                 </div>                
 
-
                 <br>                                   
                 <div class="row row-lg">
                     <div class="col-lg-12">
@@ -146,11 +145,26 @@
                             </div>
                         </div>              
                     </div>
-                </div>                          
+                </div>   
+                
+                <br>      
+                <br>      
+                <div class="row row-lg">
+                    <div class="col-lg-6">
+                        <div class="example-wrap">
+                            <h4 class="example-title">Invested Projects</h4>
+                            <!-- <p>Use function: <code>Morris.Line(options)</code> to generate chart.</p -->
+                            <div class="example" style="margin: 0;">
 
+                                <div id="piechart1" style="width: 100%; height: 250px;"></div>
 
+                            </div>
+                        </div>           
+                    </div>                    
+                    <div class="col-lg-6"></div>                    
+                </div>                   
 
-
+                
             </div> 
         </div> 
     </div> 
@@ -168,7 +182,7 @@
         ]);
 
         var options = {
-            colors: ['#009757', '#555753'],
+            colors: ['#00D181', '#63B2F8'],
             pointSize: 4,
             legend: {position: 'bottom'},
             hAxis: {
@@ -188,6 +202,28 @@
     }
 </script>
 
+
+<script type="text/javascript">
+  google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+            ['Amount', 'Projects'],
+            <?php echo $pie; ?>
+        ]);
+
+        var options = {
+          title: '',
+          is3D: true,
+          backgroundColor: '#F2F2F2',
+        };
+
+        var chart1 = new google.visualization.PieChart(document.getElementById('piechart1'));
+        chart1.draw(data, options);        
+      }
+</script>
 
 <script type="text/javascript">
     window.onload = function () {

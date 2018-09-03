@@ -19,6 +19,9 @@ class Investor_Dashboard_Controller extends CI_Controller {
     public function index() {        
         $line1 = $this->get_investments();
         $data = array('line1' => $line1);
+        
+        $pie = $this->get_data_investmentPie();
+        $data = $data + array('pie' => $pie) ;           
 
         $total_balances = $this->get_investor_balances();
         $data = $data + $total_balances;
@@ -30,6 +33,22 @@ class Investor_Dashboard_Controller extends CI_Controller {
         $this->load->view('investor_dashboard', $data);
         $this->load->view('footer/footer_admin');
     }
+    
+    public function get_data_investmentPie() {
+        $userId = $this->session->session_investor['id'];
+        $query = $this->FINInvestmentModel->get_investment_total_by_project_list($userId);
+         
+        $pie = "";      
+        foreach ($query as $obj) {
+                $aux = ",";
+                if(strlen($pie)==0) {
+                        $aux = "";
+                }                        
+                $pie = $pie .$aux . "['" . $obj->name ."',". $obj->amount ."]";
+        }        
+        return $pie;
+     } 
+           
 
     public function get_investments() {
         $line1 = '';
