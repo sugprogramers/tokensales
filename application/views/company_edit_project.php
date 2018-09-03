@@ -172,7 +172,7 @@
                                     <!--<div id="summernote" data-plugin="summernote">   
                                     </div>   -->
                                     
-                                    <textarea data-plugin="summernote" class="form-control" required id="description" name="description" placeholder="Description" style="font-size: 14px; border-radius:0; height: 100px;"></textarea>
+                                    <textarea data-plugin="summernote" class="form-control"  id="description" name="description" placeholder="Description" style="font-size: 14px; border-radius:0; height: 100px;"></textarea>
                                     
 
                                 </div>
