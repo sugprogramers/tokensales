@@ -61,8 +61,8 @@ class CProjectmanagerModel extends CI_Model {
         }
     }
 
-    public function getAll() {               
-        $query = $this->db->get_where("c_projectmanager", array('isactive' => 'Y'));
+    public function getAll($id) {               
+        $query = $this->db->get_where("c_projectmanager", array('isactive' => 'Y','c_user_id' => $id));
         $result = $query->result();
         
         $list = array();

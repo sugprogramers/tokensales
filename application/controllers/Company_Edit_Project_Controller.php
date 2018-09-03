@@ -292,10 +292,11 @@ class Company_Edit_Project_Controller extends CI_Controller {
 
     public function get_cprojectmanager_list() {
 
-        $country_list = $this->CProjectmanagerModel->getAll();
+        $country_list = $this->CProjectmanagerModel->getAll($this->session->session_company['id']);
 
         $html = '<option value="">Choose a Project Manager</option>';
         foreach ($country_list as $country) {
+           
             $html .= '<option value="' . $country->c_projectmanager_id . '">' . $country->paypalusername . '</option>';
         }
         $response = array('html' => $html);
