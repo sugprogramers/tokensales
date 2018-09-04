@@ -106,8 +106,12 @@
                                         <div class="input-group">
                                             <input type="text" class="form-control" name="" placeholder="Search...">
                                             <span class="input-group-btn">
-                                                <button type="submit" class="btn btn-primary"><i class="icon wb-search" aria-hidden="true"></i></button>
-                                            </span>                                                                                              
+                                                <button type="submit" class="btn btn-primary" style="margin-right: 10px;"><i class="icon wb-search" aria-hidden="true"></i></button>
+                                            </span>  
+                                            <a class="btn btn-primary" href="<?php echo base_url(); ?>company_edit_project" >
+                                                 <i class="icon wb-plus" aria-hidden="true"></i> New Project
+                                            </a>
+                                          
                                         </div>                                                    
                                     </div>                                    
                                 </div>

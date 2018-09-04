@@ -322,6 +322,26 @@ ALTER TABLE c_projecttype
   OWNER TO smart;
 
 
+CREATE TABLE c_propertytype
+(
+  c_propertytype_id character varying(32) NOT NULL,
+  isactive character(1) NOT NULL DEFAULT 'Y'::bpchar,
+  created timestamp without time zone NOT NULL DEFAULT now(),
+  createdby character varying(32) NOT NULL,
+  updated timestamp without time zone NOT NULL DEFAULT now(),
+  updatedby character varying(32) NOT NULL,
+  name character varying(60) NOT NULL,
+  description character varying(255),
+  CONSTRAINT c_propertytype_key PRIMARY KEY (c_propertytype_id),
+  CONSTRAINT c_propertytype_isactive_check CHECK (isactive = ANY (ARRAY['Y'::bpchar, 'N'::bpchar]))
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE c_propertytype
+  OWNER TO smart;
+
+
 CREATE TABLE c_project
 (
   c_project_id character varying(32) NOT NULL,
@@ -352,7 +372,7 @@ CREATE TABLE c_project
   --AP: Apartment 
   --SUI: Suite
   --BUI: Building
-  propertytype character varying(60) NOT NULL DEFAULT 'AP'::character varying,
+  c_propertytype_id  character varying(32),
   qtyproperty numeric NOT NULL DEFAULT 1,
 
   address1 character varying(150),
@@ -386,6 +406,11 @@ CREATE TABLE c_project
   CONSTRAINT c_project_projecttype_fk FOREIGN KEY (c_projecttype_id)
       REFERENCES c_projecttype (c_projecttype_id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION,
+
+  CONSTRAINT c_project_propertytype_fk FOREIGN KEY (c_propertytype_id)
+      REFERENCES c_propertytype (c_propertytype_id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+
   CONSTRAINT c_project_c_country_fk FOREIGN KEY (c_country_id)
       REFERENCES c_country (c_country_id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION,

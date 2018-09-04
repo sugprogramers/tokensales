@@ -310,7 +310,7 @@ class Company_Edit_Project_Controller extends CI_Controller {
         $html = '<option value="">Choose a Currency</option>';
         foreach ($country_list as $country) {
             if($country->cursymbol=='$')
-            $html .= '<option value="' . $country->c_currency_id . '">' . $country->cursymbol . '</option>';
+            $html .= '<option  value="' . $country->c_currency_id . '">' . $country->cursymbol . '</option>';
         }
         $response = array('html' => $html);
         echo json_encode($response);

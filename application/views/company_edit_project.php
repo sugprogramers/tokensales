@@ -61,7 +61,7 @@
                             <div class="col-sm-12">
                                 <div class="form-group ">
                                     <label class="control-label" for="qtyproperty">Quantity property *</label>
-                                    <input type="text" class="form-control" id="qtyproperty" name="qtyproperty" data-plugin="TouchSpin" value="1" required />
+                                    <input type="text" class="form-control" id="qtyproperty" name="qtyproperty" data-plugin="TouchSpin" value="1" data-max="1000000" required />
                                 </div>
                             </div>
 
@@ -563,11 +563,13 @@
             event.preventDefault();
             if ($(this).attr("value") == "one") {                 
                   tiposubmit = 'DRAFT';
+                  $("#project_form").submit();
             }
             if ($(this).attr("value") == "two") {                 
                   tiposubmit = 'PEND';
+                  $("#project_form").submit();
             }
-             $("#project_form").submit();
+            
          });   
         //save 
         $("#project_form").submit(function (event) {
