@@ -1,7 +1,7 @@
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <div class="page">
     <div class="page-header">
-        <h1 class="page-title">Dashboard Company</h1>
+        <h1 class="page-title">Dashboard</h1>
         <div class="page-header-actions">
            <!-- <ol class="breadcrumb breadcrumb-arrow">
                 <li class="breadcrumb-item"><a class="icon fa-clipboard" href="#">Home</a></li>
@@ -76,10 +76,10 @@
                        <div class="row row-lg">		
                            <div class="col-lg-12">
                              <div class="example-wrap">
-                                   <h4 class="example-title">Your Projects</h4>
+                                   <h4 class="example-title">Projects Funding State</h4>
                                    <div class="example" style="margin: 0;">
 
-                                         <div id="barchart_material" style=" height: 400px;"></div>
+                                         <div id="barchart_material" style=" height: 300px;"></div>
 
                                    </div>
                              </div>
@@ -106,7 +106,7 @@
                             <div class="row row-lg">		
                                 <div class="col-lg-12">
                                   <div class="example-wrap">
-                                        <h4 class="example-title" style="text-align: center">Total Investor</h4>
+                                        <h4 class="example-title" style="text-align: center">Investments in the last 30 days</h4>
                                         <div class="example" style="margin: 0;">
 
                                               <div id="chart_div4" style=" height: 100px;"></div>
@@ -159,7 +159,7 @@ function drawBasic2() {
           
         },
         vAxis: {
-          title: 'Invest',
+          title: 'Projects',
           gridlines: { count: 10 },
         }
       };
@@ -174,15 +174,18 @@ function drawBasic2() {
 google.charts.load('current', {packages: ['corechart', 'line']});
 google.charts.setOnLoadCallback(drawBasic3);
 
+//console.log("<?php echo $line2; ?>");
+
 function drawBasic3() {
 
      
       var data = google.visualization.arrayToDataTable([
-          ['Day', 'Invesments'],
-           <?php echo $line1; ?>
+         // ['Day', 'Invesments'],
+        <?php echo $line2; ?>
+         // ['Day','Rrenovation of buildings',],['2018-08-05',0,],['2018-08-06',0,],['2018-08-07',0,],['2018-08-08',0,],['2018-08-09',0,],['2018-08-10',0,],['2018-08-11',0,],['2018-08-12',0,],['2018-08-13',0,],['2018-08-14',0,],['2018-08-15',0,],['2018-08-16',0,],['2018-08-17',0,],['2018-08-18',0,],['2018-08-19',0,],['2018-08-20',0,],['2018-08-21',0,],['2018-08-22',0,],['2018-08-23',0,],['2018-08-24',0,],['2018-08-25',0,],['2018-08-26',0,],['2018-08-27',0,],['2018-08-28',0,],['2018-08-29',0,],['2018-08-30',0,],['2018-08-31',0,],['2018-09-01',0,],['2018-09-02',0,],['2018-09-03',0,],['2018-09-04',0,],
         ]);
 
-      var options = {
+      /*var options = {
            //colors: ['#a52714', '#097138'],
            pointSize: 4,
            legend: { position: 'bottom' },
@@ -196,11 +199,18 @@ function drawBasic3() {
           title: 'Invest',
           gridlines: { count: 10 },
         }
-      };
+      };*/
+      
+       var options = {
+          title: 'Investment Performance',
+          curveType: 'function',
+          legend: { position: 'bottom' }
+        };
 
-    
+   
       var chart4 = new google.visualization.LineChart(document.getElementById('chart_div4'));
       chart4.draw(data, options);
+      
     }
 </script>
 
@@ -209,7 +219,7 @@ function drawBasic3() {
       google.charts.load('current', {'packages':['bar']});
       google.charts.setOnLoadCallback(drawChart);
 
-console.log("<?php echo $bargraph; ?>");
+  //console.log("<?php echo $bargraph; ?>");
 
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
@@ -226,10 +236,10 @@ console.log("<?php echo $bargraph; ?>");
           //  title: 'Company Performance',
           //  subtitle: 'Sales, Expenses, and Profit: 2014-2017',
           },
-          bars: 'horizontal', // Required for Material Bar Charts.
+          bars: 'vertical', // Required for Material Bar Charts.
           colors: ['#0083A6','#0099C2'],
          // colors: ['#6B1365','#3442A7','#A20094','#0099C2'],
-          backgroundColor: '#F2F2F2',
+         // backgroundColor: '#F2F2F2',
         // bar: {groupWidth: "95%"},
         };
 

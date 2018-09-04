@@ -266,7 +266,7 @@ class FINInvestmentModel extends CI_Model {
         }
     }
 
-    public function getSumAmountPerDay($idcompany=null, $idinvestor=null) {
+    public function getSumAmountPerDay($idcompany=null, $idinvestor=null, $idproject=null) {
 
         $this->db->select("COALESCE(sum(fin_investment.amount),0) as suma,  to_char( fin_investment.created, 'YYYY-MM-DD') as fecha ");
         $this->db->from('fin_investment');
@@ -277,6 +277,8 @@ class FINInvestmentModel extends CI_Model {
         $this->db->join('c_investor', 'c_investor.c_investor_id = fin_investment.c_investor_id');  
         if($idinvestor!=null)
             {$this->db->where('c_investor.c_user_id', $idinvestor);}
+        if($idproject!=null)
+            {$this->db->where('c_project.c_project_id', $idproject);}
         //$this->db->where('status' , 'ACT');
         //$this->db->or_where('status' , 'FIN');
         $this->db->group_by("2");
