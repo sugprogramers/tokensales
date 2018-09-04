@@ -190,7 +190,7 @@ class FINInvestmentModel extends CI_Model {
         $this->db->select("count(c_investor_id) as countinvestors ");
         $this->db->from('fin_investment');
         $this->db->where('c_project_id', $c_project_id);
-        $this->db->or_where(array('status' => 'ACT', 'status' => 'FIN'));
+        //$this->db->or_where(array('status' => 'ACT', 'status' => 'FIN'));
         $this->db->distinct();
         $query = $this->db->get();
         $queryresult = $query->result();

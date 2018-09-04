@@ -16,15 +16,13 @@
             <div class="panel-body">
                 <div class="row" >
                   <div class="col-lg-3 align-items-center">
-                           <div class="card p-15 flex-row justify-content-between bg-blue-600">
+                           <div class="card p-15 flex-row justify-content-between bg-orange-600">
                                <div class="white">
-                                 <i class="icon icon-circle icon-3x wb-users bg-blue-300" aria-hidden="true"></i>
+                                 <i class="icon icon-circle icon-3x wb-users bg-orange-400" aria-hidden="true"></i>
                                </div>
                                <div class="counter counter-md counter counter-inverse  text-right">
                                  <div class="counter-number-group">
-                                   <span class="counter-number">
-                                         <label id="lblDashboardNumUsers" class="control-label" ></label>
-                                   </span>
+                                   <span class="counter-number"><?php echo $totalprojects; ?></span>
                                    <span class="counter-sm -number-related text-capitalize">Projects</span>
                                  </div>
                                  <div class="counter-label text-capitalize font-size-16">Created</div>
@@ -34,15 +32,13 @@
 
 
                      <div class="col-lg-3 center-block">
-                       <div class="card p-15 flex-row justify-content-between bg-green-600">
+                       <div class="card p-15 flex-row justify-content-between bg-blue-600">
                            <div class="white">
-                             <i class="icon icon-circle icon-3x wb-pluse bg-green-300" aria-hidden="true"></i>
+                             <i class="icon icon-circle icon-3x wb-pluse bg-blue-400" aria-hidden="true"></i>
                            </div>
                            <div class="counter counter-md counter counter-inverse  text-right">
                              <div class="counter-number-group">
-                                 <span class="counter-number">
-                                     <label id="lblDashboardNumProjects" class="control-label" ></label>
-                                 </span>
+                               <span class="counter-number"><?php echo $numactive; ?></span>
                                <span class="counter-number-related text-capitalize">Projects</span>
                              </div>
                              <div class="counter-label text-capitalize font-size-16">Active</div>
@@ -51,18 +47,31 @@
                     </div> 
                     
                     <div class="col-lg-3 center-block">
-                       <div class="card p-15 flex-row justify-content-between bg-green-600">
+                       <div class="card p-15 flex-row justify-content-between bg-green-700">
                            <div class="white">
-                             <i class="icon icon-circle icon-3x wb-pluse bg-green-300" aria-hidden="true"></i>
+                             <i class="icon icon-circle icon-3x wb-pluse bg-green-500" aria-hidden="true"></i>
                            </div>
                            <div class="counter counter-md counter counter-inverse  text-right">
                              <div class="counter-number-group">
-                                 <span class="counter-number">
-                                     <label id="lblDashboardNumProjects" class="control-label" ></label>
-                                 </span>
+                               <span class="counter-number"><?php echo $numfunding; ?></span>
                                <span class="counter-number-related text-capitalize">Projects</span>
                              </div>
                              <div class="counter-label text-capitalize font-size-16">Funding</div>
+                           </div>
+                         </div>
+                    </div> 
+                    
+                    <div class="col-lg-3 center-block">
+                       <div class="card p-15 flex-row justify-content-between bg-grey-500">
+                           <div class="white">
+                             <i class="icon icon-circle icon-3x wb-pluse bg-grey-400" aria-hidden="true"></i>
+                           </div>
+                           <div class="counter counter-md counter counter-inverse  text-right">
+                             <div class="counter-number-group">
+                               <span class="counter-number"><?php echo $numdraft; ?></span>
+                               <span class="counter-number-related text-capitalize">Projects</span>
+                             </div>
+                             <div class="counter-label text-capitalize font-size-16">Draft</div>
                            </div>
                          </div>
                     </div> 
@@ -72,7 +81,7 @@
                 </div>
                 <div class="row" >
                     
-                    <div class="col-lg-8 align-items-center">
+                    <div class="col-lg-6 align-items-center">
                        <div class="row row-lg">		
                            <div class="col-lg-12">
                              <div class="example-wrap">
@@ -87,7 +96,7 @@
                        </div>
                    </div>
                     
-                    <div class="col-lg-4 align-items-center">
+                    <div class="col-lg-6 align-items-center">
                         <div class="row">
                             
                             <div class="col-lg-12 align-items-center">
@@ -97,7 +106,7 @@
                                         <h4 class="example-title" style="text-align: center">Investments in the last 30 days</h4>
                                         <div class="example" style="margin: 0;">
 
-                                              <div id="chart_div4" style=" height: 100px;"></div>
+                                              <div id="chart_div4" style=" height: 150px;"></div>
 
                                         </div>
                                   </div>
@@ -111,8 +120,8 @@
                         <div class="row" >
                             
                             
-                            <div class="col-lg-3"></div>
-                            <div class="col-lg-6">
+                            <div class="col-lg-2"></div>
+                            <div class="col-lg-8">
                                 <!-- Example Default -->
                                 <div class="example-wrap m-lg-0">
                                   <div class="example">
@@ -129,7 +138,7 @@
                                 </div>
                                 <!-- End Example Default -->
                             </div>
-                            <div class="col-lg-3 align-items-center"></div>
+                            <div class="col-lg-2 align-items-center"></div>
                             
                             
                         </div>

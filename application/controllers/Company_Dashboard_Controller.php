@@ -31,6 +31,9 @@ class Company_Dashboard_Controller extends CI_Controller {
         $bar = $this->get_barGraphData();
         $data = $data + array('bargraph' => $bar); 
         
+        $infoProject = $this->info_projects();
+        $data = $data + $infoProject;
+        
         $this->load->view('header/header_admin');
         $this->load->view('company_dashboard',$data);
         $this->load->view('footer/footer_admin');        
@@ -185,14 +188,16 @@ class Company_Dashboard_Controller extends CI_Controller {
             $targetamt = $r->targetamt;
             $sumamount = $this->FINInvestmentModel->getSumAmountByProject($r->c_project_id);
             $percent = $this->get_percentage($targetamt, $sumamount);
-            
+            $statusproject = $this->CProjectModel->getProjectStatusName($r->projectstatus);
+            //$duedate = $r->datelimit;
+            $duedate = DateTime::createFromFormat('Y-m-d H:i:s', $r->datelimit)->format('Y-m-d');
             $sumamount = $this->formato_numero($sumamount);
             $targetamt = $this->formato_numero($targetamt);
             
             $projectName= $r->name;
-            $numInvestor = "0";
+            $numInvestor =   $this->FINInvestmentModel->getCountInvestorsByProject($r->c_project_id);
           
-            $html .= $this->get_htm_item($projectName, $percent, $targetamt, $sumamount,$numInvestor, $active);
+            $html .= $this->get_htm_item($projectName, $statusproject, $percent, $targetamt, $sumamount,$duedate, $numInvestor, $active);
             $count++;
             
         }
@@ -201,34 +206,42 @@ class Company_Dashboard_Controller extends CI_Controller {
         echo json_encode($response);
     }
     
-    private function get_htm_item($name, $percent, $goal, $invested , $numInvestor,$active) {
+    private function get_htm_item($name,$statusproject,  $percent, $goal, $invested , $duedate, $numInvestor,$active) {
 
         return
         '  
           <div class="carousel-item '.$active.'">
-            <div class="card card-block p-2">
-              <div class="counter counter-lg">
-                    <div class="counter-label text-uppercase">'.$name.'</div>
-                    <div class="counter-number-group">
-                        <span class="counter-icon mr-10 green-600">
-                         <i class="wb-stats-bars"></i>
-                        </span>
-                        <span class="counter-number">'.$percent.'</span>
-                        <span class="counter-number-related">%</span>
-                    </div>
-                    <div class="row" >
-                        <div class="col-lg-12">
-                         <div class="counter-label">'.$goal.' Goal / '.$invested.' Supported </div>
-                             
+            <div class="card card-block p-2 flex-row justify-content-between">
+             
+                <div class="col-lg-8">
+                    <div class="counter counter-lg">
+                        <div class="counter-label text-uppercase">'.$name.'</div>
+                        <div class="counter-number-group">
+                            <span class="counter-icon mr-10 green-600">
+                             <i class="wb-stats-bars"></i>
+                            </span>
+                            <span class="counter-number">'.$percent.'</span>
+                            <span class="counter-number-related">%</span>
                         </div>
+                        <div class="row" >
+                            <div class="col-lg-12">
+                             <div class="counter-label"> Due Date: '.$duedate.'</div>
+                            </div>
+                        </div>
+                       
+
                     </div>
-                    <div class="row" >
-                         <div class="col-lg-8 ">
-                          <div class="counter-label">'.$numInvestor.' Investor</div>
-                         </div>
-                    </div>
-                     
-              </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="counter-label"> &nbsp</div>
+                    <div class="counter-label">'.$goal.' Goal  </div>
+                    <div class="counter-label">'.$invested.' Supported</div>
+                    <div class="counter-label">'.$numInvestor.' Investor</div>
+                    <div class="counter-label"> '.$statusproject.'</div>
+                    
+                </div>
+                
+             
             </div>
           </div>
         ';
@@ -245,7 +258,41 @@ class Company_Dashboard_Controller extends CI_Controller {
     private function formato_numero($numero , $decimales=0){
     $numero = number_format($numero, $decimales, '.', ',');    
     return $numero;
-}
+    }
+    
+    public function info_projects() {
+        
+        $userId = $this->session->session_company['id'];
+        $query = $this->CProjectModel->getAllByCompany($userId);
+        
+        $count=0;
+        $numActive =0;
+        $numFunding =0;
+        $numDraft =0;
+        
+        foreach ($query->result() as $r) {
+            $count++;
+            
+            if(in_array($r->projectstatus, array('FU', 'COFU'))) //Solo proyectos funding
+             $numFunding++;
+            
+            if(in_array($r->projectstatus, array('ACT'))) //Solo proyectos Active
+             $numActive++;
+            
+            if(in_array($r->projectstatus, array('DRAFT'))) //Solo proyectos Draft
+             $numDraft++;
+            
+        }
+
+        $data = array(
+            'totalprojects' => $count, 
+            'curr_symbol' => "$", 
+            'numactive' => $numActive,
+            'numfunding' => $numFunding,
+            'numdraft' => $numDraft);
+
+        return $data;
+    }
     
     
    
