@@ -128,7 +128,6 @@ class Company_Dashboard_Controller extends CI_Controller {
                      }
         }
         
-        //Get Total of Project in Funding State
           $userId = $this->session->session_company['id'];
           $query = $this->CProjectModel->getAllByCompany($userId);
           $header = "['Day',"; //Se esta formando la Cabecera para el Gráfico
@@ -171,5 +170,83 @@ class Company_Dashboard_Controller extends CI_Controller {
        
         return $header.$line1;
      }
+     
+     
+     public function get_carousel_data() {
+         
+        $userId = $this->session->session_company['id'];
+        $query = $this->CProjectModel->getAllByCompany($userId);
+        
+        $html = '';
+        $count=0;
+        foreach ($query->result() as $r) {
+            
+            $active = ($count>0)?'':"active";
+            $targetamt = $r->targetamt;
+            $sumamount = $this->FINInvestmentModel->getSumAmountByProject($r->c_project_id);
+            $percent = $this->get_percentage($targetamt, $sumamount);
+            
+            $sumamount = $this->formato_numero($sumamount);
+            $targetamt = $this->formato_numero($targetamt);
+            
+            $projectName= $r->name;
+            $numInvestor = "0";
+          
+            $html .= $this->get_htm_item($projectName, $percent, $targetamt, $sumamount,$numInvestor, $active);
+            $count++;
+            
+        }
+        
+        $response = array('html' => $html);
+        echo json_encode($response);
+    }
+    
+    private function get_htm_item($name, $percent, $goal, $invested , $numInvestor,$active) {
+
+        return
+        '  
+          <div class="carousel-item '.$active.'">
+            <div class="card card-block p-2">
+              <div class="counter counter-lg">
+                    <div class="counter-label text-uppercase">'.$name.'</div>
+                    <div class="counter-number-group">
+                        <span class="counter-icon mr-10 green-600">
+                         <i class="wb-stats-bars"></i>
+                        </span>
+                        <span class="counter-number">'.$percent.'</span>
+                        <span class="counter-number-related">%</span>
+                    </div>
+                    <div class="row" >
+                        <div class="col-lg-12">
+                         <div class="counter-label">'.$goal.' Goal / '.$invested.' Supported </div>
+                             
+                        </div>
+                    </div>
+                    <div class="row" >
+                         <div class="col-lg-8 ">
+                          <div class="counter-label">'.$numInvestor.' Investor</div>
+                         </div>
+                    </div>
+                     
+              </div>
+            </div>
+          </div>
+        ';
+    }
+    
+    private function get_percentage($total, $number){
+      if ( $total > 0 ) {
+       return round($number / ($total / 100),1);
+      } else {
+        return 0;
+      }
+    }
+    
+    private function formato_numero($numero , $decimales=0){
+    $numero = number_format($numero, $decimales, '.', ',');    
+    return $numero;
+}
+    
+    
    
 }

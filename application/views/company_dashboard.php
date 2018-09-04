@@ -88,20 +88,8 @@
                    </div>
                     
                     <div class="col-lg-4 align-items-center">
-                        <div class="row" >
+                        <div class="row">
                             
-                                <div class="col-lg-12">
-                                  <div class="example-wrap">
-                                        <h4 class="example-title">Investments in the last 30 days</h4>
-                                        <div class="example" style="margin: 0;">
-                                             <div id="chart_div2" style=" height: 100px;"></div>
-                                        </div>
-                                  </div>
-                                </div>
-                            
-                            
-                        </div>
-                        <div class="row" >
                             <div class="col-lg-12 align-items-center">
                             <div class="row row-lg">		
                                 <div class="col-lg-12">
@@ -116,15 +104,41 @@
                                 </div>
                             </div>
                             </div>
+                            
+                            
+                            
                         </div>
-                        <div class="row" ></div>
+                        <div class="row" >
+                            
+                            
+                            <div class="col-lg-3"></div>
+                            <div class="col-lg-6">
+                                <!-- Example Default -->
+                                <div class="example-wrap m-lg-0">
+                                  <div class="example">
+                                    <div class="carousel slide" id="exampleCarouselDefault" data-ride="carousel">
+
+                                        <div class="carousel-inner" role="listbox" id="project_list">
+
+                                           <!--MY information-->
+
+                                      </div>
+
+                                    </div>
+                                  </div>
+                                </div>
+                                <!-- End Example Default -->
+                            </div>
+                            <div class="col-lg-3 align-items-center"></div>
+                            
+                            
+                        </div>
+                        
                    </div>
                     
                    
                 </div> 
-                <div class="row" >
-                                       
-                </div>
+               
             </div> 
         </div> 
     </div> 
@@ -132,43 +146,6 @@
 
 
 
-
-
-
-
-<script>
-google.charts.load('current', {packages: ['corechart', 'line']});
-google.charts.setOnLoadCallback(drawBasic2);
-
-function drawBasic2() {
-
-     
-      var data = google.visualization.arrayToDataTable([
-          ['Day', 'Invesments'],
-           <?php echo $line1; ?>
-        ]);
-
-      var options = {
-           //colors: ['#a52714', '#097138'],
-           pointSize: 4,
-           legend: { position: 'bottom' },
-           backgroundColor: '#F2F2F2',
-        hAxis: {
-          title: 'Day',
-          //gridlines: { count: 5 },
-          
-        },
-        vAxis: {
-          title: 'Projects',
-          gridlines: { count: 10 },
-        }
-      };
-
-    
-      var chart4 = new google.visualization.LineChart(document.getElementById('chart_div2'));
-      chart4.draw(data, options);
-    }
-</script>
 
 <script>
 google.charts.load('current', {packages: ['corechart', 'line']});
@@ -252,6 +229,29 @@ function drawBasic3() {
 
 <script type="text/javascript">
     window.onload = function () {
-       $('#idDashboardCompany').addClass('active');       
+       $('#idDashboardCompany').addClass('active');     
+       Listar();
+       
+       $('#exampleCarouselDefault').slick({
+        infinite: true
+       });
+       
+       
+       
     };
+    
+    function Listar() {
+        $.ajax({
+            url: "<?php echo base_url('Company_Dashboard_Controller/get_carousel_data'); ?>",
+            type: "POST",
+            async:false,
+            success: function (data) {
+                var resp = $.parseJSON(data);//convertir data de json
+                $("#project_list").empty();
+                $("#project_list").append(resp.html);
+                
+            }
+        });
+
+    }
 </script>

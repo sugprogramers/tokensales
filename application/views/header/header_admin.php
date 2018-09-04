@@ -62,6 +62,11 @@
         <link rel="stylesheet" href="<?php echo base_url() . "themes/default/remark"; ?>/global/vendor/blueimp-file-upload/jquery.fileupload.min599c.css?v4.0.2">
         <link rel="stylesheet" href="<?php echo base_url() . "themes/default/remark"; ?>/global/vendor/dropify/dropify.min599c.css?v4.0.2">
         
+        
+        <!-- Carousel -->
+        <link rel="stylesheet" href="<?php echo base_url() . "themes/default/remark"; ?>/global/vendor/owl-carousel/owl.carousel.min599c.css?v4.0.2">
+        <link rel="stylesheet" href="<?php echo base_url() . "themes/default/remark"; ?>/global/vendor/slick-carousel/slick.min599c.css?v4.0.2">
+        
          <!--[if lt IE 9]>
           <script src="<?php echo base_url() . "themes/default/remark"; ?>/global/vendor/html5shiv/html5shiv.min.js?v4.0.2"></script>
           <![endif]-->

@@ -86,6 +86,9 @@
 <script src="<?php echo base_url() . "themes/default/remark/topbar"; ?>/assets/js/App/Media.min599c.js?v4.0.2"></script>
 <script src="<?php echo base_url() . "themes/default/remark/topbar"; ?>/assets/examples/js/apps/media.min599c.js?v4.0.2"></script>
 
+<script src="<?php echo base_url() . "themes/default/remark/topbar"; ?>/assets/examples/js/uikit/carousel.min599c.js?v4.0.2"></script>
+
+
 <!-- upload dropify -->
 <script src="<?php echo base_url() . "themes/default/remark"; ?>/global/js/Plugin/dropify.min599c.js?v4.0.2"></script>
 <script src="<?php echo base_url() . "themes/default/remark"; ?>/global/vendor/dropify/dropify.min599c.js?v4.0.2"></script>
@@ -109,6 +112,10 @@
 
 <!-- matchheight -->
 <script src="<?php echo base_url() . "themes/default/remark"; ?>/global/js/Plugin/matchheight.min599c.js?v4.0.2"></script>
+
+<script src="<?php echo base_url() . "themes/default/remark"; ?>/global/vendor/owl-carousel/owl.carousel.min599c.js?v4.0.2"></script>
+<script src="<?php echo base_url() . "themes/default/remark"; ?>/global/vendor/slick-carousel/slick.min599c.js?v4.0.2"></script>
+
 
 <script>
      (function (document, window, $) {
