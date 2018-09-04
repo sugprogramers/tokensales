@@ -15,7 +15,7 @@ class CProject{
   
     public $c_projecttype_id;
     public $projectstatus;
-    public $propertytype;
+    public $c_propertytype_id;
     public $qtyproperty;
     public $address1;
     public $c_country_id;
@@ -53,7 +53,7 @@ class CProject{
         $cProject->c_currency_id = $result->c_currency_id; 
         $cProject->c_projecttype_id = $result->c_projecttype_id; 
         $cProject->projectstatus = $result->projectstatus; 
-        $cProject->propertytype = $result->propertytype; 
+        $cProject->c_propertytype_id = $result->c_propertytype_id; 
         $cProject->qtyproperty = $result->qtyproperty; 
         $cProject->address1 = $result->address1; 
         $cProject->c_country_id = $result->c_country_id; 

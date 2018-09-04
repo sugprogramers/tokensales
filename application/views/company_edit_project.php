@@ -50,9 +50,6 @@
                                 <div class="form-group ">
                                     <label class="control-label" for="propertytype">Property Type *</label>
                                     <select  required class="form-control"  id="propertytype" name="propertytype" style="font-size: 14px; border-radius:0;">
-                                        <option value="AP" >Apartment</option>
-                                        <option value="SUI" >Suite</option>
-                                        <option value="BUI">Building</option>
                                     </select>
                                 </div>
                             </div>
@@ -504,6 +501,17 @@
                 $("#cprojectmanager").append(resp.html);
             }
         });
+        
+        $.ajax({
+            url: "<?php echo base_url('Company_Edit_Project_Controller/get_cpropertytype_list') ?>",
+            type: "POST",
+            async: false,
+            success: function (data) {
+                var resp = $.parseJSON(data);//convertir data de json
+                $("#propertytype").empty();
+                $("#propertytype").append(resp.html);
+            }
+        });
 
 
 
@@ -525,7 +533,7 @@
 
             $('#nameproject').val("<?php if (isset($name)) echo $name; ?>");
             $('#companyname').val("<?php if (isset($companyname)) echo $companyname; ?>");
-            $('#propertytype').val("<?php if (isset($propertytype)) echo $propertytype; ?>");
+            $('#propertytype').val("<?php if (isset($c_propertytype_id)) echo $c_propertytype_id; ?>");
             $('#latitude').val("<?php if (isset($latitude)) echo $latitude; ?>");
             $('#longitude').val("<?php if (isset($longitude)) echo $longitude; ?>");
             map.setZoom(14);
@@ -563,11 +571,19 @@
             event.preventDefault();
             if ($(this).attr("value") == "one") {                 
                   tiposubmit = 'DRAFT';
-                  $("#project_form").submit();
+                    //$("#project_form").submit();
+                    var $myForm = $('#project_form');
+                    if (!$myForm[0].checkValidity()) {
+                      $('<input type="submit">').hide().appendTo($myForm).click().remove();
+                    }else{$("#project_form").submit();}
             }
             if ($(this).attr("value") == "two") {                 
                   tiposubmit = 'PEND';
-                  $("#project_form").submit();
+                  
+                    var $myForm = $('#project_form');
+                    if (!$myForm[0].checkValidity()) {
+                      $('<input type="submit">').hide().appendTo($myForm).click().remove();
+                    }else{$("#project_form").submit();}
             }
             
          });   

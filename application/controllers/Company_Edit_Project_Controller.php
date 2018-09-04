@@ -18,6 +18,9 @@ class Company_Edit_Project_Controller extends CI_Controller {
         $this->load->model("CFileModel");
         $this->load->model("CProjectdocumenttypeModel");
         $this->load->model("CProjectdocumentModel");
+        $this->load->model("CPropertytypeModel");
+        
+        
 
         if (!$this->session->has_userdata("session_company")) {
             redirect(base_url() . 'login');
@@ -99,7 +102,7 @@ class Company_Edit_Project_Controller extends CI_Controller {
         $new = new CProject();
         $new->name = $nameproject;
         $new->companyname = $companyname;
-        $new->propertytype = $propertytype;
+        $new->c_propertytype_id = $propertytype;
         $new->latitude = $latitude;
         $new->longitude = $longitude;
         $new->address1 = $address;
@@ -285,6 +288,18 @@ class Company_Edit_Project_Controller extends CI_Controller {
         $html = '<option value="">Choose a Project Type</option>';
         foreach ($country_list as $country) {
             $html .= '<option value="' . $country->c_projecttype_id . '">' . $country->name . '</option>';
+        }
+        $response = array('html' => $html);
+        echo json_encode($response);
+    }
+    
+     public function get_cpropertytype_list() {
+
+        $country_list = $this->CPropertytypeModel->getAll();
+
+        $html = '<option value="">Choose a Property Type</option>';
+        foreach ($country_list as $country) {
+            $html .= '<option value="' . $country->c_propertytype_id . '">' . $country->name . '</option>';
         }
         $response = array('html' => $html);
         echo json_encode($response);
