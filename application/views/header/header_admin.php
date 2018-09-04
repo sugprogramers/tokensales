@@ -655,6 +655,12 @@
                                                                 <span class="site-menu-title">Project Documents Type</span>
                                                             </a>
                                                         </li>
+                                                        
+                                                        <li class="site-menu-item">
+                                                            <a href="<?php echo base_url(); ?>admin_project_proptype">
+                                                                <span class="site-menu-title">Project Property Type</span>
+                                                            </a>
+                                                        </li>                                                        
 
                                                         <li class="site-menu-item">
                                                             <a href="<?php echo base_url(); ?>admin_project">

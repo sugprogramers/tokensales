@@ -74,6 +74,7 @@ $route['admin_changepassword'] = "Admin_Changepassword_Controller";
 $route['admin_paypalaccount'] = "Admin_PaypalAccount_Controller";
 $route['admin_transactionhistory'] = "Admin_TransactionHistory_Controller";
 $route['admin_project_payout'] = 'Admin_Project_PPayout_Controller';
+$route['admin_project_proptype'] = 'Admin_Project_Property_Controller';
 
 //routes investor
 $route['investor_dashboard'] = "Investor_Dashboard_Controller";
