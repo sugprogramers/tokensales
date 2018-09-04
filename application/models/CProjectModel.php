@@ -147,6 +147,7 @@ class CProjectModel extends CI_Model {
         $this->db->join('c_file', 'c_file.c_file_id = c_project.homeimage_id', 'left');
         $this->db->where('c_project.projectstatus !=', 'PEND');
         $this->db->where('c_project.projectstatus !=', 'ERRDATA');
+        $this->db->where('c_project.projectstatus !=', 'DRAFT');
         return $this->db->get();
     }
 
@@ -159,6 +160,7 @@ class CProjectModel extends CI_Model {
         $this->db->join('c_file', 'c_file.c_file_id = c_project.homeimage_id', 'left');
         $this->db->where('c_project.projectstatus !=', 'PEND');
         $this->db->where('c_project.projectstatus !=', 'ERRDATA');
+        $this->db->where('c_project.projectstatus !=', 'DRAFT');
         return $this->db->get();
     }
 
@@ -171,6 +173,7 @@ class CProjectModel extends CI_Model {
         $this->db->join('c_file', 'c_file.c_file_id = c_project.homeimage_id', 'left');
         $this->db->where('c_project.projectstatus !=', 'PEND');
         $this->db->where('c_project.projectstatus !=', 'ERRDATA');
+        $this->db->where('c_project.projectstatus !=', 'DRAFT');
         return $this->db->get();
     }
     
