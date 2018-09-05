@@ -81,14 +81,18 @@ class FINInvestmentModel extends CI_Model {
         $this->db->join('c_project as pr', 'fin.c_project_id = pr.c_project_id ');
         $this->db->join('c_currency cur', 'pr.c_currency_id =cur.c_currency_id ');
         $this->db->join('c_investor as inv', 'fin.c_investor_id = inv.c_investor_id ');
-        $this->db->where('inv.c_user_id', $userId);
+        $this->db->group_start();
         $this->db->or_where('pr.projectstatus' , 'FU');
         $this->db->or_where('pr.projectstatus' , 'COFU');
         $this->db->or_where('pr.projectstatus' , 'NCOFU');
         $this->db->or_where('pr.projectstatus' , 'FIN');
         $this->db->or_where('pr.projectstatus' , 'ACT');
+        $this->db->group_end();
+        $this->db->where('inv.c_user_id', $userId);
+        
         
         $this->db->order_by("sorte");
+        
         
         
 

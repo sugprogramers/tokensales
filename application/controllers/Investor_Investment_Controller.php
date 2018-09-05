@@ -84,8 +84,9 @@ class Investor_Investment_Controller extends CI_Controller {
       $draw = intval($this->input->get("draw"));
       $start = intval($this->input->get("start"));
       $length = intval($this->input->get("length"));
-      $userId =$this->input->get("id");
+     // $userId =$this->input->get("id"); //Ya no debo utilizarlo
   
+      $userId = $this->session->session_investor['id'];
       $query = $this->FINInvestmentModel->get_investment_project_list($userId);
       
       $data = [];
