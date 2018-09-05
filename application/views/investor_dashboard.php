@@ -131,9 +131,21 @@
                         </div>            
                         <!-- End Card --> 
                     </div>    
-                </div>                
-
-                <br>                                   
+                </div>     
+                
+                <div id="notInvestmentMessage" class="row row-lg">
+                    
+                    <div class="col-lg-12">
+                       <div class="counter counter-md counter text-center">
+                                <div class="counter-number-group">
+                                    <span class="counter-number">You currently don't have any investments</span>
+                                </div>
+                            </div>
+                    </div> 
+                </div>
+                <br> 
+                
+              <div id="graphBody">  
                 <div class="row row-lg">
                     <div class="col-lg-12">
 
@@ -148,7 +160,6 @@
                         </div>              
                     </div>
                 </div>   
-                
                 <br>      
                 <br>      
                 <div class="row row-lg">
@@ -165,7 +176,7 @@
                     </div>                    
                     <div class="col-lg-6"></div>                    
                 </div>                   
-
+              </div>  
                 
             </div> 
         </div> 
@@ -230,6 +241,21 @@
 <script type="text/javascript">
     window.onload = function () {
         $('#idDashboardInvestor').addClass('active');
+        
+        
+        $("#notInvestmentMessage").show();
+        $("#graphBody").hide();
+        
+        if(("<?php echo $driving_projects ?>" != 0)
+           ||  ("<?php echo $parked_projects ?>" != 0)){
+         
+           $("#notInvestmentMessage").hide();
+           $("#graphBody").show();
+         
+        }
+        
+        //$parked_projects
+        
     };
 
 </script>
