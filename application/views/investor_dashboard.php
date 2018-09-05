@@ -28,7 +28,7 @@
                                         <span class="counter-number"><?php echo $curr_symbol . ' ' . $earnings_balance; ?></span>
                                         <span class="counter-sm -number-related text-capitalize"></span>
                                     </div>
-                                    <div class="counter-label text-capitalize font-size-16">Total Earnings</div>
+                                    <div class="counter-label font-size-16">Estimated Earnings to Date</div>
                                 </div>
                             </div>            
                             <!-- End Card -->
@@ -47,19 +47,38 @@
                                         <span class="counter-number"><?php echo $curr_symbol . ' ' . $fillingTheTank_balance; ?></span>
                                         <span class="counter-sm -number-related text-capitalize"></span>
                                     </div>
-                                    <div class="counter-label text-capitalize font-size-16">Filling the Tank</div>
+                                    <div class="counter-label font-size-16">Filling the Tank</div>
                                 </div>
                             </div>            
                             <!-- End Card -->
                         </div>           
                     </div>      
+                    
+                    <div class="col-md-3" >
+                        <div style="cursor: pointer;" onclick="window.location = 'investor_depositfunds/2';">            
+                            <!-- Card -->
+                            <div class="card p-15 flex-row justify-content-between  bg-green-700">
+                                <div class="white">
+                                    <i class="icon icon-circle icon-3x wb-graph-up bg-green-500" aria-hidden="true"></i>
+                                </div>
+                                <div class="counter counter-md counter counter-inverse  text-right">
+                                    <div class="counter-number-group">
+                                        <span class="counter-number"><?php echo $curr_symbol . ' ' . $parked_balance; ?></span>
+                                        <span class="counter-sm -number-related text-capitalize"></span>
+                                    </div>
+                                    <div class="counter-label text-capitalize font-size-16">Parked</div>
+                                </div>
+                            </div>            
+                            <!-- End Card -->
+                        </div>           
+                    </div> 
 
                     <div class="col-md-3" >
                         <div style="cursor: pointer;" onclick="window.location = 'investor_depositfunds/2';">            
                             <!-- Card -->
-                            <div class="card p-15 flex-row justify-content-between bg-green-700">
+                            <div class="card p-15 flex-row justify-content-between bg-grey-500">
                                 <div class="white">
-                                    <i class="icon icon-circle icon-3x wb-graph-up bg-green-500" aria-hidden="true"></i>
+                                    <i class="icon icon-circle icon-3x wb-graph-up bg-grey-400" aria-hidden="true"></i>
                                 </div>
                                 <div class="counter counter-md counter counter-inverse  text-right">
                                     <div class="counter-number-group">
@@ -73,24 +92,7 @@
                         </div>           
                     </div>
 
-                    <div class="col-md-3" >
-                        <div style="cursor: pointer;" onclick="window.location = 'investor_depositfunds/2';">            
-                            <!-- Card -->
-                            <div class="card p-15 flex-row justify-content-between bg-grey-500">
-                                <div class="white">
-                                    <i class="icon icon-circle icon-3x wb-graph-up bg-grey-400" aria-hidden="true"></i>
-                                </div>
-                                <div class="counter counter-md counter counter-inverse  text-right">
-                                    <div class="counter-number-group">
-                                        <span class="counter-number"><?php echo $curr_symbol . ' ' . $parked_balance; ?></span>
-                                        <span class="counter-sm -number-related text-capitalize"></span>
-                                    </div>
-                                    <div class="counter-label text-capitalize font-size-16">Parked</div>
-                                </div>
-                            </div>            
-                            <!-- End Card -->
-                        </div>           
-                    </div>  
+                     
 
                 </div>
 
