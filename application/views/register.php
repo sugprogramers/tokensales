@@ -76,11 +76,11 @@
                             <label>Register as: &nbsp</label>
                             <div class="radio-custom radio-default radio-inline">
                                 <input type="radio" id="inputInvestor" name="usertype" value="investor" checked="">
-                                <label for="role0">Individual</label>
+                                <label for="role0">Supporter</label>
                             </div>
                             <div class="radio-custom radio-default radio-inline">
                                 <input type="radio" id="inputCompany" name="usertype" value="company">
-                                <label for="role1">Company</label>
+                                <label for="role1">Entrepreneur</label>
                             </div>
                         </div>                        
 
@@ -143,10 +143,10 @@
 
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label class="control-label" for="userPhone">Birthday *</label>
+                                    <label class="control-label" for="birthday">Birthday *</label>
                                     <br>
 
-                                    <input type="text" required class="form-control" class="form-control" data-plugin="datepicker" id="inputBirthday" name="birthday" style="font-size: 14px; border-radius:0;">                                    
+                                    <input type="text" required class="form-control" class="form-control" placeholder="MM/DD/YYYY" data-plugin="datepicker" id="inputBirthday" name="birthday" style="font-size: 14px; border-radius:0;">                                    
 
                                     <span class="help-block"></span>
                                 </div>
@@ -242,28 +242,28 @@
 
                     <div class="col-md-6 hidden-xs hidden-sm">
                         <div class="row">
-                            <div class="col-md-12 registro-intro-ventajas">Sign up with Smart Developer</div>
-                            <div class="col-md-12 registro-intro-ventajas">There only benefits:</div>
+                            <div class="col-md-12 registro-intro-ventajas">Sign up with Crowd Capital Partners and </div>
+                            <div class="col-md-12 registro-intro-ventajas">get your money working for you today…</div>
                         </div>
                         <div class="row registro-ventaja">
                             <div class="col-md-2"><img src="<?php echo base_url() . "themes/default/remark/topbar"; ?>/assets/images/register/ico-register-1.png" alt=""></div>
-                            <div class="col-md-10" style="padding-left:0px">Signing up with Smart developer does not imply any obligation and is completely free</div>
+                            <div class="col-md-10" style="padding-left:0px; padding-top:10px;">Signing up with Crowd Capital Partners is completely free, obligation or otherwise</div>
                         </div>
                         <div class="row registro-ventaja">
                             <div class="col-md-2"><img src="<?php echo base_url() . "themes/default/remark/topbar"; ?>/assets/images/register/ico-register-2.png" alt=""></div>
-                            <div class="col-md-10" style="padding-left:0px">The Smart Developer account does not have any fees associated: you can deposit and withdraw funds whenever you want and at no cost</div>
+                            <div class="col-md-10" style="padding-left:0px; padding-top:5px;">There are no fees associated with depositing or withdrawing funds from your account</div>
                         </div>
                         <div class="row registro-ventaja">
                             <div class="col-md-2"><img src="<?php echo base_url() . "themes/default/remark/topbar"; ?>/assets/images/register/ico-register-3.png" alt=""></div>
-                            <div class="col-md-10" style="padding-left:0px">Once you complete registration, you will have access to all detail documentation and tools to analyse the opportunities you are interested in</div>
+                            <div class="col-md-10" style="padding-left:0px; padding-top:0px;">Once you complete signing up (or registration) and your account has been approved, you will have access to all the opportunities available to support on Crowd Capital Partners</div>
                         </div>
                         <div class="row registro-ventaja">
-                            <div class="col-md-2"><img src="<?php echo base_url() . "themes/default/remark/topbar"; ?>/assets/images/register/ico-register-4.png" alt=""></div>
-                            <div class="col-md-10" style="padding-left:0px">Invest with as little as you decide in the best real estate opportunities with guarantees and high returns</div>
+                            <div class="col-md-2"><img src="<?php echo base_url() . "themes/default/remark/topbar"; ?>/assets/images/register/ico-register-4.png" alt=""></div>                            
+                            <div class="col-md-10" style="padding-left:0px; padding-top:10px;">With as little as $100 you can get your money working for you like never before</div>
                         </div>
                         <div class="row registro-ventaja">
                             <div class="col-md-2"><img src="<?php echo base_url() . "themes/default/remark/topbar"; ?>/assets/images/register/ico-register-5.png" alt=""></div>
-                            <div class="col-md-10" style="padding-left:0px">Earn from the moment you invest! Smart Developer enabled opportunities pay out the estimated rental yield every month from the moment you commit your investment (Conditions apply).</div>
+                            <div class="col-md-10" style="padding-left:0px; padding-top:10px;">Earn from the moment your project is completely funded!</div>
                         </div>                                                
                     </div>
 
@@ -382,14 +382,14 @@
                 <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">×</span>
                 </button> -->
-                <h4 class="modal-title">Register Success</h4>
+                <h4 class="modal-title">Registration Successful</h4>
             </div>
             <div class="modal-body">
-                <h5><p>You have registered correctly. Then you can log in.</p></h5>
+                <h5><p>Congratulations on sucessfully creating your account. You may now go to login page to sing-in.</p></h5>
             </div>
             <div class="modal-footer">
                 <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
-                <button id="modal_finalize" type="button" class="btn btn-primary">Finalize</button>
+                <button id="modal_finalize" type="button" class="btn btn-primary">Return to Login</button>
             </div>
         </div>
     </div>
