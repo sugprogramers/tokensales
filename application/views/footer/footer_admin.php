@@ -86,8 +86,6 @@
 <script src="<?php echo base_url() . "themes/default/remark/topbar"; ?>/assets/js/App/Media.min599c.js?v4.0.2"></script>
 <script src="<?php echo base_url() . "themes/default/remark/topbar"; ?>/assets/examples/js/apps/media.min599c.js?v4.0.2"></script>
 
-<script src="<?php echo base_url() . "themes/default/remark/topbar"; ?>/assets/examples/js/uikit/carousel.min599c.js?v4.0.2"></script>
-
 
 <!-- upload dropify -->
 <script src="<?php echo base_url() . "themes/default/remark"; ?>/global/js/Plugin/dropify.min599c.js?v4.0.2"></script>
