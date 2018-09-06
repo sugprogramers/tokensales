@@ -375,11 +375,11 @@
         bootbox.confirm({
             title: "Confirm Delete", message: "Are you sure you want to delete this item?",
             buttons: {
-                cancel: {label: '<i class="fa fa-times"></i> No', className: 'btn-danger'},
-                confirm: {label: '<i class="fa fa-check"></i> Yes', className: 'btn-success'}
+                confirm: {label: '<i class="fa fa-times"></i> No', className: 'btn-danger'},
+                cancel: {label: '<i class="fa fa-check"></i> Yes', className: 'btn-success'}
             },
             callback: function (result) {
-                if (result) {
+                if (!result) {
 
                     $.ajax({
                         url: "<?php echo base_url('Public_List_Project_Controller/delete_project'); ?>/" + id,
@@ -407,7 +407,7 @@
     
     function Invertir() {
         
-        var monto = $('#amountinvest').val();
+        var monto = $('#amountinvest').val().replace(/\,/g, '');
         
         bootbox.confirm({
             title: "Confirm Invesment", message: "To invest you must login, want to login?",

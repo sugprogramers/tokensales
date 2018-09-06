@@ -145,6 +145,14 @@ class Admin_List_Project_Active_Controller extends CI_Controller {
        
        $sumamount = $this->formato_numero($sumamount);
        $targetamt = $this->formato_numero($targetamt);
+       
+        
+       if($projectstatus=="FU"){
+           $text_dias_totales = "$diastotales days remaining";
+       }else{
+           $text_dias_totales = " -- ";
+       }
+   
 
 return
 '  
@@ -184,7 +192,7 @@ return
 <div class="sub-detalle-property">
 
     <div  style="margin-top: 5px;margin-bottom: 5px;">
-     '.$address1.'
+     <a href="javascript:void(0)" onclick="Ubicacion(\''.$latitude.'\' , \''.$longitude.'\')">'.$address1.' </a>
     </div>
 
     <div class="row">
@@ -205,7 +213,7 @@ return
             <b>'.$countinvesment.' Investors </b>
             </div>
             <div class="col-sm-6 text-right">
-            <b>'.$diastotales.'  days remaining</b>
+            <b>'.$text_dias_totales.'</b>
              </div>  
      </div>  
      

@@ -26,7 +26,7 @@ class Investor_List_Project_Controller extends CI_Controller {
     
      public function invesment_project($monto , $c_project_id){
         try {
-            
+           $monto = str_replace(',', '', $monto);
            $val = $this->FINInvestmentModel->invesment($monto ,$c_project_id , $this->session->session_investor['id']);            
            if($val=='true'){
                $response = array('redirect' => '', 'status' => 'success');
@@ -34,7 +34,7 @@ class Investor_List_Project_Controller extends CI_Controller {
            }
            else{
                $response = array('redirect' => '', 'status' => 'error', 'msg' => $val);
-                 echo json_encode($response);
+               echo json_encode($response);
            }
             
            
@@ -226,7 +226,7 @@ return
 <div class="sub-detalle-property">
 
 <div  style="margin-top: 5px;margin-bottom: 5px;">
-    '.$address1.'
+    <a href="javascript:void(0)" onclick="Ubicacion(\''.$latitude.'\' , \''.$longitude.'\')">'.$address1.' </a>
     </div>
 
      <div class="row">
@@ -247,7 +247,7 @@ return
             <b>'.$countinvesment.' Investors </b>
             </div>
             <div class="col-sm-6 text-right">
-            <b>'.$diastotales.'  days remaining</b>
+            <b>'.$text_dias_totales.'</b>
              </div>  
      </div>  
      
@@ -281,7 +281,7 @@ return
 </div>
 
 <div class="h-minificha__button-bar">
-          <button  type="submit" class="btn btn-primary  btn-block"  data-toggle="slidePanel" data-url="' . base_url() . 'themes/default/tpl/investor_panel.tpl"  onclick="Pagar(\''.$c_project_id.'\');">ADD FUNDS</button>
+          <button  type="submit" class="btn btn-primary  btn-block"  data-toggle="slidePanel" data-url="' . base_url() . 'themes/default/tpl/investor_panel.tpl"  onclick="Pagar(\''.$c_project_id.'\');">SUPPORT OPPORTUNITY</button>
 </div>
 
 <div class="h-minificha__button-bar" style="margin-top:4px;">

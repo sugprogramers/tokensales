@@ -1,5 +1,5 @@
 
-<header id='imageNew' class="slidePanel-header overlay" style="height:300px;width:100%; background-position: center center;background-image: url('http://localhost/smart_developer/themes/default/remark/global/photos/focus-5-960x640.jpg');"
+<header id='imageNew' class="slidePanel-header overlay" style="cursor: zoom-in;height:300px;width:100%; background-position: center center;background-image: url('http://localhost/smart_developer/themes/default/remark/global/photos/focus-5-960x640.jpg');"
         data-method="scroll" data-min="100">
     <div class="overlay-top overlay-panel overlay-background" style="padding: 0px 15px;background: rgba(0,0,0,0.5);">
         <div class="slidePanel-actions btn-group" aria-label="actions" role="group" style="min-height: 0px;">
@@ -10,6 +10,26 @@
         </div>
         <h5 id='tituloNew' style="line-height: 24px;">Gardening is life.png</h5>
     </div>
+    
+     <script>
+    //$('img[data-enlargable]').addClass('img-enlargable').click(function(){        
+    $('#imageNew').click(function(){         
+            //var src = $(this).attr('src');
+            var src = $(this).css('background-image').replace(/^url\(['"](.+)['"]\)/, '$1');    
+            $('<div>').css({
+                background: 'RGBA(0,0,0,.9) url('+src+') no-repeat center',
+                backgroundSize: 'contain',
+                width:'100%', height:'100%',
+                margin:'10',
+                position:'fixed',
+                zIndex:'10000',
+                top:'0', left:'0',
+                cursor: 'zoom-out'
+            }).click(function(){
+                $(this).remove();
+            }).appendTo('body');
+    });
+    </script>
 </header>
 <div class="slidePanel-inner" id="panelgeneral" >
     <section class="slidePanel-inner-section"  >
@@ -42,6 +62,13 @@
                             <div class="row">
                                 <div class="col-md-12">
 
+                                    
+                                    <div class="row" style="margin-top: 10px">
+                                        <div class="col-sm-12">
+                                            <i class="icon wb-map" aria-hidden="true"></i> <font id="addressNow"> Mi locacion</font>
+                                        </div>
+
+                                    </div>    
 
                                     <div id="descriptionNew"  > 
                                     </div>
@@ -60,12 +87,6 @@
 
 
 
-                                    <div class="row" style="margin-top: 10px">
-                                        <div class="col-sm-12">
-                                            <i class="icon wb-map" aria-hidden="true"></i> <font id="addressNow"> Mi locacion</font>
-                                        </div>
-
-                                    </div>    
 
                                     <div class="flip-container__wrapper" style="margin-top: 10px;">                               
 

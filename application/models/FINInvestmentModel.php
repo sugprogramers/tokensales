@@ -260,7 +260,7 @@ class FINInvestmentModel extends CI_Model {
                         }
                    
                 } else {
-                    return 'You do not have enough balance for the investment.';
+                    return 'NoBalance';
                 }
             } else {
                 return 'The project has a different status to "funding".';

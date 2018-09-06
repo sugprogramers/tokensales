@@ -71,7 +71,7 @@
 </style>
 <div class="page">
     <div class="page-header">
-        <h1 class="page-title">Projects </h1>
+        <h1 class="page-title">Opportunities </h1>
         <div class="page-header-actions">
             <!-- <ol class="breadcrumb breadcrumb-arrow">
                  <li class="breadcrumb-item"><a class="icon fa-cubes" href="#">Projects</a></li>
@@ -406,20 +406,23 @@
     
     function Invertir() {
         
-        var monto = $('#amountinvest').val();
+        
+        
+        var monto = $('#amountinvest').val().replace(/\,/g, '');
        
         if($.trim(monto)===''){            
             MostrarAlerta('The amount entered is invalid.');
         }else
         
         bootbox.confirm({
-            title: "Confirm Invesment", message: "Are you sure you want to invest "+monto+"?",
+            title: "Confirm Amount", message: "Are you sure you want to invest $"+monto+"?",
             buttons: {
-                cancel: {label: '<i class="fa fa-times"></i> No', className: 'btn-danger'},
-                confirm: {label: '<i class="fa fa-check"></i> Yes', className: 'btn-success'}
+                cancel: {label: '<i class="fa fa-check"></i> Yes', className: 'btn-success'},
+                confirm: {label: '<i class="fa fa-times"></i> No', className: 'btn-danger'},
+                
             },
             callback: function (result) {
-                if (result) {
+                if (!result) {
                     
                     //alert (monto + c_project_id) ;
                     
@@ -446,25 +449,40 @@
 
 function MostrarAlerta(texto){
 
+var buttons = null;
+if(texto == 'NoBalance'){
+    texto = "Looks like you need to Fill Up Your Tank before you can Drive. Please load additional funds into your wallet and try again";
+    buttons = {
+    btn1: {
+      label: "Get Balance",
+      callback: function() {
+       
+      }
+    },
+  }
+}
+ 
+  
  var dialog = bootbox.dialog({
                 message: '<div style="font-size:36px;color:red;float:left"><i class="icon wb-warning" aria-hidden="true"></i></div> <div style="float:left;height:60px;padding:20px 15px;color:red;font-weight:bold;">'+texto+'</div>',
                 closeButton: true,
+                buttons: buttons
             });
          /*
            'font-weight' : 'bold',
             'color': '#F00',
             'font-size': '2em',
           */
-dialog.find('.modal-content').css({
-'background-color': '#F5B7B1',            
-'margin-top': function (){
-    var w = $( window ).height();
-    var b = $(".modal-dialog").height();
-    // should not be (w-h)/2
-    var h = (w-b)/2;
-    return h+"px";
-}
-});
+        dialog.find('.modal-content').css({
+        'background-color': '#F5B7B1',            
+        'margin-top': function (){
+            var w = $( window ).height();
+            var b = $(".modal-dialog").height();
+            // should not be (w-h)/2
+            var h = (w-b)/2;
+            return h+"px";
+        }
+        });
 
 dialog.modal('show');
 

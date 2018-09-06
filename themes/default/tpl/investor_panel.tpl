@@ -1,5 +1,5 @@
 
-<header id='imageNew' class="slidePanel-header overlay" style="height:300px;width:100%; background-position: center center;background-image: url('http://localhost/smart_developer/themes/default/remark/global/photos/focus-5-960x640.jpg');"
+<header id='imageNew' class="slidePanel-header overlay" style="cursor: zoom-in;height:300px;width:100%; background-position: center center;background-image: url('http://localhost/smart_developer/themes/default/remark/global/photos/focus-5-960x640.jpg');"
         data-method="scroll" data-min="100">
     <div class="overlay-top overlay-panel overlay-background" style="padding: 0px 15px;background: rgba(0,0,0,0.5);">
         <div class="slidePanel-actions btn-group" aria-label="actions" role="group" style="min-height: 0px;">
@@ -10,6 +10,30 @@
         </div>
         <h5 id='tituloNew' style="line-height: 24px;">Gardening is life.png</h5>
     </div>
+    
+    <!--
+    <img data-enlargable width="100" style="cursor: zoom-in"  src="https://upload.wikimedia.org/wikipedia/commons/3/39/Lichtenstein_img_processing_test.png" />
+    -->
+    
+    <script>
+    //$('img[data-enlargable]').addClass('img-enlargable').click(function(){        
+    $('#imageNew').click(function(){         
+            //var src = $(this).attr('src');
+            var src = $(this).css('background-image').replace(/^url\(['"](.+)['"]\)/, '$1');    
+            $('<div>').css({
+                background: 'RGBA(0,0,0,.9) url('+src+') no-repeat center',
+                backgroundSize: 'contain',
+                width:'100%', height:'100%',
+                margin:'10',
+                position:'fixed',
+                zIndex:'10000',
+                top:'0', left:'0',
+                cursor: 'zoom-out'
+            }).click(function(){
+                $(this).remove();
+            }).appendTo('body');
+    });
+    </script>
 </header>
 <div class="slidePanel-inner" id="panelgeneral" >
     <section class="slidePanel-inner-section"  >
@@ -33,7 +57,7 @@
                         </li>
                          <li class="nav-item" role="presentation">
                             <a class="nav-link" data-toggle="tab" href="#exampleTabsLineTopFour"   aria-controls="exampleTabsLineTopTwo" role="tab" onclick='$("#panelgeneral").resize();
-                                    $("#panelgeneral").resize();'>Add Founds</a>
+                                    $("#panelgeneral").resize();'>Support opportunity</a>
                         </li>
                     </ul>
                     <div class="tab-content pt-10">
@@ -43,6 +67,12 @@
                                 <div class="col-md-12">
 
 
+                                     <div class="row" style="margin-top: 10px">
+                                        <div class="col-sm-12">
+                                            <i class="icon wb-map" aria-hidden="true"></i>  <font id="addressNow"> Mi locacion</font>
+                                        </div>
+
+                                    </div>    
                                     <div id="descriptionNew"  > 
                                     </div>
 
@@ -60,12 +90,7 @@
 
 
 
-                                    <div class="row" style="margin-top: 10px">
-                                        <div class="col-sm-12">
-                                            <i class="icon wb-map" aria-hidden="true"></i>  <font id="addressNow"> Mi locacion</font>
-                                        </div>
-
-                                    </div>    
+                                   
 
                                     <div class="flip-container__wrapper" style="margin-top: 10px;">                               
 
@@ -163,14 +188,15 @@
                                                 <input type="text" class="form-control" placeholder="" id="amountinvest" name="amountinvest" required >
                                                 
                                                 <script>                                                    
-                                                    $("#amountinvest").on("keyup", function(){
-                                                        var valid = /^\d{0,10}(\.\d{0,2})?$/.test(this.value),
+                                                    $("#amountinvest").on("keyup", function(event){
+                                                       /* var valid = /^\d{0,10}(\.\d{0,2})?$/.test(this.value),
                                                             val = this.value;
-
                                                         if(!valid){
                                                             console.log("Invalid input!");
                                                             this.value = val.substring(0, val.length - 1);
-                                                        }
+                                                        }*/
+                                                        if (event.which >= 37 && event.which <= 40) return;
+                                                        this.value = this.value.replace(/\D/g, '').replace(/\B(?=(\d{3})+(?!\d))/g, ',');
                                                     });
                                                 </script>
                                               </div>
@@ -181,7 +207,7 @@
                                     
                                     <div class="col-md-6">
                                         <button type="button" class="btn btn-block btn-success" onclick="Invertir();"> 
-                                            <i class="icon wb-check" aria-hidden="true"></i>Invest now
+                                            <i class="icon wb-check" aria-hidden="true"></i>Support now
                                         </button>
                                     </div>
                                    
