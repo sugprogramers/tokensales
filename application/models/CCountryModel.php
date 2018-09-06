@@ -55,8 +55,8 @@ class CCountryModel extends CI_Model {
 
     }
     
-    public function getAll() {               
-        $query = $this->db->get_where("c_country", array('isactive' => 'Y'));
+    public function getAll() {            
+        $query = $this->db->order_by("name", "asc")->get_where("c_country", array('isactive' => 'Y'));
         $result = $query->result();
         
         $list = array();

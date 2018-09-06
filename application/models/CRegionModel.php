@@ -53,7 +53,7 @@ class CRegionModel extends CI_Model
     } 
     
     public function getAll(){
-       $query = $this->db->get_where("c_region", array('isactive' => 'Y'));
+       $query = $this->db->order_by("description", "asc")->get_where("c_region", array('isactive' => 'Y'));
        $result = $query->result();
        $data = array();
        foreach($result as $value) {
@@ -63,7 +63,7 @@ class CRegionModel extends CI_Model
     } 
     
     public function getRegionsByCountry($countryId){
-       $query = $this->db->get_where("c_region", array('isactive' => 'Y', 'c_country_id' => $countryId));
+       $query = $this->db->order_by("description", "asc")->get_where("c_region", array('isactive' => 'Y', 'c_country_id' => $countryId));
        $result = $query->result();
        $data = array();
        foreach($result as $value) {

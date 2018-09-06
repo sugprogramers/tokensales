@@ -123,11 +123,11 @@ class Register_Controller extends CI_Controller {
 
         $html = '<option value="">Choose a Country</option>';
         foreach ($country_list as $country) {
-            if ($country->c_country_id == $countryId) {
-                $html .= '<option value="' . $country->c_country_id . '" selected>' . $country->name . '</option>';
-            } else {
+            // if ($country->c_country_id == $countryId) {
+            //     $html .= '<option value="' . $country->c_country_id . '" selected>' . $country->name . '</option>';
+            // } else {
                 $html .= '<option value="' . $country->c_country_id . '">' . $country->name . '</option>';
-            }
+            // }
         }
         $response = array('html' => $html);
         echo json_encode($response);

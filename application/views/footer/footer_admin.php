@@ -114,6 +114,11 @@
 <script src="<?php echo base_url() . "themes/default/remark"; ?>/global/vendor/owl-carousel/owl.carousel.min599c.js?v4.0.2"></script>
 <script src="<?php echo base_url() . "themes/default/remark"; ?>/global/vendor/slick-carousel/slick.min599c.js?v4.0.2"></script>
 
+<!-- tooltip popover-->
+<script src="<?php echo base_url() . "themes/default/remark"; ?>/global/vendor/webui-popover/jquery.webui-popover.min599c.js?v4.0.2"></script>
+<script src="<?php echo base_url() . "themes/default/remark"; ?>/global/js/Plugin/webui-popover.min599c.js?v4.0.2"></script>
+
+
 
 <script>
      (function (document, window, $) {

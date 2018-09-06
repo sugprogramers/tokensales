@@ -63,16 +63,20 @@
 
 </style> 
 <div class="page">
-    <div class="page-content" style="background:rgba(255, 255, 255, 1); color:#463d3e; padding-top: 0px; margin-top: 0px"> 
-
+    <div class="page-content" style="background:rgba(255, 255, 255, 1); color:#463d3e; padding-top: 0px; margin-top: 0px">                        
+        
         <h2>Register as a user</h2>
 
-        <div class="modal-body">
+        <div class="modal-body">                               
+            
             <form id="register_form" class="with-labels formregistro" action="/en/subscription" method="post" role="form">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-6">                        
+                        
+                        <div id="wrongPassDiv" class="summary-errors alert alert-danger alert-dismissible">The password must contain at least 8 characters and consist of at least one uppercase letter, one lowercase letter, one number and one symbol.<br><br> <strong>Symbols allowed: @ , # , $ , ! , ¡ , ¿ , ? , * , ( , ) , % , ^ , &amp; , + , = </strong></div>
 
-                        <div class="form-group">
+                        <div class="form-group">                                                                              
+                            
                             <label>Register as: &nbsp</label>
                             <div class="radio-custom radio-default radio-inline">
                                 <input type="radio" id="inputInvestor" name="usertype" value="investor" checked="">
@@ -84,10 +88,11 @@
                             </div>
                         </div>                        
 
+                        <p style="color: #555753; padding-left: #10px;"><small><strong>Fields in (*) are required.</strong></small></p> 
                         <div class="row">
-                            <div class="col-sm-6" id="inputNameSection">
-
-                                <div class="form-group ">
+                            <div class="col-sm-6" id="inputNameSection">                                
+                                
+                                <div class="form-group ">                                    
                                     <label class="control-label usuario" id="lblName" for="userFirstName">Name*</label>
                                     <label class="control-label usuario text-hide" id="lblComercialName" for="userFirstName">Name of the legal representative*</label>
                                     <input type="text" required class="form-control" id="inputFirstname" name="firstname" placeholder="First Name" style="font-size: 14px; border-radius:0;">
@@ -123,9 +128,9 @@
 
                                 <div class="form-group ">
                                     <label class="control-label" for="password">Password *</label>                                    
-                                    <input type="password" id="inputPassword" name="password" value="" class="form-control password-control" required pattern="(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$!¡¿?*()%^&amp;+=]).{8,}" placeholder="Password" style="font-size: 14px; border-radius:0;">
-
+                                    <input type="password" id="inputPassword" data-content="The password must contain at least 8 characters and consist of at least one uppercase letter, one lowercase letter, one number and one symbol. Symbols allowed: @ , # , $ , ! , ¡ , ¿ , ? , * , ( , ) , % , ^ , &amp; , + , = " data-trigger="hover" data-toggle="popover" name="password" value="" class="form-control password-control" required pattern="(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$!¡¿?*()%^&amp;+=]).{8,}" placeholder="Password" style="font-size: 14px; border-radius:0;">
                                 </div>
+                               
 
                             </div>                          
                         </div>                          
@@ -189,7 +194,7 @@
                             <div class="col-sm-6">
 
                                 <div class="form-group ">
-                                    <label class="control-label" for="country">Postal Code *</label>
+                                    <label class="control-label" for="country">Zip Code / Postal Code *</label>
                                     <input type="text" required class="form-control" id="inputPostal" name="postal" placeholder="Postal Code" style="font-size: 14px; border-radius:0;">
 
                                 </div>
@@ -217,7 +222,7 @@
                                 </div>
 
                             </div>                          
-                        </div>                         
+                        </div>                                
 
                         <div class="form-group">
 
@@ -232,11 +237,11 @@
 
                         <input type="hidden" name="step" value="one">
 
-                        <div id="wrongPassDiv" class="summary-errors alert alert-danger alert-dismissible">The password must contain at least 8 characters and consist of at least one uppercase letter, one lowercase letter, one number and one symbol.<br><br> <strong>Symbols allowed: @ , # , $ , ! , ¡ , ¿ , ? , * , ( , ) , % , ^ , &amp; , + , = </strong></div>
+                        <!--<div id="wrongPassDiv" class="summary-errors alert alert-danger alert-dismissible">The password must contain at least 8 characters and consist of at least one uppercase letter, one lowercase letter, one number and one symbol.<br><br> <strong>Symbols allowed: @ , # , $ , ! , ¡ , ¿ , ? , * , ( , ) , % , ^ , &amp; , + , = </strong></div>-->
 
-                        <div class="form-group">
+                        <div class="form-group">                            
                             <input type="hidden" name="helpMyCashClickId" value="">
-                            <button type="submit" class="btn btn-primary center-block password-check" style="margin-top: 10px;color:#000;font-size: 16px;background-color: #6cd9d0;">REGISTER</button>
+                            <button type="submit" class="btn btn-primary center-block password-check" style="margin-top: 10px;color:#000;font-size: 16px;background-color: #6cd9d0;">REGISTER</button>                            
                         </div>
                     </div>
 
@@ -270,7 +275,7 @@
                 </div>
             </form>
 
-            <p>Have account already? Please go to <a href="login">Sign In</a></p>
+            <p>Have account already? Please go to <a href="login">Sign In</a></p>                        
 
         </div>
 
@@ -325,7 +330,7 @@
             } else if (this.value === 'company') {
                 $("#lblName").addClass("text-hide");
                 $("#lblComercialName").removeClass("text-hide");
-                $("#inputFirstname").attr("placeholder", "Comercial Name");
+                $("#inputFirstname").attr("placeholder", "Company Name");
 
                 $("#inputLastname").prop('required', false);
 
@@ -334,7 +339,7 @@
             }
         });
 
-        $('#wrongPassDiv').hide();
+        $('#wrongPassDiv').hide();                  
         $('input[type=password][name=password]')[0].oninvalid = function () {            
             //this.setCustomValidity("Please enter at least 8 length. Symbols allowed: @, #, $, !, ¡, ¿, ?, *, (, ), %, ^, &, +, =");
             $('#wrongPassDiv').show();            
