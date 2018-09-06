@@ -794,14 +794,14 @@
                                 </li>
                                
                                 
-                                 <li class="dropdown site-menu-item has-sub">
+                             <!--    <li class="dropdown site-menu-item has-sub">
                                     <a data-toggle="dropdown" href="<?php echo base_url(); ?>investor_investment" data-dropdown-toggle="false">
                                         <i class="site-menu-icon fa-dollar" aria-hidden="true"></i>
                                         <span class="site-menu-title">Investments</span>
                                     </a>
                                    
                                 </li>
-                                
+                              -->  
                                 <li class="dropdown site-menu-item has-sub" >
                                     <a data-toggle="dropdown" href="<?php echo base_url(); ?>investor_project" data-dropdown-toggle="false">
                                         <i class="site-menu-icon wb-search" aria-hidden="true"></i>
