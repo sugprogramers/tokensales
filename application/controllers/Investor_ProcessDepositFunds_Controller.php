@@ -2,7 +2,7 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 include 'application/libraries/SDException.php';
-
+include 'Utils.php';
 
 class Investor_ProcessDepositFunds_Controller extends CI_Controller {
 
@@ -27,30 +27,30 @@ class Investor_ProcessDepositFunds_Controller extends CI_Controller {
     }
     
     public function get_paymentInfo($investorId, $payinAmount) {
-
-        try {
+        
+        try {           
             $investor = $this->CInvestorModel->get($investorId);
             if(!$investor){
-                throw new SDException("Pending Payment not found.");
+                throw new SDException("Error loading information. Please refresh page.");
             }
             
             $cAdmin = $this->CAdminModel->loadByUserId(CUserModel::$CUSER_ADMIN_ID);
             if(!$cAdmin){
-                throw new SDException("Error loading payment information.");
+                throw new SDException("Error loading information.");
             }
             $cUser = $this->CUserModel->get(CUserModel::$CUSER_ADMIN_ID);
             
             $html = '<tr>';
             $html .= '<td class="text-left">Deposit to Smart Developer for increment your balance</td>';
             $html .= '<td>USD</td>';
-            $html .= '<td>'.$payinAmount.'</td>';
+            $html .= '<td>'.Utils::format_number($payinAmount, 2).'</td>';
             $html .= '</tr>';
 
             $result = array(
                 "status" => 'success',
                 "msg" => '',
                 "dlgInvestorId" => $investorId,
-                "dlgPayinAmount" => $payinAmount,
+                "dlgPayinAmount" => Utils::format_number($payinAmount, 2),
                 "dlgName" => $cUser->firstname." ".$cUser->lastname,
                 "dlgPaymentMethod" => "Paypal (".$cAdmin->paypalusername.")",
                 "dlgAdminPaypalUsername" => $cAdmin->paypalusername,

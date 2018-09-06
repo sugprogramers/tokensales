@@ -2,12 +2,14 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 include 'application/libraries/SDException.php';
+include 'Utils.php';
 
 class Investor_WithdrawFunds_Controller extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
         $this->load->helper('url');
+        $this->load->model("CUserModel");
         $this->load->model("CInvestorModel");
         $this->load->model("FINPaymentOrderModel");
         $this->load->model("FINPaymentHistoryModel");     
@@ -51,7 +53,7 @@ class Investor_WithdrawFunds_Controller extends CI_Controller {
                 $paymentOrder = $queryresult[0];
 
                 $paymentOrderId = $paymentOrder->fin_payment_order_id;
-                $paymentOrderAmount = $paymentOrder->amount;
+                $paymentOrderAmount = Utils::format_number($paymentOrder->amount, 2);
                 $paymentOrderCreated = $this->createDateTimeStrFormat($paymentOrder->scheduleddate, 'Y-m-d H:i:s');
                 $paymentOrderStatus = $this->FINPaymentOrderModel->get_statusName($paymentOrder->status);
             }
@@ -61,7 +63,7 @@ class Investor_WithdrawFunds_Controller extends CI_Controller {
                 'status' => 'success',
                 'msg' => '',
                 'frmInvestorId' => $investor->c_investor_id,
-                'frmTotalWithdrawAmount' => $investor->payoutbalance,
+                'frmTotalWithdrawAmount' => Utils::format_number($investor->payoutbalance, 2),
                 'frmCurrSymbol' => '$',
                 'frmPayinPaypal' => $investor->payin_paypalusername,
                 'frmPaymentOrderId' => $paymentOrderId,
@@ -88,6 +90,8 @@ class Investor_WithdrawFunds_Controller extends CI_Controller {
         $withrawalAmount = $this->input->post("withdrawalAmount");
 
         try {
+            $withrawalAmount = str_replace(",", "", $withrawalAmount);
+            
             /* @var $investor CInvestor */
             $investor = $this->CInvestorModel->getByUserId($this->session->session_investor['id']);
             if (!$investor) {
@@ -106,16 +110,45 @@ class Investor_WithdrawFunds_Controller extends CI_Controller {
             if ($withrawalAmount <= 0 || ($withrawalAmount > $investor->payoutbalance)) {
                 throw new SDException("Invalid balance.");
             }
-
+            
+            $cUserFrom = CUserModel::$CUSER_ADMIN_ID;
+            $cUserTo = $investor->c_user_id;
+            
+            //THESE WILL NEED TO BE RETREIVED VIA POST
+            $c_currency_id = "100";
+            $amount = $withrawalAmount;
+            $fromaccount = "fromaccount@gmail.com";
+            $toaccount = "supporter@gmail.com"; // $investor->payin_paypalusername; 
+            $description = "Description payout of $" . $amount . " to increment payout-balance of investor ID:" . $investor->c_investor_id;            
+                       
+            
             $paymentOrder = new FINPaymentOrder();
             $paymentOrder->isactive = 'Y';
             $paymentOrder->ordertype = 'INVPAYOUT';
             $paymentOrder->status = 'PEND';
             $paymentOrder->scheduleddate = date("Y-m-d H:i:s");
-            $paymentOrder->amount = $withrawalAmount;
+            $paymentOrder->amount = $amount;
             $paymentOrder->c_investor_id = $investor->c_investor_id;
+            
+            $this->FINPaymentOrderModel->save($paymentOrder, $this->session->session_investor['id']);            
 
-            $this->FINPaymentOrderModel->save($paymentOrder, $this->session->session_investor['id']);
+            
+            $finPaymentHistory = new FINPaymentHistory();
+            $finPaymentHistory->isactive = 'Y';
+            $finPaymentHistory->paymentdate = date("Y-m-d H:i:s");
+            $finPaymentHistory->status = "PEND";
+            $finPaymentHistory->type = "EXTOUT";
+            $finPaymentHistory->c_currency_id = $c_currency_id;
+            $finPaymentHistory->amount = $amount;
+            $finPaymentHistory->fromaccount = $fromaccount;
+            $finPaymentHistory->toaccount = $toaccount;
+            $finPaymentHistory->description = $description;
+            $finPaymentHistory->from_user_id = $cUserFrom;
+            $finPaymentHistory->to_user_id = $cUserTo;
+            $finPaymentHistory->fin_payment_order_id = $paymentOrder->fin_payment_order_id;
+
+            $this->FINPaymentHistoryModel->save($finPaymentHistory, $this->session->session_investor['id']);
+            
 
             $response = array(
                 'status' => 'success',
@@ -154,7 +187,7 @@ class Investor_WithdrawFunds_Controller extends CI_Controller {
                 $data[] = array(
                     $paymentdate,
                     $curr->iso_code,
-                    $payhist->amount,
+                    Utils::format_number($payhist->amount, 2),
                     $payhist->fromaccount,
                     $payhist->toaccount,
                     $payhist->description,

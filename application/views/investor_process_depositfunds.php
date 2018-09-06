@@ -172,14 +172,18 @@
         showDiv('1');
 
         $("#paymentInformation-form").submit(function (event) {
-            event.preventDefault();
+            event.preventDefault();            
+            
             $('#paypalCurrency').text("<?php echo $dlgCurrencySymbol ?>");
             $('#paypalAmount').text("<?php echo $dlgPayinAmount ?>");
-
-            $('#changeAmount').val("<?php echo $dlgPayinAmount ?>");
-            $('#changeNotify').val("<?php echo base_url('paypal/ipn_investor_depositpaymenthistory/') ?>" + "<?php echo $dlgInvestorId ?>" + "/" + "<?php echo $dlgPayinAmount ?>");
-            $('#changeReturn').val("<?php echo base_url('paypal/ipn_investor_depositpaymenthistory_success/') ?>" + "<?php echo $dlgInvestorId ?>" + "/" + "<?php echo $dlgPayinAmount ?>");
-            $('#changeCancelReturn').val("<?php echo base_url('paypal/ipn_investor_depositpaymenthistory_cancel/') ?>" + "<?php echo $dlgInvestorId ?>" + "/" + "<?php echo $dlgPayinAmount ?>");
+            
+            var dlgPayinAmount = "<?php echo $dlgPayinAmount ?>";
+            dlgPayinAmount = dlgPayinAmount.replace(",", "");
+            
+            $('#changeAmount').val(dlgPayinAmount);
+            $('#changeNotify').val("<?php echo base_url('paypal/ipn_investor_depositpaymenthistory/') ?>" + "<?php echo $dlgInvestorId ?>" + "/" + dlgPayinAmount);
+            $('#changeReturn').val("<?php echo base_url('paypal/ipn_investor_depositpaymenthistory_success/') ?>" + "<?php echo $dlgInvestorId ?>" + "/" + dlgPayinAmount);
+            $('#changeCancelReturn').val("<?php echo base_url('paypal/ipn_investor_depositpaymenthistory_cancel/') ?>" + "<?php echo $dlgInvestorId ?>" + "/" + dlgPayinAmount);
 
             $('#changeBusiness').val("<?php echo $dlgAdminPaypalUsername ?>");
             $('#paypalCurrencyCode').val("<?php echo $dlgCurrencyCode ?>");

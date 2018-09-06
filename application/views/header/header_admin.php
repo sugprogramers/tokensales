@@ -753,7 +753,7 @@
 
                                                         <li class="site-menu-item" id="idAdminTransactionHistory">
                                                             <a href="<?php echo base_url(); ?>admin_transactionhistory">
-                                                                <span class="site-menu-title">Transaction History</span>
+                                                                <span class="site-menu-title">History</span>
                                                             </a>
                                                         </li>
 
@@ -813,7 +813,7 @@
                                 <li class="dropdown site-menu-item has-sub" id="idInvestorBankData">
                                     <a data-toggle="dropdown" href="javascript:void(0)" data-dropdown-toggle="false">
                                         <i class="site-menu-icon fa-bank" aria-hidden="true"></i>
-                                        <span class="site-menu-title">Payment Info</span>
+                                        <span class="site-menu-title">My Wallet</span>
                                         <span class="site-menu-icon wb-chevron-down-mini" ></span>
                                     </a>
                                     <div class="dropdown-menu">
@@ -821,12 +821,6 @@
                                             <div>
                                                 <div>
                                                     <ul class="site-menu-sub site-menu-normal-list">
-                                                        <li class="site-menu-item" id="idInvestorPaypalAccount">
-                                                            <a href="<?php echo base_url(); ?>investor_paypalaccount">
-                                                                <span class="site-menu-title">Paypal Account</span>
-                                                            </a>
-                                                        </li>
-
                                                         <li class="site-menu-item" id="idInvestorDepositFunds">
                                                             <a href="<?php echo base_url(); ?>investor_depositfunds">
                                                                 <span class="site-menu-title">Add Funds</span>
@@ -839,7 +833,7 @@
                                                         </li>
                                                          <li class="site-menu-item"id="idInvestorTransactionHistory">
                                                             <a href="<?php echo base_url(); ?>investor_transactionhistory">
-                                                                <span class="site-menu-title">Transaction History</span>
+                                                                <span class="site-menu-title">History</span>
                                                             </a>
                                                         </li>
                                                         
@@ -939,7 +933,7 @@
 
                                                         <li class="site-menu-item" id="idCompanyTransactionHistory">
                                                             <a href="<?php echo base_url(); ?>company_transactionhistory">
-                                                                <span class="site-menu-title">Transaction history</span>
+                                                                <span class="site-menu-title">History</span>
                                                             </a>
                                                         </li>
                                                         

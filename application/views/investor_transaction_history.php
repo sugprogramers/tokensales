@@ -3,8 +3,8 @@
         <h1 class="page-title">Transaction History</h1>
         <div class="page-header-actions">
             <ol class="breadcrumb breadcrumb-arrow">
-                <li class="breadcrumb-item"><a class="icon fa-bank" href="#">Payment Info</a></li>
-                <li class="breadcrumb-item">Transaction History</li>
+                <li class="breadcrumb-item"><a class="icon fa-bank" href="#">My Wallet</a></li>
+                <li class="breadcrumb-item">History</li>
             </ol> 
         </div>          
     </div>

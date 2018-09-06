@@ -3,7 +3,7 @@
         <h1 class="page-title">Withdraw Funds</h1>
         <div class="page-header-actions">
             <ol class="breadcrumb breadcrumb-arrow">
-                <li class="breadcrumb-item"><a class="icon fa-bank" href="#">Payment Info</a></li>
+                <li class="breadcrumb-item"><a class="icon fa-bank" href="#">My Wallet</a></li>
                 <li class="breadcrumb-item">Withdraw Funds</li>
             </ol> 
         </div>  
@@ -21,7 +21,7 @@
                                 <li class="nav-item" role="presentation"><a class="nav-link active" data-toggle="tab" href="#exampleTabsLineTopOne"
                                                                             aria-controls="exampleTabsLineTopOne" role="tab">Withdraw</a></li>
                                 <li class="nav-item" role="presentation"><a class="nav-link" data-toggle="tab" href="#exampleTabsLineTopTwo"
-                                                                            aria-controls="exampleTabsLineTopTwo" role="tab">Transaction History</a></li>
+                                                                            aria-controls="exampleTabsLineTopTwo" role="tab">History</a></li>
                             </ul>
                             <div class="tab-content pt-20">
                                 <div class="tab-pane active" id="exampleTabsLineTopOne" role="tabpanel">
@@ -42,10 +42,11 @@
                                                 <div class="row">
                                                     <div class="col-sm-6">
                                                         <label class="control-label" for="amount">Enter withdrawal amount*</label>
-                                                        <input type="number" required class="form-control" id="withdrawalAmount" name="amount" placeholder="Enter Withdraw Amount" step=".01" min="0.01" style="font-size: 14px; border-radius:0;">
+                                                        <!--<input type="number" required class="form-control" id="withdrawalAmount" name="amount" placeholder="Enter Withdraw Amount" step=".01" min="0.01" style="font-size: 14px; border-radius:0;" onblur="format_number()">-->
+                                                        <input type="text" required class="form-control" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" id="withdrawalAmount" name="amount" placeholder="Enter Withdraw Amount" style="font-size: 14px; border-radius:0;" onblur="format_number()">
                                                     </div>
                                                     <div class="col-sm-6"></div>  
-                                                </div>     
+                                                </div>   
 
                                                 <br>
 
@@ -96,7 +97,10 @@
 
                                             </form>
                                             
+                                            <p style="padding-left: 10px;"><small><strong>Fields in (*) are required.</strong></small></p>
+                                            
                                             <small><strong id="idMyMsg"></strong></small>
+                                            
                                         </div></div>
                                 </div>
 
@@ -106,14 +110,14 @@
                                             <table id="withdraw_history_table" class="table table-hover dataTable table-striped" role="grid" style="width:100%" >
                                                 <thead>
                                                     <tr>
-                                                        <th>Payment Date</th>                            
+                                                        <th>Transaction Date</th>                            
                                                         <th>Currency</th>
-                                                        <th>Payment Amount</th>
-                                                        <th>From Account</th>
-                                                        <th>To Account</th>                            
+                                                        <th>Amount</th>
+                                                        <th>From</th>
+                                                        <th>To</th>                            
                                                         <th>Description</th>
                                                         <th>Status</th>
-                                                        <th>Payment Order ID</th>
+                                                        <th>Transaction ID</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -136,6 +140,14 @@
 </div> 
 
 <script type="text/javascript">
+    function format_number(){
+       var x = Number($("#withdrawalAmount").val());
+       if(!x) {
+         return;
+       } 
+       $("#withdrawalAmount").val(x.toLocaleString());
+    }
+    
     function enablePaymentOrderLogic($enable) {
         if ($enable === true) {
             $("#withdrawalAmount").prop('readOnly', false);
@@ -151,7 +163,7 @@
 
             $("#frmSubmitWithdraw").prop('disabled', true);
             
-            $("#idMyMsg").text('** Your withdrawal payment order is in pending status and will be processed in a few minutes.');
+            $("#idMyMsg").text('Your withdrawal payment order is in pending status and will be processed in a few minutes.');
         }
     }
 

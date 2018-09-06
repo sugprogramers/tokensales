@@ -2,12 +2,14 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 include 'application/libraries/SDException.php';
+include 'Utils.php';
 
 class Investor_DepositFunds_Controller extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
         $this->load->helper('url');
+        $this->load->model("CUserModel");
         $this->load->model("CInvestorModel");
         $this->load->model("FINPaymentHistoryModel");     
         $this->load->model("CCurrencyModel");  
@@ -18,19 +20,20 @@ class Investor_DepositFunds_Controller extends CI_Controller {
     }
 
     public function index($defaultTab = 1) {
-        log_message('error', 'acaaa');
-        log_message('error', $defaultTab);
         /* @var $investor CInvestor */
         $investor = $this->CInvestorModel->getByUserId($this->session->session_investor['id']);
         
         $investorId = '';
-        $payinbalance = 0;        
+        $payinbalance = 0;      
+        $paypalacct = "";
         if ($investor) {
             $investorId = $investor->c_investor_id;
-            $payinbalance = $investor->payinbalance;
+            $payinbalance = Utils::format_number($investor->payinbalance, 2);
+            $paypalacct = $investor->payin_paypalusername;
         }
+        
         // temporary curr_symbol
-        $data = array('investorId' => $investorId, 'payinbalance' => $payinbalance, 'curr_symbol' => '$', 'default_tab' => $defaultTab);
+        $data = array('investorId' => $investorId, 'payinbalance' => $payinbalance, 'curr_symbol' => '$', 'default_tab' => $defaultTab, 'paypalacct' => $paypalacct);
 
         $this->load->view('header/header_admin');
         $this->load->view('investor_depositfunds', $data);
@@ -53,7 +56,7 @@ class Investor_DepositFunds_Controller extends CI_Controller {
                 $data[] = array(
                     $paymentdate,
                     $curr->iso_code,
-                    $payhist->amount,
+                    Utils::format_number($payhist->amount, 2),
                     $payhist->fromaccount,
                     $payhist->toaccount,
                     $payhist->description,

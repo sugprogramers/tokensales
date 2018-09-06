@@ -1,9 +1,9 @@
 <div class="page">
     <div class="page-header">
-        <h1 class="page-title">Add Funds to invest</h1>
+        <h1 class="page-title">Fund your Wallet</h1>
         <div class="page-header-actions">
             <ol class="breadcrumb breadcrumb-arrow">
-                <li class="breadcrumb-item"><a class="icon fa-bank" href="#">Payment Info</a></li>
+                <li class="breadcrumb-item"><a class="icon fa-bank" href="#">My Wallet</a></li>
                 <li class="breadcrumb-item">Add Funds</li>
             </ol> 
         </div> 
@@ -19,9 +19,11 @@
                         <div class="nav-tabs-horizontal" data-plugin="tabs">
                             <ul class="nav nav-tabs nav-tabs-line tabs-line-top" role="tablist">
                                 <li class="nav-item" role="presentation"><a class="nav-link active" data-toggle="tab" href="#exampleTabsLineTopOne"
-                                                                            aria-controls="exampleTabsLineTopOne" role="tab">Deposit</a></li>
+                                                                            aria-controls="exampleTabsLineTopOne" role="tab">Fund your Wallet</a></li>
                                 <li class="nav-item" role="presentation"><a class="nav-link" data-toggle="tab" href="#exampleTabsLineTopTwo"
-                                                                            aria-controls="exampleTabsLineTopTwo" role="tab" id="linkTab2">Transaction History</a></li>
+                                                                            aria-controls="exampleTabsLineTopTwo" role="tab" id="linkTab2">History</a></li>
+                                <li class="nav-item" role="presentation"><a class="nav-link" data-toggle="tab" href="#exampleTabsLineTopThree"
+                                                                            aria-controls="exampleTabsLineTopThree" role="tab" id="linkTab3">Paypal Account</a></li>                                                                            
                             </ul>
                             <div class="tab-content pt-20">
                                 <div class="tab-pane active" id="exampleTabsLineTopOne" role="tabpanel">
@@ -55,7 +57,8 @@
                                                 <div class="row">
                                                     <div class="col-sm-6">
                                                         <label class="control-label" for="amount">Amount*</label>
-                                                        <input type="number" required class="form-control" id="inputAmount" name="amount" placeholder="USD Amount" step=".01" style="font-size: 14px; border-radius:0;">                            
+                                                        <!--<input type="number" required class="form-control" id="inputAmount" name="amount" placeholder="USD Amount" step=".01" style="font-size: 14px; border-radius:0;">-->                            
+                                                        <input type="text" required class="form-control" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" id="inputAmount" name="amount" placeholder="USD Amount" style="font-size: 14px; border-radius:0;" onblur="format_number()">                                                        
                                                     </div>
                                                     <div class="col-sm-6"></div>  
                                                 </div>
@@ -70,9 +73,10 @@
                                                     </div> 
                                                     <div class="col-sm-6"></div>  
                                                 </div>                   
-                                            </form>                                            
-
-                                            <small><strong id="idMyMsg"></strong></small>
+                                            </form>           
+                                            
+                                            <p style="padding-left: 10px;"><small><strong>Fields in (*) are required.</strong></small></p>                                                                                    
+                                            
                                         </div></div>
                                 </div>
 
@@ -82,11 +86,11 @@
                                             <table id="deposit_history_table" class="table table-hover dataTable table-striped" role="grid" style="width:100%" >
                                                 <thead>
                                                     <tr>
-                                                        <th>Payment Date</th>                            
+                                                        <th>Transaction Date</th>                            
                                                         <th>Currency</th>
-                                                        <th>Payment Amount</th>
-                                                        <th>From Account</th>
-                                                        <th>To Account</th>                            
+                                                        <th>Amount</th>
+                                                        <th>From</th>
+                                                        <th>To</th>                            
                                                         <th>Description</th>
                                                         <th>Status</th>
                                                     </tr>
@@ -97,6 +101,36 @@
                                         </div>
                                     </div>
                                 </div>
+                                
+                                <div class="tab-pane" id="exampleTabsLineTopThree" role="tabpanel">
+                                    <div class="row">
+                                        <div class="col-sm-12">      
+                                            <form method="post" id="paypalacct_form">
+                                                <p>In order to receive return investments of projects, enter your paypal email address</p>
+                                                <div></div>
+
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group ">
+                                                            <label class="control-label" for="paypalaccount">Paypal Account</label>
+                                                            <input type="email" required class="form-control" id="inputPaypalAcct" name="paypalacct" placeholder="Paypal Account" style="font-size: 14px; border-radius:0;">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6"></div>                        
+                                                </div>                    
+
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group text-right">
+                                                            <button type="submit" class="btn btn-primary">Save changes</button>
+                                                        </div>
+                                                    </div> 
+                                                    <div class="col-sm-6"></div>  
+                                                </div> 
+                                            </form>                                          
+                                        </div>
+                                    </div>
+                                </div>                                
 
                             </div>
                         </div>
@@ -110,6 +144,14 @@
 </div>
 
 <script type="text/javascript">
+    function format_number(){
+       var x = Number($("#inputAmount").val());
+       if(!x) {
+         return;
+       } 
+       $("#inputAmount").val(x.toLocaleString());
+    }
+        
     window.onload = function () {
         $('#idInvestorBankData').addClass('active');
         $('#idInvestorDepositFunds').addClass('active');
@@ -135,6 +177,7 @@
                 return;
             }
 
+            payinBalanceAmt = payinBalanceAmt.replace(",","");
             window.location.href = "<?php echo base_url('investor_processdepositfunds/') ?>" + investorId + "/" + payinBalanceAmt;
         });
         
@@ -154,6 +197,43 @@
             }
         });
         new $.fn.dataTable.FixedHeader(table);        
+        
+        
+        // tab panel #3
+        $('#idInvestorBankData').addClass('active');
+        $('#idInvestorPaypalAcct').addClass('active');
+
+        $("#inputPaypalAcct").val("<?php echo $paypalacct ?>");
+
+        $("#paypalacct_form").submit(function (event) {
+            event.preventDefault();
+
+            var paypalacct = $('#inputPaypalAcct').val();
+            if (!paypalacct) {
+                showError('Missing all required fields');
+                return;
+            }
+
+            $.ajax({
+                url: "<?php echo base_url('Investor_PaypalAccount_Controller/update_paypal_acct') ?>",
+                type: "POST",
+                data: $(this).serialize(),
+                success: function (data) {
+                    var resp = $.parseJSON(data);
+                    if (resp.status === "error") {
+                        if (resp.msg === "missingFields") {
+                            showError('Missing all required fields');
+                        } else {
+                            showError(resp.msg);
+                        }
+
+                    } else if (resp.status === "success") {
+                        showSuccess('Your information has been updated.');
+                    }
+
+                }
+            });
+        });        
 
     };
 

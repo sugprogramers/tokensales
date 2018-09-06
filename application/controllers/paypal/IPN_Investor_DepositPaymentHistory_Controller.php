@@ -2,6 +2,7 @@
 
 include 'application/libraries/PaypalIPN.php';
 include 'application/libraries/SDException.php';
+include 'application/controllers/Utils.php';
 
 class IPN_Investor_DepositPaymentHistory_Controller extends CI_Controller {
 
@@ -17,6 +18,8 @@ class IPN_Investor_DepositPaymentHistory_Controller extends CI_Controller {
     public function index($investorId, $payinAmount) {
 
         try {
+            $payinAmount = str_replace(",", "", $payinAmount);
+            
             $this->db->trans_begin();
 
             /* @var $investor CInvestor */
@@ -85,7 +88,7 @@ class IPN_Investor_DepositPaymentHistory_Controller extends CI_Controller {
                 $result = array('status' => 'error', 'msg' => 'Error Payment Information.');
                 
             } else {
-                $data = array("status" => 'success', "msg" => '', "email" => $investor_user->email, "amount" => $payinAmount);
+                $data = array("status" => 'success', "msg" => '', "email" => $investor_user->email, "amount" => Utils::format_number($payinAmount, 2));
             }
         }
 
@@ -109,7 +112,7 @@ class IPN_Investor_DepositPaymentHistory_Controller extends CI_Controller {
                 $result = array('status' => 'error', 'msg' => 'Error Payment Information.');
                 
             } else {
-                $data = array("status" => 'success', "msg" => '', "email" => $investor_user->email, "amount" => $payinAmount);
+                $data = array("status" => 'success', "msg" => '', "email" => $investor_user->email, "amount" => Utils::format_number($payinAmount, 2));
             }
         }
         
