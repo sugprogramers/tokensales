@@ -168,6 +168,14 @@ class Public_List_Project_Controller extends CI_Controller {
        
        $sumamount = $this->formato_numero($sumamount);
        $targetamt = $this->formato_numero($targetamt);
+       
+       
+       if($projectstatus=="FU"){
+           $text_dias_totales = "$diastotales days remaining";
+       }else{
+           $text_dias_totales = " -- ";
+       }
+       
 
 return
 '  
