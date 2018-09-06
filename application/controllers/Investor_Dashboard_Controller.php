@@ -142,6 +142,87 @@ class Investor_Dashboard_Controller extends CI_Controller {
             'parked_projects' => $parked_projects);
 
         return $data;
-    }     
+    }  
+    
+    public function get_carousel_data() {
+        
+        $investor = $this->CInvestorModel->getByUserId($this->session->session_investor['id']);
+
+        $driving_projects = 0;
+        $parked_projects = 0;        
+        if ($investor) {       
+            $investorId = $investor->c_investor_id;       
+            
+            $driving_projects = $this->FINInvestmentModel->count_driving_projects_by_investor($investorId);
+            $parked_projects = $this->FINInvestmentModel->count_parked_projects_by_investor($investorId);
+        }
+        
+        
+         
+        $userId = $this->session->session_company['id'];
+        $query = $this->CProjectModel->getAllByCompany($userId);
+        
+        $html = '';
+        $count=0;
+        
+        $html .= $this->get_htm_item('Project', $driving_projects, 'Driving',"active");
+        $html .= $this->get_htm_item('Project', $parked_projects,  'Parked','');
+        
+      /*  foreach ($query->result() as $r) {
+            
+            $active = ($count>0)?'':"active";
+            
+            $targetamt = $r->targetamt;
+            $sumamount = $this->FINInvestmentModel->getSumAmountByProject($r->c_project_id);
+            $percent = $this->get_percentage($targetamt, $sumamount);
+            $statusproject = $this->CProjectModel->getProjectStatusName($r->projectstatus);
+            //$duedate = $r->datelimit;
+            $duedate = DateTime::createFromFormat('Y-m-d H:i:s', $r->datelimit)->format('Y-m-d');
+            $sumamount = $this->formato_numero($sumamount);
+            $targetamt = $this->formato_numero($targetamt);
+            
+            $projectName= $r->name;
+            $numInvestor =   $this->FINInvestmentModel->getCountInvestorsByProject($r->c_project_id);
+          
+            $html .= $this->get_htm_item($projectName, $statusproject, $percent, $targetamt, $sumamount,$duedate, $numInvestor, $active);
+            $count++;
+            
+        }*/
+        
+        $response = array('html' => $html);
+        echo json_encode($response);
+    }
+    
+    
+     private function get_htm_item($name, $valor, $description,$active) {
+
+        return
+        '  
+          <div class="carousel-item '.$active.'">
+            <div class="card card-block p-2 flex-row justify-content-between ">
+             
+                <div class="col-lg-8">
+                    <div class="counter counter-lg">
+                        <div class="counter-label text-uppercase">'.$name.'</div>
+                        <div class="counter-number-group">
+                            <span class="counter-icon mr-10 green-600">
+                             <i class="wb-stats-bars"></i>
+                            </span>
+                            <span class="counter-number">'.$valor. ' '. $description.'</span>
+                        </div>
+                        <div class="row" >
+                            <div class="col-lg-12">
+                             <div class="counter-label"> </div>
+                            </div>
+                        </div>
+                       
+
+                    </div>
+                </div>
+   
+            </div>
+          </div>
+        ';
+    }
 
 }
