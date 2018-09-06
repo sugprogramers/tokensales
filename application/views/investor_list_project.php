@@ -450,13 +450,16 @@
 function MostrarAlerta(texto){
 
 var buttons = null;
+var size = null;
 if(texto == 'NoBalance'){
+    size = 'large';
     texto = "Looks like you need to Fill Up Your Tank before you can Drive. Please load additional funds into your wallet and try again";
     buttons = {
     btn1: {
       label: "Get Balance",
+      className: 'btn-danger',
       callback: function() {
-       
+        window.location.href = "<?php echo base_url(); ?>investor_withdrawfunds" ;
       }
     },
   }
@@ -466,7 +469,8 @@ if(texto == 'NoBalance'){
  var dialog = bootbox.dialog({
                 message: '<div style="font-size:36px;color:red;float:left"><i class="icon wb-warning" aria-hidden="true"></i></div> <div style="float:left;height:60px;padding:20px 15px;color:red;font-weight:bold;">'+texto+'</div>',
                 closeButton: true,
-                buttons: buttons
+                buttons: buttons,
+                 size: size
             });
          /*
            'font-weight' : 'bold',
