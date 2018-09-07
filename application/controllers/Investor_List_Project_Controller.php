@@ -115,7 +115,7 @@ class Investor_List_Project_Controller extends CI_Controller {
     
     private function get_htm_docs($documents){
          $html = '';
-          if(is_array($html)){
+          if(is_array($documents)){
          foreach ($documents as $entry) {   
             if(isset($entry['namefile'])){
                $html .=   '<h5><i class="icon fa-file-pdf-o" aria-hidden="true"></i> '.ucfirst($entry['name']).'</h5><label class="control-label" ><a target="_blank" href="'. base_url().'upload/docs/'.$entry['namefile'].'">Preview Doc </a></label>';
