@@ -249,7 +249,7 @@ return
 </div>
 
 <div class="h-minificha__button-bar">
-          <button  type="submit" class="btn btn-primary btn-block"  data-toggle="slidePanel" data-url="' . base_url() . 'themes/default/tpl/admin_Active_panel.tpl"  onclick="Mostrar(\''.$c_project_id.'\');">PROJECT PREVIEW</button>
+          <button  type="submit" class="btn btn-primary btn-block"  data-toggle="slidePanel" data-url="' . base_url() . 'themes/default/tpl/admin_active_panel.tpl"  onclick="Mostrar(\''.$c_project_id.'\');">PROJECT PREVIEW</button>
 </div>
 
 
