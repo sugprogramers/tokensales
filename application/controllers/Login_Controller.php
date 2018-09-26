@@ -79,6 +79,22 @@ class Login_Controller extends CI_Controller {
                 $response = array('redirect' => base_url() . 'company_dashboard', 'status' => 'success');
             }
 
+            if ($resp->usertype === "CUSTOMER") {
+                $session_customer = [
+                    "id" => $resp->c_user_id,
+                    "firstname" => $resp->firstname,
+                    "lastname" => $resp->lastname,
+                    "email" => $resp->email,
+                ];
+
+                $data = [
+                    "session_customer" => $session_customer,
+                ];
+                $this->session->set_userdata($data);
+
+                $response = array('redirect' => base_url() . 'customer_dashboard', 'status' => 'success');
+            }
+
             echo json_encode($response);
         } else {
             log_message('error', "login_user-10 error");

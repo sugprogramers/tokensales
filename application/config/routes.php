@@ -1,61 +1,61 @@
 <?php
+
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 /*
-| -------------------------------------------------------------------------
-| URI ROUTING
-| -------------------------------------------------------------------------
-| This file lets you re-map URI requests to specific controller functions.
-|
-| Typically there is a one-to-one relationship between a URL string
-| and its corresponding controller class/method. The segments in a
-| URL normally follow this pattern:
-|
-|	example.com/class/method/id/
-|
-| In some instances, however, you may want to remap this relationship
-| so that a different class/function is called than the one
-| corresponding to the URL.
-|
-| Please see the user guide for complete details:
-|
-|	https://codeigniter.com/user_guide/general/routing.html
-|
-| -------------------------------------------------------------------------
-| RESERVED ROUTES
-| -------------------------------------------------------------------------
-|
-| There are three reserved routes:
-|
-|	$route['default_controller'] = 'welcome';
-|
-| This route indicates which controller class should be loaded if the
-| URI contains no data. In the above example, the "welcome" class
-| would be loaded.
-|
-|	$route['404_override'] = 'errors/page_missing';
-|
-| This route will tell the Router which controller/method to use if those
-| provided in the URL cannot be matched to a valid route.
-|
-|	$route['translate_uri_dashes'] = FALSE;
-|
-| This is not exactly a route, but allows you to automatically route
-| controller and method names that contain dashes. '-' isn't a valid
-| class or method name character, so it requires translation.
-| When you set this option to TRUE, it will replace ALL dashes in the
-| controller and method URI segments.
-|
-| Examples:	my-controller/index	-> my_controller/index
-|		my-controller/my-method	-> my_controller/my_method
-*/
+  | -------------------------------------------------------------------------
+  | URI ROUTING
+  | -------------------------------------------------------------------------
+  | This file lets you re-map URI requests to specific controller functions.
+  |
+  | Typically there is a one-to-one relationship between a URL string
+  | and its corresponding controller class/method. The segments in a
+  | URL normally follow this pattern:
+  |
+  |	example.com/class/method/id/
+  |
+  | In some instances, however, you may want to remap this relationship
+  | so that a different class/function is called than the one
+  | corresponding to the URL.
+  |
+  | Please see the user guide for complete details:
+  |
+  |	https://codeigniter.com/user_guide/general/routing.html
+  |
+  | -------------------------------------------------------------------------
+  | RESERVED ROUTES
+  | -------------------------------------------------------------------------
+  |
+  | There are three reserved routes:
+  |
+  |	$route['default_controller'] = 'welcome';
+  |
+  | This route indicates which controller class should be loaded if the
+  | URI contains no data. In the above example, the "welcome" class
+  | would be loaded.
+  |
+  |	$route['404_override'] = 'errors/page_missing';
+  |
+  | This route will tell the Router which controller/method to use if those
+  | provided in the URL cannot be matched to a valid route.
+  |
+  |	$route['translate_uri_dashes'] = FALSE;
+  |
+  | This is not exactly a route, but allows you to automatically route
+  | controller and method names that contain dashes. '-' isn't a valid
+  | class or method name character, so it requires translation.
+  | When you set this option to TRUE, it will replace ALL dashes in the
+  | controller and method URI segments.
+  |
+  | Examples:	my-controller/index	-> my_controller/index
+  |		my-controller/my-method	-> my_controller/my_method
+ */
 
 $route['default_controller'] = 'Public_List_Project_Controller';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
 //routes de paginas empieza en controller
-
 //routes public externo
 $route['login'] = "Login_Controller";
 $route['logout'] = "Login_Controller/logout_user";
@@ -126,6 +126,17 @@ $route['paypal/ipn_projectinvestmentpaymentorder/(:any)'] = "paypal/IPN_ProjectI
 $route['paypal/ipn_projectinvestmentpaymentorder_success/(:any)'] = "paypal/IPN_ProjectInvestmentPaymentOrder_Controller/success/$1";
 $route['paypal/ipn_projectinvestmentpaymentorder_cancel/(:any)'] = "paypal/IPN_ProjectInvestmentPaymentOrder_Controller/cancel/$1";
 
+
+//routes customer
+$route['customer_dashboard'] = "Customer_Dashboard_Controller";
+$route['customer_project'] = "Customer_List_Project_Controller";
+$route['customer_edit_project'] = "Customer_Edit_Project_Controller";
+$route['customer_edit_project/(:any)'] = "Customer_Edit_Project_Controller/index/$1";
+$route['customer_paypalaccount'] = "Customer_PaypalAccount_Controller";
+$route['customer_transactionhistory'] = "Customer_TransactionHistory_Controller";
+$route['customer_basicdata'] = "Customer_BasicData_Controller";
+$route['customer_accountdata'] = "Customer_Accountdata_Controller";
+$route['customer_changepassword'] = "Customer_Changepassword_Controller";
 
 //Ejemplo Route test a sub funciones
 /*$route['default'] = "admin/Administrator";
